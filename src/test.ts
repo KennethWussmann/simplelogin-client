@@ -1,10 +1,10 @@
-import { SimpleLogin } from "./";
+import { SimpleLogin } from './';
 
 const run = async () => {
   const api = new SimpleLogin.AccountApi();
 
   const response = await api.forgotPassword({
-    email: "kenneth@wussmann.net",
+    email: 'kenneth@wussmann.net',
   });
   console.log(JSON.stringify(response, null, 2));
 

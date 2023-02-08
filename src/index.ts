@@ -1,1 +1,1 @@
-export * as SimpleLogin from "./sdk";
+export * as SimpleLogin from './sdk';

@@ -1,4 +1,3 @@
-
 /**
  * SimpleLogin (unofficial)
  * The unofficial SimpleLogin API docs as OpenAPI 3.0.0 spec. This is based on the official markdown based docs, but written in OpenAPI to allow for easier integration with other tools and generation of client SDKs. Please do not contact the SimpleLogin team for support or issues with this API documentation.
@@ -11,5 +10,5 @@
  * Do not edit the file manually.
  */
 
-export * from "./api";
-export * from "./configuration";
+export * from './api';
+export * from './configuration';

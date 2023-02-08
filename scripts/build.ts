@@ -1,3 +1,3 @@
-import { build } from "./lib";
+import { build } from './lib';
 
 build();

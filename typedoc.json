@@ -3,10 +3,8 @@
   "entryPoints": ["./src/index.ts"],
   "out": "dist/typedoc",
   "excludeExternals": true,
-  "externalPattern": [
-    "**/node_modules/**"
-  ],
+  "externalPattern": ["**/node_modules/**"],
   "skipErrorChecking": true,
-  "sourceLinkTemplate": "https://github.com/KennethWussmann/simplelogin-client/blob/{gitRevision}/src/{path}#L{line}",
+  "sourceLinkTemplate": "https://github.com/KennethWussmann/simplelogin-client/blob/main/{path}#L{line}",
   "searchInComments": true
 }
