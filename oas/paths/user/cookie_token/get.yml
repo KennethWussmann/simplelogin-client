@@ -1,0 +1,12 @@
+tags:
+  - account
+summary: Cookie token
+description: Get a one time use cookie to exchange it for a valid cookie in the web app
+operationId: "cookieToken"
+responses:
+  '200':
+    description: Successful
+    content: {{ mixin("../../../mixins/request/json.yml", "../../../components/schemas/user/cookie_token/model.yml") }}
+  '403':
+    description: Forbidden
+    content: {{ mixin("../../../mixins/request/json.yml", "../../../components/schemas/error.yml") }}

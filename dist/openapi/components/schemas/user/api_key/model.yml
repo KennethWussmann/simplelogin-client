@@ -1,0 +1,7 @@
+type: object
+properties:
+  api_key:
+    type: string
+
+required:
+  - api_key

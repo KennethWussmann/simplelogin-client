@@ -1,0 +1,11 @@
+tags:
+  - alias
+summary: Aliases
+description: Get user aliases
+operationId: "aliases"
+# TODO: aaaaaallll the params
+responses:
+  "200":
+    description: Successful
+    # TODO: ARRAY
+    content: {{ mixin("../../../mixins/request/json.yml", "../../../components/schemas/alias/model.yml") }}

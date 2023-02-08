@@ -1,0 +1,15 @@
+tags:
+  - account
+summary: User
+description: Delete user (requires sudo mode)
+operationId: "deleteUser"
+responses:
+  '200':
+    description: Successful. Account is scheduled for deletion.
+    content: {{ mixin("../../mixins/request/json.yml", "../../components/schemas/success.yml") }}
+  '440':
+    description: Sudo mode is required
+    content: {{ mixin("../../mixins/request/json.yml", "../../components/schemas/error.yml") }}
+  '403':
+    description: Failed
+    content: {{ mixin("../../mixins/request/json.yml", "../../components/schemas/error.yml") }}

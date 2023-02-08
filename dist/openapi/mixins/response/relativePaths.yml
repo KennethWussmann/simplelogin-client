@@ -1,0 +1,10 @@
+application/json:
+  schema:
+    type: object
+    properties:
+      included:
+        $ref: /standard.yml
+      data:
+        type: array
+        items:
+          $ref: 

@@ -1,0 +1,29 @@
+tags:
+  - alias
+summary: Create random
+description: Create a new random alias
+operationId: "createRandom"
+# TODO: hostname query parameter
+# TODO: mode (uuid, word) query parameter
+requestBody:
+  required: true
+  content: 
+    application/json:
+      schema:
+        $ref: ../../../../components/schemas/alias/random/new/post.yml
+    
+responses:
+  '201':
+    description: Created
+    content: 
+      application/json:
+        schema:
+          $ref: ../../../../components/schemas/alias/model.yml
+      
+  '401':
+    description: Unauthorized
+    content: 
+      application/json:
+        schema:
+          $ref: ../../../../components/schemas/error.yml
+      

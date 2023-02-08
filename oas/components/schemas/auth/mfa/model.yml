@@ -1,0 +1,16 @@
+type: object
+properties:
+  name:
+    type: string
+    description: User's name, could be an empty string
+  api_key:
+    type: string
+    description: If MFA is not enabled, the api key is returned right away.
+  email:
+    type: string
+    description: User email
+
+required:
+  - name
+  - email
+  - api_key

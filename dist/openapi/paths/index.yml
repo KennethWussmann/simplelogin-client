@@ -1,0 +1,51 @@
+/alias/random/new:
+  post:
+    $ref: ./alias/random/new/post.yml
+/auth/activate:
+  post:
+    $ref: ./auth/activate/post.yml
+/auth/forgot_password:
+  post:
+    $ref: ./auth/forgot_password/post.yml
+/auth/login:
+  post:
+    $ref: ./auth/login/post.yml
+/auth/mfa:
+  post:
+    $ref: ./auth/mfa/post.yml
+/auth/reactivate:
+  post:
+    $ref: ./auth/reactivate/post.yml
+/auth/register:
+  post:
+    $ref: ./auth/register/post.yml
+/logout:
+  get:
+    $ref: ./logout/get.yml
+/sudo:
+  patch:
+    $ref: ./sudo/patch.yml
+/user/api_key:
+  post:
+    $ref: ./user/api_key/post.yml
+/user/cookie_token:
+  get:
+    $ref: ./user/cookie_token/get.yml
+/user:
+  delete:
+    $ref: ./user/delete.yml
+/user_info:
+  get:
+    $ref: ./user_info/get.yml
+  patch:
+    $ref: ./user_info/patch.yml
+/v2/aliases:
+  get:
+    $ref: ./v2/aliases/get.yml
+/v3/alias/custom/new:
+  post:
+    $ref: ./v3/alias/custom/new/post.yml
+/v5/alias/options:
+  get:
+    $ref: ./v5/alias/options/get.yml
+

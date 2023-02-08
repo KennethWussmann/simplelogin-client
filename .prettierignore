@@ -1,0 +1,7 @@
+*.js
+*.d.ts
+.turbo/
+build/
+export/
+cdk.out/
+.next/

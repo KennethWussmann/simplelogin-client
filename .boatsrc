@@ -1,0 +1,18 @@
+{
+  "nunjucksOptions": {
+    "tags": {}
+  },
+  "jsonSchemaRefParserBundleOpts": {},
+  "picomatchOptions": {
+    "bash": true
+  },
+  "permissionConfig": {
+    "globalPrefix": true
+  },
+  "paths": {
+    "@mixins/": "oas/mixins/",
+    "@parameters/": "oas/components/parameters/",
+    "@schemas/": "oas/components/schemas/",
+    "@/": "./"
+  }
+}

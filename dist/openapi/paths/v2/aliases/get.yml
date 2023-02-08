@@ -1,0 +1,15 @@
+tags:
+  - alias
+summary: Aliases
+description: Get user aliases
+operationId: "aliases"
+# TODO: aaaaaallll the params
+responses:
+  "200":
+    description: Successful
+    # TODO: ARRAY
+    content: 
+      application/json:
+        schema:
+          $ref: ../../../components/schemas/alias/model.yml
+      

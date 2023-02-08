@@ -1,0 +1,15 @@
+tags:
+  - account
+summary: Sudo mode
+description: Enable sudo mode
+operationId: "enableSudoMode"
+requestBody:
+  required: true
+  content: {{ mixin("../../mixins/request/json.yml", "../../components/schemas/sudo/patch.yml") }}
+responses:
+  '200':
+    description: Successful
+    content: {{ mixin("../../mixins/request/json.yml", "../../components/schemas/success.yml") }}
+  '403':
+    description: Forbidden
+    content: {{ mixin("../../mixins/request/json.yml", "../../components/schemas/error.yml") }}

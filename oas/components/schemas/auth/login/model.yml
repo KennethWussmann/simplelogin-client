@@ -1,0 +1,23 @@
+type: object
+properties:
+  name:
+    type: string
+    description: User's name, could be an empty string.
+  email:
+    type: string
+    format: email
+  mfa_enabled:
+    type: boolean
+  mfa_key:
+    type: string
+    description: Only useful when user enables MFA. In this case, user needs to enter their OTP token in order to login.
+  api_key:
+    type: string
+    description: If MFA is not enabled, the api key is returned right away.
+
+required:
+  - name
+  - email
+  - mfa_enabled
+  - mfa_key
+  - api_key

@@ -1,0 +1,13 @@
+tags:
+  - account
+summary: MFA authentication
+description: Authenticate using MFA
+operationId: "mfa"
+requestBody:
+  description: The api_key is used in all subsequent requests. It's empty if MFA is enabled. If user hasn't enabled MFA, mfa_key is empty.
+  required: true
+  content: {{ mixin("../../../mixins/request/json.yml", "../../../components/schemas/auth/mfa/post.yml") }}
+responses:
+  '200':
+    description: Successful
+    content: {{ mixin("../../../mixins/response/json.yml", "../../../components/schemas/auth/mfa/model.yml") }}

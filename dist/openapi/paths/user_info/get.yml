@@ -1,0 +1,13 @@
+tags:
+  - account
+summary: User info
+description: Get user info
+operationId: "userInfo"
+responses:
+  '200':
+    description: Successful
+    content: 
+      application/json:
+        schema:
+          $ref: ../../components/schemas/user_info/model.yml
+      

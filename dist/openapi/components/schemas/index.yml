@@ -1,0 +1,41 @@
+AliasCustomNewPost:
+  $ref: ./alias/custom/new/post.yml
+Alias:
+  $ref: ./alias/model.yml
+AliasOptions:
+  $ref: ./alias/options/model.yml
+AliasRandomNewPost:
+  $ref: ./alias/random/new/post.yml
+AuthActivatePost:
+  $ref: ./auth/activate/post.yml
+AuthForgotPasswordPost:
+  $ref: ./auth/forgot_password/post.yml
+AuthLogin:
+  $ref: ./auth/login/model.yml
+AuthLoginPost:
+  $ref: ./auth/login/post.yml
+AuthMfa:
+  $ref: ./auth/mfa/model.yml
+AuthMfaPost:
+  $ref: ./auth/mfa/post.yml
+AuthReactivatePost:
+  $ref: ./auth/reactivate/post.yml
+AuthRegisterPost:
+  $ref: ./auth/register/post.yml
+Error:
+  $ref: ./error.yml
+Success:
+  $ref: ./success.yml
+SudoPatch:
+  $ref: ./sudo/patch.yml
+UserApiKey:
+  $ref: ./user/api_key/model.yml
+UserApiKeyPost:
+  $ref: ./user/api_key/post.yml
+UserCookieToken:
+  $ref: ./user/cookie_token/model.yml
+UserInfo:
+  $ref: ./user_info/model.yml
+UserInfoPatch:
+  $ref: ./user_info/patch.yml
+

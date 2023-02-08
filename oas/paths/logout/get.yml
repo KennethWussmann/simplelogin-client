@@ -1,0 +1,12 @@
+tags:
+  - account
+summary: Logout
+description: Log out user
+operationId: "logout"
+responses:
+  '200':
+    description: Successful
+    content: {{ mixin("../../mixins/request/json.yml", "../../components/schemas/user_info/model.yml") }}
+  '401':
+    description: Unauthorized
+    content: {{ mixin("../../mixins/request/json.yml", "../../components/schemas/error.yml") }}

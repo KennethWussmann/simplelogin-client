@@ -1,0 +1,93 @@
+type: object
+properties:
+  creation_date:
+    type: string
+    format: date-time
+  creation_timestamp:
+    type: integer
+  email:
+    type: string
+  name:
+    type: string
+  enabled:
+    type: boolean
+  id:
+    type: integer
+  mailbox:
+    type: object
+    properties:
+      email:
+        type: string
+      id:
+        type: integer
+    required:
+      - email
+      - id
+  mailboxes:
+    type: array
+    items:
+      type: object
+      properties:
+        email:
+          type: string
+        id:
+          type: integer
+      required:
+        - email
+        - id
+  latest_activity:
+    type: object
+    properties:
+      action:
+        type: string
+      contact:
+        type: object
+        properties:
+          email:
+            type: string
+          name:
+            type: string
+          reverse_alias:
+            type: string
+        required:
+          - email
+          - name
+          - reverse_alias
+      timestamp:
+        type: integer
+    required:
+      - action
+      - contact
+      - timestamp
+  nb_block:
+    type: integer
+  nb_forward:
+    type: integer
+  nb_reply:
+    type: integer
+  note:
+    type: string
+  pinned:
+    type: boolean
+  disable_pgp:
+    type: boolean
+  support_pgp:
+    type: boolean
+
+required:
+  - creation_date
+  - creation_timestamp
+  - email
+  - name
+  - enabled
+  - id
+  - mailbox
+  - mailboxes
+  - latest_activity
+  - nb_block
+  - nb_forward
+  - nb_reply
+  - note
+  - pinned
+  - disable_pgp
+  - support_pgp

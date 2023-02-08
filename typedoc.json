@@ -1,0 +1,12 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": ["./src/index.ts"],
+  "out": "dist/typedoc",
+  "excludeExternals": true,
+  "externalPattern": [
+    "**/node_modules/**"
+  ],
+  "skipErrorChecking": true,
+  "sourceLinkTemplate": "https://github.com/KennethWussmann/simplelogin-client/blob/{gitRevision}/src/{path}#L{line}",
+  "searchInComments": true
+}

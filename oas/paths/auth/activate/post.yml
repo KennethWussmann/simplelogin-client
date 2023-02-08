@@ -1,0 +1,17 @@
+tags:
+  - account
+summary: Activate
+description: Activate a new account with the activation code that was sent to the user's email.
+operationId: "activate"
+requestBody:
+  required: true
+  content: {{ mixin("../../../mixins/request/json.yml", "../../../components/schemas/auth/activate/post.yml") }}
+responses:
+  '200':
+    description: Successful. User can login now.
+  '400':
+    description: Wrong email or code
+    content: {{ mixin("../../../mixins/request/json.yml", "../../../components/schemas/error.yml") }}
+  '410':
+    description: Wrong code entered too often. User needs to ask for a new code using reactivate endpoint.
+    content: {{ mixin("../../../mixins/request/json.yml", "../../../components/schemas/error.yml") }}

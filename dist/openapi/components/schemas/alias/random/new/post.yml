@@ -1,0 +1,5 @@
+type: object
+properties:
+  note:
+    type: string
+    description: Note of this alias

@@ -1,0 +1,37 @@
+openapi: "3.0.0"
+info:
+  version: 4.22.0
+  title: "SimpleLogin (unofficial)"
+  description: The unofficial SimpleLogin API docs as OpenAPI 3.0.0 spec. This is based on the official markdown based docs, but written in OpenAPI to allow for easier integration with other tools and generation of client SDKs. Please do not contact the SimpleLogin team for support or issues with this API documentation.
+  contact:
+    name: Kenneth Wußmann
+    email: contact@ketrwu.de
+    url: https://github.com/KennethWussmann/simplelogin-client
+  license:
+    name: MIT
+    url: https://github.com/KennethWussmann/simplelogin-client/blob/main/LICENSE
+
+servers:
+  - url: https://app.simplelogin.io/api
+    description: SimpleLogin API
+
+tags:
+  - name: account
+  - name: alias
+  - name: mailbox
+  - name: custom-domain
+  - name: contact
+  - name: notification
+  - name: settings
+  - name: import-export
+  - name: phone
+  - name: misc
+
+paths:
+  $ref: paths/index.yml
+
+components:
+  parameters:
+    $ref: components/parameters/index.yml
+  schemas:
+    $ref: components/schemas/index.yml
