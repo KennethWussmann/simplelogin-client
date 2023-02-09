@@ -11,6 +11,8 @@ const distOpenApiDir = join(distDir, 'openapi');
 const distRedocDir = join(distDir, 'redoc');
 const distTypedocDir = join(distDir, 'typedoc');
 
+const image = `ghcr.io/kennethwussmann/custom-swagger-codegen-cli-${process.arch}:latest`;
+
 const buildOAS = async () => {
   await Promise.all([
     $`boats -i ./oas/index.yml -o ${join('dist', 'openapi', 'simplelogin.json')}`,
@@ -24,8 +26,8 @@ const buildDocs = async (oasPath: string) =>
   Promise.all([$`npx typedoc`, $`npx redoc-cli build ${oasPath} -o ${join(distRedocDir, 'simplelogin_redoc.html')}`]);
 
 const buildSdk = async (oasPath: string) => {
-  await $`docker pull ghcr.io/kennethwussmann/custom-swagger-codegen-cli-arm64:latest`;
-  await $`docker run --rm -v ${process.cwd()}:/local ghcr.io/kennethwussmann/custom-swagger-codegen-cli-arm64:latest generate -i ${join(
+  await $`docker pull ${image}`;
+  await $`docker run --rm -v ${process.cwd()}:/local ${image} generate -i ${join(
     '/local',
     'dist',
     'openapi',
