@@ -1,2 +1,5 @@
-npx lint-staged
-npx run rebuild
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+npm run rebuild
+git add dist/ src/sdk
