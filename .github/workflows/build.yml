@@ -18,4 +18,12 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - run: npm run build
+      - run: |
+          npm run build
+          git status
+          if [ -n "$(git status --porcelain)" ]; then
+            echo There are changes of the generated files. This indicates that they were not commited. Please run \"npm run build\" and commit the generated changes!
+            exit 1
+          else
+            echo No changes of generated files.
+          fi
