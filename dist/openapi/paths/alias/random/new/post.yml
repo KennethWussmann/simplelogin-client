@@ -3,6 +3,19 @@ tags:
 summary: Create random
 description: Create a new random alias
 operationId: createRandom
+parameters:
+  - $ref: ../../../../components/parameters/queryHostname.yml
+  - in: query
+    name: mode
+    required: false
+    schema:
+      type: string
+      enum:
+        - uuid
+        - word
+    description: >-
+      Either `uuid` or `word`. By default, use the user setting when creating
+      new random alias.
 requestBody:
   required: true
   content:

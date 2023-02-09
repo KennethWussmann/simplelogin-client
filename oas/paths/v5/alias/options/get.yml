@@ -3,7 +3,8 @@ tags:
 summary: Options
 description: User alias info and suggestion. Used by the first extension screen when user opens the extension.
 operationId: "options"
-# TODO: Query param hostname, optional but recommended
+parameters:
+  - $ref: @parameters/queryHostname.yml
 responses:
   '200':
     description: Successful

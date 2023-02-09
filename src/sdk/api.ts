@@ -293,6 +293,11 @@ export interface AliasMailbox {
 /**
  *
  * @export
+ */
+export type AliasModelArray = Array<Alias>;
+/**
+ *
+ * @export
  * @interface AliasOptions
  */
 export interface AliasOptions {
@@ -1704,12 +1709,15 @@ export class AccountApi extends BaseAPI {
 export const AliasApiFetchParamCreator = function (configuration?: Configuration) {
   return {
     /**
-     * Get user aliases
+     * Get user aliases. Please note `pinned`, `disabled`, `enabled` are exclusive, i.e. only one can be present. They can only be set to `true`.
      * @summary Aliases
+     * @param {boolean} [pinned] If set, only pinned aliases are returned.
+     * @param {boolean} [disabled] If set, only disabled aliases are returned.
+     * @param {boolean} [enabled] If set, only enabled aliases are returned.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    aliases(options: any = {}): FetchArgs {
+    aliases(pinned?: boolean, disabled?: boolean, enabled?: boolean, options: any = {}): FetchArgs {
       const localVarPath = `/v2/aliases`;
       const localVarUrlObj = url.parse(localVarPath, true);
       const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
@@ -1721,6 +1729,18 @@ export const AliasApiFetchParamCreator = function (configuration?: Configuration
         const localVarApiKeyValue =
           typeof configuration.apiKey === 'function' ? configuration.apiKey('Authentication') : configuration.apiKey;
         localVarHeaderParameter['Authentication'] = localVarApiKeyValue;
+      }
+
+      if (pinned !== undefined) {
+        localVarQueryParameter['pinned'] = pinned;
+      }
+
+      if (disabled !== undefined) {
+        localVarQueryParameter['disabled'] = disabled;
+      }
+
+      if (enabled !== undefined) {
+        localVarQueryParameter['enabled'] = enabled;
       }
 
       localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
@@ -1737,10 +1757,11 @@ export const AliasApiFetchParamCreator = function (configuration?: Configuration
      * Create a new custom alias
      * @summary Create custom
      * @param {AliasCustomNewPost} body
+     * @param {string} [hostname] This information is important to know where an alias is used in order to suggest user the same alias if they want to create on alias on the same website in the future.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    createCustom(body: AliasCustomNewPost, options: any = {}): FetchArgs {
+    createCustom(body: AliasCustomNewPost, hostname?: string, options: any = {}): FetchArgs {
       // verify required parameter 'body' is not null or undefined
       if (body === null || body === undefined) {
         throw new RequiredError('body', 'Required parameter body was null or undefined when calling createCustom.');
@@ -1756,6 +1777,10 @@ export const AliasApiFetchParamCreator = function (configuration?: Configuration
         const localVarApiKeyValue =
           typeof configuration.apiKey === 'function' ? configuration.apiKey('Authentication') : configuration.apiKey;
         localVarHeaderParameter['Authentication'] = localVarApiKeyValue;
+      }
+
+      if (hostname !== undefined) {
+        localVarQueryParameter['hostname'] = hostname;
       }
 
       localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -1777,10 +1802,12 @@ export const AliasApiFetchParamCreator = function (configuration?: Configuration
      * Create a new random alias
      * @summary Create random
      * @param {AliasRandomNewPost} body
+     * @param {string} [hostname] This information is important to know where an alias is used in order to suggest user the same alias if they want to create on alias on the same website in the future.
+     * @param {string} [mode] Either &#x60;uuid&#x60; or &#x60;word&#x60;. By default, use the user setting when creating new random alias.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    createRandom(body: AliasRandomNewPost, options: any = {}): FetchArgs {
+    createRandom(body: AliasRandomNewPost, hostname?: string, mode?: string, options: any = {}): FetchArgs {
       // verify required parameter 'body' is not null or undefined
       if (body === null || body === undefined) {
         throw new RequiredError('body', 'Required parameter body was null or undefined when calling createRandom.');
@@ -1796,6 +1823,14 @@ export const AliasApiFetchParamCreator = function (configuration?: Configuration
         const localVarApiKeyValue =
           typeof configuration.apiKey === 'function' ? configuration.apiKey('Authentication') : configuration.apiKey;
         localVarHeaderParameter['Authentication'] = localVarApiKeyValue;
+      }
+
+      if (hostname !== undefined) {
+        localVarQueryParameter['hostname'] = hostname;
+      }
+
+      if (mode !== undefined) {
+        localVarQueryParameter['mode'] = mode;
       }
 
       localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -1816,10 +1851,11 @@ export const AliasApiFetchParamCreator = function (configuration?: Configuration
     /**
      * User alias info and suggestion. Used by the first extension screen when user opens the extension.
      * @summary Options
+     * @param {string} [hostname] This information is important to know where an alias is used in order to suggest user the same alias if they want to create on alias on the same website in the future.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    options(options: any = {}): FetchArgs {
+    options(hostname?: string, options: any = {}): FetchArgs {
       const localVarPath = `/v5/alias/options`;
       const localVarUrlObj = url.parse(localVarPath, true);
       const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
@@ -1831,6 +1867,10 @@ export const AliasApiFetchParamCreator = function (configuration?: Configuration
         const localVarApiKeyValue =
           typeof configuration.apiKey === 'function' ? configuration.apiKey('Authentication') : configuration.apiKey;
         localVarHeaderParameter['Authentication'] = localVarApiKeyValue;
+      }
+
+      if (hostname !== undefined) {
+        localVarQueryParameter['hostname'] = hostname;
       }
 
       localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
@@ -1853,13 +1893,21 @@ export const AliasApiFetchParamCreator = function (configuration?: Configuration
 export const AliasApiFp = function (configuration?: Configuration) {
   return {
     /**
-     * Get user aliases
+     * Get user aliases. Please note `pinned`, `disabled`, `enabled` are exclusive, i.e. only one can be present. They can only be set to `true`.
      * @summary Aliases
+     * @param {boolean} [pinned] If set, only pinned aliases are returned.
+     * @param {boolean} [disabled] If set, only disabled aliases are returned.
+     * @param {boolean} [enabled] If set, only enabled aliases are returned.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    aliases(options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Alias> {
-      const localVarFetchArgs = AliasApiFetchParamCreator(configuration).aliases(options);
+    aliases(
+      pinned?: boolean,
+      disabled?: boolean,
+      enabled?: boolean,
+      options?: any,
+    ): (fetch?: FetchAPI, basePath?: string) => Promise<AliasModelArray> {
+      const localVarFetchArgs = AliasApiFetchParamCreator(configuration).aliases(pinned, disabled, enabled, options);
       return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
         return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
           if (response.status >= 200 && response.status < 300) {
@@ -1874,11 +1922,16 @@ export const AliasApiFp = function (configuration?: Configuration) {
      * Create a new custom alias
      * @summary Create custom
      * @param {AliasCustomNewPost} body
+     * @param {string} [hostname] This information is important to know where an alias is used in order to suggest user the same alias if they want to create on alias on the same website in the future.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    createCustom(body: AliasCustomNewPost, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Alias> {
-      const localVarFetchArgs = AliasApiFetchParamCreator(configuration).createCustom(body, options);
+    createCustom(
+      body: AliasCustomNewPost,
+      hostname?: string,
+      options?: any,
+    ): (fetch?: FetchAPI, basePath?: string) => Promise<Alias> {
+      const localVarFetchArgs = AliasApiFetchParamCreator(configuration).createCustom(body, hostname, options);
       return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
         return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
           if (response.status >= 200 && response.status < 300) {
@@ -1893,11 +1946,18 @@ export const AliasApiFp = function (configuration?: Configuration) {
      * Create a new random alias
      * @summary Create random
      * @param {AliasRandomNewPost} body
+     * @param {string} [hostname] This information is important to know where an alias is used in order to suggest user the same alias if they want to create on alias on the same website in the future.
+     * @param {string} [mode] Either &#x60;uuid&#x60; or &#x60;word&#x60;. By default, use the user setting when creating new random alias.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    createRandom(body: AliasRandomNewPost, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Alias> {
-      const localVarFetchArgs = AliasApiFetchParamCreator(configuration).createRandom(body, options);
+    createRandom(
+      body: AliasRandomNewPost,
+      hostname?: string,
+      mode?: string,
+      options?: any,
+    ): (fetch?: FetchAPI, basePath?: string) => Promise<Alias> {
+      const localVarFetchArgs = AliasApiFetchParamCreator(configuration).createRandom(body, hostname, mode, options);
       return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
         return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
           if (response.status >= 200 && response.status < 300) {
@@ -1911,11 +1971,12 @@ export const AliasApiFp = function (configuration?: Configuration) {
     /**
      * User alias info and suggestion. Used by the first extension screen when user opens the extension.
      * @summary Options
+     * @param {string} [hostname] This information is important to know where an alias is used in order to suggest user the same alias if they want to create on alias on the same website in the future.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    options(options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<AliasOptions> {
-      const localVarFetchArgs = AliasApiFetchParamCreator(configuration).options(options);
+    options(hostname?: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<AliasOptions> {
+      const localVarFetchArgs = AliasApiFetchParamCreator(configuration).options(hostname, options);
       return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
         return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
           if (response.status >= 200 && response.status < 300) {
@@ -1936,42 +1997,49 @@ export const AliasApiFp = function (configuration?: Configuration) {
 export const AliasApiFactory = function (configuration?: Configuration, fetch?: FetchAPI, basePath?: string) {
   return {
     /**
-     * Get user aliases
+     * Get user aliases. Please note `pinned`, `disabled`, `enabled` are exclusive, i.e. only one can be present. They can only be set to `true`.
      * @summary Aliases
+     * @param {boolean} [pinned] If set, only pinned aliases are returned.
+     * @param {boolean} [disabled] If set, only disabled aliases are returned.
+     * @param {boolean} [enabled] If set, only enabled aliases are returned.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    aliases(options?: any) {
-      return AliasApiFp(configuration).aliases(options)(fetch, basePath);
+    aliases(pinned?: boolean, disabled?: boolean, enabled?: boolean, options?: any) {
+      return AliasApiFp(configuration).aliases(pinned, disabled, enabled, options)(fetch, basePath);
     },
     /**
      * Create a new custom alias
      * @summary Create custom
      * @param {AliasCustomNewPost} body
+     * @param {string} [hostname] This information is important to know where an alias is used in order to suggest user the same alias if they want to create on alias on the same website in the future.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    createCustom(body: AliasCustomNewPost, options?: any) {
-      return AliasApiFp(configuration).createCustom(body, options)(fetch, basePath);
+    createCustom(body: AliasCustomNewPost, hostname?: string, options?: any) {
+      return AliasApiFp(configuration).createCustom(body, hostname, options)(fetch, basePath);
     },
     /**
      * Create a new random alias
      * @summary Create random
      * @param {AliasRandomNewPost} body
+     * @param {string} [hostname] This information is important to know where an alias is used in order to suggest user the same alias if they want to create on alias on the same website in the future.
+     * @param {string} [mode] Either &#x60;uuid&#x60; or &#x60;word&#x60;. By default, use the user setting when creating new random alias.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    createRandom(body: AliasRandomNewPost, options?: any) {
-      return AliasApiFp(configuration).createRandom(body, options)(fetch, basePath);
+    createRandom(body: AliasRandomNewPost, hostname?: string, mode?: string, options?: any) {
+      return AliasApiFp(configuration).createRandom(body, hostname, mode, options)(fetch, basePath);
     },
     /**
      * User alias info and suggestion. Used by the first extension screen when user opens the extension.
      * @summary Options
+     * @param {string} [hostname] This information is important to know where an alias is used in order to suggest user the same alias if they want to create on alias on the same website in the future.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    options(options?: any) {
-      return AliasApiFp(configuration).options(options)(fetch, basePath);
+    options(hostname?: string, options?: any) {
+      return AliasApiFp(configuration).options(hostname, options)(fetch, basePath);
     },
   };
 };
@@ -1984,48 +2052,55 @@ export const AliasApiFactory = function (configuration?: Configuration, fetch?: 
  */
 export class AliasApi extends BaseAPI {
   /**
-   * Get user aliases
+   * Get user aliases. Please note `pinned`, `disabled`, `enabled` are exclusive, i.e. only one can be present. They can only be set to `true`.
    * @summary Aliases
+   * @param {boolean} [pinned] If set, only pinned aliases are returned.
+   * @param {boolean} [disabled] If set, only disabled aliases are returned.
+   * @param {boolean} [enabled] If set, only enabled aliases are returned.
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof AliasApi
    */
-  public aliases(options?: any) {
-    return AliasApiFp(this.configuration).aliases(options)(this.fetch, this.basePath);
+  public aliases(pinned?: boolean, disabled?: boolean, enabled?: boolean, options?: any) {
+    return AliasApiFp(this.configuration).aliases(pinned, disabled, enabled, options)(this.fetch, this.basePath);
   }
 
   /**
    * Create a new custom alias
    * @summary Create custom
    * @param {AliasCustomNewPost} body
+   * @param {string} [hostname] This information is important to know where an alias is used in order to suggest user the same alias if they want to create on alias on the same website in the future.
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof AliasApi
    */
-  public createCustom(body: AliasCustomNewPost, options?: any) {
-    return AliasApiFp(this.configuration).createCustom(body, options)(this.fetch, this.basePath);
+  public createCustom(body: AliasCustomNewPost, hostname?: string, options?: any) {
+    return AliasApiFp(this.configuration).createCustom(body, hostname, options)(this.fetch, this.basePath);
   }
 
   /**
    * Create a new random alias
    * @summary Create random
    * @param {AliasRandomNewPost} body
+   * @param {string} [hostname] This information is important to know where an alias is used in order to suggest user the same alias if they want to create on alias on the same website in the future.
+   * @param {string} [mode] Either &#x60;uuid&#x60; or &#x60;word&#x60;. By default, use the user setting when creating new random alias.
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof AliasApi
    */
-  public createRandom(body: AliasRandomNewPost, options?: any) {
-    return AliasApiFp(this.configuration).createRandom(body, options)(this.fetch, this.basePath);
+  public createRandom(body: AliasRandomNewPost, hostname?: string, mode?: string, options?: any) {
+    return AliasApiFp(this.configuration).createRandom(body, hostname, mode, options)(this.fetch, this.basePath);
   }
 
   /**
    * User alias info and suggestion. Used by the first extension screen when user opens the extension.
    * @summary Options
+   * @param {string} [hostname] This information is important to know where an alias is used in order to suggest user the same alias if they want to create on alias on the same website in the future.
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof AliasApi
    */
-  public options(options?: any) {
-    return AliasApiFp(this.configuration).options(options)(this.fetch, this.basePath);
+  public options(hostname?: string, options?: any) {
+    return AliasApiFp(this.configuration).options(hostname, options)(this.fetch, this.basePath);
   }
 }

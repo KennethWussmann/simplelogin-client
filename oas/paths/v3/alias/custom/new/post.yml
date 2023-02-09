@@ -6,7 +6,8 @@ operationId: "createCustom"
 requestBody:
   required: true
   content: {{ mixin("@mixins/request/json.yml", "@schemas/alias/custom/new/post.yml") }}
-# TODO: hostname query parameter
+parameters:
+  - $ref: @parameters/queryHostname.yml
 responses:
   '201':
     description: Created

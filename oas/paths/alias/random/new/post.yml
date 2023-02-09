@@ -3,8 +3,15 @@ tags:
 summary: Create random
 description: Create a new random alias
 operationId: "createRandom"
-# TODO: hostname query parameter
-# TODO: mode (uuid, word) query parameter
+parameters:
+  - $ref: @parameters/queryHostname.yml
+  - in: query
+    name: mode
+    required: false
+    schema:
+      type: string
+      enum: [uuid, word]
+    description: Either `uuid` or `word`. By default, use the user setting when creating new random alias.
 requestBody:
   required: true
   content: {{ mixin("@mixins/request/json.yml", "@schemas/alias/random/new/post.yml") }}

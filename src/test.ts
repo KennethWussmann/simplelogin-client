@@ -10,6 +10,8 @@ const run = async () => {
   });
   console.log(JSON.stringify(response, null, 2));
 
+  new SimpleLogin.AliasApi().createRandom({}, undefined, '');
+
   //const mfaResponse = await api.mfa({
   //  device: device,
   //  mfaKey: loginResponse.mfaKey,

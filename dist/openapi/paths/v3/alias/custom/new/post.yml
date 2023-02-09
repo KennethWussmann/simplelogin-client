@@ -9,6 +9,8 @@ requestBody:
     application/json:
       schema:
         $ref: ../../../../../components/schemas/alias/custom/new/post.yml
+parameters:
+  - $ref: ../../../../../components/parameters/queryHostname.yml
 responses:
   '201':
     description: Created

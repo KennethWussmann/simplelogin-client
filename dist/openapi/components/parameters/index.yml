@@ -1,5 +1,3 @@
-PathId:
-  $ref: ./pathId.yml
-QueryOffset:
-  $ref: ./queryOffset.yml
+QueryHostname:
+  $ref: ./queryHostname.yml
 

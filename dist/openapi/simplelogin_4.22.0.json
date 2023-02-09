@@ -61,6 +61,24 @@
         "summary": "Create random",
         "description": "Create a new random alias",
         "operationId": "createRandom",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/QueryHostname"
+          },
+          {
+            "in": "query",
+            "name": "mode",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "uuid",
+                "word"
+              ]
+            },
+            "description": "Either `uuid` or `word`. By default, use the user setting when creating new random alias."
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -668,15 +686,44 @@
           "alias"
         ],
         "summary": "Aliases",
-        "description": "Get user aliases",
+        "description": "Get user aliases. Please note `pinned`, `disabled`, `enabled` are exclusive, i.e. only one can be present. They can only be set to `true`.",
         "operationId": "aliases",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "pinned",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "If set, only pinned aliases are returned."
+          },
+          {
+            "in": "query",
+            "name": "disabled",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "If set, only disabled aliases are returned."
+          },
+          {
+            "in": "query",
+            "name": "enabled",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "If set, only enabled aliases are returned."
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Alias"
+                  "$ref": "#/components/schemas/AliasModelArray"
                 }
               }
             }
@@ -727,6 +774,11 @@
             }
           }
         },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/QueryHostname"
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created",
@@ -774,6 +826,11 @@
         "summary": "Options",
         "description": "User alias info and suggestion. Used by the first extension screen when user opens the extension.",
         "operationId": "options",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/QueryHostname"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful",
@@ -816,24 +873,15 @@
   },
   "components": {
     "parameters": {
-      "PathId": {
-        "in": "path",
-        "name": "id",
-        "schema": {
-          "type": "integer"
-        },
-        "required": true,
-        "description": "Numeric ID of object to fetch"
-      },
-      "QueryOffset": {
+      "QueryHostname": {
         "in": "query",
-        "name": "offset",
+        "name": "hostname",
         "required": false,
         "schema": {
-          "type": "integer",
-          "minimum": 0
+          "type": "string",
+          "example": "www.example.com"
         },
-        "description": "The number of items to skip before starting to collect the result set."
+        "description": "This information is important to know where an alias is used in order to suggest user the same alias if they want to create on alias on the same website in the future."
       }
     },
     "schemas": {
@@ -999,6 +1047,12 @@
           "disable_pgp",
           "support_pgp"
         ]
+      },
+      "AliasModelArray": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Alias"
+        }
       },
       "AliasOptions": {
         "type": "object",

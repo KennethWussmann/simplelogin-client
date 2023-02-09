@@ -1,11 +1,28 @@
 tags:
   - alias
 summary: Aliases
-description: Get user aliases
+description: Get user aliases. Please note `pinned`, `disabled`, `enabled` are exclusive, i.e. only one can be present. They can only be set to `true`.
 operationId: "aliases"
-# TODO: aaaaaallll the params
+parameters:
+  - in: query
+    name: pinned
+    required: false
+    schema:
+      type: boolean
+    description: If set, only pinned aliases are returned.
+  - in: query
+    name: disabled
+    required: false
+    schema:
+      type: boolean
+    description: If set, only disabled aliases are returned.
+  - in: query
+    name: enabled
+    required: false
+    schema:
+      type: boolean
+    description: If set, only enabled aliases are returned.
 responses:
   "200":
     description: Successful
-    # TODO: ARRAY
-    content: {{ mixin("@mixins/request/json.yml", "@schemas/alias/model.yml") }}
+    content: {{ mixin("@mixins/request/json.yml", "@schemas/alias/modelArray.yml") }}

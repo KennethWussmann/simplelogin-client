@@ -1,0 +1,7 @@
+in: query
+name: hostname
+required: false
+schema:
+  type: string
+  example: 'www.example.com'
+description: This information is important to know where an alias is used in order to suggest user the same alias if they want to create on alias on the same website in the future.

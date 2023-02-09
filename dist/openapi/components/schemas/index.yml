@@ -2,6 +2,8 @@ AliasCustomNewPost:
   $ref: ./alias/custom/new/post.yml
 Alias:
   $ref: ./alias/model.yml
+AliasModelArray:
+  $ref: ./alias/modelArray.yml
 AliasOptions:
   $ref: ./alias/options/model.yml
 AliasRandomNewPost:
