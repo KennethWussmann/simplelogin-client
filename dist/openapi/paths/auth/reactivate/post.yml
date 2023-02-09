@@ -16,15 +16,3 @@ responses:
     description: >-
       Successful. User is going to receive an email that contains an activation
       code.
-  '401':
-    description: Unauthorized
-    content:
-      application/json:
-        schema:
-          $ref: ../../../components/schemas/error.yml
-  '403':
-    description: Forbidden
-    content:
-      application/json:
-        schema:
-          $ref: ../../../components/schemas/error.yml

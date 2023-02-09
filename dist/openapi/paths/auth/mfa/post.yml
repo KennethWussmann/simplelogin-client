@@ -19,15 +19,3 @@ responses:
       application/json:
         schema:
           $ref: ../../../components/schemas/auth/mfa/model.yml
-  '401':
-    description: Unauthorized
-    content:
-      application/json:
-        schema:
-          $ref: ../../../components/schemas/error.yml
-  '403':
-    description: Forbidden
-    content:
-      application/json:
-        schema:
-          $ref: ../../../components/schemas/error.yml

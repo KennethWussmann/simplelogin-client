@@ -14,15 +14,3 @@ responses:
     description: >-
       Always returns 200, no matter if the email is registered or not. User is
       going to receive an email that contains a link to reset their password.
-  '401':
-    description: Unauthorized
-    content:
-      application/json:
-        schema:
-          $ref: ../../../components/schemas/error.yml
-  '403':
-    description: Forbidden
-    content:
-      application/json:
-        schema:
-          $ref: ../../../components/schemas/error.yml

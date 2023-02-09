@@ -49,13 +49,7 @@ components:
         content: {
           security: [{
             apiKeyAuth: []
-          }]
-        }
-      }
-    },
-    {
-      toAllOperations: {
-        content: {
+          }],
           responses: {
             '401': {
               description: 'Unauthorized',

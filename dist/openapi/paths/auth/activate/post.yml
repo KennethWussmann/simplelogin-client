@@ -20,18 +20,6 @@ responses:
       application/json:
         schema:
           $ref: ../../../components/schemas/error.yml
-  '401':
-    description: Unauthorized
-    content:
-      application/json:
-        schema:
-          $ref: ../../../components/schemas/error.yml
-  '403':
-    description: Forbidden
-    content:
-      application/json:
-        schema:
-          $ref: ../../../components/schemas/error.yml
   '410':
     description: >-
       Wrong code entered too often. User needs to ask for a new code using
