@@ -1,7 +1,7 @@
 <div align="center">
   <h1><code>simplelogin-client</code></h1>
   <p>
-    <strong>Zero-dependency TypeScript client for the SimpleLogin.io API. Compatible with NodeJS 18+ and browsers.</strong>
+    <strong>Zero-dependency TypeScript client for the [SimpleLogin.io](https://simplelogin.io) API. Compatible with NodeJS 18+ and browsers.</strong>
   </p>
   <p>
     <a href="https://kennethwussmann.github.io/simplelogin-client/typedoc/index.html">Documentation</a> • <a href="https://kennethwussmann.github.io/simplelogin-client/redoc/index.html">API Spec</a> 
@@ -29,7 +29,7 @@ It's basically writing OpenAPI spec, to contribute code to this client.
 
 The client is generated using [swagger-codegen](https://github.com/swagger-api/swagger-codegen) and the OpenAPI spec is written with [boats](https://github.com/j-d-carmichael/boats).
 
-Everything in `./dist` & `./src/sdk` is generated and should not be editied manually. To adjust the API client, docs or the built OpenAPI spec, adjust the YAML files in `./oas` to document the API.
+Everything in `./dist` & `./src/sdk` is generated and should not be modified manually. To adjust the API client, docs or the built OpenAPI spec, adjust the YAML files in `./oas` to document the API. Check the [boats documentation](https://j-d-carmichael.github.io/boats/#/) and the [OpenAPI v3 spec](https://swagger.io/specification/) for further guidance.
 
 ### Setup
 
