@@ -4,3 +4,4 @@ export * from './buildSdk';
 export * from './clean';
 export * from './lint';
 export * from './buildPagesIndex';
+export * from './buildSrc';
