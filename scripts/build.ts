@@ -1,6 +1,4 @@
-import { buildDocs, buildOAS, buildSdk, createDirs, lint } from './steps';
-import { buildPagesIndex } from './steps/buildPagesIndex';
-import { buildSrc } from './steps/buildSrc';
+import { buildDocs, buildPagesIndex, buildOAS, buildSdk, createDirs, lint } from './steps';
 import { measureBuildTime } from './utils';
 
 measureBuildTime(async () => {
@@ -8,7 +6,7 @@ measureBuildTime(async () => {
   const oas = await buildOAS();
   await buildSdk(oas);
   await lint();
-  await buildSrc();
+  // await buildSrc();
   await buildDocs(oas);
   await buildPagesIndex();
 });
