@@ -32,6 +32,39 @@ paths:
 
 components:
   parameters:
-    $ref: components/parameters/index.yml
+    $ref: @parameters/index.yml
   schemas:
-    $ref: components/schemas/index.yml
+    $ref: @schemas/index.yml
+
+{{
+  inject([
+    {
+      toAllOperations: {
+        content: {
+          responses: {
+            '401': {
+              description: 'Unauthorized',
+              content: {
+                'application/json': {
+                  schema: {
+                    $ref: '@schemas/error.yml'
+                  }
+                }
+              }
+            },
+            '403': {
+              description: 'Forbidden',
+              content: {
+                'application/json': {
+                  schema: {
+                    $ref: '@schemas/error.yml'
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ])
+}}

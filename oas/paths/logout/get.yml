@@ -7,6 +7,3 @@ responses:
   '200':
     description: Successful
     content: {{ mixin("@mixins/request/json.yml", "@schemas/user_info/model.yml") }}
-  '401':
-    description: Unauthorized
-    content: {{ mixin("@mixins/request/json.yml", "@schemas/error.yml") }}

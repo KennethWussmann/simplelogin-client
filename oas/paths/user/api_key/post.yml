@@ -10,6 +10,3 @@ responses:
   '201':
     description: Created
     content: {{ mixin("@mixins/request/json.yml", "@schemas/user/api_key/model.yml") }}
-  '401':
-    description: Unauthorized
-    content: {{ mixin("@mixins/request/json.yml", "@schemas/error.yml") }}

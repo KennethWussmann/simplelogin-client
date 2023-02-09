@@ -2,28 +2,29 @@ tags:
   - alias
 summary: Create random
 description: Create a new random alias
-operationId: "createRandom"
-# TODO: hostname query parameter
-# TODO: mode (uuid, word) query parameter
+operationId: createRandom
 requestBody:
   required: true
-  content: 
+  content:
     application/json:
       schema:
         $ref: ../../../../components/schemas/alias/random/new/post.yml
-    
 responses:
   '201':
     description: Created
-    content: 
+    content:
       application/json:
         schema:
           $ref: ../../../../components/schemas/alias/model.yml
-      
   '401':
     description: Unauthorized
-    content: 
+    content:
       application/json:
         schema:
           $ref: ../../../../components/schemas/error.yml
-      
+  '403':
+    description: Forbidden
+    content:
+      application/json:
+        schema:
+          $ref: ../../../../components/schemas/error.yml

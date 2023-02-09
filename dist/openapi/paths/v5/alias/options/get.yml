@@ -1,14 +1,26 @@
 tags:
   - alias
 summary: Options
-description: User alias info and suggestion. Used by the first extension screen when user opens the extension.
-operationId: "options"
-# TODO: Query param hostname, optional but recommended
+description: >-
+  User alias info and suggestion. Used by the first extension screen when user
+  opens the extension.
+operationId: options
 responses:
   '200':
     description: Successful
-    content: 
+    content:
       application/json:
         schema:
           $ref: ../../../../components/schemas/alias/options/model.yml
-      
+  '401':
+    description: Unauthorized
+    content:
+      application/json:
+        schema:
+          $ref: ../../../../components/schemas/error.yml
+  '403':
+    description: Forbidden
+    content:
+      application/json:
+        schema:
+          $ref: ../../../../components/schemas/error.yml

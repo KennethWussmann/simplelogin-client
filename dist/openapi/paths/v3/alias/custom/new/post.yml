@@ -2,27 +2,29 @@ tags:
   - alias
 summary: Create custom
 description: Create a new custom alias
-operationId: "createCustom"
+operationId: createCustom
 requestBody:
   required: true
-  content: 
+  content:
     application/json:
       schema:
         $ref: ../../../../../components/schemas/alias/custom/new/post.yml
-    
-# TODO: hostname query parameter
 responses:
   '201':
     description: Created
-    content: 
+    content:
       application/json:
         schema:
           $ref: ../../../../../components/schemas/alias/model.yml
-      
   '401':
     description: Unauthorized
-    content: 
+    content:
       application/json:
         schema:
           $ref: ../../../../../components/schemas/error.yml
-      
+  '403':
+    description: Forbidden
+    content:
+      application/json:
+        schema:
+          $ref: ../../../../../components/schemas/error.yml

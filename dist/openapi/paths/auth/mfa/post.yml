@@ -2,21 +2,32 @@ tags:
   - account
 summary: MFA authentication
 description: Authenticate using MFA
-operationId: "mfa"
+operationId: mfa
 requestBody:
-  description: The api_key is used in all subsequent requests. It's empty if MFA is enabled. If user hasn't enabled MFA, mfa_key is empty.
+  description: >-
+    The api_key is used in all subsequent requests. It's empty if MFA is
+    enabled. If user hasn't enabled MFA, mfa_key is empty.
   required: true
-  content: 
+  content:
     application/json:
       schema:
         $ref: ../../../components/schemas/auth/mfa/post.yml
-    
 responses:
   '200':
     description: Successful
-    content: 
+    content:
       application/json:
         schema:
           $ref: ../../../components/schemas/auth/mfa/model.yml
-      
-      
+  '401':
+    description: Unauthorized
+    content:
+      application/json:
+        schema:
+          $ref: ../../../components/schemas/error.yml
+  '403':
+    description: Forbidden
+    content:
+      application/json:
+        schema:
+          $ref: ../../../components/schemas/error.yml

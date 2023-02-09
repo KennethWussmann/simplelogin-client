@@ -2,14 +2,28 @@ tags:
   - account
 summary: Register
 description: Register a new account
-operationId: "register"
+operationId: register
 requestBody:
   required: true
-  content: 
+  content:
     application/json:
       schema:
         $ref: ../../../components/schemas/auth/register/post.yml
-    
 responses:
   '200':
-    description: Successful. User is going to receive an email that contains an activation code. User needs to enter this code to confirm their account with the activate endpoint.
+    description: >-
+      Successful. User is going to receive an email that contains an activation
+      code. User needs to enter this code to confirm their account with the
+      activate endpoint.
+  '401':
+    description: Unauthorized
+    content:
+      application/json:
+        schema:
+          $ref: ../../../components/schemas/error.yml
+  '403':
+    description: Forbidden
+    content:
+      application/json:
+        schema:
+          $ref: ../../../components/schemas/error.yml

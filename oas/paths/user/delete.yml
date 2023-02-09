@@ -10,6 +10,3 @@ responses:
   '440':
     description: Sudo mode is required
     content: {{ mixin("@mixins/request/json.yml", "@schemas/error.yml") }}
-  '403':
-    description: Failed
-    content: {{ mixin("@mixins/request/json.yml", "@schemas/error.yml") }}

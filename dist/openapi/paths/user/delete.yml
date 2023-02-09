@@ -2,26 +2,29 @@ tags:
   - account
 summary: User
 description: Delete user (requires sudo mode)
-operationId: "deleteUser"
+operationId: deleteUser
 responses:
   '200':
     description: Successful. Account is scheduled for deletion.
-    content: 
+    content:
       application/json:
         schema:
           $ref: ../../components/schemas/success.yml
-      
+  '401':
+    description: Unauthorized
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/error.yml
+  '403':
+    description: Forbidden
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/error.yml
   '440':
     description: Sudo mode is required
-    content: 
+    content:
       application/json:
         schema:
           $ref: ../../components/schemas/error.yml
-      
-  '403':
-    description: Failed
-    content: 
-      application/json:
-        schema:
-          $ref: ../../components/schemas/error.yml
-      

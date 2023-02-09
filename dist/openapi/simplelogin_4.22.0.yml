@@ -56,6 +56,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /auth/activate:
     post:
       tags:
@@ -76,6 +82,18 @@ paths:
           description: Successful. User can login now.
         '400':
           description: Wrong email or code
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
           content:
             application/json:
               schema:
@@ -107,6 +125,18 @@ paths:
             Always returns 200, no matter if the email is registered or not.
             User is going to receive an email that contains a link to reset
             their password.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /auth/login:
     post:
       tags:
@@ -127,6 +157,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AuthLogin'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /auth/mfa:
     post:
       tags:
@@ -150,6 +192,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AuthMfa'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /auth/reactivate:
     post:
       tags:
@@ -170,6 +224,18 @@ paths:
           description: >-
             Successful. User is going to receive an email that contains an
             activation code.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /auth/register:
     post:
       tags:
@@ -189,6 +255,18 @@ paths:
             Successful. User is going to receive an email that contains an
             activation code. User needs to enter this code to confirm their
             account with the activate endpoint.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /logout:
     get:
       tags:
@@ -205,6 +283,12 @@ paths:
                 $ref: '#/components/schemas/UserInfo'
         '401':
           description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
           content:
             application/json:
               schema:
@@ -229,6 +313,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Success'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '403':
           description: Forbidden
           content:
@@ -261,6 +351,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /user/cookie_token:
     get:
       tags:
@@ -277,6 +373,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserCookieToken'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '403':
           description: Forbidden
           content:
@@ -297,8 +399,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Success'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '403':
-          description: Failed
+          description: Forbidden
           content:
             application/json:
               schema:
@@ -323,6 +431,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserInfo'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
     patch:
       tags:
         - account
@@ -342,6 +462,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserInfo'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /v2/aliases:
     get:
       tags:
@@ -356,6 +488,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Alias'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /v3/alias/custom/new:
     post:
       tags:
@@ -382,6 +526,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /v5/alias/options:
     get:
       tags:
@@ -398,6 +548,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AliasOptions'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 components:
   parameters:
     PathId:

@@ -2,14 +2,23 @@ tags:
   - alias
 summary: Aliases
 description: Get user aliases
-operationId: "aliases"
-# TODO: aaaaaallll the params
+operationId: aliases
 responses:
-  "200":
+  '200':
     description: Successful
-    # TODO: ARRAY
-    content: 
+    content:
       application/json:
         schema:
           $ref: ../../../components/schemas/alias/model.yml
-      
+  '401':
+    description: Unauthorized
+    content:
+      application/json:
+        schema:
+          $ref: ../../../components/schemas/error.yml
+  '403':
+    description: Forbidden
+    content:
+      application/json:
+        schema:
+          $ref: ../../../components/schemas/error.yml

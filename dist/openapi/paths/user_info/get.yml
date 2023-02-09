@@ -2,12 +2,23 @@ tags:
   - account
 summary: User info
 description: Get user info
-operationId: "userInfo"
+operationId: userInfo
 responses:
   '200':
     description: Successful
-    content: 
+    content:
       application/json:
         schema:
           $ref: ../../components/schemas/user_info/model.yml
-      
+  '401':
+    description: Unauthorized
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/error.yml
+  '403':
+    description: Forbidden
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/error.yml

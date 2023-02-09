@@ -2,26 +2,29 @@ tags:
   - account
 summary: Sudo mode
 description: Enable sudo mode
-operationId: "enableSudoMode"
+operationId: enableSudoMode
 requestBody:
   required: true
-  content: 
+  content:
     application/json:
       schema:
         $ref: ../../components/schemas/sudo/patch.yml
-    
 responses:
   '200':
     description: Successful
-    content: 
+    content:
       application/json:
         schema:
           $ref: ../../components/schemas/success.yml
-      
-  '403':
-    description: Forbidden
-    content: 
+  '401':
+    description: Unauthorized
+    content:
       application/json:
         schema:
           $ref: ../../components/schemas/error.yml
-      
+  '403':
+    description: Forbidden
+    content:
+      application/json:
+        schema:
+          $ref: ../../components/schemas/error.yml
