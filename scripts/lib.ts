@@ -23,13 +23,15 @@ const buildOAS = async () => {
 const buildDocs = async (oasPath: string) =>
   Promise.all([$`npx typedoc`, $`npx redoc-cli build ${oasPath} -o ${join(distRedocDir, 'simplelogin_redoc.html')}`]);
 
-const buildSdk = async (oasPath: string) =>
-  $`docker run --rm -v ${process.cwd()}:/local ghcr.io/kennethwussmann/custom-swagger-codegen-cli-arm64:latest generate -i ${join(
+const buildSdk = async (oasPath: string) => {
+  await $`docker pull ghcr.io/kennethwussmann/custom-swagger-codegen-cli-arm64:latest`;
+  await $`docker run --rm -v ${process.cwd()}:/local ghcr.io/kennethwussmann/custom-swagger-codegen-cli-arm64:latest generate -i ${join(
     '/local',
     'dist',
     'openapi',
     parse(oasPath).base,
   )} -l typescript-fetch -o /local/build/sdk`;
+};
 
 export const clean = async () =>
   Promise.all([
