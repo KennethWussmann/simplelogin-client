@@ -46,10 +46,10 @@ npm run build
 npm run watch
 ```
 
+### Build process
+
+The build process is configured in `scripts/build.ts` and `scripts/rebuild.ts`. These scripts combine all the different CLI tools for the build process and ensures everthing fits together. They also modify some generated files to make them compatible.
+
 ### Contribute
 
 PRs are highly welcome. Remember to run the build and commit the generated files.
-
-### Note on arm64 machines
-
-Building on `arm64` architecture is currently not possible, because the official [swagger-codegen-cli docker image](https://hub.docker.com/r/swaggerapi/swagger-codegen-cli) is not available for this architecture. I'll try to publish one soon.

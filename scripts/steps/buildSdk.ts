@@ -2,7 +2,7 @@ import { globby } from 'globby';
 import { join, parse } from 'path';
 import { $ } from 'zx/core';
 import { image, sdkDestination } from '../constants';
-import { save, read } from '../utils';
+import { save, read, sectionHeader } from '../utils';
 
 const getDestinationPath = (path: string) => {
   const filename = parse(path).base;
@@ -35,7 +35,7 @@ const moveSdkFiles = async () => {
 };
 
 export const buildSdk = async (oasPath: string) => {
-  console.log('🔧 Building SDK');
+  console.log(sectionHeader('🔧 Building SDK'));
   await $`docker pull ${image}`;
   await $`docker run --rm -v ${process.cwd()}:/local ${image} generate -i ${join(
     '/local',
