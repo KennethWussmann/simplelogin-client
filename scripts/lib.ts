@@ -1,6 +1,6 @@
 import { globby } from 'globby';
 import { $ } from 'zx';
-import { mkdir, readFile, rm, writeFile } from 'fs/promises';
+import { access, mkdir, readFile, rm, writeFile } from 'fs/promises';
 import { join, parse } from 'path';
 
 const srcDir = join(process.cwd(), 'src');
@@ -36,18 +36,26 @@ const buildSdk = async (oasPath: string) => {
 };
 
 export const clean = async () =>
-  Promise.all([
-    rm(buildDir, { recursive: true }),
-    rm(sdkDestination, { recursive: true }),
-    rm(distDir, { recursive: true }),
-    createDirs(),
-  ]);
+  Promise.all([deleteIfExists(buildDir), deleteIfExists(sdkDestination), deleteIfExists(distDir), createDirs()]);
+
+const exist = async (path: string) => {
+  try {
+    await access(path);
+    return true;
+  } catch {
+    return false;
+  }
+};
 
 const createDirectoryIfNotExists = async (path: string) => {
-  try {
+  if (!(await exist(path))) {
     await mkdir(path, { recursive: true });
-  } catch {
-    //
+  }
+};
+
+const deleteIfExists = async (path: string) => {
+  if (await exist(path)) {
+    await rm(path, { recursive: true });
   }
 };
 
