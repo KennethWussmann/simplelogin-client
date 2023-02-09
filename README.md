@@ -1,7 +1,7 @@
 <div align="center">
   <h1><code>simplelogin-client</code></h1>
   <p>
-    <strong>Zero-dependency TypeScript client for the [SimpleLogin.io](https://simplelogin.io) API. Compatible with NodeJS 18+ and browsers.</strong>
+    <strong>Zero-dependency TypeScript client for the <a href="https://simplelogin.io">SimpleLogin.io</a> API. Compatible with NodeJS 18+ and browsers.</strong>
   </p>
   <p>
     <a href="https://kennethwussmann.github.io/simplelogin-client/typedoc/index.html">Documentation</a> • <a href="https://kennethwussmann.github.io/simplelogin-client/redoc/index.html">API Spec</a> 
