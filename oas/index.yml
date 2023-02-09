@@ -35,9 +35,24 @@ components:
     $ref: @parameters/index.yml
   schemas:
     $ref: @schemas/index.yml
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authentication
 
 {{
   inject([
+    {
+      toAllOperations: {
+        excludePaths: ['/auth/*'],
+        content: {
+          security: [{
+            apiKeyAuth: []
+          }]
+        }
+      }
+    },
     {
       toAllOperations: {
         content: {

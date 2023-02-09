@@ -62,6 +62,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+      security:
+        - apiKeyAuth: []
   /auth/activate:
     post:
       tags:
@@ -293,6 +295,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+      security:
+        - apiKeyAuth: []
   /sudo:
     patch:
       tags:
@@ -325,6 +329,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+      security:
+        - apiKeyAuth: []
   /user/api_key:
     post:
       tags:
@@ -357,6 +363,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+      security:
+        - apiKeyAuth: []
   /user/cookie_token:
     get:
       tags:
@@ -385,6 +393,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+      security:
+        - apiKeyAuth: []
   /user:
     delete:
       tags:
@@ -417,6 +427,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+      security:
+        - apiKeyAuth: []
   /user_info:
     get:
       tags:
@@ -443,6 +455,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+      security:
+        - apiKeyAuth: []
     patch:
       tags:
         - account
@@ -474,6 +488,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+      security:
+        - apiKeyAuth: []
   /v2/aliases:
     get:
       tags:
@@ -500,6 +516,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+      security:
+        - apiKeyAuth: []
   /v3/alias/custom/new:
     post:
       tags:
@@ -532,6 +550,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+      security:
+        - apiKeyAuth: []
   /v5/alias/options:
     get:
       tags:
@@ -560,6 +580,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+      security:
+        - apiKeyAuth: []
 components:
   parameters:
     PathId:
@@ -939,3 +961,8 @@ components:
         name:
           type: string
           description: New name of the user
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authentication

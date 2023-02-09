@@ -28,3 +28,5 @@ responses:
       application/json:
         schema:
           $ref: ../../components/schemas/error.yml
+security:
+  - apiKeyAuth: []

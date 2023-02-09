@@ -1,7 +1,9 @@
 import { SimpleLogin } from './';
 
 const run = async () => {
-  const api = new SimpleLogin.AccountApi();
+  const api = new SimpleLogin.AccountApi({
+    apiKey: 'test',
+  });
 
   const response = await api.forgotPassword({
     email: 'kenneth@wussmann.net',

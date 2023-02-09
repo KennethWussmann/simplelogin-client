@@ -35,4 +35,9 @@ components:
     $ref: components/parameters/index.yml
   schemas:
     $ref: components/schemas/index.yml
+  securitySchemes:
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authentication
 

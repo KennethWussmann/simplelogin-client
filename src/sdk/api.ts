@@ -752,6 +752,13 @@ export const AccountApiFetchParamCreator = function (configuration?: Configurati
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
+      // authentication apiKeyAuth required
+      if (configuration && configuration.apiKey) {
+        const localVarApiKeyValue =
+          typeof configuration.apiKey === 'function' ? configuration.apiKey('Authentication') : configuration.apiKey;
+        localVarHeaderParameter['Authentication'] = localVarApiKeyValue;
+      }
+
       localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
       // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
       delete localVarUrlObj.search;
@@ -779,6 +786,13 @@ export const AccountApiFetchParamCreator = function (configuration?: Configurati
       const localVarRequestOptions = Object.assign({ method: 'POST' }, options);
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
+
+      // authentication apiKeyAuth required
+      if (configuration && configuration.apiKey) {
+        const localVarApiKeyValue =
+          typeof configuration.apiKey === 'function' ? configuration.apiKey('Authentication') : configuration.apiKey;
+        localVarHeaderParameter['Authentication'] = localVarApiKeyValue;
+      }
 
       localVarHeaderParameter['Content-Type'] = 'application/json';
 
@@ -808,6 +822,13 @@ export const AccountApiFetchParamCreator = function (configuration?: Configurati
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
+      // authentication apiKeyAuth required
+      if (configuration && configuration.apiKey) {
+        const localVarApiKeyValue =
+          typeof configuration.apiKey === 'function' ? configuration.apiKey('Authentication') : configuration.apiKey;
+        localVarHeaderParameter['Authentication'] = localVarApiKeyValue;
+      }
+
       localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
       // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
       delete localVarUrlObj.search;
@@ -835,6 +856,13 @@ export const AccountApiFetchParamCreator = function (configuration?: Configurati
       const localVarRequestOptions = Object.assign({ method: 'PATCH' }, options);
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
+
+      // authentication apiKeyAuth required
+      if (configuration && configuration.apiKey) {
+        const localVarApiKeyValue =
+          typeof configuration.apiKey === 'function' ? configuration.apiKey('Authentication') : configuration.apiKey;
+        localVarHeaderParameter['Authentication'] = localVarApiKeyValue;
+      }
 
       localVarHeaderParameter['Content-Type'] = 'application/json';
 
@@ -930,6 +958,13 @@ export const AccountApiFetchParamCreator = function (configuration?: Configurati
       const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
+
+      // authentication apiKeyAuth required
+      if (configuration && configuration.apiKey) {
+        const localVarApiKeyValue =
+          typeof configuration.apiKey === 'function' ? configuration.apiKey('Authentication') : configuration.apiKey;
+        localVarHeaderParameter['Authentication'] = localVarApiKeyValue;
+      }
 
       localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
       // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
@@ -1058,6 +1093,13 @@ export const AccountApiFetchParamCreator = function (configuration?: Configurati
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
+      // authentication apiKeyAuth required
+      if (configuration && configuration.apiKey) {
+        const localVarApiKeyValue =
+          typeof configuration.apiKey === 'function' ? configuration.apiKey('Authentication') : configuration.apiKey;
+        localVarHeaderParameter['Authentication'] = localVarApiKeyValue;
+      }
+
       localVarHeaderParameter['Content-Type'] = 'application/json';
 
       localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
@@ -1085,6 +1127,13 @@ export const AccountApiFetchParamCreator = function (configuration?: Configurati
       const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
+
+      // authentication apiKeyAuth required
+      if (configuration && configuration.apiKey) {
+        const localVarApiKeyValue =
+          typeof configuration.apiKey === 'function' ? configuration.apiKey('Authentication') : configuration.apiKey;
+        localVarHeaderParameter['Authentication'] = localVarApiKeyValue;
+      }
 
       localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
       // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
@@ -1667,6 +1716,13 @@ export const AliasApiFetchParamCreator = function (configuration?: Configuration
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
+      // authentication apiKeyAuth required
+      if (configuration && configuration.apiKey) {
+        const localVarApiKeyValue =
+          typeof configuration.apiKey === 'function' ? configuration.apiKey('Authentication') : configuration.apiKey;
+        localVarHeaderParameter['Authentication'] = localVarApiKeyValue;
+      }
+
       localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
       // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
       delete localVarUrlObj.search;
@@ -1694,6 +1750,13 @@ export const AliasApiFetchParamCreator = function (configuration?: Configuration
       const localVarRequestOptions = Object.assign({ method: 'POST' }, options);
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
+
+      // authentication apiKeyAuth required
+      if (configuration && configuration.apiKey) {
+        const localVarApiKeyValue =
+          typeof configuration.apiKey === 'function' ? configuration.apiKey('Authentication') : configuration.apiKey;
+        localVarHeaderParameter['Authentication'] = localVarApiKeyValue;
+      }
 
       localVarHeaderParameter['Content-Type'] = 'application/json';
 
@@ -1728,6 +1791,13 @@ export const AliasApiFetchParamCreator = function (configuration?: Configuration
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
+      // authentication apiKeyAuth required
+      if (configuration && configuration.apiKey) {
+        const localVarApiKeyValue =
+          typeof configuration.apiKey === 'function' ? configuration.apiKey('Authentication') : configuration.apiKey;
+        localVarHeaderParameter['Authentication'] = localVarApiKeyValue;
+      }
+
       localVarHeaderParameter['Content-Type'] = 'application/json';
 
       localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
@@ -1755,6 +1825,13 @@ export const AliasApiFetchParamCreator = function (configuration?: Configuration
       const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
+
+      // authentication apiKeyAuth required
+      if (configuration && configuration.apiKey) {
+        const localVarApiKeyValue =
+          typeof configuration.apiKey === 'function' ? configuration.apiKey('Authentication') : configuration.apiKey;
+        localVarHeaderParameter['Authentication'] = localVarApiKeyValue;
+      }
 
       localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
       // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
