@@ -1,5 +1,9 @@
 name: publish-pages
-on: [push]
+
+on:
+  push:
+    branches:
+      - main
 
 concurrency:
   group: 'pages'
