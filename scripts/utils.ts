@@ -1,4 +1,5 @@
-import { access, mkdir, readFile, rm, writeFile } from 'fs/promises';
+import { access, copyFile, mkdir, readFile, rm, writeFile } from 'fs/promises';
+import { join, parse } from 'path';
 
 export const exist = async (path: string) => {
   try {
@@ -28,8 +29,11 @@ export const deleteIfExists = async (path: string) => {
 export const read = async (path: string) => readFile(path, 'utf-8');
 
 export const save = async (path: string, content: string) => writeFile(path, content, 'utf-8');
+export const copy = async (sourcePaths: string[], destinationDir: string) =>
+  Promise.all(sourcePaths.map((path) => copyFile(path, join(destinationDir, parse(path).base))));
 
-export const sectionHeader = (text: string) => ['-'.repeat(text.length), text, '-'.repeat(text.length)].join('\n');
+export const sectionHeader = (text: string) =>
+  ['\n', '-'.repeat(text.length), text, '-'.repeat(text.length)].join('\n');
 
 export const measureBuildTime = async (fn: () => Promise<void>) => {
   const start = Date.now();

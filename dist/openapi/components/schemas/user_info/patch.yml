@@ -1,9 +1,0 @@
-type: object
-properties:
-  profile_picture:
-    type: string
-    format: base64
-    description: Image of the new profile picture encoded in base64. Set to null to remove current profile picture.
-  name:
-    type: string
-    description: New name of the user
