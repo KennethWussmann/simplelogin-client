@@ -5,7 +5,7 @@ description: Request a new activation code for an account that was already regis
 operationId: "reactivate"
 requestBody:
   required: true
-  content: {{ mixin("../../../mixins/request/json.yml", "../../../components/schemas/auth/reactivate/post.yml") }}
+  content: {{ mixin("@mixins/request/json.yml", "@schemas/auth/reactivate/post.yml") }}
 responses:
   '200':
     description: Successful. User is going to receive an email that contains an activation code.

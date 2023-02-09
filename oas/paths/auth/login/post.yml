@@ -5,8 +5,8 @@ description: Login using email and password to get an access token.
 operationId: "login"
 requestBody:
   required: true
-  content: {{ mixin("../../../mixins/request/json.yml", "../../../components/schemas/auth/login/post.yml") }}
+  content: {{ mixin("@mixins/request/json.yml", "@schemas/auth/login/post.yml") }}
 responses:
   '200':
     description: Successful
-    content: {{ mixin("../../../mixins/response/json.yml", "../../../components/schemas/auth/login/model.yml") }}
+    content: {{ mixin("@mixins/response/json.yml", "@schemas/auth/login/model.yml") }}

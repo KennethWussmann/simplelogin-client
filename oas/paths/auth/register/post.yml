@@ -5,7 +5,7 @@ description: Register a new account
 operationId: "register"
 requestBody:
   required: true
-  content: {{ mixin("../../../mixins/request/json.yml", "../../../components/schemas/auth/register/post.yml") }}
+  content: {{ mixin("@mixins/request/json.yml", "@schemas/auth/register/post.yml") }}
 responses:
   '200':
     description: Successful. User is going to receive an email that contains an activation code. User needs to enter this code to confirm their account with the activate endpoint.

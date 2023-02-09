@@ -5,12 +5,12 @@ description: Create a new custom alias
 operationId: "createCustom"
 requestBody:
   required: true
-  content: {{ mixin("../../../../../mixins/request/json.yml", "../../../../../components/schemas/alias/custom/new/post.yml") }}
+  content: {{ mixin("@mixins/request/json.yml", "@schemas/alias/custom/new/post.yml") }}
 # TODO: hostname query parameter
 responses:
   '201':
     description: Created
-    content: {{ mixin("../../../../../mixins/request/json.yml", "../../../../../components/schemas/alias/model.yml") }}
+    content: {{ mixin("@mixins/request/json.yml", "@schemas/alias/model.yml") }}
   '401':
     description: Unauthorized
-    content: {{ mixin("../../../../../mixins/request/json.yml", "../../../../../components/schemas/error.yml") }}
+    content: {{ mixin("@mixins/request/json.yml", "@schemas/error.yml") }}

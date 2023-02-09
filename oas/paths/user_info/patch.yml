@@ -5,8 +5,8 @@ description: Update user info
 operationId: "updateUserInfo"
 requestBody:
   required: true
-  content: {{ mixin("../../mixins/request/json.yml", "../../components/schemas/user_info/patch.yml") }}
+  content: {{ mixin("@mixins/request/json.yml", "@schemas/user_info/patch.yml") }}
 responses:
   '200':
     description: Successful
-    content: {{ mixin("../../mixins/request/json.yml", "../../components/schemas/user_info/model.yml") }}
+    content: {{ mixin("@mixins/request/json.yml", "@schemas/user_info/model.yml") }}

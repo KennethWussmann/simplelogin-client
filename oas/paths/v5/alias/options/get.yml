@@ -7,4 +7,4 @@ operationId: "options"
 responses:
   '200':
     description: Successful
-    content: {{ mixin("../../../../mixins/request/json.yml", "../../../../components/schemas/alias/options/model.yml") }}
+    content: {{ mixin("@mixins/request/json.yml", "@schemas/alias/options/model.yml") }}

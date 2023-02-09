@@ -8,4 +8,4 @@ responses:
   "200":
     description: Successful
     # TODO: ARRAY
-    content: {{ mixin("../../../mixins/request/json.yml", "../../../components/schemas/alias/model.yml") }}
+    content: {{ mixin("@mixins/request/json.yml", "@schemas/alias/model.yml") }}

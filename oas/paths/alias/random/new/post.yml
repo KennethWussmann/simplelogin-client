@@ -7,11 +7,11 @@ operationId: "createRandom"
 # TODO: mode (uuid, word) query parameter
 requestBody:
   required: true
-  content: {{ mixin("../../../../mixins/request/json.yml", "../../../../components/schemas/alias/random/new/post.yml") }}
+  content: {{ mixin("@mixins/request/json.yml", "@schemas/alias/random/new/post.yml") }}
 responses:
   '201':
     description: Created
-    content: {{ mixin("../../../../mixins/request/json.yml", "../../../../components/schemas/alias/model.yml") }}
+    content: {{ mixin("@mixins/request/json.yml", "@schemas/alias/model.yml") }}
   '401':
     description: Unauthorized
-    content: {{ mixin("../../../../mixins/request/json.yml", "../../../../components/schemas/error.yml") }}
+    content: {{ mixin("@mixins/request/json.yml", "@schemas/error.yml") }}

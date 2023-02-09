@@ -5,11 +5,11 @@ description: Create a new API key
 operationId: "createApiKey"
 requestBody:
   required: true
-  content: {{ mixin("../../../mixins/request/json.yml", "../../../components/schemas/user/api_key/post.yml") }}
+  content: {{ mixin("@mixins/request/json.yml", "@schemas/user/api_key/post.yml") }}
 responses:
   '201':
     description: Created
-    content: {{ mixin("../../../mixins/request/json.yml", "../../../components/schemas/user/api_key/model.yml") }}
+    content: {{ mixin("@mixins/request/json.yml", "@schemas/user/api_key/model.yml") }}
   '401':
     description: Unauthorized
-    content: {{ mixin("../../../mixins/request/json.yml", "../../../components/schemas/error.yml") }}
+    content: {{ mixin("@mixins/request/json.yml", "@schemas/error.yml") }}

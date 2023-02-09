@@ -10,9 +10,10 @@
     "globalPrefix": true
   },
   "paths": {
-    "@mixins/": "oas/mixins/",
-    "@parameters/": "oas/components/parameters/",
-    "@schemas/": "oas/components/schemas/",
-    "@/": "./"
+    "@mixins": "oas/mixins",
+    "@components": "oas/components",
+    "@parameters": "oas/components/parameters",
+    "@schemas": "oas/components/schemas",
+    "@": "."
   }
 }
