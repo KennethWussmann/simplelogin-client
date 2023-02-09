@@ -1,7 +1,10 @@
-import { build, clean } from './lib';
+import { buildDocs, buildOAS, buildSdk, clean, lint } from './steps';
+import { measureBuildTime } from './utils';
 
-(async () => {
-  console.log('Cleaning up');
+measureBuildTime(async () => {
   await clean();
-  await build();
-})();
+  const oas = await buildOAS();
+  await buildSdk(oas);
+  await lint();
+  await buildDocs(oas);
+});

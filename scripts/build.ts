@@ -1,3 +1,10 @@
-import { build } from './lib';
+import { buildDocs, buildOAS, buildSdk, createDirs, lint } from './steps';
+import { measureBuildTime } from './utils';
 
-build();
+measureBuildTime(async () => {
+  await createDirs();
+  const oas = await buildOAS();
+  await buildSdk(oas);
+  await lint();
+  await buildDocs(oas);
+});
