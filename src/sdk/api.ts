@@ -14,6 +14,7 @@
 
 import * as url from 'url';
 const isomorphicFetch = fetch;
+type Response = any;
 import { Configuration } from './configuration';
 
 const BASE_PATH = 'https://app.simplelogin.io/api'.replace(/\/+$/, '');

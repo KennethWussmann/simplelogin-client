@@ -9,6 +9,9 @@ concurrency:
   group: 'pages'
   cancel-in-progress: true
 
+env:
+  FORCE_COLOR: 1
+
 jobs:
   publish:
     runs-on: ubuntu-latest

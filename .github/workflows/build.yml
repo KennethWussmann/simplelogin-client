@@ -1,6 +1,9 @@
 name: build
 on: [push]
 
+env:
+  FORCE_COLOR: 1
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -22,8 +25,8 @@ jobs:
           npm run rebuild
           git status
           if [ -n "$(git status --porcelain)" ]; then
-            echo There are changes of the generated files. This indicates that they were not commited. Please run \"npm run rebuild\" and commit the generated changes!
+            echo "\033[0;31mThere are changes of the generated files. This indicates that they were not commited. Please run \"npm run rebuild\" and commit the generated changes!"
             exit 1
           else
-            echo No changes of generated files.
+            echo "\033[0;32mNo changes of generated files."
           fi

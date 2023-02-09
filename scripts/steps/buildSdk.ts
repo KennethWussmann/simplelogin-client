@@ -13,7 +13,10 @@ const modify = (filename: string, content: string) =>
   [
     ...(filename.toLowerCase().includes('api.') ? ['/* eslint-disable */', '// @ts-nocheck'] : []),
     content
-      .replace('import * as isomorphicFetch from "isomorphic-fetch";', 'const isomorphicFetch = fetch;')
+      .replace(
+        'import * as isomorphicFetch from "isomorphic-fetch";\n',
+        'const isomorphicFetch = fetch;\ntype Response = any;\n',
+      )
       .replace("declare module 'isomorphic-fetch';\n", '')
       .replace('/// <reference path="./custom.d.ts" />\n', '')
       .replace('// tslint:disable\n', ''),
