@@ -1,0 +1,6 @@
+type: object
+properties:
+  activities:
+    type: array
+    items:
+      $ref: '@schemas/alias/{alias_id}/activities/model.yml'

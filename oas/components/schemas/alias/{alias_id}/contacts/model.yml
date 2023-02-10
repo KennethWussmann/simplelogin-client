@@ -1,0 +1,38 @@
+type: object
+properties:
+  id:
+    type: integer
+    description: Unique identifier for the email address.
+    example: 1
+  contact:
+    type: string
+    description: Email address for the contact.
+    example: "marketing@example.com"
+  creation_date:
+    $ref: '@schemas/dateTime.yml'
+  creation_timestamp:
+    $ref: '@schemas/unixTimestamp.yml'
+  last_email_sent_date:
+    $ref: '@schemas/dateTime.yml'
+  last_email_sent_timestamp:
+    type: integer
+    description: Unix timestamp when the last email was sent.
+    example: null
+  reverse_alias:
+    type: string
+    description: Reverse alias for the email address.
+    example: "marketing at example.com <reply+bzvpazcdedcgcpztehxzgjgzmxskqa@sl.co>"
+  block_forward:
+    type: boolean
+    description: Whether the email address is blocked for forwarding.
+    example: false
+  existed:
+    type: boolean
+    description: Whether the contact already existed.
+    example: false
+required:
+  - id
+  - contact
+  - creation_date
+  - creation_timestamp
+  - reverse_alias

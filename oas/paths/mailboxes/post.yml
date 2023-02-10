@@ -1,0 +1,16 @@
+tags:
+  - mailbox
+summary: Create mailbox
+description:  Create a new mailbox
+operationId: "create"
+requestBody:
+  description: The new mailbox address
+  required: true
+  content: {{ mixin("@mixins/request/json.yml", "@schemas/mailbox/post.yml") }}
+responses:
+  "201":
+    description: New mailbox is created successfully. User is going to receive a verification email.
+    content: {{ mixin("@mixins/request/json.yml", "@schemas/mailbox/model.yml") }}
+  "400":
+    description: The error message can be displayed to user
+    content: {{ mixin("@mixins/request/json.yml", "@schemas/error.yml") }}

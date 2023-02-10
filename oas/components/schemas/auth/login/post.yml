@@ -1,8 +1,7 @@
 type: object
 properties:
   email:
-    type: string
-    format: email
+    $ref: '@schemas/email.yml'
   password:
     type: string
   device:

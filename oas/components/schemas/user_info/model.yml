@@ -4,8 +4,7 @@ properties:
     type: string
     description: User's full name
   email:
-    type: string
-    format: email
+    $ref: '@schemas/email.yml'
   is_premium:
     type: boolean
     description: Whether the user is a premium user or not

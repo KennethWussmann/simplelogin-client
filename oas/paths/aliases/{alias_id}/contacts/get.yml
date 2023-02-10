@@ -1,0 +1,15 @@
+tags:
+  - alias
+summary: Get contacts
+description: Get contacts for specific alias by id.
+operationId: "contacts"
+parameters:
+  - $ref: "@parameters/pathAliasId.yml"
+  - $ref: "@parameters/queryPageId.yml"
+responses:
+  "200":
+    description: Successful
+    content: {{ mixin("@mixins/request/json.yml", "@schemas/alias/{alias_id}/contacts/modelArray.yml") }}
+  "404":
+    description: Not found
+    content: {{ mixin("@mixins/request/json.yml", "@schemas/error.yml") }}

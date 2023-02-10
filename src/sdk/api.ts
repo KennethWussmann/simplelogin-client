@@ -102,10 +102,10 @@ export interface Alias {
   creationTimestamp: number;
   /**
    *
-   * @type {string}
+   * @type {Email}
    * @memberof Alias
    */
-  email: string;
+  email: Email;
   /**
    *
    * @type {string}
@@ -126,16 +126,16 @@ export interface Alias {
   id: number;
   /**
    *
-   * @type {AliasMailbox}
+   * @type {MailboxModelRef}
    * @memberof Alias
    */
-  mailbox: AliasMailbox;
+  mailbox: MailboxModelRef;
   /**
    *
-   * @type {Array<AliasMailbox>}
+   * @type {Array<MailboxModelRef>}
    * @memberof Alias
    */
-  mailboxes: Array<AliasMailbox>;
+  mailboxes: Array<MailboxModelRef>;
   /**
    *
    * @type {AliasLatestActivity}
@@ -184,6 +184,218 @@ export interface Alias {
    * @memberof Alias
    */
   supportPgp: boolean;
+}
+/**
+ *
+ * @export
+ * @interface AliasAliasIdActivities
+ */
+export interface AliasAliasIdActivities {
+  /**
+   *
+   * @type {string}
+   * @memberof AliasAliasIdActivities
+   */
+  action: string;
+  /**
+   *
+   * @type {string}
+   * @memberof AliasAliasIdActivities
+   */
+  from: string;
+  /**
+   *
+   * @type {UnixTimestamp}
+   * @memberof AliasAliasIdActivities
+   */
+  timestamp: UnixTimestamp;
+  /**
+   *
+   * @type {string}
+   * @memberof AliasAliasIdActivities
+   */
+  to: string;
+  /**
+   *
+   * @type {string}
+   * @memberof AliasAliasIdActivities
+   */
+  reverseAlias: string;
+  /**
+   *
+   * @type {string}
+   * @memberof AliasAliasIdActivities
+   */
+  reverseAliasAddress: string;
+}
+/**
+ *
+ * @export
+ * @interface AliasAliasIdActivitiesModelArray
+ */
+export interface AliasAliasIdActivitiesModelArray {
+  /**
+   *
+   * @type {Array<AliasAliasIdActivities>}
+   * @memberof AliasAliasIdActivitiesModelArray
+   */
+  activities?: Array<AliasAliasIdActivities>;
+}
+/**
+ *
+ * @export
+ * @interface AliasAliasIdContacts
+ */
+export interface AliasAliasIdContacts {
+  /**
+   * Unique identifier for the email address.
+   * @type {number}
+   * @memberof AliasAliasIdContacts
+   */
+  id: number;
+  /**
+   * Email address for the contact.
+   * @type {string}
+   * @memberof AliasAliasIdContacts
+   */
+  contact: string;
+  /**
+   *
+   * @type {Date}
+   * @memberof AliasAliasIdContacts
+   */
+  creationDate: Date;
+  /**
+   *
+   * @type {UnixTimestamp}
+   * @memberof AliasAliasIdContacts
+   */
+  creationTimestamp: UnixTimestamp;
+  /**
+   *
+   * @type {Date}
+   * @memberof AliasAliasIdContacts
+   */
+  lastEmailSentDate?: Date;
+  /**
+   * Unix timestamp when the last email was sent.
+   * @type {number}
+   * @memberof AliasAliasIdContacts
+   */
+  lastEmailSentTimestamp?: number;
+  /**
+   * Reverse alias for the email address.
+   * @type {string}
+   * @memberof AliasAliasIdContacts
+   */
+  reverseAlias: string;
+  /**
+   * Whether the email address is blocked for forwarding.
+   * @type {boolean}
+   * @memberof AliasAliasIdContacts
+   */
+  blockForward?: boolean;
+  /**
+   * Whether the contact already existed.
+   * @type {boolean}
+   * @memberof AliasAliasIdContacts
+   */
+  existed?: boolean;
+}
+/**
+ *
+ * @export
+ * @interface AliasAliasIdContactsModelArray
+ */
+export interface AliasAliasIdContactsModelArray {
+  /**
+   *
+   * @type {Array<AliasAliasIdContacts>}
+   * @memberof AliasAliasIdContactsModelArray
+   */
+  contacts?: Array<AliasAliasIdContacts>;
+}
+/**
+ *
+ * @export
+ * @interface AliasAliasIdContactsPost
+ */
+export interface AliasAliasIdContactsPost {
+  /**
+   *
+   * @type {Email}
+   * @memberof AliasAliasIdContactsPost
+   */
+  contact: Email;
+}
+/**
+ *
+ * @export
+ * @interface AliasAliasIdDelete
+ */
+export interface AliasAliasIdDelete {
+  /**
+   *
+   * @type {boolean}
+   * @memberof AliasAliasIdDelete
+   */
+  deleted?: boolean;
+}
+/**
+ *
+ * @export
+ * @interface AliasAliasIdPatch
+ */
+export interface AliasAliasIdPatch {
+  /**
+   *
+   * @type {string}
+   * @memberof AliasAliasIdPatch
+   */
+  note?: string;
+  /**
+   *
+   * @type {number}
+   * @memberof AliasAliasIdPatch
+   */
+  mailboxId?: number;
+  /**
+   *
+   * @type {string}
+   * @memberof AliasAliasIdPatch
+   */
+  name?: string;
+  /**
+   *
+   * @type {Array<number>}
+   * @memberof AliasAliasIdPatch
+   */
+  mailboxIds?: Array<number>;
+  /**
+   *
+   * @type {boolean}
+   * @memberof AliasAliasIdPatch
+   */
+  disablePgp?: boolean;
+  /**
+   *
+   * @type {boolean}
+   * @memberof AliasAliasIdPatch
+   */
+  pinned?: boolean;
+}
+/**
+ *
+ * @export
+ * @interface AliasAliasIdTogglePost
+ */
+export interface AliasAliasIdTogglePost {
+  /**
+   *
+   * @type {boolean}
+   * @memberof AliasAliasIdTogglePost
+   */
+  enabled?: boolean;
 }
 /**
  *
@@ -255,10 +467,10 @@ export interface AliasLatestActivity {
 export interface AliasLatestActivityContact {
   /**
    *
-   * @type {string}
+   * @type {Email}
    * @memberof AliasLatestActivityContact
    */
-  email: string;
+  email: Email;
   /**
    *
    * @type {string}
@@ -275,27 +487,16 @@ export interface AliasLatestActivityContact {
 /**
  *
  * @export
- * @interface AliasMailbox
+ * @interface AliasModelArray
  */
-export interface AliasMailbox {
+export interface AliasModelArray {
   /**
    *
-   * @type {string}
-   * @memberof AliasMailbox
+   * @type {Array<Alias>}
+   * @memberof AliasModelArray
    */
-  email: string;
-  /**
-   *
-   * @type {number}
-   * @memberof AliasMailbox
-   */
-  id: number;
+  aliases?: Array<Alias>;
 }
-/**
- *
- * @export
- */
-export type AliasModelArray = Array<Alias>;
 /**
  *
  * @export
@@ -397,11 +598,11 @@ export interface AliasRandomNewPost {
  */
 export interface AuthActivatePost {
   /**
-   * Email address used to register account
-   * @type {string}
+   *
+   * @type {Email}
    * @memberof AuthActivatePost
    */
-  email: string;
+  email: Email;
   /**
    * Activation code sent to email
    * @type {string}
@@ -416,11 +617,11 @@ export interface AuthActivatePost {
  */
 export interface AuthForgotPasswordPost {
   /**
-   * Email address used to register account
-   * @type {string}
+   *
+   * @type {Email}
    * @memberof AuthForgotPasswordPost
    */
-  email: string;
+  email: Email;
 }
 /**
  *
@@ -436,10 +637,10 @@ export interface AuthLogin {
   name: string;
   /**
    *
-   * @type {string}
+   * @type {Email}
    * @memberof AuthLogin
    */
-  email: string;
+  email: Email;
   /**
    *
    * @type {boolean}
@@ -467,10 +668,10 @@ export interface AuthLogin {
 export interface AuthLoginPost {
   /**
    *
-   * @type {string}
+   * @type {Email}
    * @memberof AuthLoginPost
    */
-  email: string;
+  email: Email;
   /**
    *
    * @type {string}
@@ -503,11 +704,11 @@ export interface AuthMfa {
    */
   apiKey: string;
   /**
-   * User email
-   * @type {string}
+   *
+   * @type {Email}
    * @memberof AuthMfa
    */
-  email: string;
+  email: Email;
 }
 /**
  *
@@ -541,11 +742,11 @@ export interface AuthMfaPost {
  */
 export interface AuthReactivatePost {
   /**
-   * Email address used to register account
-   * @type {string}
+   *
+   * @type {Email}
    * @memberof AuthReactivatePost
    */
-  email: string;
+  email: Email;
 }
 /**
  *
@@ -565,6 +766,201 @@ export interface AuthRegisterPost {
    * @memberof AuthRegisterPost
    */
   password: string;
+}
+/**
+ *
+ * @export
+ * @interface CustomDomain
+ */
+export interface CustomDomain {
+  /**
+   *
+   * @type {boolean}
+   * @memberof CustomDomain
+   */
+  catchAll: boolean;
+  /**
+   *
+   * @type {Date}
+   * @memberof CustomDomain
+   */
+  creationDate: Date;
+  /**
+   *
+   * @type {UnixTimestamp}
+   * @memberof CustomDomain
+   */
+  creationTimestamp: UnixTimestamp;
+  /**
+   *
+   * @type {string}
+   * @memberof CustomDomain
+   */
+  domainName: string;
+  /**
+   *
+   * @type {number}
+   * @memberof CustomDomain
+   */
+  id: number;
+  /**
+   *
+   * @type {boolean}
+   * @memberof CustomDomain
+   */
+  isVerified: boolean;
+  /**
+   *
+   * @type {Array<MailboxModelRef>}
+   * @memberof CustomDomain
+   */
+  mailboxes: Array<MailboxModelRef>;
+  /**
+   *
+   * @type {string}
+   * @memberof CustomDomain
+   */
+  name: string;
+  /**
+   *
+   * @type {number}
+   * @memberof CustomDomain
+   */
+  nbAlias: number;
+  /**
+   *
+   * @type {boolean}
+   * @memberof CustomDomain
+   */
+  randomPrefixGeneration: boolean;
+}
+/**
+ *
+ * @export
+ */
+export type CustomDomainModelArray = Array<CustomDomain>;
+/**
+ *
+ * @export
+ */
+export type DateTime = Date;
+/**
+ * Email address
+ * @export
+ */
+export type Email = string;
+/**
+ *
+ * @export
+ * @interface Mailbox
+ */
+export interface Mailbox {
+  /**
+   *
+   * @type {Email}
+   * @memberof Mailbox
+   */
+  email: Email;
+  /**
+   *
+   * @type {number}
+   * @memberof Mailbox
+   */
+  id: number;
+  /**
+   *
+   * @type {boolean}
+   * @memberof Mailbox
+   */
+  _default: boolean;
+  /**
+   *
+   * @type {UnixTimestamp}
+   * @memberof Mailbox
+   */
+  creationTimestamp: UnixTimestamp;
+  /**
+   *
+   * @type {number}
+   * @memberof Mailbox
+   */
+  nbAlias: number;
+  /**
+   *
+   * @type {boolean}
+   * @memberof Mailbox
+   */
+  verified: boolean;
+}
+/**
+ *
+ * @export
+ * @interface MailboxMailboxIdPut
+ */
+export interface MailboxMailboxIdPut {
+  /**
+   * If true, set the mailbox as the default mailbox.
+   * @type {boolean}
+   * @memberof MailboxMailboxIdPut
+   */
+  _default?: boolean;
+  /**
+   *
+   * @type {Email}
+   * @memberof MailboxMailboxIdPut
+   */
+  email?: Email;
+  /**
+   * If true, cancel the email change of the mailbox.
+   * @type {boolean}
+   * @memberof MailboxMailboxIdPut
+   */
+  cancelEmailChange?: boolean;
+}
+/**
+ *
+ * @export
+ * @interface MailboxModelArray
+ */
+export interface MailboxModelArray {
+  /**
+   *
+   * @type {Array<Mailbox>}
+   * @memberof MailboxModelArray
+   */
+  mailboxes?: Array<Mailbox>;
+}
+/**
+ *
+ * @export
+ * @interface MailboxModelRef
+ */
+export interface MailboxModelRef {
+  /**
+   *
+   * @type {Email}
+   * @memberof MailboxModelRef
+   */
+  email: Email;
+  /**
+   *
+   * @type {number}
+   * @memberof MailboxModelRef
+   */
+  id: number;
+}
+/**
+ *
+ * @export
+ * @interface MailboxPost
+ */
+export interface MailboxPost {
+  /**
+   *
+   * @type {Email}
+   * @memberof MailboxPost
+   */
+  email?: Email;
 }
 /**
  *
@@ -605,6 +1001,11 @@ export interface SudoPatch {
    */
   password?: string;
 }
+/**
+ * Unix timestamp
+ * @export
+ */
+export type UnixTimestamp = number;
 /**
  *
  * @export
@@ -658,10 +1059,10 @@ export interface UserInfo {
   name: string;
   /**
    *
-   * @type {string}
+   * @type {Email}
    * @memberof UserInfo
    */
-  email: string;
+  email: Email;
   /**
    * Whether the user is a premium user or not
    * @type {boolean}
@@ -1710,8 +2111,90 @@ export class AccountApi extends BaseAPI {
 export const AliasApiFetchParamCreator = function (configuration?: Configuration) {
   return {
     /**
+     * Delete specific alias by id.
+     * @summary Delete alias by id
+     * @param {string} aliasId ID of an alias
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    _delete(aliasId: string, options: any = {}): FetchArgs {
+      // verify required parameter 'aliasId' is not null or undefined
+      if (aliasId === null || aliasId === undefined) {
+        throw new RequiredError('aliasId', 'Required parameter aliasId was null or undefined when calling _delete.');
+      }
+      const localVarPath = `/aliases/{alias_id}`.replace(`{${'alias_id'}}`, encodeURIComponent(String(aliasId)));
+      const localVarUrlObj = url.parse(localVarPath, true);
+      const localVarRequestOptions = Object.assign({ method: 'DELETE' }, options);
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication apiKeyAuth required
+      if (configuration && configuration.apiKey) {
+        const localVarApiKeyValue =
+          typeof configuration.apiKey === 'function' ? configuration.apiKey('Authentication') : configuration.apiKey;
+        localVarHeaderParameter['Authentication'] = localVarApiKeyValue;
+      }
+
+      localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+      // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+      delete localVarUrlObj.search;
+      localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+      return {
+        url: url.format(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     * Get activities for specific alias by id.
+     * @summary Get activities
+     * @param {string} aliasId ID of an alias
+     * @param {number} pageId The endpoint returns maximum 20 aliases for each page.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    activities(aliasId: string, pageId: number, options: any = {}): FetchArgs {
+      // verify required parameter 'aliasId' is not null or undefined
+      if (aliasId === null || aliasId === undefined) {
+        throw new RequiredError('aliasId', 'Required parameter aliasId was null or undefined when calling activities.');
+      }
+      // verify required parameter 'pageId' is not null or undefined
+      if (pageId === null || pageId === undefined) {
+        throw new RequiredError('pageId', 'Required parameter pageId was null or undefined when calling activities.');
+      }
+      const localVarPath = `/aliases/{alias_id}/activities`.replace(
+        `{${'alias_id'}}`,
+        encodeURIComponent(String(aliasId)),
+      );
+      const localVarUrlObj = url.parse(localVarPath, true);
+      const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication apiKeyAuth required
+      if (configuration && configuration.apiKey) {
+        const localVarApiKeyValue =
+          typeof configuration.apiKey === 'function' ? configuration.apiKey('Authentication') : configuration.apiKey;
+        localVarHeaderParameter['Authentication'] = localVarApiKeyValue;
+      }
+
+      if (pageId !== undefined) {
+        localVarQueryParameter['page_id'] = pageId;
+      }
+
+      localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+      // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+      delete localVarUrlObj.search;
+      localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+      return {
+        url: url.format(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
      * Get user aliases. Please note `pinned`, `disabled`, `enabled` are exclusive, i.e. only one can be present. They can only be set to `true`.
-     * @summary Aliases
+     * @summary Get aliases
      * @param {boolean} [pinned] If set, only pinned aliases are returned.
      * @param {boolean} [disabled] If set, only disabled aliases are returned.
      * @param {boolean} [enabled] If set, only enabled aliases are returned.
@@ -1748,6 +2231,105 @@ export const AliasApiFetchParamCreator = function (configuration?: Configuration
       // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
       delete localVarUrlObj.search;
       localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+      return {
+        url: url.format(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     * Get contacts for specific alias by id.
+     * @summary Get contacts
+     * @param {string} aliasId ID of an alias
+     * @param {number} pageId The endpoint returns maximum 20 aliases for each page.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    contacts(aliasId: string, pageId: number, options: any = {}): FetchArgs {
+      // verify required parameter 'aliasId' is not null or undefined
+      if (aliasId === null || aliasId === undefined) {
+        throw new RequiredError('aliasId', 'Required parameter aliasId was null or undefined when calling contacts.');
+      }
+      // verify required parameter 'pageId' is not null or undefined
+      if (pageId === null || pageId === undefined) {
+        throw new RequiredError('pageId', 'Required parameter pageId was null or undefined when calling contacts.');
+      }
+      const localVarPath = `/aliases/{alias_id}/contacts`.replace(
+        `{${'alias_id'}}`,
+        encodeURIComponent(String(aliasId)),
+      );
+      const localVarUrlObj = url.parse(localVarPath, true);
+      const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication apiKeyAuth required
+      if (configuration && configuration.apiKey) {
+        const localVarApiKeyValue =
+          typeof configuration.apiKey === 'function' ? configuration.apiKey('Authentication') : configuration.apiKey;
+        localVarHeaderParameter['Authentication'] = localVarApiKeyValue;
+      }
+
+      if (pageId !== undefined) {
+        localVarQueryParameter['page_id'] = pageId;
+      }
+
+      localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+      // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+      delete localVarUrlObj.search;
+      localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+      return {
+        url: url.format(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     * Create a new contact for an alias by id.
+     * @summary Create contact
+     * @param {AliasAliasIdContactsPost} body Updated settings for the given alias.
+     * @param {string} aliasId ID of an alias
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    createContact(body: AliasAliasIdContactsPost, aliasId: string, options: any = {}): FetchArgs {
+      // verify required parameter 'body' is not null or undefined
+      if (body === null || body === undefined) {
+        throw new RequiredError('body', 'Required parameter body was null or undefined when calling createContact.');
+      }
+      // verify required parameter 'aliasId' is not null or undefined
+      if (aliasId === null || aliasId === undefined) {
+        throw new RequiredError(
+          'aliasId',
+          'Required parameter aliasId was null or undefined when calling createContact.',
+        );
+      }
+      const localVarPath = `/aliases/{alias_id}/contacts`.replace(
+        `{${'alias_id'}}`,
+        encodeURIComponent(String(aliasId)),
+      );
+      const localVarUrlObj = url.parse(localVarPath, true);
+      const localVarRequestOptions = Object.assign({ method: 'POST' }, options);
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication apiKeyAuth required
+      if (configuration && configuration.apiKey) {
+        const localVarApiKeyValue =
+          typeof configuration.apiKey === 'function' ? configuration.apiKey('Authentication') : configuration.apiKey;
+        localVarHeaderParameter['Authentication'] = localVarApiKeyValue;
+      }
+
+      localVarHeaderParameter['Content-Type'] = 'application/json';
+
+      localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+      // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+      delete localVarUrlObj.search;
+      localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+      const needsSerialization =
+        <any>'AliasAliasIdContactsPost' !== 'string' ||
+        localVarRequestOptions.headers['Content-Type'] === 'application/json';
+      localVarRequestOptions.body = needsSerialization ? JSON.stringify(body || {}) : body || '';
 
       return {
         url: url.format(localVarUrlObj),
@@ -1850,8 +2432,43 @@ export const AliasApiFetchParamCreator = function (configuration?: Configuration
       };
     },
     /**
+     * Get specific alias by id.
+     * @summary Get alias by id
+     * @param {string} aliasId ID of an alias
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    get(aliasId: string, options: any = {}): FetchArgs {
+      // verify required parameter 'aliasId' is not null or undefined
+      if (aliasId === null || aliasId === undefined) {
+        throw new RequiredError('aliasId', 'Required parameter aliasId was null or undefined when calling get.');
+      }
+      const localVarPath = `/aliases/{alias_id}`.replace(`{${'alias_id'}}`, encodeURIComponent(String(aliasId)));
+      const localVarUrlObj = url.parse(localVarPath, true);
+      const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication apiKeyAuth required
+      if (configuration && configuration.apiKey) {
+        const localVarApiKeyValue =
+          typeof configuration.apiKey === 'function' ? configuration.apiKey('Authentication') : configuration.apiKey;
+        localVarHeaderParameter['Authentication'] = localVarApiKeyValue;
+      }
+
+      localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+      // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+      delete localVarUrlObj.search;
+      localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+      return {
+        url: url.format(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
      * User alias info and suggestion. Used by the first extension screen when user opens the extension.
-     * @summary Options
+     * @summary Get options
      * @param {string} [hostname] This information is important to know where an alias is used in order to suggest user the same alias if they want to create on alias on the same website in the future.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1884,6 +2501,86 @@ export const AliasApiFetchParamCreator = function (configuration?: Configuration
         options: localVarRequestOptions,
       };
     },
+    /**
+     * Enable or disable specific alias by id.
+     * @summary Toggle alias by id
+     * @param {string} aliasId ID of an alias
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    toggle(aliasId: string, options: any = {}): FetchArgs {
+      // verify required parameter 'aliasId' is not null or undefined
+      if (aliasId === null || aliasId === undefined) {
+        throw new RequiredError('aliasId', 'Required parameter aliasId was null or undefined when calling toggle.');
+      }
+      const localVarPath = `/aliases/{alias_id}/toggle`.replace(`{${'alias_id'}}`, encodeURIComponent(String(aliasId)));
+      const localVarUrlObj = url.parse(localVarPath, true);
+      const localVarRequestOptions = Object.assign({ method: 'POST' }, options);
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication apiKeyAuth required
+      if (configuration && configuration.apiKey) {
+        const localVarApiKeyValue =
+          typeof configuration.apiKey === 'function' ? configuration.apiKey('Authentication') : configuration.apiKey;
+        localVarHeaderParameter['Authentication'] = localVarApiKeyValue;
+      }
+
+      localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+      // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+      delete localVarUrlObj.search;
+      localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+      return {
+        url: url.format(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     * Update specific alias by id.
+     * @summary Update alias by id
+     * @param {AliasAliasIdPatch} body Updated settings for the given alias.
+     * @param {string} aliasId ID of an alias
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    update(body: AliasAliasIdPatch, aliasId: string, options: any = {}): FetchArgs {
+      // verify required parameter 'body' is not null or undefined
+      if (body === null || body === undefined) {
+        throw new RequiredError('body', 'Required parameter body was null or undefined when calling update.');
+      }
+      // verify required parameter 'aliasId' is not null or undefined
+      if (aliasId === null || aliasId === undefined) {
+        throw new RequiredError('aliasId', 'Required parameter aliasId was null or undefined when calling update.');
+      }
+      const localVarPath = `/aliases/{alias_id}`.replace(`{${'alias_id'}}`, encodeURIComponent(String(aliasId)));
+      const localVarUrlObj = url.parse(localVarPath, true);
+      const localVarRequestOptions = Object.assign({ method: 'PATCH' }, options);
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication apiKeyAuth required
+      if (configuration && configuration.apiKey) {
+        const localVarApiKeyValue =
+          typeof configuration.apiKey === 'function' ? configuration.apiKey('Authentication') : configuration.apiKey;
+        localVarHeaderParameter['Authentication'] = localVarApiKeyValue;
+      }
+
+      localVarHeaderParameter['Content-Type'] = 'application/json';
+
+      localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+      // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+      delete localVarUrlObj.search;
+      localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+      const needsSerialization =
+        <any>'AliasAliasIdPatch' !== 'string' || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+      localVarRequestOptions.body = needsSerialization ? JSON.stringify(body || {}) : body || '';
+
+      return {
+        url: url.format(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
   };
 };
 
@@ -1894,8 +2591,51 @@ export const AliasApiFetchParamCreator = function (configuration?: Configuration
 export const AliasApiFp = function (configuration?: Configuration) {
   return {
     /**
+     * Delete specific alias by id.
+     * @summary Delete alias by id
+     * @param {string} aliasId ID of an alias
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    _delete(aliasId: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<AliasAliasIdDelete> {
+      const localVarFetchArgs = AliasApiFetchParamCreator(configuration)._delete(aliasId, options);
+      return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+        return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+          if (response.status >= 200 && response.status < 300) {
+            return response.json();
+          } else {
+            throw response;
+          }
+        });
+      };
+    },
+    /**
+     * Get activities for specific alias by id.
+     * @summary Get activities
+     * @param {string} aliasId ID of an alias
+     * @param {number} pageId The endpoint returns maximum 20 aliases for each page.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    activities(
+      aliasId: string,
+      pageId: number,
+      options?: any,
+    ): (fetch?: FetchAPI, basePath?: string) => Promise<AliasAliasIdActivitiesModelArray> {
+      const localVarFetchArgs = AliasApiFetchParamCreator(configuration).activities(aliasId, pageId, options);
+      return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+        return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+          if (response.status >= 200 && response.status < 300) {
+            return response.json();
+          } else {
+            throw response;
+          }
+        });
+      };
+    },
+    /**
      * Get user aliases. Please note `pinned`, `disabled`, `enabled` are exclusive, i.e. only one can be present. They can only be set to `true`.
-     * @summary Aliases
+     * @summary Get aliases
      * @param {boolean} [pinned] If set, only pinned aliases are returned.
      * @param {boolean} [disabled] If set, only disabled aliases are returned.
      * @param {boolean} [enabled] If set, only enabled aliases are returned.
@@ -1909,6 +2649,54 @@ export const AliasApiFp = function (configuration?: Configuration) {
       options?: any,
     ): (fetch?: FetchAPI, basePath?: string) => Promise<AliasModelArray> {
       const localVarFetchArgs = AliasApiFetchParamCreator(configuration).aliases(pinned, disabled, enabled, options);
+      return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+        return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+          if (response.status >= 200 && response.status < 300) {
+            return response.json();
+          } else {
+            throw response;
+          }
+        });
+      };
+    },
+    /**
+     * Get contacts for specific alias by id.
+     * @summary Get contacts
+     * @param {string} aliasId ID of an alias
+     * @param {number} pageId The endpoint returns maximum 20 aliases for each page.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    contacts(
+      aliasId: string,
+      pageId: number,
+      options?: any,
+    ): (fetch?: FetchAPI, basePath?: string) => Promise<AliasAliasIdContactsModelArray> {
+      const localVarFetchArgs = AliasApiFetchParamCreator(configuration).contacts(aliasId, pageId, options);
+      return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+        return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+          if (response.status >= 200 && response.status < 300) {
+            return response.json();
+          } else {
+            throw response;
+          }
+        });
+      };
+    },
+    /**
+     * Create a new contact for an alias by id.
+     * @summary Create contact
+     * @param {AliasAliasIdContactsPost} body Updated settings for the given alias.
+     * @param {string} aliasId ID of an alias
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    createContact(
+      body: AliasAliasIdContactsPost,
+      aliasId: string,
+      options?: any,
+    ): (fetch?: FetchAPI, basePath?: string) => Promise<AliasAliasIdContacts> {
+      const localVarFetchArgs = AliasApiFetchParamCreator(configuration).createContact(body, aliasId, options);
       return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
         return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
           if (response.status >= 200 && response.status < 300) {
@@ -1970,8 +2758,27 @@ export const AliasApiFp = function (configuration?: Configuration) {
       };
     },
     /**
+     * Get specific alias by id.
+     * @summary Get alias by id
+     * @param {string} aliasId ID of an alias
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    get(aliasId: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Alias> {
+      const localVarFetchArgs = AliasApiFetchParamCreator(configuration).get(aliasId, options);
+      return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+        return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+          if (response.status >= 200 && response.status < 300) {
+            return response.json();
+          } else {
+            throw response;
+          }
+        });
+      };
+    },
+    /**
      * User alias info and suggestion. Used by the first extension screen when user opens the extension.
-     * @summary Options
+     * @summary Get options
      * @param {string} [hostname] This information is important to know where an alias is used in order to suggest user the same alias if they want to create on alias on the same website in the future.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1988,6 +2795,49 @@ export const AliasApiFp = function (configuration?: Configuration) {
         });
       };
     },
+    /**
+     * Enable or disable specific alias by id.
+     * @summary Toggle alias by id
+     * @param {string} aliasId ID of an alias
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    toggle(aliasId: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<AliasAliasIdTogglePost> {
+      const localVarFetchArgs = AliasApiFetchParamCreator(configuration).toggle(aliasId, options);
+      return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+        return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+          if (response.status >= 200 && response.status < 300) {
+            return response.json();
+          } else {
+            throw response;
+          }
+        });
+      };
+    },
+    /**
+     * Update specific alias by id.
+     * @summary Update alias by id
+     * @param {AliasAliasIdPatch} body Updated settings for the given alias.
+     * @param {string} aliasId ID of an alias
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    update(
+      body: AliasAliasIdPatch,
+      aliasId: string,
+      options?: any,
+    ): (fetch?: FetchAPI, basePath?: string) => Promise<Response> {
+      const localVarFetchArgs = AliasApiFetchParamCreator(configuration).update(body, aliasId, options);
+      return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+        return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+          if (response.status >= 200 && response.status < 300) {
+            return response;
+          } else {
+            throw response;
+          }
+        });
+      };
+    },
   };
 };
 
@@ -1998,8 +2848,29 @@ export const AliasApiFp = function (configuration?: Configuration) {
 export const AliasApiFactory = function (configuration?: Configuration, fetch?: FetchAPI, basePath?: string) {
   return {
     /**
+     * Delete specific alias by id.
+     * @summary Delete alias by id
+     * @param {string} aliasId ID of an alias
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    _delete(aliasId: string, options?: any) {
+      return AliasApiFp(configuration)._delete(aliasId, options)(fetch, basePath);
+    },
+    /**
+     * Get activities for specific alias by id.
+     * @summary Get activities
+     * @param {string} aliasId ID of an alias
+     * @param {number} pageId The endpoint returns maximum 20 aliases for each page.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    activities(aliasId: string, pageId: number, options?: any) {
+      return AliasApiFp(configuration).activities(aliasId, pageId, options)(fetch, basePath);
+    },
+    /**
      * Get user aliases. Please note `pinned`, `disabled`, `enabled` are exclusive, i.e. only one can be present. They can only be set to `true`.
-     * @summary Aliases
+     * @summary Get aliases
      * @param {boolean} [pinned] If set, only pinned aliases are returned.
      * @param {boolean} [disabled] If set, only disabled aliases are returned.
      * @param {boolean} [enabled] If set, only enabled aliases are returned.
@@ -2008,6 +2879,28 @@ export const AliasApiFactory = function (configuration?: Configuration, fetch?: 
      */
     aliases(pinned?: boolean, disabled?: boolean, enabled?: boolean, options?: any) {
       return AliasApiFp(configuration).aliases(pinned, disabled, enabled, options)(fetch, basePath);
+    },
+    /**
+     * Get contacts for specific alias by id.
+     * @summary Get contacts
+     * @param {string} aliasId ID of an alias
+     * @param {number} pageId The endpoint returns maximum 20 aliases for each page.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    contacts(aliasId: string, pageId: number, options?: any) {
+      return AliasApiFp(configuration).contacts(aliasId, pageId, options)(fetch, basePath);
+    },
+    /**
+     * Create a new contact for an alias by id.
+     * @summary Create contact
+     * @param {AliasAliasIdContactsPost} body Updated settings for the given alias.
+     * @param {string} aliasId ID of an alias
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    createContact(body: AliasAliasIdContactsPost, aliasId: string, options?: any) {
+      return AliasApiFp(configuration).createContact(body, aliasId, options)(fetch, basePath);
     },
     /**
      * Create a new custom alias
@@ -2033,14 +2926,45 @@ export const AliasApiFactory = function (configuration?: Configuration, fetch?: 
       return AliasApiFp(configuration).createRandom(body, hostname, mode, options)(fetch, basePath);
     },
     /**
+     * Get specific alias by id.
+     * @summary Get alias by id
+     * @param {string} aliasId ID of an alias
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    get(aliasId: string, options?: any) {
+      return AliasApiFp(configuration).get(aliasId, options)(fetch, basePath);
+    },
+    /**
      * User alias info and suggestion. Used by the first extension screen when user opens the extension.
-     * @summary Options
+     * @summary Get options
      * @param {string} [hostname] This information is important to know where an alias is used in order to suggest user the same alias if they want to create on alias on the same website in the future.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     options(hostname?: string, options?: any) {
       return AliasApiFp(configuration).options(hostname, options)(fetch, basePath);
+    },
+    /**
+     * Enable or disable specific alias by id.
+     * @summary Toggle alias by id
+     * @param {string} aliasId ID of an alias
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    toggle(aliasId: string, options?: any) {
+      return AliasApiFp(configuration).toggle(aliasId, options)(fetch, basePath);
+    },
+    /**
+     * Update specific alias by id.
+     * @summary Update alias by id
+     * @param {AliasAliasIdPatch} body Updated settings for the given alias.
+     * @param {string} aliasId ID of an alias
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    update(body: AliasAliasIdPatch, aliasId: string, options?: any) {
+      return AliasApiFp(configuration).update(body, aliasId, options)(fetch, basePath);
     },
   };
 };
@@ -2053,8 +2977,33 @@ export const AliasApiFactory = function (configuration?: Configuration, fetch?: 
  */
 export class AliasApi extends BaseAPI {
   /**
+   * Delete specific alias by id.
+   * @summary Delete alias by id
+   * @param {string} aliasId ID of an alias
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof AliasApi
+   */
+  public _delete(aliasId: string, options?: any) {
+    return AliasApiFp(this.configuration)._delete(aliasId, options)(this.fetch, this.basePath);
+  }
+
+  /**
+   * Get activities for specific alias by id.
+   * @summary Get activities
+   * @param {string} aliasId ID of an alias
+   * @param {number} pageId The endpoint returns maximum 20 aliases for each page.
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof AliasApi
+   */
+  public activities(aliasId: string, pageId: number, options?: any) {
+    return AliasApiFp(this.configuration).activities(aliasId, pageId, options)(this.fetch, this.basePath);
+  }
+
+  /**
    * Get user aliases. Please note `pinned`, `disabled`, `enabled` are exclusive, i.e. only one can be present. They can only be set to `true`.
-   * @summary Aliases
+   * @summary Get aliases
    * @param {boolean} [pinned] If set, only pinned aliases are returned.
    * @param {boolean} [disabled] If set, only disabled aliases are returned.
    * @param {boolean} [enabled] If set, only enabled aliases are returned.
@@ -2064,6 +3013,32 @@ export class AliasApi extends BaseAPI {
    */
   public aliases(pinned?: boolean, disabled?: boolean, enabled?: boolean, options?: any) {
     return AliasApiFp(this.configuration).aliases(pinned, disabled, enabled, options)(this.fetch, this.basePath);
+  }
+
+  /**
+   * Get contacts for specific alias by id.
+   * @summary Get contacts
+   * @param {string} aliasId ID of an alias
+   * @param {number} pageId The endpoint returns maximum 20 aliases for each page.
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof AliasApi
+   */
+  public contacts(aliasId: string, pageId: number, options?: any) {
+    return AliasApiFp(this.configuration).contacts(aliasId, pageId, options)(this.fetch, this.basePath);
+  }
+
+  /**
+   * Create a new contact for an alias by id.
+   * @summary Create contact
+   * @param {AliasAliasIdContactsPost} body Updated settings for the given alias.
+   * @param {string} aliasId ID of an alias
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof AliasApi
+   */
+  public createContact(body: AliasAliasIdContactsPost, aliasId: string, options?: any) {
+    return AliasApiFp(this.configuration).createContact(body, aliasId, options)(this.fetch, this.basePath);
   }
 
   /**
@@ -2094,8 +3069,20 @@ export class AliasApi extends BaseAPI {
   }
 
   /**
+   * Get specific alias by id.
+   * @summary Get alias by id
+   * @param {string} aliasId ID of an alias
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof AliasApi
+   */
+  public get(aliasId: string, options?: any) {
+    return AliasApiFp(this.configuration).get(aliasId, options)(this.fetch, this.basePath);
+  }
+
+  /**
    * User alias info and suggestion. Used by the first extension screen when user opens the extension.
-   * @summary Options
+   * @summary Get options
    * @param {string} [hostname] This information is important to know where an alias is used in order to suggest user the same alias if they want to create on alias on the same website in the future.
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
@@ -2103,5 +3090,505 @@ export class AliasApi extends BaseAPI {
    */
   public options(hostname?: string, options?: any) {
     return AliasApiFp(this.configuration).options(hostname, options)(this.fetch, this.basePath);
+  }
+
+  /**
+   * Enable or disable specific alias by id.
+   * @summary Toggle alias by id
+   * @param {string} aliasId ID of an alias
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof AliasApi
+   */
+  public toggle(aliasId: string, options?: any) {
+    return AliasApiFp(this.configuration).toggle(aliasId, options)(this.fetch, this.basePath);
+  }
+
+  /**
+   * Update specific alias by id.
+   * @summary Update alias by id
+   * @param {AliasAliasIdPatch} body Updated settings for the given alias.
+   * @param {string} aliasId ID of an alias
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof AliasApi
+   */
+  public update(body: AliasAliasIdPatch, aliasId: string, options?: any) {
+    return AliasApiFp(this.configuration).update(body, aliasId, options)(this.fetch, this.basePath);
+  }
+}
+/**
+ * CustomDomainApi - fetch parameter creator
+ * @export
+ */
+export const CustomDomainApiFetchParamCreator = function (configuration?: Configuration) {
+  return {
+    /**
+     * Get users custom domains.
+     * @summary Get custom domains
+     * @param {string} aliasId ID of an alias
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    customDomains(aliasId: string, options: any = {}): FetchArgs {
+      // verify required parameter 'aliasId' is not null or undefined
+      if (aliasId === null || aliasId === undefined) {
+        throw new RequiredError(
+          'aliasId',
+          'Required parameter aliasId was null or undefined when calling customDomains.',
+        );
+      }
+      const localVarPath = `/custom_domains`.replace(`{${'alias_id'}}`, encodeURIComponent(String(aliasId)));
+      const localVarUrlObj = url.parse(localVarPath, true);
+      const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication apiKeyAuth required
+      if (configuration && configuration.apiKey) {
+        const localVarApiKeyValue =
+          typeof configuration.apiKey === 'function' ? configuration.apiKey('Authentication') : configuration.apiKey;
+        localVarHeaderParameter['Authentication'] = localVarApiKeyValue;
+      }
+
+      localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+      // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+      delete localVarUrlObj.search;
+      localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+      return {
+        url: url.format(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+  };
+};
+
+/**
+ * CustomDomainApi - functional programming interface
+ * @export
+ */
+export const CustomDomainApiFp = function (configuration?: Configuration) {
+  return {
+    /**
+     * Get users custom domains.
+     * @summary Get custom domains
+     * @param {string} aliasId ID of an alias
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    customDomains(aliasId: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<CustomDomain> {
+      const localVarFetchArgs = CustomDomainApiFetchParamCreator(configuration).customDomains(aliasId, options);
+      return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+        return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+          if (response.status >= 200 && response.status < 300) {
+            return response.json();
+          } else {
+            throw response;
+          }
+        });
+      };
+    },
+  };
+};
+
+/**
+ * CustomDomainApi - factory interface
+ * @export
+ */
+export const CustomDomainApiFactory = function (configuration?: Configuration, fetch?: FetchAPI, basePath?: string) {
+  return {
+    /**
+     * Get users custom domains.
+     * @summary Get custom domains
+     * @param {string} aliasId ID of an alias
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    customDomains(aliasId: string, options?: any) {
+      return CustomDomainApiFp(configuration).customDomains(aliasId, options)(fetch, basePath);
+    },
+  };
+};
+
+/**
+ * CustomDomainApi - object-oriented interface
+ * @export
+ * @class CustomDomainApi
+ * @extends {BaseAPI}
+ */
+export class CustomDomainApi extends BaseAPI {
+  /**
+   * Get users custom domains.
+   * @summary Get custom domains
+   * @param {string} aliasId ID of an alias
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof CustomDomainApi
+   */
+  public customDomains(aliasId: string, options?: any) {
+    return CustomDomainApiFp(this.configuration).customDomains(aliasId, options)(this.fetch, this.basePath);
+  }
+}
+/**
+ * MailboxApi - fetch parameter creator
+ * @export
+ */
+export const MailboxApiFetchParamCreator = function (configuration?: Configuration) {
+  return {
+    /**
+     * Delete specific mailbox by id.
+     * @summary Delete mailbox by id
+     * @param {string} mailboxId ID of a mailbox
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    _delete(mailboxId: string, options: any = {}): FetchArgs {
+      // verify required parameter 'mailboxId' is not null or undefined
+      if (mailboxId === null || mailboxId === undefined) {
+        throw new RequiredError(
+          'mailboxId',
+          'Required parameter mailboxId was null or undefined when calling _delete.',
+        );
+      }
+      const localVarPath = `/mailboxes/{mailbox_id}`.replace(
+        `{${'mailbox_id'}}`,
+        encodeURIComponent(String(mailboxId)),
+      );
+      const localVarUrlObj = url.parse(localVarPath, true);
+      const localVarRequestOptions = Object.assign({ method: 'DELETE' }, options);
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication apiKeyAuth required
+      if (configuration && configuration.apiKey) {
+        const localVarApiKeyValue =
+          typeof configuration.apiKey === 'function' ? configuration.apiKey('Authentication') : configuration.apiKey;
+        localVarHeaderParameter['Authentication'] = localVarApiKeyValue;
+      }
+
+      localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+      // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+      delete localVarUrlObj.search;
+      localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+      return {
+        url: url.format(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     * Create a new mailbox
+     * @summary Create mailbox
+     * @param {MailboxPost} body The new mailbox address
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    create(body: MailboxPost, options: any = {}): FetchArgs {
+      // verify required parameter 'body' is not null or undefined
+      if (body === null || body === undefined) {
+        throw new RequiredError('body', 'Required parameter body was null or undefined when calling create.');
+      }
+      const localVarPath = `/mailboxes`;
+      const localVarUrlObj = url.parse(localVarPath, true);
+      const localVarRequestOptions = Object.assign({ method: 'POST' }, options);
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication apiKeyAuth required
+      if (configuration && configuration.apiKey) {
+        const localVarApiKeyValue =
+          typeof configuration.apiKey === 'function' ? configuration.apiKey('Authentication') : configuration.apiKey;
+        localVarHeaderParameter['Authentication'] = localVarApiKeyValue;
+      }
+
+      localVarHeaderParameter['Content-Type'] = 'application/json';
+
+      localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+      // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+      delete localVarUrlObj.search;
+      localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+      const needsSerialization =
+        <any>'MailboxPost' !== 'string' || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+      localVarRequestOptions.body = needsSerialization ? JSON.stringify(body || {}) : body || '';
+
+      return {
+        url: url.format(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     * Get user mailboxes.
+     * @summary Get mailboxes
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    mailboxes(options: any = {}): FetchArgs {
+      const localVarPath = `/v2/mailboxes`;
+      const localVarUrlObj = url.parse(localVarPath, true);
+      const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication apiKeyAuth required
+      if (configuration && configuration.apiKey) {
+        const localVarApiKeyValue =
+          typeof configuration.apiKey === 'function' ? configuration.apiKey('Authentication') : configuration.apiKey;
+        localVarHeaderParameter['Authentication'] = localVarApiKeyValue;
+      }
+
+      localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+      // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+      delete localVarUrlObj.search;
+      localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+      return {
+        url: url.format(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     * Update specific mailbox by id.
+     * @summary Update a mailbox by id
+     * @param {MailboxMailboxIdPut} body Updated settings of mailbox
+     * @param {string} mailboxId ID of a mailbox
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    update(body: MailboxMailboxIdPut, mailboxId: string, options: any = {}): FetchArgs {
+      // verify required parameter 'body' is not null or undefined
+      if (body === null || body === undefined) {
+        throw new RequiredError('body', 'Required parameter body was null or undefined when calling update.');
+      }
+      // verify required parameter 'mailboxId' is not null or undefined
+      if (mailboxId === null || mailboxId === undefined) {
+        throw new RequiredError('mailboxId', 'Required parameter mailboxId was null or undefined when calling update.');
+      }
+      const localVarPath = `/mailboxes/{mailbox_id}`.replace(
+        `{${'mailbox_id'}}`,
+        encodeURIComponent(String(mailboxId)),
+      );
+      const localVarUrlObj = url.parse(localVarPath, true);
+      const localVarRequestOptions = Object.assign({ method: 'PUT' }, options);
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication apiKeyAuth required
+      if (configuration && configuration.apiKey) {
+        const localVarApiKeyValue =
+          typeof configuration.apiKey === 'function' ? configuration.apiKey('Authentication') : configuration.apiKey;
+        localVarHeaderParameter['Authentication'] = localVarApiKeyValue;
+      }
+
+      localVarHeaderParameter['Content-Type'] = 'application/json';
+
+      localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+      // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+      delete localVarUrlObj.search;
+      localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+      const needsSerialization =
+        <any>'MailboxMailboxIdPut' !== 'string' ||
+        localVarRequestOptions.headers['Content-Type'] === 'application/json';
+      localVarRequestOptions.body = needsSerialization ? JSON.stringify(body || {}) : body || '';
+
+      return {
+        url: url.format(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+  };
+};
+
+/**
+ * MailboxApi - functional programming interface
+ * @export
+ */
+export const MailboxApiFp = function (configuration?: Configuration) {
+  return {
+    /**
+     * Delete specific mailbox by id.
+     * @summary Delete mailbox by id
+     * @param {string} mailboxId ID of a mailbox
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    _delete(mailboxId: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Response> {
+      const localVarFetchArgs = MailboxApiFetchParamCreator(configuration)._delete(mailboxId, options);
+      return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+        return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+          if (response.status >= 200 && response.status < 300) {
+            return response;
+          } else {
+            throw response;
+          }
+        });
+      };
+    },
+    /**
+     * Create a new mailbox
+     * @summary Create mailbox
+     * @param {MailboxPost} body The new mailbox address
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    create(body: MailboxPost, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Mailbox> {
+      const localVarFetchArgs = MailboxApiFetchParamCreator(configuration).create(body, options);
+      return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+        return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+          if (response.status >= 200 && response.status < 300) {
+            return response.json();
+          } else {
+            throw response;
+          }
+        });
+      };
+    },
+    /**
+     * Get user mailboxes.
+     * @summary Get mailboxes
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    mailboxes(options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<MailboxModelArray> {
+      const localVarFetchArgs = MailboxApiFetchParamCreator(configuration).mailboxes(options);
+      return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+        return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+          if (response.status >= 200 && response.status < 300) {
+            return response.json();
+          } else {
+            throw response;
+          }
+        });
+      };
+    },
+    /**
+     * Update specific mailbox by id.
+     * @summary Update a mailbox by id
+     * @param {MailboxMailboxIdPut} body Updated settings of mailbox
+     * @param {string} mailboxId ID of a mailbox
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    update(
+      body: MailboxMailboxIdPut,
+      mailboxId: string,
+      options?: any,
+    ): (fetch?: FetchAPI, basePath?: string) => Promise<Response> {
+      const localVarFetchArgs = MailboxApiFetchParamCreator(configuration).update(body, mailboxId, options);
+      return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+        return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
+          if (response.status >= 200 && response.status < 300) {
+            return response;
+          } else {
+            throw response;
+          }
+        });
+      };
+    },
+  };
+};
+
+/**
+ * MailboxApi - factory interface
+ * @export
+ */
+export const MailboxApiFactory = function (configuration?: Configuration, fetch?: FetchAPI, basePath?: string) {
+  return {
+    /**
+     * Delete specific mailbox by id.
+     * @summary Delete mailbox by id
+     * @param {string} mailboxId ID of a mailbox
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    _delete(mailboxId: string, options?: any) {
+      return MailboxApiFp(configuration)._delete(mailboxId, options)(fetch, basePath);
+    },
+    /**
+     * Create a new mailbox
+     * @summary Create mailbox
+     * @param {MailboxPost} body The new mailbox address
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    create(body: MailboxPost, options?: any) {
+      return MailboxApiFp(configuration).create(body, options)(fetch, basePath);
+    },
+    /**
+     * Get user mailboxes.
+     * @summary Get mailboxes
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    mailboxes(options?: any) {
+      return MailboxApiFp(configuration).mailboxes(options)(fetch, basePath);
+    },
+    /**
+     * Update specific mailbox by id.
+     * @summary Update a mailbox by id
+     * @param {MailboxMailboxIdPut} body Updated settings of mailbox
+     * @param {string} mailboxId ID of a mailbox
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    update(body: MailboxMailboxIdPut, mailboxId: string, options?: any) {
+      return MailboxApiFp(configuration).update(body, mailboxId, options)(fetch, basePath);
+    },
+  };
+};
+
+/**
+ * MailboxApi - object-oriented interface
+ * @export
+ * @class MailboxApi
+ * @extends {BaseAPI}
+ */
+export class MailboxApi extends BaseAPI {
+  /**
+   * Delete specific mailbox by id.
+   * @summary Delete mailbox by id
+   * @param {string} mailboxId ID of a mailbox
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof MailboxApi
+   */
+  public _delete(mailboxId: string, options?: any) {
+    return MailboxApiFp(this.configuration)._delete(mailboxId, options)(this.fetch, this.basePath);
+  }
+
+  /**
+   * Create a new mailbox
+   * @summary Create mailbox
+   * @param {MailboxPost} body The new mailbox address
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof MailboxApi
+   */
+  public create(body: MailboxPost, options?: any) {
+    return MailboxApiFp(this.configuration).create(body, options)(this.fetch, this.basePath);
+  }
+
+  /**
+   * Get user mailboxes.
+   * @summary Get mailboxes
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof MailboxApi
+   */
+  public mailboxes(options?: any) {
+    return MailboxApiFp(this.configuration).mailboxes(options)(this.fetch, this.basePath);
+  }
+
+  /**
+   * Update specific mailbox by id.
+   * @summary Update a mailbox by id
+   * @param {MailboxMailboxIdPut} body Updated settings of mailbox
+   * @param {string} mailboxId ID of a mailbox
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof MailboxApi
+   */
+  public update(body: MailboxMailboxIdPut, mailboxId: string, options?: any) {
+    return MailboxApiFp(this.configuration).update(body, mailboxId, options)(this.fetch, this.basePath);
   }
 }

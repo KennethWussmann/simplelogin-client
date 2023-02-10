@@ -1,2 +1,3 @@
 dist/* linguist-generated=true
 src/sdk/* linguist-generated=true
+.husky/* linguist-generated=true

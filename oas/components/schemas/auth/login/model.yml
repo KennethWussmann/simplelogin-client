@@ -4,8 +4,7 @@ properties:
     type: string
     description: User's name, could be an empty string.
   email:
-    type: string
-    format: email
+    $ref: '@schemas/email.yml'
   mfa_enabled:
     type: boolean
   mfa_key:

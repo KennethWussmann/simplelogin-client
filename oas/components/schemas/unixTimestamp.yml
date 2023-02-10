@@ -1,0 +1,3 @@
+type: integer
+description: Unix timestamp
+example: 1580903760

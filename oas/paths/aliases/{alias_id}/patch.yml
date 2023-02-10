@@ -1,0 +1,18 @@
+tags:
+  - alias
+summary: Update alias by id
+description: Update specific alias by id.
+operationId: "update"
+parameters:
+  - $ref: "@parameters/pathAliasId.yml"
+requestBody:
+  description: Updated settings for the given alias.
+  required: true
+  content: {{ mixin("@mixins/request/json.yml", "@schemas/alias/{alias_id}/patch.yml") }}
+responses:
+  "200":
+    description: Successful
+    # TODO: Does it really return nothing? No return value stated in the docs.
+  "404":
+    description: Not found
+    content: {{ mixin("@mixins/request/json.yml", "@schemas/error.yml") }}

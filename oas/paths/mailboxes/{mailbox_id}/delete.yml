@@ -1,0 +1,14 @@
+tags:
+  - mailbox
+summary: Delete mailbox by id
+description: Delete specific mailbox by id.
+operationId: "delete"
+parameters:
+  - $ref: "@parameters/pathMailboxId.yml"
+responses:
+  "200":
+    description: Successful
+    # TODO: Verify no content is returned
+  "400":
+    description: The error message can be displayed to user
+    content: {{ mixin("@mixins/request/json.yml", "@schemas/error.yml") }}

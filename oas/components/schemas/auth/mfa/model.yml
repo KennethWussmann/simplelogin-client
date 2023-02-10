@@ -7,8 +7,7 @@ properties:
     type: string
     description: If MFA is not enabled, the api key is returned right away.
   email:
-    type: string
-    description: User email
+    $ref: '@schemas/email.yml'
 
 required:
   - name

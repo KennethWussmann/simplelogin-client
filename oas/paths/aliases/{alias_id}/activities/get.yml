@@ -1,0 +1,15 @@
+tags:
+  - alias
+summary: Get activities
+description: Get activities for specific alias by id.
+operationId: "activities"
+parameters:
+  - $ref: "@parameters/pathAliasId.yml"
+  - $ref: "@parameters/queryPageId.yml"
+responses:
+  "200":
+    description: Successful
+    content: {{ mixin("@mixins/request/json.yml", "@schemas/alias/{alias_id}/activities/modelArray.yml") }}
+  "404":
+    description: Not found
+    content: {{ mixin("@mixins/request/json.yml", "@schemas/error.yml") }}

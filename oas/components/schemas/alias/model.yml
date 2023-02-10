@@ -1,12 +1,11 @@
 type: object
 properties:
   creation_date:
-    type: string
-    format: date-time
+    $ref: '@schemas/dateTime.yml'
   creation_timestamp:
     type: integer
   email:
-    type: string
+    $ref: '@schemas/email.yml'
   name:
     type: string
   enabled:
@@ -14,27 +13,11 @@ properties:
   id:
     type: integer
   mailbox:
-    type: object
-    properties:
-      email:
-        type: string
-      id:
-        type: integer
-    required:
-      - email
-      - id
+    $ref: '@schemas/mailbox/modelRef.yml'
   mailboxes:
     type: array
     items:
-      type: object
-      properties:
-        email:
-          type: string
-        id:
-          type: integer
-      required:
-        - email
-        - id
+      $ref: '@schemas/mailbox/modelRef.yml'
   latest_activity:
     type: object
     properties:
@@ -44,7 +27,7 @@ properties:
         type: object
         properties:
           email:
-            type: string
+            $ref: '@schemas/email.yml'
           name:
             type: string
           reverse_alias:

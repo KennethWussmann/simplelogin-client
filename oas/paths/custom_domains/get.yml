@@ -1,0 +1,14 @@
+tags:
+  - custom-domain
+summary: Get custom domains
+description: Get users custom domains.
+operationId: "customDomains"
+parameters:
+  - $ref: "@parameters/pathAliasId.yml"
+responses:
+  "200":
+    description: Successful
+    content: {{ mixin("@mixins/request/json.yml", "@schemas/custom_domain/model.yml") }}
+  "404":
+    description: Not found
+    content: {{ mixin("@mixins/request/json.yml", "@schemas/error.yml") }}

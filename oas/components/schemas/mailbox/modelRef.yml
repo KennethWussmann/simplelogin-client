@@ -1,0 +1,11 @@
+type: object
+properties:
+  email:
+    $ref: '@schemas/email.yml'
+  id:
+    type: integer
+    format: int64
+    example: 1
+required:
+  - id
+  - email 

@@ -1,0 +1,18 @@
+tags:
+  - mailbox
+summary: Update a mailbox by id
+description: Update specific mailbox by id.
+operationId: "update"
+parameters:
+  - $ref: "@parameters/pathMailboxId.yml"
+requestBody:
+  description: Updated settings of mailbox
+  required: true
+  content: {{ mixin("@mixins/request/json.yml", "@schemas/mailbox/{mailbox_id}/put.yml") }}
+responses:
+  "200":
+    description: Successful
+    # TODO: Verify no content is returned
+  "400":
+    description: The error message can be displayed to user
+    content: {{ mixin("@mixins/request/json.yml", "@schemas/error.yml") }}

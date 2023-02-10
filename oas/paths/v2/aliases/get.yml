@@ -1,6 +1,6 @@
 tags:
   - alias
-summary: Aliases
+summary: Get aliases
 description: Get user aliases. Please note `pinned`, `disabled`, `enabled` are exclusive, i.e. only one can be present. They can only be set to `true`.
 operationId: "aliases"
 parameters:

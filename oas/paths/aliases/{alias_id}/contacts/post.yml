@@ -1,0 +1,24 @@
+tags:
+  - alias
+summary: Create contact
+description:  Create a new contact for an alias by id.
+operationId: "createContact"
+parameters:
+  - $ref: "@parameters/pathAliasId.yml"
+requestBody:
+  description: Updated settings for the given alias.
+  required: true
+  content: {{ mixin("@mixins/request/json.yml", "@schemas/alias/{alias_id}/contacts/post.yml") }}
+responses:
+  "201":
+    description: Contact created successfully
+    content: {{ mixin("@mixins/request/json.yml", "@schemas/alias/{alias_id}/contacts/model.yml") }}
+  "200":
+    description: Contact already exists
+    content: {{ mixin("@mixins/request/json.yml", "@schemas/alias/{alias_id}/contacts/model.yml") }}
+  "404":
+    description: Not found
+    content: {{ mixin("@mixins/request/json.yml", "@schemas/error.yml") }}
+  "403":
+    description: User cannot create reverse alias
+    content: {{ mixin("@mixins/request/json.yml", "@schemas/error.yml") }}

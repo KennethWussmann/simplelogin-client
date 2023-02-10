@@ -1,0 +1,9 @@
+in: query
+name: page_id
+required: true
+schema:
+  type: number
+  minimum: 0
+  default: 0
+  example: 0
+description: The endpoint returns maximum 20 aliases for each page.

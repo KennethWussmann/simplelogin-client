@@ -128,6 +128,455 @@
         ]
       }
     },
+    "/aliases/{alias_id}/activities": {
+      "get": {
+        "tags": [
+          "alias"
+        ],
+        "summary": "Get activities",
+        "description": "Get activities for specific alias by id.",
+        "operationId": "activities",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/PathAliasId"
+          },
+          {
+            "$ref": "#/components/parameters/QueryPageId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AliasAliasIdActivitiesModelArray"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/aliases/{alias_id}/contacts": {
+      "get": {
+        "tags": [
+          "alias"
+        ],
+        "summary": "Get contacts",
+        "description": "Get contacts for specific alias by id.",
+        "operationId": "contacts",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/PathAliasId"
+          },
+          {
+            "$ref": "#/components/parameters/QueryPageId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AliasAliasIdContactsModelArray"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "alias"
+        ],
+        "summary": "Create contact",
+        "description": "Create a new contact for an alias by id.",
+        "operationId": "createContact",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/PathAliasId"
+          }
+        ],
+        "requestBody": {
+          "description": "Updated settings for the given alias.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AliasAliasIdContactsPost"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Contact already exists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AliasAliasIdContacts"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Contact created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AliasAliasIdContacts"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/aliases/{alias_id}": {
+      "delete": {
+        "tags": [
+          "alias"
+        ],
+        "summary": "Delete alias by id",
+        "description": "Delete specific alias by id.",
+        "operationId": "delete",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/PathAliasId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AliasAliasIdDelete"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      },
+      "get": {
+        "tags": [
+          "alias"
+        ],
+        "summary": "Get alias by id",
+        "description": "Get specific alias by id.",
+        "operationId": "get",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/PathAliasId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Alias"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      },
+      "patch": {
+        "tags": [
+          "alias"
+        ],
+        "summary": "Update alias by id",
+        "description": "Update specific alias by id.",
+        "operationId": "update",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/PathAliasId"
+          }
+        ],
+        "requestBody": {
+          "description": "Updated settings for the given alias.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AliasAliasIdPatch"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/aliases/{alias_id}/toggle": {
+      "post": {
+        "tags": [
+          "alias"
+        ],
+        "summary": "Toggle alias by id",
+        "description": "Enable or disable specific alias by id.",
+        "operationId": "toggle",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/PathAliasId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AliasAliasIdTogglePost"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
     "/auth/activate": {
       "post": {
         "tags": [
@@ -313,6 +762,68 @@
         }
       }
     },
+    "/custom_domains": {
+      "get": {
+        "tags": [
+          "custom-domain"
+        ],
+        "summary": "Get custom domains",
+        "description": "Get users custom domains.",
+        "operationId": "customDomains",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/PathAliasId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomDomain"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
     "/logout": {
       "get": {
         "tags": [
@@ -328,6 +839,193 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/UserInfo"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/mailboxes": {
+      "post": {
+        "tags": [
+          "mailbox"
+        ],
+        "summary": "Create mailbox",
+        "description": "Create a new mailbox",
+        "operationId": "create",
+        "requestBody": {
+          "description": "The new mailbox address",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MailboxPost"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "New mailbox is created successfully. User is going to receive a verification email.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mailbox"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The error message can be displayed to user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/mailboxes/{mailbox_id}": {
+      "delete": {
+        "tags": [
+          "mailbox"
+        ],
+        "summary": "Delete mailbox by id",
+        "description": "Delete specific mailbox by id.",
+        "operationId": "delete",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/PathMailboxId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful"
+          },
+          "400": {
+            "description": "The error message can be displayed to user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "mailbox"
+        ],
+        "summary": "Update a mailbox by id",
+        "description": "Update specific mailbox by id.",
+        "operationId": "update",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/PathMailboxId"
+          }
+        ],
+        "requestBody": {
+          "description": "Updated settings of mailbox",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MailboxMailboxIdPut"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful"
+          },
+          "400": {
+            "description": "The error message can be displayed to user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
                 }
               }
             }
@@ -685,7 +1383,7 @@
         "tags": [
           "alias"
         ],
-        "summary": "Aliases",
+        "summary": "Get aliases",
         "description": "Get user aliases. Please note `pinned`, `disabled`, `enabled` are exclusive, i.e. only one can be present. They can only be set to `true`.",
         "operationId": "aliases",
         "parameters": [
@@ -724,6 +1422,53 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/AliasModelArray"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/v2/mailboxes": {
+      "get": {
+        "tags": [
+          "mailbox"
+        ],
+        "summary": "Get mailboxes",
+        "description": "Get user mailboxes.",
+        "operationId": "mailboxes",
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MailboxModelArray"
                 }
               }
             }
@@ -823,7 +1568,7 @@
         "tags": [
           "alias"
         ],
-        "summary": "Options",
+        "summary": "Get options",
         "description": "User alias info and suggestion. Used by the first extension screen when user opens the extension.",
         "operationId": "options",
         "parameters": [
@@ -873,6 +1618,24 @@
   },
   "components": {
     "parameters": {
+      "PathAliasId": {
+        "in": "path",
+        "name": "alias_id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "ID of an alias"
+      },
+      "PathMailboxId": {
+        "in": "path",
+        "name": "mailbox_id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "ID of a mailbox"
+      },
       "QueryHostname": {
         "in": "query",
         "name": "hostname",
@@ -882,6 +1645,18 @@
           "example": "www.example.com"
         },
         "description": "This information is important to know where an alias is used in order to suggest user the same alias if they want to create on alias on the same website in the future."
+      },
+      "QueryPageId": {
+        "in": "query",
+        "name": "page_id",
+        "required": true,
+        "schema": {
+          "type": "number",
+          "minimum": 0,
+          "default": 0,
+          "example": 0
+        },
+        "description": "The endpoint returns maximum 20 aliases for each page."
       }
     },
     "schemas": {
@@ -921,14 +1696,13 @@
         "type": "object",
         "properties": {
           "creation_date": {
-            "type": "string",
-            "format": "date-time"
+            "$ref": "#/components/schemas/DateTime"
           },
           "creation_timestamp": {
             "type": "integer"
           },
           "email": {
-            "type": "string"
+            "$ref": "#/components/schemas/Email"
           },
           "name": {
             "type": "string"
@@ -940,36 +1714,12 @@
             "type": "integer"
           },
           "mailbox": {
-            "type": "object",
-            "properties": {
-              "email": {
-                "type": "string"
-              },
-              "id": {
-                "type": "integer"
-              }
-            },
-            "required": [
-              "email",
-              "id"
-            ]
+            "$ref": "#/components/schemas/MailboxModelRef"
           },
           "mailboxes": {
             "type": "array",
             "items": {
-              "type": "object",
-              "properties": {
-                "email": {
-                  "type": "string"
-                },
-                "id": {
-                  "type": "integer"
-                }
-              },
-              "required": [
-                "email",
-                "id"
-              ]
+              "$ref": "#/components/schemas/MailboxModelRef"
             }
           },
           "latest_activity": {
@@ -982,7 +1732,7 @@
                 "type": "object",
                 "properties": {
                   "email": {
-                    "type": "string"
+                    "$ref": "#/components/schemas/Email"
                   },
                   "name": {
                     "type": "string"
@@ -1049,9 +1799,14 @@
         ]
       },
       "AliasModelArray": {
-        "type": "array",
-        "items": {
-          "$ref": "#/components/schemas/Alias"
+        "type": "object",
+        "properties": {
+          "aliases": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Alias"
+            }
+          }
         }
       },
       "AliasOptions": {
@@ -1126,13 +1881,175 @@
           }
         }
       },
+      "AliasAliasIdActivities": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "example": "reply"
+          },
+          "from": {
+            "type": "string",
+            "example": "yes_meo_chat@sl.local"
+          },
+          "timestamp": {
+            "$ref": "#/components/schemas/UnixTimestamp"
+          },
+          "to": {
+            "type": "string",
+            "example": "marketing@example.com"
+          },
+          "reverse_alias": {
+            "type": "string",
+            "example": "\"marketing at example.com\" <reply@a.b>"
+          },
+          "reverse_alias_address": {
+            "type": "string",
+            "example": "reply@a.b"
+          }
+        },
+        "required": [
+          "action",
+          "from",
+          "timestamp",
+          "to",
+          "reverse_alias",
+          "reverse_alias_address"
+        ]
+      },
+      "AliasAliasIdActivitiesModelArray": {
+        "type": "object",
+        "properties": {
+          "activities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AliasAliasIdActivities"
+            }
+          }
+        }
+      },
+      "AliasAliasIdContacts": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique identifier for the email address.",
+            "example": 1
+          },
+          "contact": {
+            "type": "string",
+            "description": "Email address for the contact.",
+            "example": "marketing@example.com"
+          },
+          "creation_date": {
+            "$ref": "#/components/schemas/DateTime"
+          },
+          "creation_timestamp": {
+            "$ref": "#/components/schemas/UnixTimestamp"
+          },
+          "last_email_sent_date": {
+            "$ref": "#/components/schemas/DateTime"
+          },
+          "last_email_sent_timestamp": {
+            "type": "integer",
+            "description": "Unix timestamp when the last email was sent.",
+            "example": null
+          },
+          "reverse_alias": {
+            "type": "string",
+            "description": "Reverse alias for the email address.",
+            "example": "marketing at example.com <reply+bzvpazcdedcgcpztehxzgjgzmxskqa@sl.co>"
+          },
+          "block_forward": {
+            "type": "boolean",
+            "description": "Whether the email address is blocked for forwarding.",
+            "example": false
+          },
+          "existed": {
+            "type": "boolean",
+            "description": "Whether the contact already existed.",
+            "example": false
+          }
+        },
+        "required": [
+          "id",
+          "contact",
+          "creation_date",
+          "creation_timestamp",
+          "reverse_alias"
+        ]
+      },
+      "AliasAliasIdContactsModelArray": {
+        "type": "object",
+        "properties": {
+          "contacts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AliasAliasIdContacts"
+            }
+          }
+        }
+      },
+      "AliasAliasIdContactsPost": {
+        "type": "object",
+        "properties": {
+          "contact": {
+            "$ref": "#/components/schemas/Email"
+          }
+        },
+        "required": [
+          "contact"
+        ]
+      },
+      "AliasAliasIdDelete": {
+        "type": "object",
+        "properties": {
+          "deleted": {
+            "type": "boolean",
+            "example": true
+          }
+        }
+      },
+      "AliasAliasIdPatch": {
+        "type": "object",
+        "properties": {
+          "note": {
+            "type": "string"
+          },
+          "mailbox_id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "mailbox_ids": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "disable_pgp": {
+            "type": "boolean"
+          },
+          "pinned": {
+            "type": "boolean"
+          }
+        }
+      },
+      "AliasAliasIdTogglePost": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "example": false
+          }
+        }
+      },
       "AuthActivatePost": {
         "type": "object",
         "properties": {
           "email": {
-            "type": "string",
-            "format": "email",
-            "description": "Email address used to register account"
+            "$ref": "#/components/schemas/Email"
           },
           "code": {
             "type": "string",
@@ -1148,9 +2065,7 @@
         "type": "object",
         "properties": {
           "email": {
-            "type": "string",
-            "format": "email",
-            "description": "Email address used to register account"
+            "$ref": "#/components/schemas/Email"
           }
         },
         "required": [
@@ -1165,8 +2080,7 @@
             "description": "User's name, could be an empty string."
           },
           "email": {
-            "type": "string",
-            "format": "email"
+            "$ref": "#/components/schemas/Email"
           },
           "mfa_enabled": {
             "type": "boolean"
@@ -1192,8 +2106,7 @@
         "type": "object",
         "properties": {
           "email": {
-            "type": "string",
-            "format": "email"
+            "$ref": "#/components/schemas/Email"
           },
           "password": {
             "type": "string"
@@ -1220,8 +2133,7 @@
             "description": "If MFA is not enabled, the api key is returned right away."
           },
           "email": {
-            "type": "string",
-            "description": "User email"
+            "$ref": "#/components/schemas/Email"
           }
         },
         "required": [
@@ -1256,9 +2168,7 @@
         "type": "object",
         "properties": {
           "email": {
-            "type": "string",
-            "format": "email",
-            "description": "Email address used to register account"
+            "$ref": "#/components/schemas/Email"
           }
         },
         "required": [
@@ -1281,12 +2191,176 @@
           "password"
         ]
       },
+      "CustomDomain": {
+        "type": "object",
+        "properties": {
+          "catch_all": {
+            "type": "boolean",
+            "example": false
+          },
+          "creation_date": {
+            "$ref": "#/components/schemas/DateTime"
+          },
+          "creation_timestamp": {
+            "$ref": "#/components/schemas/UnixTimestamp"
+          },
+          "domain_name": {
+            "type": "string",
+            "example": "test1.org"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "example": 1
+          },
+          "is_verified": {
+            "type": "boolean",
+            "example": true
+          },
+          "mailboxes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MailboxModelRef"
+            }
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "nb_alias": {
+            "type": "integer",
+            "format": "int64",
+            "example": 0
+          },
+          "random_prefix_generation": {
+            "type": "boolean",
+            "example": false
+          }
+        },
+        "required": [
+          "id",
+          "domain_name",
+          "creation_date",
+          "creation_timestamp",
+          "is_verified",
+          "catch_all",
+          "random_prefix_generation",
+          "nb_alias",
+          "mailboxes",
+          "name"
+        ]
+      },
+      "CustomDomainModelArray": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/CustomDomain"
+        }
+      },
+      "DateTime": {
+        "type": "string",
+        "format": "date-time",
+        "example": "2021-03-10 21:36:08+00:00"
+      },
+      "Email": {
+        "type": "string",
+        "description": "Email address",
+        "example": "firstname.lastname@example.com"
+      },
       "Error": {
         "type": "object",
         "properties": {
           "error": {
             "type": "string",
             "description": "Error message"
+          }
+        }
+      },
+      "Mailbox": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "$ref": "#/components/schemas/Email"
+          },
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "default": {
+            "type": "boolean",
+            "example": true
+          },
+          "creation_timestamp": {
+            "$ref": "#/components/schemas/UnixTimestamp"
+          },
+          "nb_alias": {
+            "type": "integer",
+            "example": 10
+          },
+          "verified": {
+            "type": "boolean",
+            "example": true
+          }
+        },
+        "required": [
+          "email",
+          "id",
+          "default",
+          "creation_timestamp",
+          "nb_alias",
+          "verified"
+        ]
+      },
+      "MailboxModelArray": {
+        "type": "object",
+        "properties": {
+          "mailboxes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Mailbox"
+            }
+          }
+        }
+      },
+      "MailboxModelRef": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "$ref": "#/components/schemas/Email"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "example": 1
+          }
+        },
+        "required": [
+          "id",
+          "email"
+        ]
+      },
+      "MailboxPost": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "$ref": "#/components/schemas/Email"
+          }
+        }
+      },
+      "MailboxMailboxIdPut": {
+        "type": "object",
+        "properties": {
+          "default": {
+            "type": "boolean",
+            "description": "If true, set the mailbox as the default mailbox.",
+            "example": true
+          },
+          "email": {
+            "$ref": "#/components/schemas/Email"
+          },
+          "cancel_email_change": {
+            "type": "boolean",
+            "description": "If true, cancel the email change of the mailbox.",
+            "example": true
           }
         }
       },
@@ -1308,6 +2382,11 @@
             "type": "string"
           }
         }
+      },
+      "UnixTimestamp": {
+        "type": "integer",
+        "description": "Unix timestamp",
+        "example": 1580903760
       },
       "UserApiKey": {
         "type": "object",
@@ -1351,8 +2430,7 @@
             "description": "User's full name"
           },
           "email": {
-            "type": "string",
-            "format": "email"
+            "$ref": "#/components/schemas/Email"
           },
           "is_premium": {
             "type": "boolean",

@@ -1,0 +1,17 @@
+type: object
+properties:
+  note:
+    type: string
+  mailbox_id:
+    type: integer
+  name:
+    type: string
+  mailbox_ids:
+    type: array
+    items:
+      type: integer
+  disable_pgp:
+    type: boolean
+  pinned:
+    type: boolean
+    

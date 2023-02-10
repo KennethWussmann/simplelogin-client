@@ -1,0 +1,4 @@
+type: object
+properties:
+  email:
+    $ref: '@schemas/email.yml'

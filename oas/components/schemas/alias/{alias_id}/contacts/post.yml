@@ -1,0 +1,6 @@
+type: object
+properties:
+  contact:
+    $ref: '@schemas/email.yml'
+required:
+  - contact

@@ -1,0 +1,14 @@
+tags:
+  - alias
+summary: Get alias by id
+description: Get specific alias by id.
+operationId: "get"
+parameters:
+  - $ref: "@parameters/pathAliasId.yml"
+responses:
+  "200":
+    description: Successful
+    content: {{ mixin("@mixins/request/json.yml", "@schemas/alias/model.yml") }}
+  "404":
+    description: Not found
+    content: {{ mixin("@mixins/request/json.yml", "@schemas/error.yml") }}

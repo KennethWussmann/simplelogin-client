@@ -1,0 +1,44 @@
+type: object
+properties:
+  catch_all:
+    type: boolean
+    example: false
+  creation_date:
+    $ref: '@schemas/dateTime.yml'
+  creation_timestamp:
+    $ref: '@schemas/unixTimestamp.yml'
+  domain_name:
+    type: string
+    example: test1.org
+  id:
+    type: integer
+    format: int64
+    example: 1
+  is_verified:
+    type: boolean
+    example: true
+  mailboxes:
+    type: array
+    items:
+      $ref: '@schemas/mailbox/modelRef.yml'
+  name:
+    type: string
+    nullable: true
+  nb_alias:
+    type: integer
+    format: int64
+    example: 0
+  random_prefix_generation:
+    type: boolean
+    example: false
+required:
+  - id
+  - domain_name
+  - creation_date
+  - creation_timestamp
+  - is_verified
+  - catch_all
+  - random_prefix_generation
+  - nb_alias
+  - mailboxes
+  - name

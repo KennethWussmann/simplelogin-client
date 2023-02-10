@@ -1,0 +1,25 @@
+type: object
+properties:
+  email:
+    $ref: '@schemas/email.yml'
+  id:
+    type: integer
+    example: 1
+  default:
+    type: boolean
+    example: true
+  creation_timestamp:
+    $ref: '@schemas/unixTimestamp.yml'
+  nb_alias:
+    type: integer
+    example: 10
+  verified:
+    type: boolean
+    example: true
+required:
+  - email
+  - id
+  - default
+  - creation_timestamp
+  - nb_alias
+  - verified

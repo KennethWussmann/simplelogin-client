@@ -1,0 +1,27 @@
+type: object
+properties:
+  action:
+    type: string
+    example: "reply"
+  from:
+    type: string
+    example: "yes_meo_chat@sl.local"
+  timestamp:
+    $ref: '@schemas/unixTimestamp.yml'
+  to:
+    type: string
+    example: "marketing@example.com"
+  reverse_alias:
+    type: string
+    example: "\"marketing at example.com\" <reply@a.b>"
+  reverse_alias_address:
+    type: string
+    example: "reply@a.b"
+
+required:
+  - action
+  - from
+  - timestamp
+  - to
+  - reverse_alias
+  - reverse_alias_address

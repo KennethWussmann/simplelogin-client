@@ -1,0 +1,9 @@
+tags:
+  - mailbox
+summary: Get mailboxes
+description: Get user mailboxes.
+operationId: "mailboxes"
+responses:
+  "200":
+    description: Successful
+    content: {{ mixin("@mixins/request/json.yml", "@schemas/mailbox/modelArray.yml") }}

@@ -1,0 +1,6 @@
+type: object
+properties:
+  mailboxes:
+    type: array
+    items:
+      $ref: '@schemas/mailbox/model.yml'

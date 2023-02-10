@@ -1,0 +1,6 @@
+type: object
+properties:
+  contacts:
+    type: array
+    items:
+      $ref: '@schemas/alias/{alias_id}/contacts/model.yml'

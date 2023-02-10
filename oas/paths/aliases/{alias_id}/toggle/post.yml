@@ -1,0 +1,11 @@
+tags:
+  - alias
+summary: Toggle alias by id
+description: Enable or disable specific alias by id.
+operationId: "toggle"
+parameters:
+  - $ref: "@parameters/pathAliasId.yml"
+responses:
+  '200':
+    description: Successful
+    content: {{ mixin("@mixins/response/json.yml", "@schemas/alias/{alias_id}/toggle/post.yml") }}

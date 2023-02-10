@@ -1,0 +1,12 @@
+type: object
+properties:
+  default:
+    type: boolean
+    description: If true, set the mailbox as the default mailbox.
+    example: true
+  email:
+    $ref: '@schemas/email.yml'
+  cancel_email_change:
+    type: boolean
+    description: If true, cancel the email change of the mailbox.
+    example: true
