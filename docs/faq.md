@@ -15,6 +15,8 @@ const alias = new SimpleLogin.AliasApi(
 );
 ```
 
+> Check the [docs](https://kennethwussmann.github.io/simplelogin-client/typedoc/classes/SimpleLogin.BaseAPI.html#constructor) for more information.
+
 ## Can I use the OpenAPI Spec to generate clients for other languages?
 
 Yes of course! Check the [license](../LICENSE) for conditions under which this code can be used.
