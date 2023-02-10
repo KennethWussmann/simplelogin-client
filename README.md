@@ -55,7 +55,27 @@ npm install --save simplelogin-client
 ```typescript
 import { SimpleLogin } from 'simplelogin-client';
 
-// TODO: Add usage example
+const alias = new SimpleLogin.AliasApi({
+  apiKey: process.env.API_KEY,
+});
+
+const createdAlias = await alias.createRandom({
+  note: 'This alias was created with simplelogin-client!',
+});
+
+console.log(createdAlias);
+/* Output:
+{
+  id: 50001,
+  creation_date: '2023-02-10 20:19:37+00:00',
+  alias: 'nederlanden_heatherington@example.com',
+  mailbox: { email: 'somewhere@gmail.com', id: 50001 },
+  enabled: true,
+  pinned: false,
+  note: "This alias was created with simplelogin-client!",
+  ...
+}
+*/
 ```
 
 ## Development

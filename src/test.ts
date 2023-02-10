@@ -4,16 +4,13 @@ import { config } from 'dotenv';
 config();
 
 const run = async () => {
-  const aliases = new SimpleLogin.AliasApi({
+  const alias = new SimpleLogin.AliasApi({
     apiKey: process.env.API_KEY,
   });
-
-  try {
-    const response = await aliases._delete(5779636);
-    console.log('Success', response);
-  } catch (error: any) {
-    console.log('Error', error);
-  }
+  const createdAlias = await alias.createRandom({
+    note: 'This alias was created with simplelogin-client!',
+  });
+  console.log(createdAlias);
 };
 
 run().catch(console.error);
