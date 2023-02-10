@@ -1,7 +1,7 @@
 <div align="center">
   <h1><code>simplelogin-client</code></h1>
   <p>
-    <strong>Zero-dependency TypeScript client for the <a href="https://simplelogin.io">SimpleLogin.io</a> API. Compatible with NodeJS 18+ and browsers.</strong>
+    <strong>Zero-dependency TypeScript client for the <a href="https://simplelogin.io">SimpleLogin.io</a> API. Compatible with NodeJS and browsers.</strong>
   </p>
   <p>
     <a href="https://kennethwussmann.github.io/simplelogin-client/typedoc/index.html">Documentation</a> • <a href="https://kennethwussmann.github.io/simplelogin-client/redoc/index.html">API Spec</a> 
@@ -44,6 +44,8 @@ During the v0.\* versions of this client, you may expect breaking changes to the
   - [ ] Get messages received during reservation
 
 ## Getting started
+
+`simplelogin-client` works in most NodeJS versions and browsers, but may require a tweak when not used with NodeJS 18 or in outdated browsers. Check the [compatibility guide](./docs/faq.md#what-nodejs-version-and-browsers-are-supported).
 
 To start using this API client in your JS/TS projects:
 

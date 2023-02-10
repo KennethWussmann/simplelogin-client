@@ -15,13 +15,15 @@ const modify = (filename: string, content: string) =>
     ...content
       .replace(
         'import * as isomorphicFetch from "isomorphic-fetch";\n',
-        'const defaultFetchApi = fetch;\nexport type Response = any;\n',
+        'const defaultFetchApi = typeof fetch === "undefined" ? undefined : fetch;\nexport type Response = any;\n',
       )
       .replace("declare module 'isomorphic-fetch';\n", '')
       .replace('/// <reference path="./custom.d.ts" />\n', '')
       .replace('// tslint:disable\n', '')
       .split('\n')
-      .map((line) => line.replace('isomorphicFetch', 'defaultFetchApi')),
+      .map((line) =>
+        line.replace('isomorphicFetch', 'defaultFetchApi').replace('const BASE_PATH =', 'export const BASE_PATH ='),
+      ),
   ].join('\n');
 
 const moveSdkFiles = async () => {

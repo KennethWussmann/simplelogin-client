@@ -13,11 +13,11 @@
  */
 
 import * as url from 'url';
-const defaultFetchApi = fetch;
+const defaultFetchApi = typeof fetch === 'undefined' ? undefined : fetch;
 export type Response = any;
 import { Configuration } from './configuration';
 
-const BASE_PATH = 'https://app.simplelogin.io/api'.replace(/\/+$/, '');
+export const BASE_PATH = 'https://app.simplelogin.io/api'.replace(/\/+$/, '');
 
 /**
  *
