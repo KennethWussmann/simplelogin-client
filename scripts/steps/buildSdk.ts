@@ -12,14 +12,16 @@ const getDestinationPath = (path: string) => {
 const modify = (filename: string, content: string) =>
   [
     ...(filename.toLowerCase().includes('api.') ? ['/* eslint-disable */', '// @ts-nocheck'] : []),
-    content
+    ...content
       .replace(
         'import * as isomorphicFetch from "isomorphic-fetch";\n',
-        'const isomorphicFetch = fetch;\ntype Response = any;\n',
+        'const defaultFetchApi = fetch;\nexport type Response = any;\n',
       )
       .replace("declare module 'isomorphic-fetch';\n", '')
       .replace('/// <reference path="./custom.d.ts" />\n', '')
-      .replace('// tslint:disable\n', ''),
+      .replace('// tslint:disable\n', '')
+      .split('\n')
+      .map((line) => line.replace('isomorphicFetch', 'defaultFetchApi')),
   ].join('\n');
 
 const moveSdkFiles = async () => {

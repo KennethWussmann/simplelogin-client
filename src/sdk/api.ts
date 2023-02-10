@@ -13,8 +13,8 @@
  */
 
 import * as url from 'url';
-const isomorphicFetch = fetch;
-type Response = any;
+const defaultFetchApi = fetch;
+export type Response = any;
 import { Configuration } from './configuration';
 
 const BASE_PATH = 'https://app.simplelogin.io/api'.replace(/\/+$/, '');
@@ -60,7 +60,7 @@ export class BaseAPI {
   constructor(
     configuration?: Configuration,
     protected basePath: string = BASE_PATH,
-    protected fetch: FetchAPI = isomorphicFetch,
+    protected fetch: FetchAPI = defaultFetchApi,
   ) {
     if (configuration) {
       this.configuration = configuration;
@@ -1570,7 +1570,7 @@ export const AccountApiFp = function (configuration?: Configuration) {
      */
     activate(body: AuthActivatePost, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Response> {
       const localVarFetchArgs = AccountApiFetchParamCreator(configuration).activate(body, options);
-      return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+      return (fetch: FetchAPI = defaultFetchApi, basePath: string = BASE_PATH) => {
         return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
           if (response.status >= 200 && response.status < 300) {
             return response;
@@ -1588,7 +1588,7 @@ export const AccountApiFp = function (configuration?: Configuration) {
      */
     cookieToken(options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<UserCookieToken> {
       const localVarFetchArgs = AccountApiFetchParamCreator(configuration).cookieToken(options);
-      return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+      return (fetch: FetchAPI = defaultFetchApi, basePath: string = BASE_PATH) => {
         return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
           if (response.status >= 200 && response.status < 300) {
             return response.json();
@@ -1607,7 +1607,7 @@ export const AccountApiFp = function (configuration?: Configuration) {
      */
     createApiKey(body: UserApiKeyPost, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<UserApiKey> {
       const localVarFetchArgs = AccountApiFetchParamCreator(configuration).createApiKey(body, options);
-      return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+      return (fetch: FetchAPI = defaultFetchApi, basePath: string = BASE_PATH) => {
         return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
           if (response.status >= 200 && response.status < 300) {
             return response.json();
@@ -1625,7 +1625,7 @@ export const AccountApiFp = function (configuration?: Configuration) {
      */
     deleteUser(options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Success> {
       const localVarFetchArgs = AccountApiFetchParamCreator(configuration).deleteUser(options);
-      return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+      return (fetch: FetchAPI = defaultFetchApi, basePath: string = BASE_PATH) => {
         return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
           if (response.status >= 200 && response.status < 300) {
             return response.json();
@@ -1644,7 +1644,7 @@ export const AccountApiFp = function (configuration?: Configuration) {
      */
     enableSudoMode(body: SudoPatch, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Success> {
       const localVarFetchArgs = AccountApiFetchParamCreator(configuration).enableSudoMode(body, options);
-      return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+      return (fetch: FetchAPI = defaultFetchApi, basePath: string = BASE_PATH) => {
         return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
           if (response.status >= 200 && response.status < 300) {
             return response.json();
@@ -1666,7 +1666,7 @@ export const AccountApiFp = function (configuration?: Configuration) {
       options?: any,
     ): (fetch?: FetchAPI, basePath?: string) => Promise<Response> {
       const localVarFetchArgs = AccountApiFetchParamCreator(configuration).forgotPassword(body, options);
-      return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+      return (fetch: FetchAPI = defaultFetchApi, basePath: string = BASE_PATH) => {
         return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
           if (response.status >= 200 && response.status < 300) {
             return response;
@@ -1685,7 +1685,7 @@ export const AccountApiFp = function (configuration?: Configuration) {
      */
     login(body: AuthLoginPost, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<AuthLogin> {
       const localVarFetchArgs = AccountApiFetchParamCreator(configuration).login(body, options);
-      return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+      return (fetch: FetchAPI = defaultFetchApi, basePath: string = BASE_PATH) => {
         return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
           if (response.status >= 200 && response.status < 300) {
             return response.json();
@@ -1703,7 +1703,7 @@ export const AccountApiFp = function (configuration?: Configuration) {
      */
     logout(options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<UserInfo> {
       const localVarFetchArgs = AccountApiFetchParamCreator(configuration).logout(options);
-      return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+      return (fetch: FetchAPI = defaultFetchApi, basePath: string = BASE_PATH) => {
         return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
           if (response.status >= 200 && response.status < 300) {
             return response.json();
@@ -1722,7 +1722,7 @@ export const AccountApiFp = function (configuration?: Configuration) {
      */
     mfa(body: AuthMfaPost, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<AuthMfa> {
       const localVarFetchArgs = AccountApiFetchParamCreator(configuration).mfa(body, options);
-      return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+      return (fetch: FetchAPI = defaultFetchApi, basePath: string = BASE_PATH) => {
         return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
           if (response.status >= 200 && response.status < 300) {
             return response.json();
@@ -1741,7 +1741,7 @@ export const AccountApiFp = function (configuration?: Configuration) {
      */
     reactivate(body: AuthReactivatePost, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Response> {
       const localVarFetchArgs = AccountApiFetchParamCreator(configuration).reactivate(body, options);
-      return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+      return (fetch: FetchAPI = defaultFetchApi, basePath: string = BASE_PATH) => {
         return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
           if (response.status >= 200 && response.status < 300) {
             return response;
@@ -1760,7 +1760,7 @@ export const AccountApiFp = function (configuration?: Configuration) {
      */
     register(body: AuthRegisterPost, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Response> {
       const localVarFetchArgs = AccountApiFetchParamCreator(configuration).register(body, options);
-      return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+      return (fetch: FetchAPI = defaultFetchApi, basePath: string = BASE_PATH) => {
         return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
           if (response.status >= 200 && response.status < 300) {
             return response;
@@ -1779,7 +1779,7 @@ export const AccountApiFp = function (configuration?: Configuration) {
      */
     updateUserInfo(body: UserInfoPatch, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<UserInfo> {
       const localVarFetchArgs = AccountApiFetchParamCreator(configuration).updateUserInfo(body, options);
-      return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+      return (fetch: FetchAPI = defaultFetchApi, basePath: string = BASE_PATH) => {
         return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
           if (response.status >= 200 && response.status < 300) {
             return response.json();
@@ -1797,7 +1797,7 @@ export const AccountApiFp = function (configuration?: Configuration) {
      */
     userInfo(options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<UserInfo> {
       const localVarFetchArgs = AccountApiFetchParamCreator(configuration).userInfo(options);
-      return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+      return (fetch: FetchAPI = defaultFetchApi, basePath: string = BASE_PATH) => {
         return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
           if (response.status >= 200 && response.status < 300) {
             return response.json();
@@ -2599,7 +2599,7 @@ export const AliasApiFp = function (configuration?: Configuration) {
      */
     _delete(aliasId: number, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<AliasAliasIdDelete> {
       const localVarFetchArgs = AliasApiFetchParamCreator(configuration)._delete(aliasId, options);
-      return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+      return (fetch: FetchAPI = defaultFetchApi, basePath: string = BASE_PATH) => {
         return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
           if (response.status >= 200 && response.status < 300) {
             return response.json();
@@ -2623,7 +2623,7 @@ export const AliasApiFp = function (configuration?: Configuration) {
       options?: any,
     ): (fetch?: FetchAPI, basePath?: string) => Promise<AliasAliasIdActivitiesModelArray> {
       const localVarFetchArgs = AliasApiFetchParamCreator(configuration).activities(aliasId, pageId, options);
-      return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+      return (fetch: FetchAPI = defaultFetchApi, basePath: string = BASE_PATH) => {
         return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
           if (response.status >= 200 && response.status < 300) {
             return response.json();
@@ -2649,7 +2649,7 @@ export const AliasApiFp = function (configuration?: Configuration) {
       options?: any,
     ): (fetch?: FetchAPI, basePath?: string) => Promise<AliasModelArray> {
       const localVarFetchArgs = AliasApiFetchParamCreator(configuration).aliases(pinned, disabled, enabled, options);
-      return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+      return (fetch: FetchAPI = defaultFetchApi, basePath: string = BASE_PATH) => {
         return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
           if (response.status >= 200 && response.status < 300) {
             return response.json();
@@ -2673,7 +2673,7 @@ export const AliasApiFp = function (configuration?: Configuration) {
       options?: any,
     ): (fetch?: FetchAPI, basePath?: string) => Promise<AliasAliasIdContactsModelArray> {
       const localVarFetchArgs = AliasApiFetchParamCreator(configuration).contacts(aliasId, pageId, options);
-      return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+      return (fetch: FetchAPI = defaultFetchApi, basePath: string = BASE_PATH) => {
         return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
           if (response.status >= 200 && response.status < 300) {
             return response.json();
@@ -2697,7 +2697,7 @@ export const AliasApiFp = function (configuration?: Configuration) {
       options?: any,
     ): (fetch?: FetchAPI, basePath?: string) => Promise<AliasAliasIdContacts> {
       const localVarFetchArgs = AliasApiFetchParamCreator(configuration).createContact(body, aliasId, options);
-      return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+      return (fetch: FetchAPI = defaultFetchApi, basePath: string = BASE_PATH) => {
         return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
           if (response.status >= 200 && response.status < 300) {
             return response.json();
@@ -2721,7 +2721,7 @@ export const AliasApiFp = function (configuration?: Configuration) {
       options?: any,
     ): (fetch?: FetchAPI, basePath?: string) => Promise<Alias> {
       const localVarFetchArgs = AliasApiFetchParamCreator(configuration).createCustom(body, hostname, options);
-      return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+      return (fetch: FetchAPI = defaultFetchApi, basePath: string = BASE_PATH) => {
         return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
           if (response.status >= 200 && response.status < 300) {
             return response.json();
@@ -2747,7 +2747,7 @@ export const AliasApiFp = function (configuration?: Configuration) {
       options?: any,
     ): (fetch?: FetchAPI, basePath?: string) => Promise<Alias> {
       const localVarFetchArgs = AliasApiFetchParamCreator(configuration).createRandom(body, hostname, mode, options);
-      return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+      return (fetch: FetchAPI = defaultFetchApi, basePath: string = BASE_PATH) => {
         return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
           if (response.status >= 200 && response.status < 300) {
             return response.json();
@@ -2766,7 +2766,7 @@ export const AliasApiFp = function (configuration?: Configuration) {
      */
     get(aliasId: number, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Alias> {
       const localVarFetchArgs = AliasApiFetchParamCreator(configuration).get(aliasId, options);
-      return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+      return (fetch: FetchAPI = defaultFetchApi, basePath: string = BASE_PATH) => {
         return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
           if (response.status >= 200 && response.status < 300) {
             return response.json();
@@ -2785,7 +2785,7 @@ export const AliasApiFp = function (configuration?: Configuration) {
      */
     options(hostname?: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<AliasOptions> {
       const localVarFetchArgs = AliasApiFetchParamCreator(configuration).options(hostname, options);
-      return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+      return (fetch: FetchAPI = defaultFetchApi, basePath: string = BASE_PATH) => {
         return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
           if (response.status >= 200 && response.status < 300) {
             return response.json();
@@ -2804,7 +2804,7 @@ export const AliasApiFp = function (configuration?: Configuration) {
      */
     toggle(aliasId: number, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<AliasAliasIdTogglePost> {
       const localVarFetchArgs = AliasApiFetchParamCreator(configuration).toggle(aliasId, options);
-      return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+      return (fetch: FetchAPI = defaultFetchApi, basePath: string = BASE_PATH) => {
         return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
           if (response.status >= 200 && response.status < 300) {
             return response.json();
@@ -2828,7 +2828,7 @@ export const AliasApiFp = function (configuration?: Configuration) {
       options?: any,
     ): (fetch?: FetchAPI, basePath?: string) => Promise<Response> {
       const localVarFetchArgs = AliasApiFetchParamCreator(configuration).update(body, aliasId, options);
-      return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+      return (fetch: FetchAPI = defaultFetchApi, basePath: string = BASE_PATH) => {
         return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
           if (response.status >= 200 && response.status < 300) {
             return response;
@@ -3179,7 +3179,7 @@ export const CustomDomainApiFp = function (configuration?: Configuration) {
      */
     customDomains(aliasId: number, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<CustomDomain> {
       const localVarFetchArgs = CustomDomainApiFetchParamCreator(configuration).customDomains(aliasId, options);
-      return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+      return (fetch: FetchAPI = defaultFetchApi, basePath: string = BASE_PATH) => {
         return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
           if (response.status >= 200 && response.status < 300) {
             return response.json();
@@ -3414,7 +3414,7 @@ export const MailboxApiFp = function (configuration?: Configuration) {
      */
     _delete(mailboxId: number, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Response> {
       const localVarFetchArgs = MailboxApiFetchParamCreator(configuration)._delete(mailboxId, options);
-      return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+      return (fetch: FetchAPI = defaultFetchApi, basePath: string = BASE_PATH) => {
         return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
           if (response.status >= 200 && response.status < 300) {
             return response;
@@ -3433,7 +3433,7 @@ export const MailboxApiFp = function (configuration?: Configuration) {
      */
     create(body: MailboxPost, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Mailbox> {
       const localVarFetchArgs = MailboxApiFetchParamCreator(configuration).create(body, options);
-      return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+      return (fetch: FetchAPI = defaultFetchApi, basePath: string = BASE_PATH) => {
         return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
           if (response.status >= 200 && response.status < 300) {
             return response.json();
@@ -3451,7 +3451,7 @@ export const MailboxApiFp = function (configuration?: Configuration) {
      */
     mailboxes(options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<MailboxModelArray> {
       const localVarFetchArgs = MailboxApiFetchParamCreator(configuration).mailboxes(options);
-      return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+      return (fetch: FetchAPI = defaultFetchApi, basePath: string = BASE_PATH) => {
         return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
           if (response.status >= 200 && response.status < 300) {
             return response.json();
@@ -3475,7 +3475,7 @@ export const MailboxApiFp = function (configuration?: Configuration) {
       options?: any,
     ): (fetch?: FetchAPI, basePath?: string) => Promise<Response> {
       const localVarFetchArgs = MailboxApiFetchParamCreator(configuration).update(body, mailboxId, options);
-      return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
+      return (fetch: FetchAPI = defaultFetchApi, basePath: string = BASE_PATH) => {
         return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
           if (response.status >= 200 && response.status < 300) {
             return response;
