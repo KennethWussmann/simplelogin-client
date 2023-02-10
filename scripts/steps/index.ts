@@ -5,3 +5,4 @@ export * from './clean';
 export * from './lint';
 export * from './buildPagesIndex';
 export * from './buildSrc';
+export * from './checkCodegen';

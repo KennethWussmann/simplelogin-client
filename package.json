@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "tsx src/index.ts",
-    "build": "tsx scripts/build.ts",
-    "rebuild": "tsx scripts/rebuild.ts",
+    "build": "tsx scripts/index.ts build",
+    "rebuild": "tsx scripts/index.ts rebuild",
+    "clean": "tsx scripts/index.ts clean",
+    "check-codegen": "tsx scripts/index.ts checkCodegen",
     "dev": "npm-watch",
     "lint": "eslint \"src/**/*.{ts,tsx}\" --ext .ts",
     "lint:fix": "npm run lint -- --fix",
