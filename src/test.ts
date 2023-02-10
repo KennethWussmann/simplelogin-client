@@ -1,23 +1,19 @@
 import { SimpleLogin } from './';
+import { config } from 'dotenv';
+
+config();
 
 const run = async () => {
-  const api = new SimpleLogin.AccountApi({
-    apiKey: 'test',
+  const aliases = new SimpleLogin.AliasApi({
+    apiKey: process.env.API_KEY,
   });
 
-  const response = await api.forgotPassword({
-    email: 'kenneth@wussmann.net',
-  });
-  console.log(JSON.stringify(response, null, 2));
-
-  new SimpleLogin.AliasApi().createRandom({}, undefined, '');
-
-  //const mfaResponse = await api.mfa({
-  //  device: device,
-  //  mfaKey: loginResponse.mfaKey,
-  //  mfaToken: "",
-  //});
-  //console.log(mfaResponse);
+  try {
+    const response = await aliases._delete(5779636);
+    console.log('Success', response);
+  } catch (error: any) {
+    console.log('Error', error);
+  }
 };
 
 run().catch(console.error);

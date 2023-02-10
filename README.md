@@ -8,6 +8,41 @@
   </p>
 </div>
 
+## Features
+
+The client is still in development. Below is a list of supported features.
+During the v0.\* versions of this client, you may expect breaking changes to the client.
+
+- [x] Account Management
+  - [x] Login (+MFA), Register, Activate, etc.
+  - [x] User info
+  - [x] API key management
+- [x] Alias Management
+  - [x] Get, Create, Update, Delete
+  - [x] Contacts and activities
+- [x] Mailbox Management
+  - [x] Get, Create, Update, Delete
+- [ ] Custom Domain Management
+  - [x] Get
+  - [ ] Update, Delete
+- [ ] Contact Management
+  - [x] Get, Create
+  - [ ] Delete
+  - [ ] Block & unblock
+- [ ] Notifications
+  - [ ] Get
+  - [ ] Mark as read
+- [ ] Settings
+  - [ ] Get, update
+  - [ ] Get usable domains
+- [ ] Import & Export
+  - [ ] Export user data
+  - [ ] Export aliases CSV
+- [ ] Misc
+  - [ ] Process Apple receipt
+- [ ] Phone
+  - [ ] Get messages received during reservation
+
 ## Getting started
 
 To start using this API client in your JS/TS projects:

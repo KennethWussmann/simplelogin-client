@@ -2,5 +2,6 @@ in: path
 name: alias_id
 required: true
 schema:
-  type: string
+  type: number
+  example: 142
 description: ID of an alias

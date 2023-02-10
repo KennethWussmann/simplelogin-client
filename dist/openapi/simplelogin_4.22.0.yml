@@ -993,14 +993,16 @@ components:
       name: alias_id
       required: true
       schema:
-        type: string
+        type: number
+        example: 142
       description: ID of an alias
     PathMailboxId:
       in: path
       name: mailbox_id
       required: true
       schema:
-        type: string
+        type: number
+        example: 142
       description: ID of a mailbox
     QueryHostname:
       in: query

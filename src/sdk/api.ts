@@ -2113,11 +2113,11 @@ export const AliasApiFetchParamCreator = function (configuration?: Configuration
     /**
      * Delete specific alias by id.
      * @summary Delete alias by id
-     * @param {string} aliasId ID of an alias
+     * @param {number} aliasId ID of an alias
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    _delete(aliasId: string, options: any = {}): FetchArgs {
+    _delete(aliasId: number, options: any = {}): FetchArgs {
       // verify required parameter 'aliasId' is not null or undefined
       if (aliasId === null || aliasId === undefined) {
         throw new RequiredError('aliasId', 'Required parameter aliasId was null or undefined when calling _delete.');
@@ -2148,12 +2148,12 @@ export const AliasApiFetchParamCreator = function (configuration?: Configuration
     /**
      * Get activities for specific alias by id.
      * @summary Get activities
-     * @param {string} aliasId ID of an alias
+     * @param {number} aliasId ID of an alias
      * @param {number} pageId The endpoint returns maximum 20 aliases for each page.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    activities(aliasId: string, pageId: number, options: any = {}): FetchArgs {
+    activities(aliasId: number, pageId: number, options: any = {}): FetchArgs {
       // verify required parameter 'aliasId' is not null or undefined
       if (aliasId === null || aliasId === undefined) {
         throw new RequiredError('aliasId', 'Required parameter aliasId was null or undefined when calling activities.');
@@ -2240,12 +2240,12 @@ export const AliasApiFetchParamCreator = function (configuration?: Configuration
     /**
      * Get contacts for specific alias by id.
      * @summary Get contacts
-     * @param {string} aliasId ID of an alias
+     * @param {number} aliasId ID of an alias
      * @param {number} pageId The endpoint returns maximum 20 aliases for each page.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    contacts(aliasId: string, pageId: number, options: any = {}): FetchArgs {
+    contacts(aliasId: number, pageId: number, options: any = {}): FetchArgs {
       // verify required parameter 'aliasId' is not null or undefined
       if (aliasId === null || aliasId === undefined) {
         throw new RequiredError('aliasId', 'Required parameter aliasId was null or undefined when calling contacts.');
@@ -2288,11 +2288,11 @@ export const AliasApiFetchParamCreator = function (configuration?: Configuration
      * Create a new contact for an alias by id.
      * @summary Create contact
      * @param {AliasAliasIdContactsPost} body Updated settings for the given alias.
-     * @param {string} aliasId ID of an alias
+     * @param {number} aliasId ID of an alias
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    createContact(body: AliasAliasIdContactsPost, aliasId: string, options: any = {}): FetchArgs {
+    createContact(body: AliasAliasIdContactsPost, aliasId: number, options: any = {}): FetchArgs {
       // verify required parameter 'body' is not null or undefined
       if (body === null || body === undefined) {
         throw new RequiredError('body', 'Required parameter body was null or undefined when calling createContact.');
@@ -2434,11 +2434,11 @@ export const AliasApiFetchParamCreator = function (configuration?: Configuration
     /**
      * Get specific alias by id.
      * @summary Get alias by id
-     * @param {string} aliasId ID of an alias
+     * @param {number} aliasId ID of an alias
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    get(aliasId: string, options: any = {}): FetchArgs {
+    get(aliasId: number, options: any = {}): FetchArgs {
       // verify required parameter 'aliasId' is not null or undefined
       if (aliasId === null || aliasId === undefined) {
         throw new RequiredError('aliasId', 'Required parameter aliasId was null or undefined when calling get.');
@@ -2504,11 +2504,11 @@ export const AliasApiFetchParamCreator = function (configuration?: Configuration
     /**
      * Enable or disable specific alias by id.
      * @summary Toggle alias by id
-     * @param {string} aliasId ID of an alias
+     * @param {number} aliasId ID of an alias
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    toggle(aliasId: string, options: any = {}): FetchArgs {
+    toggle(aliasId: number, options: any = {}): FetchArgs {
       // verify required parameter 'aliasId' is not null or undefined
       if (aliasId === null || aliasId === undefined) {
         throw new RequiredError('aliasId', 'Required parameter aliasId was null or undefined when calling toggle.');
@@ -2540,11 +2540,11 @@ export const AliasApiFetchParamCreator = function (configuration?: Configuration
      * Update specific alias by id.
      * @summary Update alias by id
      * @param {AliasAliasIdPatch} body Updated settings for the given alias.
-     * @param {string} aliasId ID of an alias
+     * @param {number} aliasId ID of an alias
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    update(body: AliasAliasIdPatch, aliasId: string, options: any = {}): FetchArgs {
+    update(body: AliasAliasIdPatch, aliasId: number, options: any = {}): FetchArgs {
       // verify required parameter 'body' is not null or undefined
       if (body === null || body === undefined) {
         throw new RequiredError('body', 'Required parameter body was null or undefined when calling update.');
@@ -2593,11 +2593,11 @@ export const AliasApiFp = function (configuration?: Configuration) {
     /**
      * Delete specific alias by id.
      * @summary Delete alias by id
-     * @param {string} aliasId ID of an alias
+     * @param {number} aliasId ID of an alias
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    _delete(aliasId: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<AliasAliasIdDelete> {
+    _delete(aliasId: number, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<AliasAliasIdDelete> {
       const localVarFetchArgs = AliasApiFetchParamCreator(configuration)._delete(aliasId, options);
       return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
         return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
@@ -2612,13 +2612,13 @@ export const AliasApiFp = function (configuration?: Configuration) {
     /**
      * Get activities for specific alias by id.
      * @summary Get activities
-     * @param {string} aliasId ID of an alias
+     * @param {number} aliasId ID of an alias
      * @param {number} pageId The endpoint returns maximum 20 aliases for each page.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     activities(
-      aliasId: string,
+      aliasId: number,
       pageId: number,
       options?: any,
     ): (fetch?: FetchAPI, basePath?: string) => Promise<AliasAliasIdActivitiesModelArray> {
@@ -2662,13 +2662,13 @@ export const AliasApiFp = function (configuration?: Configuration) {
     /**
      * Get contacts for specific alias by id.
      * @summary Get contacts
-     * @param {string} aliasId ID of an alias
+     * @param {number} aliasId ID of an alias
      * @param {number} pageId The endpoint returns maximum 20 aliases for each page.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     contacts(
-      aliasId: string,
+      aliasId: number,
       pageId: number,
       options?: any,
     ): (fetch?: FetchAPI, basePath?: string) => Promise<AliasAliasIdContactsModelArray> {
@@ -2687,13 +2687,13 @@ export const AliasApiFp = function (configuration?: Configuration) {
      * Create a new contact for an alias by id.
      * @summary Create contact
      * @param {AliasAliasIdContactsPost} body Updated settings for the given alias.
-     * @param {string} aliasId ID of an alias
+     * @param {number} aliasId ID of an alias
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     createContact(
       body: AliasAliasIdContactsPost,
-      aliasId: string,
+      aliasId: number,
       options?: any,
     ): (fetch?: FetchAPI, basePath?: string) => Promise<AliasAliasIdContacts> {
       const localVarFetchArgs = AliasApiFetchParamCreator(configuration).createContact(body, aliasId, options);
@@ -2760,11 +2760,11 @@ export const AliasApiFp = function (configuration?: Configuration) {
     /**
      * Get specific alias by id.
      * @summary Get alias by id
-     * @param {string} aliasId ID of an alias
+     * @param {number} aliasId ID of an alias
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    get(aliasId: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Alias> {
+    get(aliasId: number, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Alias> {
       const localVarFetchArgs = AliasApiFetchParamCreator(configuration).get(aliasId, options);
       return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
         return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
@@ -2798,11 +2798,11 @@ export const AliasApiFp = function (configuration?: Configuration) {
     /**
      * Enable or disable specific alias by id.
      * @summary Toggle alias by id
-     * @param {string} aliasId ID of an alias
+     * @param {number} aliasId ID of an alias
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    toggle(aliasId: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<AliasAliasIdTogglePost> {
+    toggle(aliasId: number, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<AliasAliasIdTogglePost> {
       const localVarFetchArgs = AliasApiFetchParamCreator(configuration).toggle(aliasId, options);
       return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
         return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
@@ -2818,13 +2818,13 @@ export const AliasApiFp = function (configuration?: Configuration) {
      * Update specific alias by id.
      * @summary Update alias by id
      * @param {AliasAliasIdPatch} body Updated settings for the given alias.
-     * @param {string} aliasId ID of an alias
+     * @param {number} aliasId ID of an alias
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     update(
       body: AliasAliasIdPatch,
-      aliasId: string,
+      aliasId: number,
       options?: any,
     ): (fetch?: FetchAPI, basePath?: string) => Promise<Response> {
       const localVarFetchArgs = AliasApiFetchParamCreator(configuration).update(body, aliasId, options);
@@ -2850,22 +2850,22 @@ export const AliasApiFactory = function (configuration?: Configuration, fetch?: 
     /**
      * Delete specific alias by id.
      * @summary Delete alias by id
-     * @param {string} aliasId ID of an alias
+     * @param {number} aliasId ID of an alias
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    _delete(aliasId: string, options?: any) {
+    _delete(aliasId: number, options?: any) {
       return AliasApiFp(configuration)._delete(aliasId, options)(fetch, basePath);
     },
     /**
      * Get activities for specific alias by id.
      * @summary Get activities
-     * @param {string} aliasId ID of an alias
+     * @param {number} aliasId ID of an alias
      * @param {number} pageId The endpoint returns maximum 20 aliases for each page.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    activities(aliasId: string, pageId: number, options?: any) {
+    activities(aliasId: number, pageId: number, options?: any) {
       return AliasApiFp(configuration).activities(aliasId, pageId, options)(fetch, basePath);
     },
     /**
@@ -2883,23 +2883,23 @@ export const AliasApiFactory = function (configuration?: Configuration, fetch?: 
     /**
      * Get contacts for specific alias by id.
      * @summary Get contacts
-     * @param {string} aliasId ID of an alias
+     * @param {number} aliasId ID of an alias
      * @param {number} pageId The endpoint returns maximum 20 aliases for each page.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    contacts(aliasId: string, pageId: number, options?: any) {
+    contacts(aliasId: number, pageId: number, options?: any) {
       return AliasApiFp(configuration).contacts(aliasId, pageId, options)(fetch, basePath);
     },
     /**
      * Create a new contact for an alias by id.
      * @summary Create contact
      * @param {AliasAliasIdContactsPost} body Updated settings for the given alias.
-     * @param {string} aliasId ID of an alias
+     * @param {number} aliasId ID of an alias
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    createContact(body: AliasAliasIdContactsPost, aliasId: string, options?: any) {
+    createContact(body: AliasAliasIdContactsPost, aliasId: number, options?: any) {
       return AliasApiFp(configuration).createContact(body, aliasId, options)(fetch, basePath);
     },
     /**
@@ -2928,11 +2928,11 @@ export const AliasApiFactory = function (configuration?: Configuration, fetch?: 
     /**
      * Get specific alias by id.
      * @summary Get alias by id
-     * @param {string} aliasId ID of an alias
+     * @param {number} aliasId ID of an alias
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    get(aliasId: string, options?: any) {
+    get(aliasId: number, options?: any) {
       return AliasApiFp(configuration).get(aliasId, options)(fetch, basePath);
     },
     /**
@@ -2948,22 +2948,22 @@ export const AliasApiFactory = function (configuration?: Configuration, fetch?: 
     /**
      * Enable or disable specific alias by id.
      * @summary Toggle alias by id
-     * @param {string} aliasId ID of an alias
+     * @param {number} aliasId ID of an alias
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    toggle(aliasId: string, options?: any) {
+    toggle(aliasId: number, options?: any) {
       return AliasApiFp(configuration).toggle(aliasId, options)(fetch, basePath);
     },
     /**
      * Update specific alias by id.
      * @summary Update alias by id
      * @param {AliasAliasIdPatch} body Updated settings for the given alias.
-     * @param {string} aliasId ID of an alias
+     * @param {number} aliasId ID of an alias
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    update(body: AliasAliasIdPatch, aliasId: string, options?: any) {
+    update(body: AliasAliasIdPatch, aliasId: number, options?: any) {
       return AliasApiFp(configuration).update(body, aliasId, options)(fetch, basePath);
     },
   };
@@ -2979,25 +2979,25 @@ export class AliasApi extends BaseAPI {
   /**
    * Delete specific alias by id.
    * @summary Delete alias by id
-   * @param {string} aliasId ID of an alias
+   * @param {number} aliasId ID of an alias
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof AliasApi
    */
-  public _delete(aliasId: string, options?: any) {
+  public _delete(aliasId: number, options?: any) {
     return AliasApiFp(this.configuration)._delete(aliasId, options)(this.fetch, this.basePath);
   }
 
   /**
    * Get activities for specific alias by id.
    * @summary Get activities
-   * @param {string} aliasId ID of an alias
+   * @param {number} aliasId ID of an alias
    * @param {number} pageId The endpoint returns maximum 20 aliases for each page.
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof AliasApi
    */
-  public activities(aliasId: string, pageId: number, options?: any) {
+  public activities(aliasId: number, pageId: number, options?: any) {
     return AliasApiFp(this.configuration).activities(aliasId, pageId, options)(this.fetch, this.basePath);
   }
 
@@ -3018,13 +3018,13 @@ export class AliasApi extends BaseAPI {
   /**
    * Get contacts for specific alias by id.
    * @summary Get contacts
-   * @param {string} aliasId ID of an alias
+   * @param {number} aliasId ID of an alias
    * @param {number} pageId The endpoint returns maximum 20 aliases for each page.
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof AliasApi
    */
-  public contacts(aliasId: string, pageId: number, options?: any) {
+  public contacts(aliasId: number, pageId: number, options?: any) {
     return AliasApiFp(this.configuration).contacts(aliasId, pageId, options)(this.fetch, this.basePath);
   }
 
@@ -3032,12 +3032,12 @@ export class AliasApi extends BaseAPI {
    * Create a new contact for an alias by id.
    * @summary Create contact
    * @param {AliasAliasIdContactsPost} body Updated settings for the given alias.
-   * @param {string} aliasId ID of an alias
+   * @param {number} aliasId ID of an alias
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof AliasApi
    */
-  public createContact(body: AliasAliasIdContactsPost, aliasId: string, options?: any) {
+  public createContact(body: AliasAliasIdContactsPost, aliasId: number, options?: any) {
     return AliasApiFp(this.configuration).createContact(body, aliasId, options)(this.fetch, this.basePath);
   }
 
@@ -3071,12 +3071,12 @@ export class AliasApi extends BaseAPI {
   /**
    * Get specific alias by id.
    * @summary Get alias by id
-   * @param {string} aliasId ID of an alias
+   * @param {number} aliasId ID of an alias
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof AliasApi
    */
-  public get(aliasId: string, options?: any) {
+  public get(aliasId: number, options?: any) {
     return AliasApiFp(this.configuration).get(aliasId, options)(this.fetch, this.basePath);
   }
 
@@ -3095,12 +3095,12 @@ export class AliasApi extends BaseAPI {
   /**
    * Enable or disable specific alias by id.
    * @summary Toggle alias by id
-   * @param {string} aliasId ID of an alias
+   * @param {number} aliasId ID of an alias
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof AliasApi
    */
-  public toggle(aliasId: string, options?: any) {
+  public toggle(aliasId: number, options?: any) {
     return AliasApiFp(this.configuration).toggle(aliasId, options)(this.fetch, this.basePath);
   }
 
@@ -3108,12 +3108,12 @@ export class AliasApi extends BaseAPI {
    * Update specific alias by id.
    * @summary Update alias by id
    * @param {AliasAliasIdPatch} body Updated settings for the given alias.
-   * @param {string} aliasId ID of an alias
+   * @param {number} aliasId ID of an alias
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof AliasApi
    */
-  public update(body: AliasAliasIdPatch, aliasId: string, options?: any) {
+  public update(body: AliasAliasIdPatch, aliasId: number, options?: any) {
     return AliasApiFp(this.configuration).update(body, aliasId, options)(this.fetch, this.basePath);
   }
 }
@@ -3126,11 +3126,11 @@ export const CustomDomainApiFetchParamCreator = function (configuration?: Config
     /**
      * Get users custom domains.
      * @summary Get custom domains
-     * @param {string} aliasId ID of an alias
+     * @param {number} aliasId ID of an alias
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    customDomains(aliasId: string, options: any = {}): FetchArgs {
+    customDomains(aliasId: number, options: any = {}): FetchArgs {
       // verify required parameter 'aliasId' is not null or undefined
       if (aliasId === null || aliasId === undefined) {
         throw new RequiredError(
@@ -3173,11 +3173,11 @@ export const CustomDomainApiFp = function (configuration?: Configuration) {
     /**
      * Get users custom domains.
      * @summary Get custom domains
-     * @param {string} aliasId ID of an alias
+     * @param {number} aliasId ID of an alias
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    customDomains(aliasId: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<CustomDomain> {
+    customDomains(aliasId: number, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<CustomDomain> {
       const localVarFetchArgs = CustomDomainApiFetchParamCreator(configuration).customDomains(aliasId, options);
       return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
         return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
@@ -3201,11 +3201,11 @@ export const CustomDomainApiFactory = function (configuration?: Configuration, f
     /**
      * Get users custom domains.
      * @summary Get custom domains
-     * @param {string} aliasId ID of an alias
+     * @param {number} aliasId ID of an alias
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    customDomains(aliasId: string, options?: any) {
+    customDomains(aliasId: number, options?: any) {
       return CustomDomainApiFp(configuration).customDomains(aliasId, options)(fetch, basePath);
     },
   };
@@ -3221,12 +3221,12 @@ export class CustomDomainApi extends BaseAPI {
   /**
    * Get users custom domains.
    * @summary Get custom domains
-   * @param {string} aliasId ID of an alias
+   * @param {number} aliasId ID of an alias
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof CustomDomainApi
    */
-  public customDomains(aliasId: string, options?: any) {
+  public customDomains(aliasId: number, options?: any) {
     return CustomDomainApiFp(this.configuration).customDomains(aliasId, options)(this.fetch, this.basePath);
   }
 }
@@ -3239,11 +3239,11 @@ export const MailboxApiFetchParamCreator = function (configuration?: Configurati
     /**
      * Delete specific mailbox by id.
      * @summary Delete mailbox by id
-     * @param {string} mailboxId ID of a mailbox
+     * @param {number} mailboxId ID of a mailbox
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    _delete(mailboxId: string, options: any = {}): FetchArgs {
+    _delete(mailboxId: number, options: any = {}): FetchArgs {
       // verify required parameter 'mailboxId' is not null or undefined
       if (mailboxId === null || mailboxId === undefined) {
         throw new RequiredError(
@@ -3351,11 +3351,11 @@ export const MailboxApiFetchParamCreator = function (configuration?: Configurati
      * Update specific mailbox by id.
      * @summary Update a mailbox by id
      * @param {MailboxMailboxIdPut} body Updated settings of mailbox
-     * @param {string} mailboxId ID of a mailbox
+     * @param {number} mailboxId ID of a mailbox
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    update(body: MailboxMailboxIdPut, mailboxId: string, options: any = {}): FetchArgs {
+    update(body: MailboxMailboxIdPut, mailboxId: number, options: any = {}): FetchArgs {
       // verify required parameter 'body' is not null or undefined
       if (body === null || body === undefined) {
         throw new RequiredError('body', 'Required parameter body was null or undefined when calling update.');
@@ -3408,11 +3408,11 @@ export const MailboxApiFp = function (configuration?: Configuration) {
     /**
      * Delete specific mailbox by id.
      * @summary Delete mailbox by id
-     * @param {string} mailboxId ID of a mailbox
+     * @param {number} mailboxId ID of a mailbox
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    _delete(mailboxId: string, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Response> {
+    _delete(mailboxId: number, options?: any): (fetch?: FetchAPI, basePath?: string) => Promise<Response> {
       const localVarFetchArgs = MailboxApiFetchParamCreator(configuration)._delete(mailboxId, options);
       return (fetch: FetchAPI = isomorphicFetch, basePath: string = BASE_PATH) => {
         return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
@@ -3465,13 +3465,13 @@ export const MailboxApiFp = function (configuration?: Configuration) {
      * Update specific mailbox by id.
      * @summary Update a mailbox by id
      * @param {MailboxMailboxIdPut} body Updated settings of mailbox
-     * @param {string} mailboxId ID of a mailbox
+     * @param {number} mailboxId ID of a mailbox
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     update(
       body: MailboxMailboxIdPut,
-      mailboxId: string,
+      mailboxId: number,
       options?: any,
     ): (fetch?: FetchAPI, basePath?: string) => Promise<Response> {
       const localVarFetchArgs = MailboxApiFetchParamCreator(configuration).update(body, mailboxId, options);
@@ -3497,11 +3497,11 @@ export const MailboxApiFactory = function (configuration?: Configuration, fetch?
     /**
      * Delete specific mailbox by id.
      * @summary Delete mailbox by id
-     * @param {string} mailboxId ID of a mailbox
+     * @param {number} mailboxId ID of a mailbox
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    _delete(mailboxId: string, options?: any) {
+    _delete(mailboxId: number, options?: any) {
       return MailboxApiFp(configuration)._delete(mailboxId, options)(fetch, basePath);
     },
     /**
@@ -3527,11 +3527,11 @@ export const MailboxApiFactory = function (configuration?: Configuration, fetch?
      * Update specific mailbox by id.
      * @summary Update a mailbox by id
      * @param {MailboxMailboxIdPut} body Updated settings of mailbox
-     * @param {string} mailboxId ID of a mailbox
+     * @param {number} mailboxId ID of a mailbox
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    update(body: MailboxMailboxIdPut, mailboxId: string, options?: any) {
+    update(body: MailboxMailboxIdPut, mailboxId: number, options?: any) {
       return MailboxApiFp(configuration).update(body, mailboxId, options)(fetch, basePath);
     },
   };
@@ -3547,12 +3547,12 @@ export class MailboxApi extends BaseAPI {
   /**
    * Delete specific mailbox by id.
    * @summary Delete mailbox by id
-   * @param {string} mailboxId ID of a mailbox
+   * @param {number} mailboxId ID of a mailbox
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof MailboxApi
    */
-  public _delete(mailboxId: string, options?: any) {
+  public _delete(mailboxId: number, options?: any) {
     return MailboxApiFp(this.configuration)._delete(mailboxId, options)(this.fetch, this.basePath);
   }
 
@@ -3583,12 +3583,12 @@ export class MailboxApi extends BaseAPI {
    * Update specific mailbox by id.
    * @summary Update a mailbox by id
    * @param {MailboxMailboxIdPut} body Updated settings of mailbox
-   * @param {string} mailboxId ID of a mailbox
+   * @param {number} mailboxId ID of a mailbox
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof MailboxApi
    */
-  public update(body: MailboxMailboxIdPut, mailboxId: string, options?: any) {
+  public update(body: MailboxMailboxIdPut, mailboxId: number, options?: any) {
     return MailboxApiFp(this.configuration).update(body, mailboxId, options)(this.fetch, this.basePath);
   }
 }
