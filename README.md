@@ -78,6 +78,8 @@ console.log(createdAlias);
 */
 ```
 
+Check the [documentation](https://kennethwussmann.github.io/simplelogin-client/typedoc/index.html) for all available methods and the [FAQ](./docs/faq.md) in case of questions.
+
 ## Development
 
 It's basically writing OpenAPI spec, to contribute code to this client.
