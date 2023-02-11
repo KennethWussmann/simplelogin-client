@@ -2195,13 +2195,18 @@ export const AliasApiFetchParamCreator = function (configuration?: Configuration
     /**
      * Get user aliases. Please note `pinned`, `disabled`, `enabled` are exclusive, i.e. only one can be present. They can only be set to `true`.
      * @summary Get aliases
+     * @param {number} pageId The endpoint returns maximum 20 aliases for each page.
      * @param {boolean} [pinned] If set, only pinned aliases are returned.
      * @param {boolean} [disabled] If set, only disabled aliases are returned.
      * @param {boolean} [enabled] If set, only enabled aliases are returned.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    aliases(pinned?: boolean, disabled?: boolean, enabled?: boolean, options: any = {}): FetchArgs {
+    aliases(pageId: number, pinned?: boolean, disabled?: boolean, enabled?: boolean, options: any = {}): FetchArgs {
+      // verify required parameter 'pageId' is not null or undefined
+      if (pageId === null || pageId === undefined) {
+        throw new RequiredError('pageId', 'Required parameter pageId was null or undefined when calling aliases.');
+      }
       const localVarPath = `/v2/aliases`;
       const localVarUrlObj = url.parse(localVarPath, true);
       const localVarRequestOptions = Object.assign({ method: 'GET' }, options);
@@ -2213,6 +2218,10 @@ export const AliasApiFetchParamCreator = function (configuration?: Configuration
         const localVarApiKeyValue =
           typeof configuration.apiKey === 'function' ? configuration.apiKey('Authentication') : configuration.apiKey;
         localVarHeaderParameter['Authentication'] = localVarApiKeyValue;
+      }
+
+      if (pageId !== undefined) {
+        localVarQueryParameter['page_id'] = pageId;
       }
 
       if (pinned !== undefined) {
@@ -2636,6 +2645,7 @@ export const AliasApiFp = function (configuration?: Configuration) {
     /**
      * Get user aliases. Please note `pinned`, `disabled`, `enabled` are exclusive, i.e. only one can be present. They can only be set to `true`.
      * @summary Get aliases
+     * @param {number} pageId The endpoint returns maximum 20 aliases for each page.
      * @param {boolean} [pinned] If set, only pinned aliases are returned.
      * @param {boolean} [disabled] If set, only disabled aliases are returned.
      * @param {boolean} [enabled] If set, only enabled aliases are returned.
@@ -2643,12 +2653,19 @@ export const AliasApiFp = function (configuration?: Configuration) {
      * @throws {RequiredError}
      */
     aliases(
+      pageId: number,
       pinned?: boolean,
       disabled?: boolean,
       enabled?: boolean,
       options?: any,
     ): (fetch?: FetchAPI, basePath?: string) => Promise<AliasModelArray> {
-      const localVarFetchArgs = AliasApiFetchParamCreator(configuration).aliases(pinned, disabled, enabled, options);
+      const localVarFetchArgs = AliasApiFetchParamCreator(configuration).aliases(
+        pageId,
+        pinned,
+        disabled,
+        enabled,
+        options,
+      );
       return (fetch: FetchAPI = defaultFetchApi, basePath: string = BASE_PATH) => {
         return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
           if (response.status >= 200 && response.status < 300) {
@@ -2826,12 +2843,12 @@ export const AliasApiFp = function (configuration?: Configuration) {
       body: AliasAliasIdPatch,
       aliasId: number,
       options?: any,
-    ): (fetch?: FetchAPI, basePath?: string) => Promise<Response> {
+    ): (fetch?: FetchAPI, basePath?: string) => Promise<Success> {
       const localVarFetchArgs = AliasApiFetchParamCreator(configuration).update(body, aliasId, options);
       return (fetch: FetchAPI = defaultFetchApi, basePath: string = BASE_PATH) => {
         return fetch(basePath + localVarFetchArgs.url, localVarFetchArgs.options).then((response) => {
           if (response.status >= 200 && response.status < 300) {
-            return response;
+            return response.json();
           } else {
             throw response;
           }
@@ -2871,14 +2888,15 @@ export const AliasApiFactory = function (configuration?: Configuration, fetch?: 
     /**
      * Get user aliases. Please note `pinned`, `disabled`, `enabled` are exclusive, i.e. only one can be present. They can only be set to `true`.
      * @summary Get aliases
+     * @param {number} pageId The endpoint returns maximum 20 aliases for each page.
      * @param {boolean} [pinned] If set, only pinned aliases are returned.
      * @param {boolean} [disabled] If set, only disabled aliases are returned.
      * @param {boolean} [enabled] If set, only enabled aliases are returned.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    aliases(pinned?: boolean, disabled?: boolean, enabled?: boolean, options?: any) {
-      return AliasApiFp(configuration).aliases(pinned, disabled, enabled, options)(fetch, basePath);
+    aliases(pageId: number, pinned?: boolean, disabled?: boolean, enabled?: boolean, options?: any) {
+      return AliasApiFp(configuration).aliases(pageId, pinned, disabled, enabled, options)(fetch, basePath);
     },
     /**
      * Get contacts for specific alias by id.
@@ -3004,6 +3022,7 @@ export class AliasApi extends BaseAPI {
   /**
    * Get user aliases. Please note `pinned`, `disabled`, `enabled` are exclusive, i.e. only one can be present. They can only be set to `true`.
    * @summary Get aliases
+   * @param {number} pageId The endpoint returns maximum 20 aliases for each page.
    * @param {boolean} [pinned] If set, only pinned aliases are returned.
    * @param {boolean} [disabled] If set, only disabled aliases are returned.
    * @param {boolean} [enabled] If set, only enabled aliases are returned.
@@ -3011,8 +3030,14 @@ export class AliasApi extends BaseAPI {
    * @throws {RequiredError}
    * @memberof AliasApi
    */
-  public aliases(pinned?: boolean, disabled?: boolean, enabled?: boolean, options?: any) {
-    return AliasApiFp(this.configuration).aliases(pinned, disabled, enabled, options)(this.fetch, this.basePath);
+  public aliases(pageId: number, pinned?: boolean, disabled?: boolean, enabled?: boolean, options?: any) {
+    return AliasApiFp(this.configuration).aliases(
+      pageId,
+      pinned,
+      disabled,
+      enabled,
+      options,
+    )(this.fetch, this.basePath);
   }
 
   /**

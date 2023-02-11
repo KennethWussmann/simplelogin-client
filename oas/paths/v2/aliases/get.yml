@@ -4,6 +4,7 @@ summary: Get aliases
 description: Get user aliases. Please note `pinned`, `disabled`, `enabled` are exclusive, i.e. only one can be present. They can only be set to `true`.
 operationId: "aliases"
 parameters:
+  - $ref: "@parameters/queryPageId.yml"
   - in: query
     name: pinned
     required: false

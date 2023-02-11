@@ -2,6 +2,7 @@ type: object
 properties:
   ok:
     type: boolean
+    example: true
 
 required:
   - ok

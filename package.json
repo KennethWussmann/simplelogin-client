@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "npm-watch",
-    "test": "tsx scripts/index.ts test",
+    "test": "jest",
     "ci": "tsx scripts/index.ts ci",
     "build": "tsx scripts/index.ts build",
     "rebuild": "tsx scripts/index.ts rebuild",
@@ -37,6 +37,7 @@
     "@moia-oss/eslint-prettier-typescript-config": "^0.11.46",
     "@types/jest": "^29.2.3",
     "@types/node": "18.*",
+    "@types/node-fetch": "^2.6.2",
     "@typescript-eslint/eslint-plugin": "^5.51.0",
     "@typescript-eslint/parser": "^5.51.0",
     "boats": "^3.4.0",

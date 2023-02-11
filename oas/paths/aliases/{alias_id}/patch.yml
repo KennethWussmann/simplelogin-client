@@ -12,7 +12,7 @@ requestBody:
 responses:
   "200":
     description: Successful
-    # TODO: Does it really return nothing? No return value stated in the docs.
+    content: {{ mixin("@mixins/request/json.yml", "@schemas/success.yml") }} 
   "404":
     description: Not found
     content: {{ mixin("@mixins/request/json.yml", "@schemas/error.yml") }}

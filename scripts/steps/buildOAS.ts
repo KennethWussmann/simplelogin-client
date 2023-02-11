@@ -1,5 +1,5 @@
 import { globby } from 'globby';
-import { join } from 'path';
+import { join, parse } from 'path';
 import { $ } from 'zx/core';
 import { distOpenApiDir } from '../constants';
 import { copy, sectionHeader } from '../utils';
@@ -12,7 +12,7 @@ export const buildOAS = async () => {
   ]);
 
   const output = await globby([join('build', 'openapi', 'simplelogin_*.*')]);
-  await copy(output, distOpenApiDir);
+  await copy(output, distOpenApiDir, (name) => `simplelogin${parse(name).ext}`); // rename to simplelogin.json (remove _version)
 
-  return (await globby([join(distOpenApiDir, 'simplelogin_*.json')]))[0];
+  return (await globby([join(distOpenApiDir, 'simplelogin*.json')]))[0];
 };
