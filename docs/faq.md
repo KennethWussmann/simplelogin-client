@@ -44,3 +44,11 @@ Same for [outdated browsers that do not support `fetch`](https://caniuse.com/fet
 ## Can I use the OpenAPI Spec to generate clients for other languages?
 
 Yes of course! Check the [license](../LICENSE) for conditions under which this code can be used.
+
+## What's the current project state?
+
+The client is still under heavy development. But that shouldn't scare you from already using it. It's just a dumb REST client and the alias management through the client already works very well.
+
+Still you may stumble upon bugs, wrongly configured requests, etc. The development mainly affects missing functionality to be support everything the upstream API can do. During the v0.\* versions you may even expect breaking changes in the client's API.
+
+Please be so kind to [report any issues](https://github.com/KennethWussmann/simplelogin-client/issues) or even [contribute fixes](./development.md).
