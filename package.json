@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "npm-watch",
-    "test": "jest --passWithNoTests",
+    "test": "tsx scripts/index.ts test",
     "ci": "tsx scripts/index.ts ci",
     "build": "tsx scripts/index.ts build",
     "rebuild": "tsx scripts/index.ts rebuild",

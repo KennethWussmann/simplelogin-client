@@ -7,3 +7,4 @@ export * from './format';
 export * from './buildPagesIndex';
 export * from './buildSrc';
 export * from './checkCodegen';
+export * from './test';
