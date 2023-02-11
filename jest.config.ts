@@ -12,6 +12,7 @@ module.exports = {
       testMatch: ['<rootDir>/**/*.test.ts'],
       testPathIgnorePatterns: ['it.test.ts'],
       setupFiles: ['<rootDir>/test/setupEnv.ts'],
+      setupFilesAfterEnv: ['<rootDir>/test/setupMockserver.ts'],
     },
   ],
 };

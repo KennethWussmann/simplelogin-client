@@ -1,3 +1,3 @@
 import { $ } from 'zx/core';
 
-export const test = async () => $`jest --passWithNoTests`;
+export const test = async () => $`npm run test`;

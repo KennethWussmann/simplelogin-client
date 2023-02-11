@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "npm-watch",
-    "test": "tsx scripts/index.ts test",
+    "test": "jest --passWithNoTests",
     "ci": "tsx scripts/index.ts ci",
     "build": "tsx scripts/index.ts build",
     "rebuild": "tsx scripts/index.ts rebuild",
@@ -49,6 +49,7 @@
     "husky": "^8.0.3",
     "jest": "^29.3.1",
     "lint-staged": "^13",
+    "mockserver-client": "^5.15.0",
     "mockserver-node": "^5.15.0",
     "npm-check-updates": "^16.6.5",
     "npm-watch": "^0.11.0",
