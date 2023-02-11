@@ -1,5 +1,4 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npm run rebuild
-git add dist/ src/sdk
+npx tsx scripts/index.ts preCommit

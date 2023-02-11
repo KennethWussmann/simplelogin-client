@@ -1,4 +1,4 @@
 export * as build from './build';
-export * as checkCodegen from './checkCodegen';
 export * as rebuild from './rebuild';
-export * as clean from './clean';
+export * as ci from './ci';
+export * as preCommit from './preCommit';

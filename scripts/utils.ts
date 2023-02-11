@@ -1,3 +1,4 @@
+import chalk from 'chalk';
 import { access, copyFile, mkdir, readFile, rm, writeFile } from 'fs/promises';
 import { join, parse } from 'path';
 
@@ -33,10 +34,11 @@ export const copy = async (sourcePaths: string[], destinationDir: string) =>
   Promise.all(sourcePaths.map((path) => copyFile(path, join(destinationDir, parse(path).base))));
 
 export const sectionHeader = (text: string) =>
-  ['\n', '-'.repeat(text.length), text, '-'.repeat(text.length)].join('\n');
+  ['\n', '-'.repeat(text.length), chalk.greenBright(text), '-'.repeat(text.length)].join('\n');
 
 export const measureBuildTime = async (fn: () => Promise<void>) => {
   const start = Date.now();
   await fn();
-  console.log(`\n✨ Done in ${Math.round(((Date.now() - start) / 1000 + Number.EPSILON) * 100) / 100}s`);
+  const seconds = Math.round(((Date.now() - start) / 1000 + Number.EPSILON) * 100) / 100;
+  console.log(`\n✨ ${chalk.greenBright('Done in')} ${seconds}${chalk.greenBright('s')}`);
 };

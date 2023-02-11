@@ -1,6 +1,8 @@
 import { $ } from 'zx/core';
+import { sectionHeader } from '../utils';
 
 export const checkCodegen = async () => {
+  console.log(sectionHeader('🔍 Checking codegen'));
   const { stdout } = await $`git status --porcelain`;
   if (stdout.length !== 0) {
     throw new Error(
