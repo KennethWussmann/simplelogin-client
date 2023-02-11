@@ -102,7 +102,7 @@ npm install
 npm run build
 
 # During development the build can run when a source file was changed using
-npm run watch
+npm run dev
 ```
 
 ### Build process
