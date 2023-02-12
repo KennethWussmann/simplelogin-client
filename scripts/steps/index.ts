@@ -1,7 +1,6 @@
 export * from './buildDocs';
 export * from './buildOAS';
 export * from './buildSdk';
-export * from './buildSdk2';
 export * from './clean';
 export * from './lint';
 export * from './format';
