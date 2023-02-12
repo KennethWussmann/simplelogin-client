@@ -2,8 +2,8 @@
   "name": "simplelogin-client",
   "version": "0.0.1",
   "description": "",
-  "main": "build/index.js",
-  "types": "build/index.d.ts",
+  "main": "tscBuild/index.js",
+  "types": "tscBuild/index.d.ts",
   "scripts": {
     "dev": "npm-watch",
     "test": "jest --passWithNoTests",
@@ -17,6 +17,11 @@
     "dependency-update": "npm-check-updates -u --filterVersion \"/^[~^<>]| - |\\.x$/\" --deep && npm install",
     "prepare": "husky install"
   },
+  "files": [
+    "README.md",
+    "LICENSE",
+    "./tscBuild"
+  ],
   "watch": {
     "build": {
       "patterns": "oas",

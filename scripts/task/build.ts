@@ -1,5 +1,5 @@
 import { run } from '../run';
-import { buildDocs, buildPagesIndex, buildOAS, buildSdk, createDirs } from '../steps';
+import { buildDocs, buildPagesIndex, buildOAS, buildSdk, createDirs, buildSrc } from '../steps';
 import { measureBuildTime } from '../utils';
 
 export default () =>
@@ -8,7 +8,7 @@ export default () =>
     const oas = await buildOAS();
     await buildSdk(oas);
     await run('format');
-    // await buildSrc();
+    await buildSrc();
     await buildDocs(oas);
     await buildPagesIndex();
   });

@@ -1,5 +1,13 @@
 import { createDirectoryIfNotExists, deleteIfExists, sectionHeader } from '../utils';
-import { buildDir, distDir, distOpenApiDir, distRedocDir, distTypedocDir, sdkDestination } from '../constants';
+import {
+  buildDir,
+  distDir,
+  distOpenApiDir,
+  distRedocDir,
+  distTypedocDir,
+  sdkDestination,
+  tscBuildDir,
+} from '../constants';
 
 const logIfTrue = async (value: Promise<boolean>, message: string) => {
   if (await value) {
@@ -17,4 +25,6 @@ export const clean = async () => {
 };
 
 export const createDirs = async () =>
-  Promise.all([buildDir, sdkDestination, distDir, distRedocDir, distTypedocDir, distOpenApiDir].map(mkdirAndLog));
+  Promise.all(
+    [buildDir, tscBuildDir, sdkDestination, distDir, distRedocDir, distTypedocDir, distOpenApiDir].map(mkdirAndLog),
+  );

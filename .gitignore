@@ -195,3 +195,5 @@ build/
 *.map
 .env
 .turbo
+
+tscBuild/
