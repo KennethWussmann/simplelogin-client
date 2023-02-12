@@ -6,7 +6,7 @@
   "types": "build/index.d.ts",
   "scripts": {
     "dev": "npm-watch",
-    "test": "jest",
+    "test": "jest --passWithNoTests",
     "ci": "tsx scripts/index.ts ci",
     "build": "tsx scripts/index.ts build",
     "rebuild": "tsx scripts/index.ts rebuild",
