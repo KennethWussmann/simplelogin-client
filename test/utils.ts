@@ -1,4 +1,4 @@
-import { SimpleLogin } from '../src';
+import { AliasApi, AccountApi, MailboxApi, CustomDomainApi, SimpleLoginConfig } from '../src';
 import type { Response } from 'node-fetch';
 import { config } from 'dotenv';
 
@@ -14,10 +14,11 @@ const assertEnv = (env: string): string => {
 
 const serverUrl = assertEnv('SERVER_URL');
 const apiKey = assertEnv('API_KEY');
-export const accountApi = new SimpleLogin.AccountApi({ apiKey }, serverUrl);
-export const aliasApi = new SimpleLogin.AliasApi({ apiKey }, serverUrl);
-export const mailboxApi = new SimpleLogin.MailboxApi({ apiKey }, serverUrl);
-export const customDomainApi = new SimpleLogin.CustomDomainApi({ apiKey }, serverUrl);
+const apiConfig = new SimpleLoginConfig({ apiKey, basePath: serverUrl });
+export const accountApi = new AccountApi(apiConfig);
+export const aliasApi = new AliasApi(apiConfig);
+export const mailboxApi = new MailboxApi(apiConfig);
+export const customDomainApi = new CustomDomainApi(apiConfig);
 
 const isResponse = (error: unknown): error is Response => !!(error as Response).status;
 
