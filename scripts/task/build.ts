@@ -1,5 +1,5 @@
 import { run } from '../run';
-import { buildDocs, buildPagesIndex, buildOAS, buildSdk, createDirs, buildSrc } from '../steps';
+import { buildDocs, buildPagesIndex, buildOAS, createDirs, buildSrc, buildSdk } from '../steps';
 
 export default async (formatOrLint: 'format' | 'lint' = 'format') => {
   await createDirs();

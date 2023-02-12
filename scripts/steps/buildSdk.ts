@@ -1,54 +1,49 @@
-import { globby } from 'globby';
 import { join, parse } from 'path';
 import { $ } from 'zx/core';
+import { glob } from 'zx';
 import { image, sdkDestination } from '../constants';
-import { save, read, sectionHeader } from '../utils';
+import { save, read, sectionHeader, createDirectoryIfNotExists } from '../utils';
 
 const getDestinationPath = (path: string) => {
   const filename = parse(path).base;
-  return join(sdkDestination, filename);
+  return join(sdkDestination, path.replace('build/sdk/', '').replace(filename, ''), filename);
 };
 
-const modify = (filename: string, content: string) =>
+const modify = (content: string) =>
   [
-    ...(filename.toLowerCase().includes('api.') ? ['/* eslint-disable */', '// @ts-nocheck'] : []),
-    ...content
-      .replace(
-        'import * as isomorphicFetch from "isomorphic-fetch";\n',
-        'const defaultFetchApi = typeof fetch === "undefined" ? undefined : fetch;\nexport type Response = any;\n',
-      )
-      .replace("declare module 'isomorphic-fetch';\n", '')
-      .replace('/// <reference path="./custom.d.ts" />\n', '')
-      .replace('// tslint:disable\n', '')
-      .split('\n')
-      .map((line) =>
-        line.replace('isomorphicFetch', 'defaultFetchApi').replace('const BASE_PATH =', 'export const BASE_PATH ='),
-      ),
+    '/* eslint-disable */',
+    '// @ts-nocheck',
+    'type RequestCredentials = any;',
+    'type Response = any;',
+    'type RequestInit = any;',
+    'type FormData = any;',
+    'type WindowOrWorkerGlobalScope = any;',
+    content,
   ].join('\n');
 
 const moveSdkFiles = async () => {
-  const paths = await globby(['build/sdk/*.ts', '!build/sdk/*.spec.ts', '!build/sdk/*.d.ts']);
+  const paths = await glob(['build/sdk/**/*.ts']);
 
   await Promise.all(
     paths.map(async (path) => {
       const destination = getDestinationPath(path);
+      await createDirectoryIfNotExists(parse(destination).dir);
       const originalFileContent = await read(path);
-      const modifiedFileContent = modify(parse(path).base, originalFileContent);
+      const modifiedFileContent = modify(originalFileContent);
 
       await save(destination, modifiedFileContent);
-      console.log(`Moved modified ${path} to ${destination}`);
+      console.log(`Copied modified ${path} to ${destination}`);
     }),
   );
 };
 
 export const buildSdk = async (oasPath: string) => {
   console.log(sectionHeader('🔧 Building SDK'));
-  await $`docker pull ${image}`;
   await $`docker run --rm -v ${process.cwd()}:/local ${image} generate -i ${join(
     '/local',
     'dist',
     'openapi',
     parse(oasPath).base,
-  )} -l typescript-fetch -o /local/build/sdk`;
+  )} -g typescript-fetch -o /local/build/sdk`;
   await moveSdkFiles();
 };

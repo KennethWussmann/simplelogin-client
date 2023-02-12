@@ -20,7 +20,7 @@ const mkdirAndLog = async (path: string) => logIfTrue(createDirectoryIfNotExists
 
 export const clean = async () => {
   console.log(sectionHeader('🚮 Cleaning up'));
-  await Promise.all([buildDir, sdkDestination, distDir].map(deleteAndLog));
+  await Promise.all([buildDir, tscBuildDir, sdkDestination, distDir].map(deleteAndLog));
   await createDirs();
 };
 

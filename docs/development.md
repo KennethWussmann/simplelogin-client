@@ -2,7 +2,7 @@
 
 It's basically writing OpenAPI spec, to contribute code to this client.
 
-The client is generated using [swagger-codegen](https://github.com/swagger-api/swagger-codegen) and the OpenAPI spec is written with [boats](https://github.com/j-d-carmichael/boats).
+The client is generated using [openapi-generator](https://openapi-generator.tech) and the OpenAPI spec is written with [boats](https://github.com/j-d-carmichael/boats).
 
 Everything in `./dist` & `./src/sdk` is generated and should not be modified manually. To adjust the API client, docs or the built OpenAPI spec, adjust the YAML files in `./oas` to document the API. Check the [boats documentation](https://j-d-carmichael.github.io/boats/#/) and the [OpenAPI v3 spec](https://swagger.io/specification/) for further guidance.
 

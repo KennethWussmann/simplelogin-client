@@ -5,13 +5,13 @@
 Yes, the used API url can be adjusted when constructing the client:
 
 ```typescript
-import { SimpleLogin } from 'simplelogin-client';
+import { AliasApi, SimpleLoginConfig } from 'simplelogin-client';
 
-const alias = new SimpleLogin.AliasApi(
-  {
+const alias = new AliasApi(
+  new SimpleLoginConfig({
     apiKey: process.env.API_KEY,
-  },
-  'https://app.my-selfhosted-simplelogin.io/api', // <-- change me
+    basePath: 'https://app.my-selfhosted-simplelogin.io/api', // <-- change me
+  }),
 );
 ```
 
@@ -27,15 +27,14 @@ It does not require any dependencies by default when used in enviroments where a
 In case you want to use the client with older versions of NodeJS you may need to install a third-party `fetch` compliant library like [`node-fetch`](https://www.npmjs.com/package/node-fetch). You then just pass the `fetch` HTTP client into the API client:
 
 ```typescript
-import { SimpleLogin } from 'simplelogin-client';
+import { AliasApi } from 'simplelogin-client';
 import fetch from 'node-fetch'; // v2
 
-const alias = new SimpleLogin.AliasApi(
-  {
+const alias = new AliasApi(
+  new SimpleLoginConfig({
     apiKey: process.env.API_KEY,
-  },
-  undefined,
-  fetch, // <-- insert fetch API
+    fetchApi: fetch, // <-- insert fetch API
+  }),
 );
 ```
 
