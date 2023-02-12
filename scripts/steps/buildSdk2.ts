@@ -13,7 +13,11 @@ const modify = (filename: string, content: string) =>
   [
     '/* eslint-disable */',
     '// @ts-nocheck',
-    ...(filename.includes('http.ts') ? ['type FormData = any;'] : []),
+    'type RequestCredentials = any;',
+    'type Response = any;',
+    'type RequestInit = any;',
+    'type FormData = any;',
+    'type WindowOrWorkerGlobalScope = any;',
     content,
   ].join('\n');
 
@@ -56,6 +60,6 @@ export const buildSdk2 = async (oasPath: string) => {
     'dist',
     'openapi',
     parse(oasPath).base,
-  )} -g typescript -o /local/build/sdk`;
+  )} -g typescript-fetch -o /local/build/sdk`;
   await moveSdkFiles();
 };
