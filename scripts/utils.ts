@@ -1,6 +1,6 @@
-import chalk from 'chalk';
 import { access, copyFile, mkdir, readFile, rm, writeFile } from 'fs/promises';
 import { join, parse } from 'path';
+import { chalk } from 'zx';
 
 export const exist = async (path: string) => {
   try {
