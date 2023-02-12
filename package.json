@@ -1,9 +1,23 @@
 {
   "name": "simplelogin-client",
   "version": "0.0.1",
-  "description": "",
+  "description": "Zero-dependency TypeScript client for the SimpleLogin.io API",
   "main": "tscBuild/index.js",
   "types": "tscBuild/index.d.ts",
+  "author": "Kenneth Wussmann",
+  "keywords": [
+    "simplelogin",
+    "api",
+    "client",
+    "sdk",
+    "rest",
+    "simplelogin.io"
+  ],
+  "homepage": "https://github.com/KennethWussmann/simplelogin-client",
+  "bugs": {
+    "url": "https://github.com/KennethWussmann/simplelogin-client/issues"
+  },
+  "license": "MIT",
   "scripts": {
     "dev": "npm-watch",
     "test": "jest --passWithNoTests",
@@ -36,9 +50,6 @@
     "node": "18",
     "npm": "9"
   },
-  "keywords": [],
-  "author": "",
-  "license": "MIT",
   "devDependencies": {
     "@moia-oss/eslint-prettier-typescript-config": "^0.11.46",
     "@types/jest": "^29.2.3",
