@@ -1,2 +1,4 @@
 import { run } from './run';
-run();
+import { measureBuildTime } from './utils';
+
+measureBuildTime(run);
