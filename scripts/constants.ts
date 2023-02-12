@@ -9,6 +9,4 @@ export const distOpenApiDir = join(distDir, 'openapi');
 export const distRedocDir = join(distDir, 'redoc');
 export const distTypedocDir = join(distDir, 'typedoc');
 
-export const image = `ghcr.io/kennethwussmann/custom-swagger-codegen-cli-${
-  process.arch === 'arm64' ? 'arm64' : 'amd64'
-}:latest`;
+export const image = `openapitools/openapi-generator-cli:latest`;
