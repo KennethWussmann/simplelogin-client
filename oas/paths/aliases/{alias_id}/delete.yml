@@ -1,8 +1,8 @@
 tags:
   - alias
-summary: Delete alias by id
+summary: Delete alias
 description: Delete specific alias by id.
-operationId: "delete"
+operationId: {{ opId() }}
 parameters:
   - $ref: "@parameters/pathAliasId.yml"
 responses:

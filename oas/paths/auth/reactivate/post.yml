@@ -1,8 +1,8 @@
 tags:
   - account
-summary: Reactivate
+summary: Reactivate account
 description: Request a new activation code for an account that was already registered, but not activated yet.
-operationId: "reactivate"
+operationId: {{ opId() }}
 requestBody:
   required: true
   content: {{ mixin("@mixins/request/json.yml", "@schemas/auth/reactivate/post.yml") }}

@@ -2,7 +2,7 @@ tags:
   - account
 summary: Forgot password
 description: Request a link to reset the password for a registered account.
-operationId: "forgotPassword"
+operationId: {{ opId() }}
 requestBody:
   required: true
   content: {{ mixin("@mixins/request/json.yml", "@schemas/auth/forgot_password/post.yml") }}

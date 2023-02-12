@@ -1,8 +1,8 @@
 tags:
   - alias
-summary: Get alias by id
+summary: Get alias
 description: Get specific alias by id.
-operationId: "get"
+operationId: {{ opId() }}
 parameters:
   - $ref: "@parameters/pathAliasId.yml"
 responses:

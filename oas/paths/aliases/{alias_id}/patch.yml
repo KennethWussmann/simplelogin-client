@@ -1,8 +1,8 @@
 tags:
   - alias
-summary: Update alias by id
+summary: Update alias
 description: Update specific alias by id.
-operationId: "update"
+operationId: {{ opId() }}
 parameters:
   - $ref: "@parameters/pathAliasId.yml"
 requestBody:

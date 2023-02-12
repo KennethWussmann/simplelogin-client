@@ -6,9 +6,18 @@ import { copy, sectionHeader } from '../utils';
 
 export const buildOAS = async () => {
   console.log(sectionHeader('📄 Building OpenAPI Spec'));
+
   await Promise.all([
-    $`boats -i ./oas/index.yml -o ${join('build', 'openapi', 'simplelogin.json')}`,
-    $`boats -i ./oas/index.yml -o ${join('build', 'openapi', 'simplelogin.yml')}`,
+    $`boats -i ./oas/index.yml -o ${join('build', 'openapi', 'simplelogin.json')} -f ${join(
+      'oas',
+      'helpers',
+      'opId.ts',
+    )}`,
+    $`boats -i ./oas/index.yml -o ${join('build', 'openapi', 'simplelogin.yml')} -f ${join(
+      'oas',
+      'helpers',
+      'opId.ts',
+    )}`,
   ]);
 
   const output = await globby([join('build', 'openapi', 'simplelogin_*.*')]);

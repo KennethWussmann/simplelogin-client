@@ -58,9 +58,9 @@
         "tags": [
           "alias"
         ],
-        "summary": "Create random",
+        "summary": "Create random alias",
         "description": "Create a new random alias",
-        "operationId": "createRandom",
+        "operationId": "createRandomAlias",
         "parameters": [
           {
             "$ref": "#/components/parameters/QueryHostname"
@@ -135,7 +135,7 @@
         ],
         "summary": "Get activities",
         "description": "Get activities for specific alias by id.",
-        "operationId": "activities",
+        "operationId": "getActivities",
         "parameters": [
           {
             "$ref": "#/components/parameters/PathAliasId"
@@ -200,7 +200,7 @@
         ],
         "summary": "Get contacts",
         "description": "Get contacts for specific alias by id.",
-        "operationId": "contacts",
+        "operationId": "getContacts",
         "parameters": [
           {
             "$ref": "#/components/parameters/PathAliasId"
@@ -344,9 +344,9 @@
         "tags": [
           "alias"
         ],
-        "summary": "Delete alias by id",
+        "summary": "Delete alias",
         "description": "Delete specific alias by id.",
-        "operationId": "delete",
+        "operationId": "deleteAlias",
         "parameters": [
           {
             "$ref": "#/components/parameters/PathAliasId"
@@ -404,9 +404,9 @@
         "tags": [
           "alias"
         ],
-        "summary": "Get alias by id",
+        "summary": "Get alias",
         "description": "Get specific alias by id.",
-        "operationId": "get",
+        "operationId": "getAlias",
         "parameters": [
           {
             "$ref": "#/components/parameters/PathAliasId"
@@ -464,9 +464,9 @@
         "tags": [
           "alias"
         ],
-        "summary": "Update alias by id",
+        "summary": "Update alias",
         "description": "Update specific alias by id.",
-        "operationId": "update",
+        "operationId": "updateAlias",
         "parameters": [
           {
             "$ref": "#/components/parameters/PathAliasId"
@@ -537,9 +537,9 @@
         "tags": [
           "alias"
         ],
-        "summary": "Toggle alias by id",
+        "summary": "Toggle alias",
         "description": "Enable or disable specific alias by id.",
-        "operationId": "toggle",
+        "operationId": "toggleAlias",
         "parameters": [
           {
             "$ref": "#/components/parameters/PathAliasId"
@@ -589,9 +589,9 @@
         "tags": [
           "account"
         ],
-        "summary": "Activate",
+        "summary": "Activate account",
         "description": "Activate a new account with the activation code that was sent to the user's email.",
-        "operationId": "activate",
+        "operationId": "activateAccount",
         "requestBody": {
           "required": true,
           "content": {
@@ -724,9 +724,9 @@
         "tags": [
           "account"
         ],
-        "summary": "Reactivate",
+        "summary": "Reactivate account",
         "description": "Request a new activation code for an account that was already registered, but not activated yet.",
-        "operationId": "reactivate",
+        "operationId": "reactivateAccount",
         "requestBody": {
           "required": true,
           "content": {
@@ -749,9 +749,9 @@
         "tags": [
           "account"
         ],
-        "summary": "Register",
+        "summary": "Register account",
         "description": "Register a new account",
-        "operationId": "register",
+        "operationId": "registerAccount",
         "requestBody": {
           "required": true,
           "content": {
@@ -776,7 +776,7 @@
         ],
         "summary": "Get custom domains",
         "description": "Get users custom domains.",
-        "operationId": "customDomains",
+        "operationId": "getCustomDomains",
         "parameters": [
           {
             "$ref": "#/components/parameters/PathAliasId"
@@ -885,7 +885,7 @@
         ],
         "summary": "Create mailbox",
         "description": "Create a new mailbox",
-        "operationId": "create",
+        "operationId": "createMailbox",
         "requestBody": {
           "description": "The new mailbox address",
           "required": true,
@@ -951,9 +951,9 @@
         "tags": [
           "mailbox"
         ],
-        "summary": "Delete mailbox by id",
+        "summary": "Delete mailbox",
         "description": "Delete specific mailbox by id.",
-        "operationId": "delete",
+        "operationId": "deleteMailbox",
         "parameters": [
           {
             "$ref": "#/components/parameters/PathMailboxId"
@@ -1004,9 +1004,9 @@
         "tags": [
           "mailbox"
         ],
-        "summary": "Update a mailbox by id",
+        "summary": "Update mailbox",
         "description": "Update specific mailbox by id.",
-        "operationId": "update",
+        "operationId": "updateMailbox",
         "parameters": [
           {
             "$ref": "#/components/parameters/PathMailboxId"
@@ -1070,7 +1070,7 @@
         "tags": [
           "account"
         ],
-        "summary": "Sudo mode",
+        "summary": "Enable sudo mode",
         "description": "Enable sudo mode",
         "operationId": "enableSudoMode",
         "requestBody": {
@@ -1127,7 +1127,7 @@
         "tags": [
           "account"
         ],
-        "summary": "API key",
+        "summary": "Create API key",
         "description": "Create a new API key",
         "operationId": "createApiKey",
         "requestBody": {
@@ -1184,9 +1184,9 @@
         "tags": [
           "account"
         ],
-        "summary": "Cookie token",
+        "summary": "Get cookie token",
         "description": "Get a one time use cookie to exchange it for a valid cookie in the web app",
-        "operationId": "cookieToken",
+        "operationId": "getCookieToken",
         "responses": {
           "200": {
             "description": "Successful",
@@ -1231,7 +1231,7 @@
         "tags": [
           "account"
         ],
-        "summary": "User",
+        "summary": "Delete user",
         "description": "Delete user (requires sudo mode)",
         "operationId": "deleteUser",
         "responses": {
@@ -1288,9 +1288,9 @@
         "tags": [
           "account"
         ],
-        "summary": "User info",
+        "summary": "Get user info",
         "description": "Get user info",
-        "operationId": "userInfo",
+        "operationId": "getUserInfo",
         "responses": {
           "200": {
             "description": "Successful",
@@ -1333,7 +1333,7 @@
         "tags": [
           "account"
         ],
-        "summary": "User info",
+        "summary": "Update user info",
         "description": "Update user info",
         "operationId": "updateUserInfo",
         "requestBody": {
@@ -1392,7 +1392,7 @@
         ],
         "summary": "Get aliases",
         "description": "Get user aliases. Please note `pinned`, `disabled`, `enabled` are exclusive, i.e. only one can be present. They can only be set to `true`.",
-        "operationId": "aliases",
+        "operationId": "getAliases",
         "parameters": [
           {
             "$ref": "#/components/parameters/QueryPageId"
@@ -1471,7 +1471,7 @@
         ],
         "summary": "Get mailboxes",
         "description": "Get user mailboxes.",
-        "operationId": "mailboxes",
+        "operationId": "getMailboxes",
         "responses": {
           "200": {
             "description": "Successful",
@@ -1516,9 +1516,9 @@
         "tags": [
           "alias"
         ],
-        "summary": "Create custom",
+        "summary": "Create custom alias",
         "description": "Create a new custom alias",
-        "operationId": "createCustom",
+        "operationId": "createCustomAlias",
         "requestBody": {
           "required": true,
           "content": {
@@ -1578,9 +1578,9 @@
         "tags": [
           "alias"
         ],
-        "summary": "Get options",
+        "summary": "Get alias options",
         "description": "User alias info and suggestion. Used by the first extension screen when user opens the extension.",
-        "operationId": "options",
+        "operationId": "getAliasOptions",
         "parameters": [
           {
             "$ref": "#/components/parameters/QueryHostname"

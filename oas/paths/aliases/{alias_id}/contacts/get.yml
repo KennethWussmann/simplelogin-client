@@ -2,7 +2,7 @@ tags:
   - alias
 summary: Get contacts
 description: Get contacts for specific alias by id.
-operationId: "contacts"
+operationId: {{ opId() }}
 parameters:
   - $ref: "@parameters/pathAliasId.yml"
   - $ref: "@parameters/queryPageId.yml"

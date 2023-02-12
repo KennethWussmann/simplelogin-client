@@ -1,8 +1,8 @@
 tags:
   - account
-summary: User info
+summary: Get user info
 description: Get user info
-operationId: "userInfo"
+operationId: {{ opId() }}
 responses:
   '200':
     description: Successful

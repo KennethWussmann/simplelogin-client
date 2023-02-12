@@ -1,8 +1,8 @@
 tags:
   - account
-summary: User info
+summary: Update user info
 description: Update user info
-operationId: "updateUserInfo"
+operationId: {{ opId() }}
 requestBody:
   required: true
   content: {{ mixin("@mixins/request/json.yml", "@schemas/user_info/patch.yml") }}

@@ -1,8 +1,8 @@
 tags:
   - mailbox
-summary: Update a mailbox by id
+summary: Update mailbox
 description: Update specific mailbox by id.
-operationId: "update"
+operationId: {{ opId() }}
 parameters:
   - $ref: "@parameters/pathMailboxId.yml"
 requestBody:

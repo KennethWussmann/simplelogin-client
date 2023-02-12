@@ -1,8 +1,8 @@
 tags:
   - account
-summary: Activate
+summary: Activate account
 description: Activate a new account with the activation code that was sent to the user's email.
-operationId: "activate"
+operationId: {{ opId() }}
 requestBody:
   required: true
   content: {{ mixin("@mixins/request/json.yml", "@schemas/auth/activate/post.yml") }}

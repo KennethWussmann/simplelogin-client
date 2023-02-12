@@ -1,8 +1,8 @@
 tags:
   - alias
-summary: Create custom
+summary: Create custom alias
 description: Create a new custom alias
-operationId: "createCustom"
+operationId: {{ opId() }}
 requestBody:
   required: true
   content: {{ mixin("@mixins/request/json.yml", "@schemas/alias/custom/new/post.yml") }}

@@ -1,8 +1,8 @@
 tags:
   - account
-summary: Register
+summary: Register account
 description: Register a new account
-operationId: "register"
+operationId: {{ opId() }}
 requestBody:
   required: true
   content: {{ mixin("@mixins/request/json.yml", "@schemas/auth/register/post.yml") }}

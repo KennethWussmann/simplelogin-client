@@ -1,8 +1,8 @@
 tags:
   - alias
-summary: Get options
+summary: Get alias options
 description: User alias info and suggestion. Used by the first extension screen when user opens the extension.
-operationId: "options"
+operationId: {{ opId() }}
 parameters:
   - $ref: @parameters/queryHostname.yml
 responses:

@@ -2,7 +2,7 @@ tags:
   - custom-domain
 summary: Get custom domains
 description: Get users custom domains.
-operationId: "customDomains"
+operationId: {{ opId() }}
 parameters:
   - $ref: "@parameters/pathAliasId.yml"
 responses:

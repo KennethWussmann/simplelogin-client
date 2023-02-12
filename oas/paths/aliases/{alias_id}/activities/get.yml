@@ -2,7 +2,7 @@ tags:
   - alias
 summary: Get activities
 description: Get activities for specific alias by id.
-operationId: "activities"
+operationId: {{ opId() }}
 parameters:
   - $ref: "@parameters/pathAliasId.yml"
   - $ref: "@parameters/queryPageId.yml"

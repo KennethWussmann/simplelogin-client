@@ -2,7 +2,7 @@ tags:
   - account
 summary: MFA authentication
 description: Authenticate using MFA
-operationId: "mfa"
+operationId: 'mfa'
 requestBody:
   description: The api_key is used in all subsequent requests. It's empty if MFA is enabled. If user hasn't enabled MFA, mfa_key is empty.
   required: true

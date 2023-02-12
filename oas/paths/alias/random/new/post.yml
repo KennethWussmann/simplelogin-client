@@ -1,8 +1,8 @@
 tags:
   - alias
-summary: Create random
+summary: Create random alias
 description: Create a new random alias
-operationId: "createRandom"
+operationId: {{ opId() }}
 parameters:
   - $ref: @parameters/queryHostname.yml
   - in: query

@@ -2,7 +2,7 @@ tags:
   - mailbox
 summary: Create mailbox
 description:  Create a new mailbox
-operationId: "create"
+operationId: {{ opId() }}
 requestBody:
   description: The new mailbox address
   required: true

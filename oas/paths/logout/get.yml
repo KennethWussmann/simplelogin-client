@@ -2,7 +2,7 @@ tags:
   - account
 summary: Logout
 description: Log out user
-operationId: "logout"
+operationId: {{ opId() }}
 responses:
   '200':
     description: Successful

@@ -2,7 +2,7 @@ tags:
   - alias
 summary: Create contact
 description:  Create a new contact for an alias by id.
-operationId: "createContact"
+operationId: {{ opId() }}
 parameters:
   - $ref: "@parameters/pathAliasId.yml"
 requestBody:

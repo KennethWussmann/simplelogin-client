@@ -1,8 +1,8 @@
 tags:
   - account
-summary: API key
+summary: Create API key
 description: Create a new API key
-operationId: "createApiKey"
+operationId: {{ opId() }}
 requestBody:
   required: true
   content: {{ mixin("@mixins/request/json.yml", "@schemas/user/api_key/post.yml") }}

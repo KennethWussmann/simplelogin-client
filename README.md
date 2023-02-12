@@ -52,7 +52,7 @@ const alias = new SimpleLogin.AliasApi({
   apiKey: process.env.API_KEY,
 });
 
-const createdAlias = await alias.createRandom({
+const createdAlias = await alias.createRandomAlias({
   note: 'This alias was created with simplelogin-client!',
 });
 

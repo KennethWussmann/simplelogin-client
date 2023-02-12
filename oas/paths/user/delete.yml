@@ -1,8 +1,8 @@
 tags:
   - account
-summary: User
+summary: Delete user
 description: Delete user (requires sudo mode)
-operationId: "deleteUser"
+operationId: {{ opId() }}
 responses:
   '200':
     description: Successful. Account is scheduled for deletion.

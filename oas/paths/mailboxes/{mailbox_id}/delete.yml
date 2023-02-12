@@ -1,8 +1,8 @@
 tags:
   - mailbox
-summary: Delete mailbox by id
+summary: Delete mailbox
 description: Delete specific mailbox by id.
-operationId: "delete"
+operationId: {{ opId() }}
 parameters:
   - $ref: "@parameters/pathMailboxId.yml"
 responses:

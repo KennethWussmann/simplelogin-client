@@ -1,8 +1,8 @@
 tags:
   - alias
-summary: Toggle alias by id
+summary: Toggle alias
 description: Enable or disable specific alias by id.
-operationId: "toggle"
+operationId: {{ opId() }}
 parameters:
   - $ref: "@parameters/pathAliasId.yml"
 responses:

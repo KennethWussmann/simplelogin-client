@@ -1,8 +1,8 @@
 tags:
   - account
-summary: Sudo mode
+summary: Enable sudo mode
 description: Enable sudo mode
-operationId: "enableSudoMode"
+operationId: {{ opId() }}
 requestBody:
   required: true
   content: {{ mixin("@mixins/request/json.yml", "@schemas/sudo/patch.yml") }}
