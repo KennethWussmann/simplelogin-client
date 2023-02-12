@@ -23,12 +23,8 @@ export const buildPagesIndex = async () =>
   <body>
     <h1>simplelogin-client</h1>
     <ul>
-      ${[
-        ['Documentation', 'typedoc'],
-        ['SimpleLogin API Specification', 'redoc'],
-      ]
-        .map(([label, href]) => `<li><a href="${join(href, 'index.html')}">${label}</a></li>`)
-        .join('\n')}
+      <li><a href="typedoc/modules/SimpleLogin.html">Documentation</a></li>
+      <li><a href="redoc/index.html">SimpleLogin API Specification</a></li>
       <li><a href="https://github.com/KennethWussmann/simplelogin-client">GitHub</a></li>
     </ul>
   </body>

@@ -4,7 +4,7 @@
     <strong>Zero-dependency TypeScript client for the <a href="https://simplelogin.io">SimpleLogin.io</a> API. Compatible with NodeJS and browsers.</strong>
   </p>
   <p>
-    <a href="https://kennethwussmann.github.io/simplelogin-client/typedoc/index.html">Documentation</a> • <a href="https://kennethwussmann.github.io/simplelogin-client/redoc/index.html">API Spec</a> 
+    <a href="https://kennethwussmann.github.io/simplelogin-client/typedoc/modules/SimpleLogin.html">Documentation</a> • <a href="https://kennethwussmann.github.io/simplelogin-client/redoc/index.html">API Spec</a> 
   </p>
 </div>
 
@@ -71,7 +71,7 @@ console.log(createdAlias);
 */
 ```
 
-Check the [documentation](https://kennethwussmann.github.io/simplelogin-client/typedoc/index.html) for all available methods and the [FAQ](./docs/faq.md) in case of questions.
+Check the [documentation](https://kennethwussmann.github.io/simplelogin-client/typedoc/modules/SimpleLogin.html) for all available methods and the [FAQ](./docs/faq.md) in case of questions.
 
 ## Development
 
