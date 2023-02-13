@@ -21,18 +21,17 @@
   - [x] Contacts and activities
 - [x] Mailbox Management
   - [x] Get, Create, Update, Delete
-- [ ] Custom Domain Management
+- [ ] [Custom Domain Management](https://github.com/KennethWussmann/simplelogin-client/issues/7)
   - [x] Get
   - [ ] Update, Delete
-- [ ] Contact Management
+- [ ] [Contact Management](https://github.com/KennethWussmann/simplelogin-client/issues/8)
   - [x] Get, Create
   - [ ] Delete
   - [ ] Block & unblock
-- [ ] Notifications
-- [ ] Settings
-- [ ] Import & Export
-- [ ] Misc
-- [ ] Phone
+- [ ] [Notifications](https://github.com/KennethWussmann/simplelogin-client/issues/9)
+- [ ] [Settings](https://github.com/KennethWussmann/simplelogin-client/issues/10)
+- [ ] [Import & Export](https://github.com/KennethWussmann/simplelogin-client/issues/11)
+- [ ] [Phone & Misc](https://github.com/KennethWussmann/simplelogin-client/issues/12)
 
 ## Getting started
 
@@ -74,6 +73,8 @@ console.log(createdAlias);
 ```
 
 Check the [documentation](https://kennethwussmann.github.io/simplelogin-client/typedoc/index.html) for all available methods and the [FAQ](./docs/faq.md) in case of questions.
+
+> :bangbang: Please don't contact the SimpleLogin team with issues regarding this client. Instead open an issue in this repository.
 
 ## Development
 
