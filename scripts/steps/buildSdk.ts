@@ -9,17 +9,19 @@ const getDestinationPath = (path: string) => {
   return join(sdkDestination, path.replace('build/sdk/', '').replace(filename, ''), filename);
 };
 
-const modify = (content: string) =>
-  [
-    '/* eslint-disable */',
-    '// @ts-nocheck',
-    'type RequestCredentials = any;',
-    'type Response = any;',
-    'type RequestInit = any;',
-    'type FormData = any;',
-    'type WindowOrWorkerGlobalScope = any;',
-    content,
-  ].join('\n');
+const modify = (filename: string, content: string) =>
+  filename === 'index.ts'
+    ? content
+    : [
+        '/* eslint-disable */',
+        '// @ts-nocheck',
+        'type RequestCredentials = any;',
+        'type Response = any;',
+        'type RequestInit = any;',
+        'type FormData = any;',
+        'type WindowOrWorkerGlobalScope = any;',
+        content,
+      ].join('\n');
 
 const moveSdkFiles = async () => {
   const paths = await glob(['build/sdk/**/*.ts']);
@@ -29,7 +31,7 @@ const moveSdkFiles = async () => {
       const destination = getDestinationPath(path);
       await createDirectoryIfNotExists(parse(destination).dir);
       const originalFileContent = await read(path);
-      const modifiedFileContent = modify(originalFileContent);
+      const modifiedFileContent = modify(parse(path).base, originalFileContent);
 
       await save(destination, modifiedFileContent);
       console.log(`Copied modified ${path} to ${destination}`);
