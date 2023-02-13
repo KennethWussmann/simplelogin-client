@@ -45,22 +45,21 @@
 <li><input checked="" disabled="" type="checkbox"> Get, Create, Update, Delete</li>
 </ul>
 </li>
-<li><input disabled="" type="checkbox"> Custom Domain Management<ul>
+<li><input disabled="" type="checkbox"> <a href="https://github.com/KennethWussmann/simplelogin-client/issues/7">Custom Domain Management</a><ul>
 <li><input checked="" disabled="" type="checkbox"> Get</li>
 <li><input disabled="" type="checkbox"> Update, Delete</li>
 </ul>
 </li>
-<li><input disabled="" type="checkbox"> Contact Management<ul>
+<li><input disabled="" type="checkbox"> <a href="https://github.com/KennethWussmann/simplelogin-client/issues/8">Contact Management</a><ul>
 <li><input checked="" disabled="" type="checkbox"> Get, Create</li>
 <li><input disabled="" type="checkbox"> Delete</li>
 <li><input disabled="" type="checkbox"> Block &amp; unblock</li>
 </ul>
 </li>
-<li><input disabled="" type="checkbox"> Notifications</li>
-<li><input disabled="" type="checkbox"> Settings</li>
-<li><input disabled="" type="checkbox"> Import &amp; Export</li>
-<li><input disabled="" type="checkbox"> Misc</li>
-<li><input disabled="" type="checkbox"> Phone</li>
+<li><input disabled="" type="checkbox"> <a href="https://github.com/KennethWussmann/simplelogin-client/issues/9">Notifications</a></li>
+<li><input disabled="" type="checkbox"> <a href="https://github.com/KennethWussmann/simplelogin-client/issues/10">Settings</a></li>
+<li><input disabled="" type="checkbox"> <a href="https://github.com/KennethWussmann/simplelogin-client/issues/11">Import &amp; Export</a></li>
+<li><input disabled="" type="checkbox"> <a href="https://github.com/KennethWussmann/simplelogin-client/issues/12">Phone &amp; Misc</a></li>
 </ul>
 
 <a href="#getting-started" id="getting-started" style="color: inherit; text-decoration: none;">
@@ -73,6 +72,9 @@
 <pre><code class="language-typescript"><span class="hl-3">import</span><span class="hl-1"> { </span><span class="hl-4">AliasApi</span><span class="hl-1">, </span><span class="hl-4">SimpleLoginConfig</span><span class="hl-1"> } </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&#39;simplelogin-client&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-6">alias</span><span class="hl-1"> = </span><span class="hl-5">new</span><span class="hl-1"> </span><span class="hl-7">AliasApi</span><span class="hl-1">(</span><br/><span class="hl-1">  </span><span class="hl-5">new</span><span class="hl-1"> </span><span class="hl-7">SimpleLoginConfig</span><span class="hl-1">({</span><br/><span class="hl-1">    </span><span class="hl-4">apiKey:</span><span class="hl-1"> </span><span class="hl-4">process</span><span class="hl-1">.</span><span class="hl-4">env</span><span class="hl-1">.</span><span class="hl-6">API_KEY</span><span class="hl-1">,</span><br/><span class="hl-1">  }),</span><br/><span class="hl-1">);</span><br/><br/><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-6">createdAlias</span><span class="hl-1"> = </span><span class="hl-3">await</span><span class="hl-1"> </span><span class="hl-4">alias</span><span class="hl-1">.</span><span class="hl-7">createRandomAlias</span><span class="hl-1">({</span><br/><span class="hl-1">  </span><span class="hl-4">note:</span><span class="hl-1"> </span><span class="hl-2">&#39;This alias was created with simplelogin-client!&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">});</span><br/><br/><span class="hl-4">console</span><span class="hl-1">.</span><span class="hl-7">log</span><span class="hl-1">(</span><span class="hl-4">createdAlias</span><span class="hl-1">);</span><br/><span class="hl-0">/* Output:</span><br/><span class="hl-0">{</span><br/><span class="hl-0">  id: 50001,</span><br/><span class="hl-0">  creation_date: &#39;2023-02-10 20:19:37+00:00&#39;,</span><br/><span class="hl-0">  alias: &#39;nederlanden_heatherington@example.com&#39;,</span><br/><span class="hl-0">  mailbox: { email: &#39;somewhere@gmail.com&#39;, id: 50001 },</span><br/><span class="hl-0">  enabled: true,</span><br/><span class="hl-0">  pinned: false,</span><br/><span class="hl-0">  note: &quot;This alias was created with simplelogin-client!&quot;,</span><br/><span class="hl-0">  ...</span><br/><span class="hl-0">}</span><br/><span class="hl-0">*/</span>
 </code></pre>
 <p>Check the <a href="https://kennethwussmann.github.io/simplelogin-client/typedoc/index.html">documentation</a> for all available methods and the <a href="./docs/faq.md">FAQ</a> in case of questions.</p>
+<blockquote>
+<p>:bangbang: Please don&#39;t contact the SimpleLogin team with issues regarding this client. Instead open an issue in this repository.</p>
+</blockquote>
 
 <a href="#development" id="development" style="color: inherit; text-decoration: none;">
   <h2>Development</h2>

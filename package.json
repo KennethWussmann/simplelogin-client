@@ -28,7 +28,7 @@
     "check-codegen": "tsx scripts/index.ts checkCodegen",
     "lint": "tsx scripts/index.ts lint",
     "format": "tsx scripts/index.ts format",
-    "dependency-update": "npm-check-updates -u --filterVersion \"/^[~^<>]| - |\\.x$/\" --deep && npm install",
+    "dependency-update": "tsx scripts/index.ts dependencyUpdate",
     "prepare": "husky install"
   },
   "files": [
