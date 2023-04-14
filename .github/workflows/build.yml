@@ -20,3 +20,10 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - run: npm run ci
+      # upload changes.patch on failure
+      - name: Upload uncomitted changes
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: changes.patch
+          path: changes.patch
