@@ -1166,17 +1166,15 @@ components:
               - is_custom
               - is_premium
         recommendation:
-          type: array
-          items:
-            type: object
-            properties:
-              alias:
-                type: string
-              hostname:
-                type: string
-            required:
-              - alias
-              - hostname
+          type: object
+          properties:
+            alias:
+              type: string
+            hostname:
+              type: string
+          required:
+            - alias
+            - hostname
       required:
         - can_create
         - prefix_suggestion
