@@ -20,12 +20,12 @@ type WindowOrWorkerGlobalScope = any;
  */
 
 import { exists, mapValues } from '../runtime';
-import type { AliasOptionsRecommendationInner } from './AliasOptionsRecommendationInner';
+import type { AliasOptionsRecommendation } from './AliasOptionsRecommendation';
 import {
-    AliasOptionsRecommendationInnerFromJSON,
-    AliasOptionsRecommendationInnerFromJSONTyped,
-    AliasOptionsRecommendationInnerToJSON,
-} from './AliasOptionsRecommendationInner';
+    AliasOptionsRecommendationFromJSON,
+    AliasOptionsRecommendationFromJSONTyped,
+    AliasOptionsRecommendationToJSON,
+} from './AliasOptionsRecommendation';
 import type { AliasOptionsSuffixesInner } from './AliasOptionsSuffixesInner';
 import {
     AliasOptionsSuffixesInnerFromJSON,
@@ -59,10 +59,10 @@ export interface AliasOptions {
     suffixes: Array<AliasOptionsSuffixesInner>;
     /**
      * 
-     * @type {Array<AliasOptionsRecommendationInner>}
+     * @type {AliasOptionsRecommendation}
      * @memberof AliasOptions
      */
-    recommendation?: Array<AliasOptionsRecommendationInner>;
+    recommendation?: AliasOptionsRecommendation;
 }
 
 /**
@@ -90,7 +90,7 @@ export function AliasOptionsFromJSONTyped(json: any, ignoreDiscriminator: boolea
         'canCreate': json['can_create'],
         'prefixSuggestion': json['prefix_suggestion'],
         'suffixes': ((json['suffixes'] as Array<any>).map(AliasOptionsSuffixesInnerFromJSON)),
-        'recommendation': !exists(json, 'recommendation') ? undefined : ((json['recommendation'] as Array<any>).map(AliasOptionsRecommendationInnerFromJSON)),
+        'recommendation': !exists(json, 'recommendation') ? undefined : AliasOptionsRecommendationFromJSON(json['recommendation']),
     };
 }
 
@@ -106,7 +106,7 @@ export function AliasOptionsToJSON(value?: AliasOptions | null): any {
         'can_create': value.canCreate,
         'prefix_suggestion': value.prefixSuggestion,
         'suffixes': ((value.suffixes as Array<any>).map(AliasOptionsSuffixesInnerToJSON)),
-        'recommendation': value.recommendation === undefined ? undefined : ((value.recommendation as Array<any>).map(AliasOptionsRecommendationInnerToJSON)),
+        'recommendation': AliasOptionsRecommendationToJSON(value.recommendation),
     };
 }
 

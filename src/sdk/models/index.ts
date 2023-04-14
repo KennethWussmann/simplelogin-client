@@ -14,7 +14,7 @@ export * from './AliasLatestActivity';
 export * from './AliasLatestActivityContact';
 export * from './AliasModelArray';
 export * from './AliasOptions';
-export * from './AliasOptionsRecommendationInner';
+export * from './AliasOptionsRecommendation';
 export * from './AliasOptionsSuffixesInner';
 export * from './AliasRandomNewPost';
 export * from './AuthActivatePost';

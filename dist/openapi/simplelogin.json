@@ -1860,22 +1860,19 @@
             }
           },
           "recommendation": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "alias": {
-                  "type": "string"
-                },
-                "hostname": {
-                  "type": "string"
-                }
+            "type": "object",
+            "properties": {
+              "alias": {
+                "type": "string"
               },
-              "required": [
-                "alias",
-                "hostname"
-              ]
-            }
+              "hostname": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "alias",
+              "hostname"
+            ]
           }
         },
         "required": [

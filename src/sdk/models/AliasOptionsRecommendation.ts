@@ -23,27 +23,27 @@ import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface AliasOptionsRecommendationInner
+ * @interface AliasOptionsRecommendation
  */
-export interface AliasOptionsRecommendationInner {
+export interface AliasOptionsRecommendation {
     /**
      * 
      * @type {string}
-     * @memberof AliasOptionsRecommendationInner
+     * @memberof AliasOptionsRecommendation
      */
     alias: string;
     /**
      * 
      * @type {string}
-     * @memberof AliasOptionsRecommendationInner
+     * @memberof AliasOptionsRecommendation
      */
     hostname: string;
 }
 
 /**
- * Check if a given object implements the AliasOptionsRecommendationInner interface.
+ * Check if a given object implements the AliasOptionsRecommendation interface.
  */
-export function instanceOfAliasOptionsRecommendationInner(value: object): boolean {
+export function instanceOfAliasOptionsRecommendation(value: object): boolean {
     let isInstance = true;
     isInstance = isInstance && "alias" in value;
     isInstance = isInstance && "hostname" in value;
@@ -51,11 +51,11 @@ export function instanceOfAliasOptionsRecommendationInner(value: object): boolea
     return isInstance;
 }
 
-export function AliasOptionsRecommendationInnerFromJSON(json: any): AliasOptionsRecommendationInner {
-    return AliasOptionsRecommendationInnerFromJSONTyped(json, false);
+export function AliasOptionsRecommendationFromJSON(json: any): AliasOptionsRecommendation {
+    return AliasOptionsRecommendationFromJSONTyped(json, false);
 }
 
-export function AliasOptionsRecommendationInnerFromJSONTyped(json: any, ignoreDiscriminator: boolean): AliasOptionsRecommendationInner {
+export function AliasOptionsRecommendationFromJSONTyped(json: any, ignoreDiscriminator: boolean): AliasOptionsRecommendation {
     if ((json === undefined) || (json === null)) {
         return json;
     }
@@ -66,7 +66,7 @@ export function AliasOptionsRecommendationInnerFromJSONTyped(json: any, ignoreDi
     };
 }
 
-export function AliasOptionsRecommendationInnerToJSON(value?: AliasOptionsRecommendationInner | null): any {
+export function AliasOptionsRecommendationToJSON(value?: AliasOptionsRecommendation | null): any {
     if (value === undefined) {
         return undefined;
     }
