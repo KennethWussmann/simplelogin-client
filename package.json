@@ -53,6 +53,7 @@
   },
   "devDependencies": {
     "@moia-oss/eslint-prettier-typescript-config": "0.11.48",
+    "@redocly/cli": "^1.0.0-beta.125",
     "@types/jest": "^29.5.0",
     "@types/node": "18.*",
     "@types/node-fetch": "^2.6.3",
@@ -68,7 +69,6 @@
     "npm-check-updates": "^16.10.8",
     "npm-watch": "^0.11.0",
     "prettier": "^2.8.7",
-    "redoc-cli": "^0.13.21",
     "ts-jest": "^29.1.0",
     "ts-node": "^10.9.1",
     "tsx": "^3.12.6",
