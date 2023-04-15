@@ -37,7 +37,7 @@ export interface AliasOptionsSuffixesInner {
      * @type {string}
      * @memberof AliasOptionsSuffixesInner
      */
-    signedSuffix: string;
+    signedSuffix?: string;
     /**
      * 
      * @type {boolean}
@@ -58,7 +58,6 @@ export interface AliasOptionsSuffixesInner {
 export function instanceOfAliasOptionsSuffixesInner(value: object): boolean {
     let isInstance = true;
     isInstance = isInstance && "suffix" in value;
-    isInstance = isInstance && "signedSuffix" in value;
     isInstance = isInstance && "isCustom" in value;
     isInstance = isInstance && "isPremium" in value;
 
@@ -76,7 +75,7 @@ export function AliasOptionsSuffixesInnerFromJSONTyped(json: any, ignoreDiscrimi
     return {
         
         'suffix': json['suffix'],
-        'signedSuffix': json['signed-suffix'],
+        'signedSuffix': !exists(json, 'signed_suffix') ? undefined : json['signed_suffix'],
         'isCustom': json['is_custom'],
         'isPremium': json['is_premium'],
     };
@@ -92,7 +91,7 @@ export function AliasOptionsSuffixesInnerToJSON(value?: AliasOptionsSuffixesInne
     return {
         
         'suffix': value.suffix,
-        'signed-suffix': value.signedSuffix,
+        'signed_suffix': value.signedSuffix,
         'is_custom': value.isCustom,
         'is_premium': value.isPremium,
     };
