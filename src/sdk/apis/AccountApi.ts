@@ -37,6 +37,7 @@ import type {
   UserCookieToken,
   UserInfo,
   UserInfoPatch,
+  UserStats,
 } from '../models';
 import {
     AuthActivatePostFromJSON,
@@ -69,6 +70,8 @@ import {
     UserInfoToJSON,
     UserInfoPatchFromJSON,
     UserInfoPatchToJSON,
+    UserStatsFromJSON,
+    UserStatsToJSON,
 } from '../models';
 
 export interface ActivateAccountRequest {
@@ -319,6 +322,38 @@ export class AccountApi extends runtime.BaseAPI {
      */
     async getCookieToken(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UserCookieToken> {
         const response = await this.getCookieTokenRaw(initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Returns stats about the number of aliases, number of emails forwarded/replied/blocked
+     * Get stats
+     */
+    async getStatsRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UserStats>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authentication"] = this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
+        }
+
+        const response = await this.request({
+            path: `/stats`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => UserStatsFromJSON(jsonValue));
+    }
+
+    /**
+     * Returns stats about the number of aliases, number of emails forwarded/replied/blocked
+     * Get stats
+     */
+    async getStats(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UserStats> {
+        const response = await this.getStatsRaw(initOverrides);
         return await response.value();
     }
 

@@ -1,0 +1,9 @@
+tags:
+  - account
+summary: Get stats
+description: Returns stats about the number of aliases, number of emails forwarded/replied/blocked
+operationId: {{ opId() }}
+responses:
+  '200':
+    description: Successful
+    content: {{ mixin("@mixins/request/json.yml", "@schemas/user/stats/model.yml") }}

@@ -1065,6 +1065,53 @@
         ]
       }
     },
+    "/stats": {
+      "get": {
+        "tags": [
+          "account"
+        ],
+        "summary": "Get stats",
+        "description": "Returns stats about the number of aliases, number of emails forwarded/replied/blocked",
+        "operationId": "getStats",
+        "responses": {
+          "200": {
+            "description": "Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserStats"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
     "/sudo": {
       "patch": {
         "tags": [
@@ -2430,6 +2477,26 @@
         },
         "required": [
           "token"
+        ]
+      },
+      "UserStats": {
+        "type": "object",
+        "properties": {
+          "nb_alias": {
+            "type": "integer"
+          },
+          "nb_block": {
+            "type": "integer"
+          },
+          "nb_forward": {
+            "type": "integer"
+          },
+          "nb_reply": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "api_key"
         ]
       },
       "UserInfo": {

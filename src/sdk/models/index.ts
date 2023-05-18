@@ -39,3 +39,4 @@ export * from './UserApiKeyPost';
 export * from './UserCookieToken';
 export * from './UserInfo';
 export * from './UserInfoPatch';
+export * from './UserStats';
