@@ -1,0 +1,13 @@
+type: object
+properties:
+  nb_alias:
+    type: integer
+  nb_block:
+    type: integer
+  nb_forward:
+    type: integer
+  nb_reply:
+    type: integer
+
+required:
+  - api_key
