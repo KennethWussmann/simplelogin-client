@@ -1,8 +1,8 @@
-import { buildDocs, buildPagesIndex, buildOAS, createDirs } from '../steps';
+import { buildDocs, buildPagesIndex } from '../steps';
+import build from './build';
 
 export default async () => {
-  await createDirs();
-  const oas = await buildOAS();
+  const oas = await build();
   await buildDocs(oas);
   await buildPagesIndex();
 };

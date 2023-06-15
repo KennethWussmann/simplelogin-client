@@ -7,4 +7,5 @@ export default async (formatOrLint: 'format' | 'lint' = 'format') => {
   await buildSdk(oas);
   await run(formatOrLint);
   await buildSrc();
+  return oas;
 };
