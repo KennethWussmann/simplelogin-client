@@ -1,6 +1,6 @@
-import { access, copyFile, mkdir, readFile, rm, writeFile } from 'fs/promises';
-import { join, parse } from 'path';
-import { chalk } from 'zx';
+import { join, parse } from "path";
+import { access, copyFile, mkdir, readFile, rm, writeFile } from "fs/promises";
+import { chalk } from "zx";
 
 export const exist = async (path: string) => {
   try {
@@ -27,9 +27,9 @@ export const deleteIfExists = async (path: string) => {
   return false;
 };
 
-export const read = async (path: string) => readFile(path, 'utf-8');
+export const read = async (path: string) => readFile(path, "utf-8");
 
-export const save = async (path: string, content: string) => writeFile(path, content, 'utf-8');
+export const save = async (path: string, content: string) => writeFile(path, content, "utf-8");
 export const copy = async (
   sourcePaths: string[],
   destinationDir: string,
@@ -37,11 +37,11 @@ export const copy = async (
 ) => Promise.all(sourcePaths.map((path) => copyFile(path, join(destinationDir, rename(parse(path).base)))));
 
 export const sectionHeader = (text: string) =>
-  ['\n', '-'.repeat(text.length), chalk.greenBright(text), '-'.repeat(text.length)].join('\n');
+  ["\n", "-".repeat(text.length), chalk.greenBright(text), "-".repeat(text.length)].join("\n");
 
 export const measureBuildTime = async (fn: () => Promise<void>) => {
   const start = Date.now();
   await fn();
   const seconds = Math.round(((Date.now() - start) / 1000 + Number.EPSILON) * 100) / 100;
-  console.log(`\n✨ ${chalk.greenBright('Done in')} ${seconds}${chalk.greenBright('s')}`);
+  console.log(`\n✨ ${chalk.greenBright("Done in")} ${seconds}${chalk.greenBright("s")}`);
 };

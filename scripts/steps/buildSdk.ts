@@ -1,30 +1,30 @@
-import { join, parse } from 'path';
-import { $ } from 'zx/core';
-import { glob } from 'zx';
-import { image, sdkDestination } from '../constants';
-import { save, read, sectionHeader, createDirectoryIfNotExists } from '../utils';
+import { join, parse } from "path";
+import { glob } from "zx";
+import { $ } from "zx/core";
+import { image, sdkDestination } from "../constants";
+import { createDirectoryIfNotExists, read, save, sectionHeader } from "../utils";
 
 const getDestinationPath = (path: string) => {
   const filename = parse(path).base;
-  return join(sdkDestination, path.replace('build/sdk/', '').replace(filename, ''), filename);
+  return join(sdkDestination, path.replace("build/sdk/", "").replace(filename, ""), filename);
 };
 
 const modify = (filename: string, content: string) =>
-  filename === 'index.ts'
+  filename === "index.ts"
     ? content
     : [
-        '/* eslint-disable */',
-        '// @ts-nocheck',
-        'type RequestCredentials = any;',
-        'type Response = any;',
-        'type RequestInit = any;',
-        'type FormData = any;',
-        'type WindowOrWorkerGlobalScope = any;',
+        "// biome-ignore lint/format: generated file",
+        "// @ts-nocheck",
+        "type RequestCredentials = any;",
+        "type Response = any;",
+        "type RequestInit = any;",
+        "type FormData = any;",
+        "type WindowOrWorkerGlobalScope = any;",
         content,
-      ].join('\n');
+      ].join("\n");
 
 const moveSdkFiles = async () => {
-  const paths = await glob(['build/sdk/**/*.ts']);
+  const paths = await glob(["build/sdk/**/*.ts"]);
 
   await Promise.all(
     paths.map(async (path) => {
@@ -40,11 +40,11 @@ const moveSdkFiles = async () => {
 };
 
 export const buildSdk = async (oasPath: string) => {
-  console.log(sectionHeader('🔧 Building SDK'));
+  console.log(sectionHeader("🔧 Building SDK"));
   await $`docker run --rm -v ${process.cwd()}:/local ${image} generate -i ${join(
-    '/local',
-    'dist',
-    'openapi',
+    "/local",
+    "dist",
+    "openapi",
     parse(oasPath).base,
   )} -g typescript-fetch -o /local/build/sdk`;
   await moveSdkFiles();

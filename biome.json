@@ -1,0 +1,20 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.2.2/schema.json",
+  "organizeImports": {
+    "enabled": true
+  },
+  "formatter": {
+    "indentStyle": "space",
+    "indentSize": 2,
+    "lineWidth": 120
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true
+    }
+  },
+  "files": {
+    "ignore": ["./build", "./dist", "oas/", "!oas/helpers", "src/sdk", "tscBuild/", "./node_modules", ".github"]
+  }
+}
