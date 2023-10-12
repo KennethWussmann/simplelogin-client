@@ -1,0 +1,5 @@
+type: object
+properties:
+  query:
+    type: string
+    description: Full-text search for the e-mail address of the alias

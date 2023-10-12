@@ -34,6 +34,7 @@ import type {
   AliasModelArray,
   AliasOptions,
   AliasRandomNewPost,
+  AliasSearchPost,
   Success,
 } from '../models';
 import {
@@ -61,6 +62,8 @@ import {
     AliasOptionsToJSON,
     AliasRandomNewPostFromJSON,
     AliasRandomNewPostToJSON,
+    AliasSearchPostFromJSON,
+    AliasSearchPostToJSON,
     SuccessFromJSON,
     SuccessToJSON,
 } from '../models';
@@ -108,6 +111,14 @@ export interface GetAliasesRequest {
 export interface GetContactsRequest {
     aliasId: number;
     pageId: number;
+}
+
+export interface SearchAliasesRequest {
+    pageId: number;
+    pinned?: boolean;
+    disabled?: boolean;
+    enabled?: boolean;
+    aliasSearchPost?: AliasSearchPost;
 }
 
 export interface ToggleAliasRequest {
@@ -502,6 +513,61 @@ export class AliasApi extends runtime.BaseAPI {
      */
     async getContacts(requestParameters: GetContactsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AliasAliasIdContactsModelArray> {
         const response = await this.getContactsRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Search user aliases. Please note `pinned`, `disabled`, `enabled` are exclusive, i.e. only one can be present. They can only be set to `true`.
+     * Search aliases
+     */
+    async searchAliasesRaw(requestParameters: SearchAliasesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AliasModelArray>> {
+        if (requestParameters.pageId === null || requestParameters.pageId === undefined) {
+            throw new runtime.RequiredError('pageId','Required parameter requestParameters.pageId was null or undefined when calling searchAliases.');
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters.pageId !== undefined) {
+            queryParameters['page_id'] = requestParameters.pageId;
+        }
+
+        if (requestParameters.pinned !== undefined) {
+            queryParameters['pinned'] = requestParameters.pinned;
+        }
+
+        if (requestParameters.disabled !== undefined) {
+            queryParameters['disabled'] = requestParameters.disabled;
+        }
+
+        if (requestParameters.enabled !== undefined) {
+            queryParameters['enabled'] = requestParameters.enabled;
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authentication"] = this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
+        }
+
+        const response = await this.request({
+            path: `/v2/aliases`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: AliasSearchPostToJSON(requestParameters.aliasSearchPost),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => AliasModelArrayFromJSON(jsonValue));
+    }
+
+    /**
+     * Search user aliases. Please note `pinned`, `disabled`, `enabled` are exclusive, i.e. only one can be present. They can only be set to `true`.
+     * Search aliases
+     */
+    async searchAliases(requestParameters: SearchAliasesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AliasModelArray> {
+        const response = await this.searchAliasesRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

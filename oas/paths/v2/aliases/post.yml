@@ -1,0 +1,32 @@
+tags:
+  - alias
+summary: Search aliases
+description: Search user aliases. Please note `pinned`, `disabled`, `enabled` are exclusive, i.e. only one can be present. They can only be set to `true`.
+operationId: {{ opId() }}
+parameters:
+  - $ref: "@parameters/queryPageId.yml"
+  - in: query
+    name: pinned
+    required: false
+    schema:
+      type: boolean
+    description: If set, only pinned aliases are returned.
+  - in: query
+    name: disabled
+    required: false
+    schema:
+      type: boolean
+    description: If set, only disabled aliases are returned.
+  - in: query
+    name: enabled
+    required: false
+    schema:
+      type: boolean
+    description: If set, only enabled aliases are returned.
+requestBody:
+  required: false
+  content: {{ mixin("@mixins/request/json.yml", "@schemas/alias/search/post.yml") }}
+responses:
+  "200":
+    description: Successful
+    content: {{ mixin("@mixins/request/json.yml", "@schemas/alias/modelArray.yml") }}

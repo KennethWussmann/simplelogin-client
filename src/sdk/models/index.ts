@@ -17,6 +17,7 @@ export * from './AliasOptions';
 export * from './AliasOptionsRecommendation';
 export * from './AliasOptionsSuffixesInner';
 export * from './AliasRandomNewPost';
+export * from './AliasSearchPost';
 export * from './AuthActivatePost';
 export * from './AuthForgotPasswordPost';
 export * from './AuthLogin';

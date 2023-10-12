@@ -45,8 +45,7 @@
     }
   },
   "lint-staged": {
-    "src/*.ts": "biome check --apply-unsafe",
-    "*.{ts,json,yml,yaml,html,md}": "biome format --write"
+    "*.{ts,json,yml,yaml,html,md}": "tsx scripts/index.ts format lint"
   },
   "engines": {
     "node": "20",
