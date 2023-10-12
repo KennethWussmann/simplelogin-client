@@ -1,11 +1,11 @@
-import { writeFile } from 'fs/promises';
-import { join } from 'path';
-import { distDir } from '../constants';
+import { join } from "path";
+import { writeFile } from "fs/promises";
+import { distDir } from "../constants";
 
 export const buildPagesIndex = async () =>
   Promise.all([
     writeFile(
-      join(distDir, 'index.html'),
+      join(distDir, "index.html"),
       `<!DOCTYPE html>
 <html lang="en">
   <meta charset="UTF-8">
@@ -29,7 +29,7 @@ export const buildPagesIndex = async () =>
     </ul>
   </body>
 </html>`,
-      'utf-8',
+      "utf-8",
     ),
-    writeFile(join(distDir, '.nojekyll'), '', 'utf-8'),
+    writeFile(join(distDir, ".nojekyll"), "", "utf-8"),
   ]);

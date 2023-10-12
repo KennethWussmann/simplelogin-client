@@ -1,8 +1,8 @@
-import { $ } from 'zx/core';
-import { sectionHeader } from '../utils';
+import { $ } from "zx/core";
+import { sectionHeader } from "../utils";
 
 export const checkCodegen = async () => {
-  console.log(sectionHeader('🔍 Checking codegen'));
+  console.log(sectionHeader("🔍 Checking codegen"));
   const { stdout } = await $`git status --porcelain`;
   if (stdout.length !== 0) {
     await $`git diff > changes.patch`;
@@ -10,6 +10,6 @@ export const checkCodegen = async () => {
       'There are changes to the generated files listed above. This indicates that they were not commited. Please run "npm run rebuild" and commit the generated changes. You can find the changes in the artifact attached to this job.',
     );
   } else {
-    console.log('No changes of generated files.');
+    console.log("No changes of generated files.");
   }
 };

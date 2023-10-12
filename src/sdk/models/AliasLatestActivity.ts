@@ -1,4 +1,4 @@
-/* eslint-disable */
+// biome-ignore lint/format: generated file
 // @ts-nocheck
 type RequestCredentials = any;
 type Response = any;

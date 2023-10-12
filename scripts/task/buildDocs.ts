@@ -1,5 +1,5 @@
-import { buildDocs, buildPagesIndex } from '../steps';
-import build from './build';
+import { buildDocs, buildPagesIndex } from "../steps";
+import build from "./build";
 
 export default async () => {
   const oas = await build();

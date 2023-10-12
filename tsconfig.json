@@ -8,7 +8,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
-    "moduleResolution": "node",
+    "moduleResolution": "NodeNext",
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "types": ["node", "jest"],
@@ -19,5 +19,5 @@
     "declaration": true
   },
   "include": ["src", "test"],
-  "exclude": ["node_modules", "dist", "build", "scripts", "oas"]
+  "exclude": ["node_modules", "dist", "build", "scripts", "oas", "package-lock.json"]
 }

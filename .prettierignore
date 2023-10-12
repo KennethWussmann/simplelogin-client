@@ -1,6 +1,1 @@
-build/
-dist/
-oas/
-!oas/helpers
-src/sdk/
-tscBuild/
+**
