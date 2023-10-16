@@ -11,7 +11,7 @@ jobs:
       packages: read
       contents: read
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/npm-install
       - name: Login to GitHub Packages Docker Registry
         uses: docker/login-action@v2
