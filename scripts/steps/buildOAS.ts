@@ -8,12 +8,12 @@ export const buildOAS = async () => {
   console.log(sectionHeader("📄 Building OpenAPI Spec"));
 
   await Promise.all([
-    $`boats -i ./oas/index.yml -o ${join("build", "openapi", "simplelogin.json")} -f ${join(
+    $`boats --noVersionCheck -i ./oas/index.yml -o ${join("build", "openapi", "simplelogin.json")} -f ${join(
       "oas",
       "helpers",
       "opId.ts",
     )}`,
-    $`boats -i ./oas/index.yml -o ${join("build", "openapi", "simplelogin.yml")} -f ${join(
+    $`boats --noVersionCheck -i ./oas/index.yml -o ${join("build", "openapi", "simplelogin.yml")} -f ${join(
       "oas",
       "helpers",
       "opId.ts",
