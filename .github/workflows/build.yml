@@ -23,7 +23,7 @@ jobs:
       # upload changes.patch on failure
       - name: Upload uncomitted changes
         if: failure()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: changes.patch
           path: changes.patch
