@@ -36,7 +36,7 @@ import type {
   AliasRandomNewPost,
   AliasSearchPost,
   Success,
-} from '../models';
+} from '../models/index';
 import {
     AliasFromJSON,
     AliasToJSON,
@@ -66,7 +66,7 @@ import {
     AliasSearchPostToJSON,
     SuccessFromJSON,
     SuccessToJSON,
-} from '../models';
+} from '../models/index';
 
 export interface CreateContactRequest {
     aliasId: number;

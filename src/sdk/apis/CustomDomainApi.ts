@@ -23,11 +23,11 @@ type WindowOrWorkerGlobalScope = any;
 import * as runtime from '../runtime';
 import type {
   CustomDomain,
-} from '../models';
+} from '../models/index';
 import {
     CustomDomainFromJSON,
     CustomDomainToJSON,
-} from '../models';
+} from '../models/index';
 
 export interface GetCustomDomainsRequest {
     aliasId: number;

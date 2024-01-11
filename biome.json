@@ -5,7 +5,7 @@
   },
   "formatter": {
     "indentStyle": "space",
-    "indentSize": 2,
+    "indentWidth": 2,
     "lineWidth": 120
   },
   "linter": {
