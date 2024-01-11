@@ -9,7 +9,6 @@ export const checkCodegen = async () => {
     throw new Error(
       'There are changes to the generated files listed above. This indicates that they were not commited. Please run "npm run rebuild" and commit the generated changes. You can find the changes in the artifact attached to this job.',
     );
-  } else {
-    console.log("No changes of generated files.");
   }
+  console.log("No changes of generated files.");
 };

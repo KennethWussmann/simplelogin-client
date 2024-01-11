@@ -38,7 +38,7 @@ import type {
   UserInfo,
   UserInfoPatch,
   UserStats,
-} from '../models';
+} from '../models/index';
 import {
     AuthActivatePostFromJSON,
     AuthActivatePostToJSON,
@@ -72,7 +72,7 @@ import {
     UserInfoPatchToJSON,
     UserStatsFromJSON,
     UserStatsToJSON,
-} from '../models';
+} from '../models/index';
 
 export interface ActivateAccountRequest {
     authActivatePost: AuthActivatePost;

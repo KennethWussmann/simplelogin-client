@@ -26,7 +26,7 @@ import type {
   MailboxMailboxIdPut,
   MailboxModelArray,
   MailboxPost,
-} from '../models';
+} from '../models/index';
 import {
     MailboxFromJSON,
     MailboxToJSON,
@@ -36,7 +36,7 @@ import {
     MailboxModelArrayToJSON,
     MailboxPostFromJSON,
     MailboxPostToJSON,
-} from '../models';
+} from '../models/index';
 
 export interface CreateMailboxRequest {
     mailboxPost: MailboxPost;
