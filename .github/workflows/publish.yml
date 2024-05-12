@@ -35,7 +35,7 @@ jobs:
 
   docs:
     needs: package
-    runs-on: buildjet-8vcpu-ubuntu-2204
+    runs-on: ubuntu-latest
     permissions:
       pages: write
       id-token: write
