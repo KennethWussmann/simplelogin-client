@@ -1,0 +1,11 @@
+tags:
+  - settings
+summary: Return user setting
+description: Return user setting
+responses:
+  '200':
+    description: Successful
+    content: 
+      application/json:
+        schema:
+          $ref: '@schemas/setting/model.yml'
