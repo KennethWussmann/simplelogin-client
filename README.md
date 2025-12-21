@@ -16,11 +16,17 @@
 > Interested in the state of the project? [Check the faq!](./docs/faq.md#whats-the-current-project-state)
 
 - [x] Account Management
-  - [x] Login (+MFA), Register, Activate, etc.
-  - [x] User info
+  - [x] Login (+MFA), Register, Activate, Reactivate
+  - [x] Password reset
+  - [x] User info and statistics
   - [x] API key management
+  - [x] Cookie token generation
+  - [x] Logout
+  - [x] Sudo mode
+  - [x] Account deletion
 - [x] Alias Management
-  - [x] Get, Create, Update, Delete
+  - [x] Get alias options
+  - [x] Create (random and custom), Update, Delete
   - [x] Contacts and activities
 - [x] Mailbox Management
   - [x] Get, Create, Update, Delete
@@ -32,11 +38,18 @@
   - [x] Read and write settings
   - [x] Read random alias domains
 - [ ] [Custom Domain Management](https://github.com/KennethWussmann/simplelogin-client/issues/7)
-  - [x] Get
-  - [ ] Update, Delete
+  - [x] Get domains
+  - [ ] Update domain settings
+  - [ ] View trash (deleted aliases)
 - [ ] [Notifications](https://github.com/KennethWussmann/simplelogin-client/issues/9)
+  - [ ] Get notifications
+  - [ ] Mark notification as read
 - [ ] [Import & Export](https://github.com/KennethWussmann/simplelogin-client/issues/11)
+  - [ ] Export complete user data
+  - [ ] Export aliases as CSV
 - [ ] [Phone & Misc](https://github.com/KennethWussmann/simplelogin-client/issues/12)
+  - [ ] Phone reservation message retrieval
+  - [ ] Apple payment processing
 
 ## Getting started
 
