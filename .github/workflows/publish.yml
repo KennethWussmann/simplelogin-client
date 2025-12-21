@@ -25,7 +25,7 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - run: pnpm ci
+      - run: pnpm run ci
       - name: Set package version
         run: npm version --no-git-tag-version ${GITHUB_REF/refs\/tags\//}
       - name: Publish
