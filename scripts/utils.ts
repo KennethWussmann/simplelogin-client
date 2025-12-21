@@ -48,3 +48,13 @@ export const measureBuildTime = async (fn: () => Promise<void>) => {
   const seconds = Math.round(((Date.now() - start) / 1000 + Number.EPSILON) * 100) / 100;
   console.log(`\n✨ ${chalk.greenBright('Done in')} ${seconds}${chalk.greenBright('s')}`);
 };
+
+export const getPackageVersion = async (): Promise<string> => {
+  const packageJson = JSON.parse(await read(join(process.cwd(), 'package.json')));
+  return packageJson.version;
+};
+
+export const getCommitHash = (): string => {
+  const hash = process.env.GITHUB_SHA || 'develop';
+  return hash === 'develop' ? hash : hash.substring(0, 7);
+};
