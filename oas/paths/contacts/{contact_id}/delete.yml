@@ -1,0 +1,14 @@
+tags:
+  - alias
+summary: Delete contact
+description: Delete a contact by id.
+operationId: {{ opId() }}
+parameters:
+  - $ref: "@parameters/pathContactId.yml"
+responses:
+  "200":
+    description: Contact deleted successfully
+    content: {{ mixin("@mixins/request/json.yml", "@schemas/contacts/{contact_id}/delete.yml") }}
+  "401":
+    description: Unauthorized
+    content: {{ mixin("@mixins/request/json.yml", "@schemas/error.yml") }}

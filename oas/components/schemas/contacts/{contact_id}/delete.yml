@@ -1,0 +1,8 @@
+type: object
+properties:
+  deleted:
+    type: boolean
+    description: Whether the contact was successfully deleted.
+    example: true
+required:
+  - deleted

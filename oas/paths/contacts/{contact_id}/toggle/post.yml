@@ -1,0 +1,14 @@
+tags:
+  - alias
+summary: Toggle contact blocking
+description: Block or unblock a contact by id. Toggles the block_forward status.
+operationId: {{ opId() }}
+parameters:
+  - $ref: "@parameters/pathContactId.yml"
+responses:
+  "200":
+    description: Contact blocking toggled successfully
+    content: {{ mixin("@mixins/request/json.yml", "@schemas/contacts/{contact_id}/toggle.yml") }}
+  "401":
+    description: Unauthorized
+    content: {{ mixin("@mixins/request/json.yml", "@schemas/error.yml") }}
