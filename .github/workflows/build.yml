@@ -19,7 +19,7 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - run: npm run ci
+      - run: pnpm run ci
       # upload changes.patch on failure
       - name: Upload uncomitted changes
         if: failure()
