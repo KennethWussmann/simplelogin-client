@@ -35,6 +35,8 @@ import type {
   AliasOptions,
   AliasRandomNewPost,
   AliasSearchPost,
+  ContactsContactIdDelete,
+  ContactsContactIdToggle,
   Success,
 } from '../models/index';
 import {
@@ -64,6 +66,10 @@ import {
     AliasRandomNewPostToJSON,
     AliasSearchPostFromJSON,
     AliasSearchPostToJSON,
+    ContactsContactIdDeleteFromJSON,
+    ContactsContactIdDeleteToJSON,
+    ContactsContactIdToggleFromJSON,
+    ContactsContactIdToggleToJSON,
     SuccessFromJSON,
     SuccessToJSON,
 } from '../models/index';
@@ -86,6 +92,10 @@ export interface CreateRandomAliasRequest {
 
 export interface DeleteAliasRequest {
     aliasId: number;
+}
+
+export interface DeleteContactRequest {
+    contactId: number;
 }
 
 export interface GetActivitiesRequest {
@@ -123,6 +133,10 @@ export interface SearchAliasesRequest {
 
 export interface ToggleAliasRequest {
     aliasId: number;
+}
+
+export interface ToggleContactBlockingRequest {
+    contactId: number;
 }
 
 export interface UpdateAliasRequest {
@@ -330,6 +344,49 @@ export class AliasApi extends runtime.BaseAPI {
      */
     async deleteAlias(requestParameters: DeleteAliasRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AliasAliasIdDelete> {
         const response = await this.deleteAliasRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Delete a contact by id.
+     * Delete contact
+     */
+    async deleteContactRaw(requestParameters: DeleteContactRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ContactsContactIdDelete>> {
+        if (requestParameters['contactId'] == null) {
+            throw new runtime.RequiredError(
+                'contactId',
+                'Required parameter "contactId" was null or undefined when calling deleteContact().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authentication"] = await this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
+        }
+
+
+        let urlPath = `/contacts/{contact_id}`;
+        urlPath = urlPath.replace(`{${"contact_id"}}`, encodeURIComponent(String(requestParameters['contactId'])));
+
+        const response = await this.request({
+            path: urlPath,
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => ContactsContactIdDeleteFromJSON(jsonValue));
+    }
+
+    /**
+     * Delete a contact by id.
+     * Delete contact
+     */
+    async deleteContact(requestParameters: DeleteContactRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ContactsContactIdDelete> {
+        const response = await this.deleteContactRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
@@ -682,6 +739,49 @@ export class AliasApi extends runtime.BaseAPI {
      */
     async toggleAlias(requestParameters: ToggleAliasRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AliasAliasIdTogglePost> {
         const response = await this.toggleAliasRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Block or unblock a contact by id. Toggles the block_forward status.
+     * Toggle contact blocking
+     */
+    async toggleContactBlockingRaw(requestParameters: ToggleContactBlockingRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ContactsContactIdToggle>> {
+        if (requestParameters['contactId'] == null) {
+            throw new runtime.RequiredError(
+                'contactId',
+                'Required parameter "contactId" was null or undefined when calling toggleContactBlocking().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authentication"] = await this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
+        }
+
+
+        let urlPath = `/contacts/{contact_id}/toggle`;
+        urlPath = urlPath.replace(`{${"contact_id"}}`, encodeURIComponent(String(requestParameters['contactId'])));
+
+        const response = await this.request({
+            path: urlPath,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => ContactsContactIdToggleFromJSON(jsonValue));
+    }
+
+    /**
+     * Block or unblock a contact by id. Toggles the block_forward status.
+     * Toggle contact blocking
+     */
+    async toggleContactBlocking(requestParameters: ToggleContactBlockingRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ContactsContactIdToggle> {
+        const response = await this.toggleContactBlockingRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

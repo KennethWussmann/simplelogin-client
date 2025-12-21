@@ -24,13 +24,13 @@
   - [x] Contacts and activities
 - [x] Mailbox Management
   - [x] Get, Create, Update, Delete
+- [x] Contact Management
+  - [x] Get, Create
+  - [x] Delete
+  - [x] Block & unblock
 - [ ] [Custom Domain Management](https://github.com/KennethWussmann/simplelogin-client/issues/7)
   - [x] Get
   - [ ] Update, Delete
-- [ ] [Contact Management](https://github.com/KennethWussmann/simplelogin-client/issues/8)
-  - [x] Get, Create
-  - [ ] Delete
-  - [ ] Block & unblock
 - [ ] [Notifications](https://github.com/KennethWussmann/simplelogin-client/issues/9)
 - [ ] [Settings](https://github.com/KennethWussmann/simplelogin-client/issues/10)
 - [ ] [Import & Export](https://github.com/KennethWussmann/simplelogin-client/issues/11)

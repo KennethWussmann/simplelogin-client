@@ -1,0 +1,8 @@
+type: object
+properties:
+  block_forward:
+    type: boolean
+    description: Whether forwarding from this contact is blocked. When true, forwarding is blocked; when false, forwarding is allowed.
+    example: false
+required:
+  - block_forward

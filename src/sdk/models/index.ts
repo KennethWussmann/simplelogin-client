@@ -26,6 +26,8 @@ export * from './AuthMfa';
 export * from './AuthMfaPost';
 export * from './AuthReactivatePost';
 export * from './AuthRegisterPost';
+export * from './ContactsContactIdDelete';
+export * from './ContactsContactIdToggle';
 export * from './CustomDomain';
 export * from './Mailbox';
 export * from './MailboxMailboxIdPut';
