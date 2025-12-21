@@ -19,12 +19,13 @@ type WindowOrWorkerGlobalScope = any;
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 import type { AliasAliasIdContacts } from './AliasAliasIdContacts';
 import {
     AliasAliasIdContactsFromJSON,
     AliasAliasIdContactsFromJSONTyped,
     AliasAliasIdContactsToJSON,
+    AliasAliasIdContactsToJSONTyped,
 } from './AliasAliasIdContacts';
 
 /**
@@ -44,10 +45,8 @@ export interface AliasAliasIdContactsModelArray {
 /**
  * Check if a given object implements the AliasAliasIdContactsModelArray interface.
  */
-export function instanceOfAliasAliasIdContactsModelArray(value: object): boolean {
-    let isInstance = true;
-
-    return isInstance;
+export function instanceOfAliasAliasIdContactsModelArray(value: object): value is AliasAliasIdContactsModelArray {
+    return true;
 }
 
 export function AliasAliasIdContactsModelArrayFromJSON(json: any): AliasAliasIdContactsModelArray {
@@ -55,25 +54,27 @@ export function AliasAliasIdContactsModelArrayFromJSON(json: any): AliasAliasIdC
 }
 
 export function AliasAliasIdContactsModelArrayFromJSONTyped(json: any, ignoreDiscriminator: boolean): AliasAliasIdContactsModelArray {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
         
-        'contacts': !exists(json, 'contacts') ? undefined : ((json['contacts'] as Array<any>).map(AliasAliasIdContactsFromJSON)),
+        'contacts': json['contacts'] == null ? undefined : ((json['contacts'] as Array<any>).map(AliasAliasIdContactsFromJSON)),
     };
 }
 
-export function AliasAliasIdContactsModelArrayToJSON(value?: AliasAliasIdContactsModelArray | null): any {
-    if (value === undefined) {
-        return undefined;
+export function AliasAliasIdContactsModelArrayToJSON(json: any): AliasAliasIdContactsModelArray {
+    return AliasAliasIdContactsModelArrayToJSONTyped(json, false);
+}
+
+export function AliasAliasIdContactsModelArrayToJSONTyped(value?: AliasAliasIdContactsModelArray | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'contacts': value.contacts === undefined ? undefined : ((value.contacts as Array<any>).map(AliasAliasIdContactsToJSON)),
+        'contacts': value['contacts'] == null ? undefined : ((value['contacts'] as Array<any>).map(AliasAliasIdContactsToJSON)),
     };
 }
 

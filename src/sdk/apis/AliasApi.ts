@@ -140,12 +140,18 @@ export class AliasApi extends runtime.BaseAPI {
      * Create contact
      */
     async createContactRaw(requestParameters: CreateContactRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AliasAliasIdContacts>> {
-        if (requestParameters.aliasId === null || requestParameters.aliasId === undefined) {
-            throw new runtime.RequiredError('aliasId','Required parameter requestParameters.aliasId was null or undefined when calling createContact.');
+        if (requestParameters['aliasId'] == null) {
+            throw new runtime.RequiredError(
+                'aliasId',
+                'Required parameter "aliasId" was null or undefined when calling createContact().'
+            );
         }
 
-        if (requestParameters.aliasAliasIdContactsPost === null || requestParameters.aliasAliasIdContactsPost === undefined) {
-            throw new runtime.RequiredError('aliasAliasIdContactsPost','Required parameter requestParameters.aliasAliasIdContactsPost was null or undefined when calling createContact.');
+        if (requestParameters['aliasAliasIdContactsPost'] == null) {
+            throw new runtime.RequiredError(
+                'aliasAliasIdContactsPost',
+                'Required parameter "aliasAliasIdContactsPost" was null or undefined when calling createContact().'
+            );
         }
 
         const queryParameters: any = {};
@@ -155,15 +161,19 @@ export class AliasApi extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authentication"] = this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
+            headerParameters["Authentication"] = await this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/aliases/{alias_id}/contacts`;
+        urlPath = urlPath.replace(`{${"alias_id"}}`, encodeURIComponent(String(requestParameters['aliasId'])));
+
         const response = await this.request({
-            path: `/aliases/{alias_id}/contacts`.replace(`{${"alias_id"}}`, encodeURIComponent(String(requestParameters.aliasId))),
+            path: urlPath,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: AliasAliasIdContactsPostToJSON(requestParameters.aliasAliasIdContactsPost),
+            body: AliasAliasIdContactsPostToJSON(requestParameters['aliasAliasIdContactsPost']),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => AliasAliasIdContactsFromJSON(jsonValue));
@@ -183,14 +193,17 @@ export class AliasApi extends runtime.BaseAPI {
      * Create custom alias
      */
     async createCustomAliasRaw(requestParameters: CreateCustomAliasRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Alias>> {
-        if (requestParameters.aliasCustomNewPost === null || requestParameters.aliasCustomNewPost === undefined) {
-            throw new runtime.RequiredError('aliasCustomNewPost','Required parameter requestParameters.aliasCustomNewPost was null or undefined when calling createCustomAlias.');
+        if (requestParameters['aliasCustomNewPost'] == null) {
+            throw new runtime.RequiredError(
+                'aliasCustomNewPost',
+                'Required parameter "aliasCustomNewPost" was null or undefined when calling createCustomAlias().'
+            );
         }
 
         const queryParameters: any = {};
 
-        if (requestParameters.hostname !== undefined) {
-            queryParameters['hostname'] = requestParameters.hostname;
+        if (requestParameters['hostname'] != null) {
+            queryParameters['hostname'] = requestParameters['hostname'];
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -198,15 +211,18 @@ export class AliasApi extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authentication"] = this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
+            headerParameters["Authentication"] = await this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/v3/alias/custom/new`;
+
         const response = await this.request({
-            path: `/v3/alias/custom/new`,
+            path: urlPath,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: AliasCustomNewPostToJSON(requestParameters.aliasCustomNewPost),
+            body: AliasCustomNewPostToJSON(requestParameters['aliasCustomNewPost']),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => AliasFromJSON(jsonValue));
@@ -226,18 +242,21 @@ export class AliasApi extends runtime.BaseAPI {
      * Create random alias
      */
     async createRandomAliasRaw(requestParameters: CreateRandomAliasRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Alias>> {
-        if (requestParameters.aliasRandomNewPost === null || requestParameters.aliasRandomNewPost === undefined) {
-            throw new runtime.RequiredError('aliasRandomNewPost','Required parameter requestParameters.aliasRandomNewPost was null or undefined when calling createRandomAlias.');
+        if (requestParameters['aliasRandomNewPost'] == null) {
+            throw new runtime.RequiredError(
+                'aliasRandomNewPost',
+                'Required parameter "aliasRandomNewPost" was null or undefined when calling createRandomAlias().'
+            );
         }
 
         const queryParameters: any = {};
 
-        if (requestParameters.hostname !== undefined) {
-            queryParameters['hostname'] = requestParameters.hostname;
+        if (requestParameters['hostname'] != null) {
+            queryParameters['hostname'] = requestParameters['hostname'];
         }
 
-        if (requestParameters.mode !== undefined) {
-            queryParameters['mode'] = requestParameters.mode;
+        if (requestParameters['mode'] != null) {
+            queryParameters['mode'] = requestParameters['mode'];
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -245,15 +264,18 @@ export class AliasApi extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authentication"] = this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
+            headerParameters["Authentication"] = await this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/alias/random/new`;
+
         const response = await this.request({
-            path: `/alias/random/new`,
+            path: urlPath,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: AliasRandomNewPostToJSON(requestParameters.aliasRandomNewPost),
+            body: AliasRandomNewPostToJSON(requestParameters['aliasRandomNewPost']),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => AliasFromJSON(jsonValue));
@@ -273,8 +295,11 @@ export class AliasApi extends runtime.BaseAPI {
      * Delete alias
      */
     async deleteAliasRaw(requestParameters: DeleteAliasRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AliasAliasIdDelete>> {
-        if (requestParameters.aliasId === null || requestParameters.aliasId === undefined) {
-            throw new runtime.RequiredError('aliasId','Required parameter requestParameters.aliasId was null or undefined when calling deleteAlias.');
+        if (requestParameters['aliasId'] == null) {
+            throw new runtime.RequiredError(
+                'aliasId',
+                'Required parameter "aliasId" was null or undefined when calling deleteAlias().'
+            );
         }
 
         const queryParameters: any = {};
@@ -282,11 +307,15 @@ export class AliasApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authentication"] = this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
+            headerParameters["Authentication"] = await this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/aliases/{alias_id}`;
+        urlPath = urlPath.replace(`{${"alias_id"}}`, encodeURIComponent(String(requestParameters['aliasId'])));
+
         const response = await this.request({
-            path: `/aliases/{alias_id}`.replace(`{${"alias_id"}}`, encodeURIComponent(String(requestParameters.aliasId))),
+            path: urlPath,
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -309,28 +338,38 @@ export class AliasApi extends runtime.BaseAPI {
      * Get activities
      */
     async getActivitiesRaw(requestParameters: GetActivitiesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AliasAliasIdActivitiesModelArray>> {
-        if (requestParameters.aliasId === null || requestParameters.aliasId === undefined) {
-            throw new runtime.RequiredError('aliasId','Required parameter requestParameters.aliasId was null or undefined when calling getActivities.');
+        if (requestParameters['aliasId'] == null) {
+            throw new runtime.RequiredError(
+                'aliasId',
+                'Required parameter "aliasId" was null or undefined when calling getActivities().'
+            );
         }
 
-        if (requestParameters.pageId === null || requestParameters.pageId === undefined) {
-            throw new runtime.RequiredError('pageId','Required parameter requestParameters.pageId was null or undefined when calling getActivities.');
+        if (requestParameters['pageId'] == null) {
+            throw new runtime.RequiredError(
+                'pageId',
+                'Required parameter "pageId" was null or undefined when calling getActivities().'
+            );
         }
 
         const queryParameters: any = {};
 
-        if (requestParameters.pageId !== undefined) {
-            queryParameters['page_id'] = requestParameters.pageId;
+        if (requestParameters['pageId'] != null) {
+            queryParameters['page_id'] = requestParameters['pageId'];
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authentication"] = this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
+            headerParameters["Authentication"] = await this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/aliases/{alias_id}/activities`;
+        urlPath = urlPath.replace(`{${"alias_id"}}`, encodeURIComponent(String(requestParameters['aliasId'])));
+
         const response = await this.request({
-            path: `/aliases/{alias_id}/activities`.replace(`{${"alias_id"}}`, encodeURIComponent(String(requestParameters.aliasId))),
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -353,8 +392,11 @@ export class AliasApi extends runtime.BaseAPI {
      * Get alias
      */
     async getAliasRaw(requestParameters: GetAliasRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Alias>> {
-        if (requestParameters.aliasId === null || requestParameters.aliasId === undefined) {
-            throw new runtime.RequiredError('aliasId','Required parameter requestParameters.aliasId was null or undefined when calling getAlias.');
+        if (requestParameters['aliasId'] == null) {
+            throw new runtime.RequiredError(
+                'aliasId',
+                'Required parameter "aliasId" was null or undefined when calling getAlias().'
+            );
         }
 
         const queryParameters: any = {};
@@ -362,11 +404,15 @@ export class AliasApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authentication"] = this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
+            headerParameters["Authentication"] = await this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/aliases/{alias_id}`;
+        urlPath = urlPath.replace(`{${"alias_id"}}`, encodeURIComponent(String(requestParameters['aliasId'])));
+
         const response = await this.request({
-            path: `/aliases/{alias_id}`.replace(`{${"alias_id"}}`, encodeURIComponent(String(requestParameters.aliasId))),
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -391,18 +437,21 @@ export class AliasApi extends runtime.BaseAPI {
     async getAliasOptionsRaw(requestParameters: GetAliasOptionsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AliasOptions>> {
         const queryParameters: any = {};
 
-        if (requestParameters.hostname !== undefined) {
-            queryParameters['hostname'] = requestParameters.hostname;
+        if (requestParameters['hostname'] != null) {
+            queryParameters['hostname'] = requestParameters['hostname'];
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authentication"] = this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
+            headerParameters["Authentication"] = await this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/v5/alias/options`;
+
         const response = await this.request({
-            path: `/v5/alias/options`,
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -425,36 +474,42 @@ export class AliasApi extends runtime.BaseAPI {
      * Get aliases
      */
     async getAliasesRaw(requestParameters: GetAliasesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AliasModelArray>> {
-        if (requestParameters.pageId === null || requestParameters.pageId === undefined) {
-            throw new runtime.RequiredError('pageId','Required parameter requestParameters.pageId was null or undefined when calling getAliases.');
+        if (requestParameters['pageId'] == null) {
+            throw new runtime.RequiredError(
+                'pageId',
+                'Required parameter "pageId" was null or undefined when calling getAliases().'
+            );
         }
 
         const queryParameters: any = {};
 
-        if (requestParameters.pageId !== undefined) {
-            queryParameters['page_id'] = requestParameters.pageId;
+        if (requestParameters['pageId'] != null) {
+            queryParameters['page_id'] = requestParameters['pageId'];
         }
 
-        if (requestParameters.pinned !== undefined) {
-            queryParameters['pinned'] = requestParameters.pinned;
+        if (requestParameters['pinned'] != null) {
+            queryParameters['pinned'] = requestParameters['pinned'];
         }
 
-        if (requestParameters.disabled !== undefined) {
-            queryParameters['disabled'] = requestParameters.disabled;
+        if (requestParameters['disabled'] != null) {
+            queryParameters['disabled'] = requestParameters['disabled'];
         }
 
-        if (requestParameters.enabled !== undefined) {
-            queryParameters['enabled'] = requestParameters.enabled;
+        if (requestParameters['enabled'] != null) {
+            queryParameters['enabled'] = requestParameters['enabled'];
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authentication"] = this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
+            headerParameters["Authentication"] = await this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/v2/aliases`;
+
         const response = await this.request({
-            path: `/v2/aliases`,
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -477,28 +532,38 @@ export class AliasApi extends runtime.BaseAPI {
      * Get contacts
      */
     async getContactsRaw(requestParameters: GetContactsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AliasAliasIdContactsModelArray>> {
-        if (requestParameters.aliasId === null || requestParameters.aliasId === undefined) {
-            throw new runtime.RequiredError('aliasId','Required parameter requestParameters.aliasId was null or undefined when calling getContacts.');
+        if (requestParameters['aliasId'] == null) {
+            throw new runtime.RequiredError(
+                'aliasId',
+                'Required parameter "aliasId" was null or undefined when calling getContacts().'
+            );
         }
 
-        if (requestParameters.pageId === null || requestParameters.pageId === undefined) {
-            throw new runtime.RequiredError('pageId','Required parameter requestParameters.pageId was null or undefined when calling getContacts.');
+        if (requestParameters['pageId'] == null) {
+            throw new runtime.RequiredError(
+                'pageId',
+                'Required parameter "pageId" was null or undefined when calling getContacts().'
+            );
         }
 
         const queryParameters: any = {};
 
-        if (requestParameters.pageId !== undefined) {
-            queryParameters['page_id'] = requestParameters.pageId;
+        if (requestParameters['pageId'] != null) {
+            queryParameters['page_id'] = requestParameters['pageId'];
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authentication"] = this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
+            headerParameters["Authentication"] = await this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/aliases/{alias_id}/contacts`;
+        urlPath = urlPath.replace(`{${"alias_id"}}`, encodeURIComponent(String(requestParameters['aliasId'])));
+
         const response = await this.request({
-            path: `/aliases/{alias_id}/contacts`.replace(`{${"alias_id"}}`, encodeURIComponent(String(requestParameters.aliasId))),
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -521,26 +586,29 @@ export class AliasApi extends runtime.BaseAPI {
      * Search aliases
      */
     async searchAliasesRaw(requestParameters: SearchAliasesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AliasModelArray>> {
-        if (requestParameters.pageId === null || requestParameters.pageId === undefined) {
-            throw new runtime.RequiredError('pageId','Required parameter requestParameters.pageId was null or undefined when calling searchAliases.');
+        if (requestParameters['pageId'] == null) {
+            throw new runtime.RequiredError(
+                'pageId',
+                'Required parameter "pageId" was null or undefined when calling searchAliases().'
+            );
         }
 
         const queryParameters: any = {};
 
-        if (requestParameters.pageId !== undefined) {
-            queryParameters['page_id'] = requestParameters.pageId;
+        if (requestParameters['pageId'] != null) {
+            queryParameters['page_id'] = requestParameters['pageId'];
         }
 
-        if (requestParameters.pinned !== undefined) {
-            queryParameters['pinned'] = requestParameters.pinned;
+        if (requestParameters['pinned'] != null) {
+            queryParameters['pinned'] = requestParameters['pinned'];
         }
 
-        if (requestParameters.disabled !== undefined) {
-            queryParameters['disabled'] = requestParameters.disabled;
+        if (requestParameters['disabled'] != null) {
+            queryParameters['disabled'] = requestParameters['disabled'];
         }
 
-        if (requestParameters.enabled !== undefined) {
-            queryParameters['enabled'] = requestParameters.enabled;
+        if (requestParameters['enabled'] != null) {
+            queryParameters['enabled'] = requestParameters['enabled'];
         }
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -548,15 +616,18 @@ export class AliasApi extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authentication"] = this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
+            headerParameters["Authentication"] = await this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/v2/aliases`;
+
         const response = await this.request({
-            path: `/v2/aliases`,
+            path: urlPath,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: AliasSearchPostToJSON(requestParameters.aliasSearchPost),
+            body: AliasSearchPostToJSON(requestParameters['aliasSearchPost']),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => AliasModelArrayFromJSON(jsonValue));
@@ -576,8 +647,11 @@ export class AliasApi extends runtime.BaseAPI {
      * Toggle alias
      */
     async toggleAliasRaw(requestParameters: ToggleAliasRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AliasAliasIdTogglePost>> {
-        if (requestParameters.aliasId === null || requestParameters.aliasId === undefined) {
-            throw new runtime.RequiredError('aliasId','Required parameter requestParameters.aliasId was null or undefined when calling toggleAlias.');
+        if (requestParameters['aliasId'] == null) {
+            throw new runtime.RequiredError(
+                'aliasId',
+                'Required parameter "aliasId" was null or undefined when calling toggleAlias().'
+            );
         }
 
         const queryParameters: any = {};
@@ -585,11 +659,15 @@ export class AliasApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authentication"] = this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
+            headerParameters["Authentication"] = await this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/aliases/{alias_id}/toggle`;
+        urlPath = urlPath.replace(`{${"alias_id"}}`, encodeURIComponent(String(requestParameters['aliasId'])));
+
         const response = await this.request({
-            path: `/aliases/{alias_id}/toggle`.replace(`{${"alias_id"}}`, encodeURIComponent(String(requestParameters.aliasId))),
+            path: urlPath,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
@@ -612,12 +690,18 @@ export class AliasApi extends runtime.BaseAPI {
      * Update alias
      */
     async updateAliasRaw(requestParameters: UpdateAliasRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Success>> {
-        if (requestParameters.aliasId === null || requestParameters.aliasId === undefined) {
-            throw new runtime.RequiredError('aliasId','Required parameter requestParameters.aliasId was null or undefined when calling updateAlias.');
+        if (requestParameters['aliasId'] == null) {
+            throw new runtime.RequiredError(
+                'aliasId',
+                'Required parameter "aliasId" was null or undefined when calling updateAlias().'
+            );
         }
 
-        if (requestParameters.aliasAliasIdPatch === null || requestParameters.aliasAliasIdPatch === undefined) {
-            throw new runtime.RequiredError('aliasAliasIdPatch','Required parameter requestParameters.aliasAliasIdPatch was null or undefined when calling updateAlias.');
+        if (requestParameters['aliasAliasIdPatch'] == null) {
+            throw new runtime.RequiredError(
+                'aliasAliasIdPatch',
+                'Required parameter "aliasAliasIdPatch" was null or undefined when calling updateAlias().'
+            );
         }
 
         const queryParameters: any = {};
@@ -627,15 +711,19 @@ export class AliasApi extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authentication"] = this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
+            headerParameters["Authentication"] = await this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/aliases/{alias_id}`;
+        urlPath = urlPath.replace(`{${"alias_id"}}`, encodeURIComponent(String(requestParameters['aliasId'])));
+
         const response = await this.request({
-            path: `/aliases/{alias_id}`.replace(`{${"alias_id"}}`, encodeURIComponent(String(requestParameters.aliasId))),
+            path: urlPath,
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: AliasAliasIdPatchToJSON(requestParameters.aliasAliasIdPatch),
+            body: AliasAliasIdPatchToJSON(requestParameters['aliasAliasIdPatch']),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => SuccessFromJSON(jsonValue));

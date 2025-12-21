@@ -19,12 +19,13 @@ type WindowOrWorkerGlobalScope = any;
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 import type { Alias } from './Alias';
 import {
     AliasFromJSON,
     AliasFromJSONTyped,
     AliasToJSON,
+    AliasToJSONTyped,
 } from './Alias';
 
 /**
@@ -44,10 +45,8 @@ export interface AliasModelArray {
 /**
  * Check if a given object implements the AliasModelArray interface.
  */
-export function instanceOfAliasModelArray(value: object): boolean {
-    let isInstance = true;
-
-    return isInstance;
+export function instanceOfAliasModelArray(value: object): value is AliasModelArray {
+    return true;
 }
 
 export function AliasModelArrayFromJSON(json: any): AliasModelArray {
@@ -55,25 +54,27 @@ export function AliasModelArrayFromJSON(json: any): AliasModelArray {
 }
 
 export function AliasModelArrayFromJSONTyped(json: any, ignoreDiscriminator: boolean): AliasModelArray {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
         
-        'aliases': !exists(json, 'aliases') ? undefined : ((json['aliases'] as Array<any>).map(AliasFromJSON)),
+        'aliases': json['aliases'] == null ? undefined : ((json['aliases'] as Array<any>).map(AliasFromJSON)),
     };
 }
 
-export function AliasModelArrayToJSON(value?: AliasModelArray | null): any {
-    if (value === undefined) {
-        return undefined;
+export function AliasModelArrayToJSON(json: any): AliasModelArray {
+    return AliasModelArrayToJSONTyped(json, false);
+}
+
+export function AliasModelArrayToJSONTyped(value?: AliasModelArray | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'aliases': value.aliases === undefined ? undefined : ((value.aliases as Array<any>).map(AliasToJSON)),
+        'aliases': value['aliases'] == null ? undefined : ((value['aliases'] as Array<any>).map(AliasToJSON)),
     };
 }
 

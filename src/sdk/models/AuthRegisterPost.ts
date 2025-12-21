@@ -19,7 +19,7 @@ type WindowOrWorkerGlobalScope = any;
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -43,12 +43,10 @@ export interface AuthRegisterPost {
 /**
  * Check if a given object implements the AuthRegisterPost interface.
  */
-export function instanceOfAuthRegisterPost(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "email" in value;
-    isInstance = isInstance && "password" in value;
-
-    return isInstance;
+export function instanceOfAuthRegisterPost(value: object): value is AuthRegisterPost {
+    if (!('email' in value) || value['email'] === undefined) return false;
+    if (!('password' in value) || value['password'] === undefined) return false;
+    return true;
 }
 
 export function AuthRegisterPostFromJSON(json: any): AuthRegisterPost {
@@ -56,7 +54,7 @@ export function AuthRegisterPostFromJSON(json: any): AuthRegisterPost {
 }
 
 export function AuthRegisterPostFromJSONTyped(json: any, ignoreDiscriminator: boolean): AuthRegisterPost {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -66,17 +64,19 @@ export function AuthRegisterPostFromJSONTyped(json: any, ignoreDiscriminator: bo
     };
 }
 
-export function AuthRegisterPostToJSON(value?: AuthRegisterPost | null): any {
-    if (value === undefined) {
-        return undefined;
+export function AuthRegisterPostToJSON(json: any): AuthRegisterPost {
+    return AuthRegisterPostToJSONTyped(json, false);
+}
+
+export function AuthRegisterPostToJSONTyped(value?: AuthRegisterPost | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'email': value.email,
-        'password': value.password,
+        'email': value['email'],
+        'password': value['password'],
     };
 }
 

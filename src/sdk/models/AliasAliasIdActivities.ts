@@ -19,7 +19,7 @@ type WindowOrWorkerGlobalScope = any;
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -67,16 +67,14 @@ export interface AliasAliasIdActivities {
 /**
  * Check if a given object implements the AliasAliasIdActivities interface.
  */
-export function instanceOfAliasAliasIdActivities(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "action" in value;
-    isInstance = isInstance && "from" in value;
-    isInstance = isInstance && "timestamp" in value;
-    isInstance = isInstance && "to" in value;
-    isInstance = isInstance && "reverseAlias" in value;
-    isInstance = isInstance && "reverseAliasAddress" in value;
-
-    return isInstance;
+export function instanceOfAliasAliasIdActivities(value: object): value is AliasAliasIdActivities {
+    if (!('action' in value) || value['action'] === undefined) return false;
+    if (!('from' in value) || value['from'] === undefined) return false;
+    if (!('timestamp' in value) || value['timestamp'] === undefined) return false;
+    if (!('to' in value) || value['to'] === undefined) return false;
+    if (!('reverseAlias' in value) || value['reverseAlias'] === undefined) return false;
+    if (!('reverseAliasAddress' in value) || value['reverseAliasAddress'] === undefined) return false;
+    return true;
 }
 
 export function AliasAliasIdActivitiesFromJSON(json: any): AliasAliasIdActivities {
@@ -84,7 +82,7 @@ export function AliasAliasIdActivitiesFromJSON(json: any): AliasAliasIdActivitie
 }
 
 export function AliasAliasIdActivitiesFromJSONTyped(json: any, ignoreDiscriminator: boolean): AliasAliasIdActivities {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -98,21 +96,23 @@ export function AliasAliasIdActivitiesFromJSONTyped(json: any, ignoreDiscriminat
     };
 }
 
-export function AliasAliasIdActivitiesToJSON(value?: AliasAliasIdActivities | null): any {
-    if (value === undefined) {
-        return undefined;
+export function AliasAliasIdActivitiesToJSON(json: any): AliasAliasIdActivities {
+    return AliasAliasIdActivitiesToJSONTyped(json, false);
+}
+
+export function AliasAliasIdActivitiesToJSONTyped(value?: AliasAliasIdActivities | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'action': value.action,
-        'from': value.from,
-        'timestamp': value.timestamp,
-        'to': value.to,
-        'reverse_alias': value.reverseAlias,
-        'reverse_alias_address': value.reverseAliasAddress,
+        'action': value['action'],
+        'from': value['from'],
+        'timestamp': value['timestamp'],
+        'to': value['to'],
+        'reverse_alias': value['reverseAlias'],
+        'reverse_alias_address': value['reverseAliasAddress'],
     };
 }
 

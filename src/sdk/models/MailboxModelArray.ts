@@ -19,12 +19,13 @@ type WindowOrWorkerGlobalScope = any;
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 import type { Mailbox } from './Mailbox';
 import {
     MailboxFromJSON,
     MailboxFromJSONTyped,
     MailboxToJSON,
+    MailboxToJSONTyped,
 } from './Mailbox';
 
 /**
@@ -44,10 +45,8 @@ export interface MailboxModelArray {
 /**
  * Check if a given object implements the MailboxModelArray interface.
  */
-export function instanceOfMailboxModelArray(value: object): boolean {
-    let isInstance = true;
-
-    return isInstance;
+export function instanceOfMailboxModelArray(value: object): value is MailboxModelArray {
+    return true;
 }
 
 export function MailboxModelArrayFromJSON(json: any): MailboxModelArray {
@@ -55,25 +54,27 @@ export function MailboxModelArrayFromJSON(json: any): MailboxModelArray {
 }
 
 export function MailboxModelArrayFromJSONTyped(json: any, ignoreDiscriminator: boolean): MailboxModelArray {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
         
-        'mailboxes': !exists(json, 'mailboxes') ? undefined : ((json['mailboxes'] as Array<any>).map(MailboxFromJSON)),
+        'mailboxes': json['mailboxes'] == null ? undefined : ((json['mailboxes'] as Array<any>).map(MailboxFromJSON)),
     };
 }
 
-export function MailboxModelArrayToJSON(value?: MailboxModelArray | null): any {
-    if (value === undefined) {
-        return undefined;
+export function MailboxModelArrayToJSON(json: any): MailboxModelArray {
+    return MailboxModelArrayToJSONTyped(json, false);
+}
+
+export function MailboxModelArrayToJSONTyped(value?: MailboxModelArray | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'mailboxes': value.mailboxes === undefined ? undefined : ((value.mailboxes as Array<any>).map(MailboxToJSON)),
+        'mailboxes': value['mailboxes'] == null ? undefined : ((value['mailboxes'] as Array<any>).map(MailboxToJSON)),
     };
 }
 

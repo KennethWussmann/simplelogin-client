@@ -19,12 +19,13 @@ type WindowOrWorkerGlobalScope = any;
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 import type { AliasAliasIdActivities } from './AliasAliasIdActivities';
 import {
     AliasAliasIdActivitiesFromJSON,
     AliasAliasIdActivitiesFromJSONTyped,
     AliasAliasIdActivitiesToJSON,
+    AliasAliasIdActivitiesToJSONTyped,
 } from './AliasAliasIdActivities';
 
 /**
@@ -44,10 +45,8 @@ export interface AliasAliasIdActivitiesModelArray {
 /**
  * Check if a given object implements the AliasAliasIdActivitiesModelArray interface.
  */
-export function instanceOfAliasAliasIdActivitiesModelArray(value: object): boolean {
-    let isInstance = true;
-
-    return isInstance;
+export function instanceOfAliasAliasIdActivitiesModelArray(value: object): value is AliasAliasIdActivitiesModelArray {
+    return true;
 }
 
 export function AliasAliasIdActivitiesModelArrayFromJSON(json: any): AliasAliasIdActivitiesModelArray {
@@ -55,25 +54,27 @@ export function AliasAliasIdActivitiesModelArrayFromJSON(json: any): AliasAliasI
 }
 
 export function AliasAliasIdActivitiesModelArrayFromJSONTyped(json: any, ignoreDiscriminator: boolean): AliasAliasIdActivitiesModelArray {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
         
-        'activities': !exists(json, 'activities') ? undefined : ((json['activities'] as Array<any>).map(AliasAliasIdActivitiesFromJSON)),
+        'activities': json['activities'] == null ? undefined : ((json['activities'] as Array<any>).map(AliasAliasIdActivitiesFromJSON)),
     };
 }
 
-export function AliasAliasIdActivitiesModelArrayToJSON(value?: AliasAliasIdActivitiesModelArray | null): any {
-    if (value === undefined) {
-        return undefined;
+export function AliasAliasIdActivitiesModelArrayToJSON(json: any): AliasAliasIdActivitiesModelArray {
+    return AliasAliasIdActivitiesModelArrayToJSONTyped(json, false);
+}
+
+export function AliasAliasIdActivitiesModelArrayToJSONTyped(value?: AliasAliasIdActivitiesModelArray | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'activities': value.activities === undefined ? undefined : ((value.activities as Array<any>).map(AliasAliasIdActivitiesToJSON)),
+        'activities': value['activities'] == null ? undefined : ((value['activities'] as Array<any>).map(AliasAliasIdActivitiesToJSON)),
     };
 }
 

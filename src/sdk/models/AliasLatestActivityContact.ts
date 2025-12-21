@@ -19,7 +19,7 @@ type WindowOrWorkerGlobalScope = any;
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -49,13 +49,11 @@ export interface AliasLatestActivityContact {
 /**
  * Check if a given object implements the AliasLatestActivityContact interface.
  */
-export function instanceOfAliasLatestActivityContact(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "email" in value;
-    isInstance = isInstance && "name" in value;
-    isInstance = isInstance && "reverseAlias" in value;
-
-    return isInstance;
+export function instanceOfAliasLatestActivityContact(value: object): value is AliasLatestActivityContact {
+    if (!('email' in value) || value['email'] === undefined) return false;
+    if (!('name' in value) || value['name'] === undefined) return false;
+    if (!('reverseAlias' in value) || value['reverseAlias'] === undefined) return false;
+    return true;
 }
 
 export function AliasLatestActivityContactFromJSON(json: any): AliasLatestActivityContact {
@@ -63,7 +61,7 @@ export function AliasLatestActivityContactFromJSON(json: any): AliasLatestActivi
 }
 
 export function AliasLatestActivityContactFromJSONTyped(json: any, ignoreDiscriminator: boolean): AliasLatestActivityContact {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -74,18 +72,20 @@ export function AliasLatestActivityContactFromJSONTyped(json: any, ignoreDiscrim
     };
 }
 
-export function AliasLatestActivityContactToJSON(value?: AliasLatestActivityContact | null): any {
-    if (value === undefined) {
-        return undefined;
+export function AliasLatestActivityContactToJSON(json: any): AliasLatestActivityContact {
+    return AliasLatestActivityContactToJSONTyped(json, false);
+}
+
+export function AliasLatestActivityContactToJSONTyped(value?: AliasLatestActivityContact | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'email': value.email,
-        'name': value.name,
-        'reverse_alias': value.reverseAlias,
+        'email': value['email'],
+        'name': value['name'],
+        'reverse_alias': value['reverseAlias'],
     };
 }
 

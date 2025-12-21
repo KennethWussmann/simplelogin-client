@@ -19,7 +19,7 @@ type WindowOrWorkerGlobalScope = any;
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -85,15 +85,13 @@ export interface AliasAliasIdContacts {
 /**
  * Check if a given object implements the AliasAliasIdContacts interface.
  */
-export function instanceOfAliasAliasIdContacts(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "id" in value;
-    isInstance = isInstance && "contact" in value;
-    isInstance = isInstance && "creationDate" in value;
-    isInstance = isInstance && "creationTimestamp" in value;
-    isInstance = isInstance && "reverseAlias" in value;
-
-    return isInstance;
+export function instanceOfAliasAliasIdContacts(value: object): value is AliasAliasIdContacts {
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('contact' in value) || value['contact'] === undefined) return false;
+    if (!('creationDate' in value) || value['creationDate'] === undefined) return false;
+    if (!('creationTimestamp' in value) || value['creationTimestamp'] === undefined) return false;
+    if (!('reverseAlias' in value) || value['reverseAlias'] === undefined) return false;
+    return true;
 }
 
 export function AliasAliasIdContactsFromJSON(json: any): AliasAliasIdContacts {
@@ -101,7 +99,7 @@ export function AliasAliasIdContactsFromJSON(json: any): AliasAliasIdContacts {
 }
 
 export function AliasAliasIdContactsFromJSONTyped(json: any, ignoreDiscriminator: boolean): AliasAliasIdContacts {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -110,32 +108,34 @@ export function AliasAliasIdContactsFromJSONTyped(json: any, ignoreDiscriminator
         'contact': json['contact'],
         'creationDate': (new Date(json['creation_date'])),
         'creationTimestamp': json['creation_timestamp'],
-        'lastEmailSentDate': !exists(json, 'last_email_sent_date') ? undefined : (new Date(json['last_email_sent_date'])),
-        'lastEmailSentTimestamp': !exists(json, 'last_email_sent_timestamp') ? undefined : json['last_email_sent_timestamp'],
+        'lastEmailSentDate': json['last_email_sent_date'] == null ? undefined : (new Date(json['last_email_sent_date'])),
+        'lastEmailSentTimestamp': json['last_email_sent_timestamp'] == null ? undefined : json['last_email_sent_timestamp'],
         'reverseAlias': json['reverse_alias'],
-        'blockForward': !exists(json, 'block_forward') ? undefined : json['block_forward'],
-        'existed': !exists(json, 'existed') ? undefined : json['existed'],
+        'blockForward': json['block_forward'] == null ? undefined : json['block_forward'],
+        'existed': json['existed'] == null ? undefined : json['existed'],
     };
 }
 
-export function AliasAliasIdContactsToJSON(value?: AliasAliasIdContacts | null): any {
-    if (value === undefined) {
-        return undefined;
+export function AliasAliasIdContactsToJSON(json: any): AliasAliasIdContacts {
+    return AliasAliasIdContactsToJSONTyped(json, false);
+}
+
+export function AliasAliasIdContactsToJSONTyped(value?: AliasAliasIdContacts | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'id': value.id,
-        'contact': value.contact,
-        'creation_date': (value.creationDate.toISOString()),
-        'creation_timestamp': value.creationTimestamp,
-        'last_email_sent_date': value.lastEmailSentDate === undefined ? undefined : (value.lastEmailSentDate.toISOString()),
-        'last_email_sent_timestamp': value.lastEmailSentTimestamp,
-        'reverse_alias': value.reverseAlias,
-        'block_forward': value.blockForward,
-        'existed': value.existed,
+        'id': value['id'],
+        'contact': value['contact'],
+        'creation_date': value['creationDate'].toISOString(),
+        'creation_timestamp': value['creationTimestamp'],
+        'last_email_sent_date': value['lastEmailSentDate'] == null ? value['lastEmailSentDate'] : value['lastEmailSentDate'].toISOString(),
+        'last_email_sent_timestamp': value['lastEmailSentTimestamp'],
+        'reverse_alias': value['reverseAlias'],
+        'block_forward': value['blockForward'],
+        'existed': value['existed'],
     };
 }
 

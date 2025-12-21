@@ -19,7 +19,7 @@ type WindowOrWorkerGlobalScope = any;
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -61,15 +61,13 @@ export interface AuthLogin {
 /**
  * Check if a given object implements the AuthLogin interface.
  */
-export function instanceOfAuthLogin(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "name" in value;
-    isInstance = isInstance && "email" in value;
-    isInstance = isInstance && "mfaEnabled" in value;
-    isInstance = isInstance && "mfaKey" in value;
-    isInstance = isInstance && "apiKey" in value;
-
-    return isInstance;
+export function instanceOfAuthLogin(value: object): value is AuthLogin {
+    if (!('name' in value) || value['name'] === undefined) return false;
+    if (!('email' in value) || value['email'] === undefined) return false;
+    if (!('mfaEnabled' in value) || value['mfaEnabled'] === undefined) return false;
+    if (!('mfaKey' in value) || value['mfaKey'] === undefined) return false;
+    if (!('apiKey' in value) || value['apiKey'] === undefined) return false;
+    return true;
 }
 
 export function AuthLoginFromJSON(json: any): AuthLogin {
@@ -77,7 +75,7 @@ export function AuthLoginFromJSON(json: any): AuthLogin {
 }
 
 export function AuthLoginFromJSONTyped(json: any, ignoreDiscriminator: boolean): AuthLogin {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -90,20 +88,22 @@ export function AuthLoginFromJSONTyped(json: any, ignoreDiscriminator: boolean):
     };
 }
 
-export function AuthLoginToJSON(value?: AuthLogin | null): any {
-    if (value === undefined) {
-        return undefined;
+export function AuthLoginToJSON(json: any): AuthLogin {
+    return AuthLoginToJSONTyped(json, false);
+}
+
+export function AuthLoginToJSONTyped(value?: AuthLogin | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'name': value.name,
-        'email': value.email,
-        'mfa_enabled': value.mfaEnabled,
-        'mfa_key': value.mfaKey,
-        'api_key': value.apiKey,
+        'name': value['name'],
+        'email': value['email'],
+        'mfa_enabled': value['mfaEnabled'],
+        'mfa_key': value['mfaKey'],
+        'api_key': value['apiKey'],
     };
 }
 

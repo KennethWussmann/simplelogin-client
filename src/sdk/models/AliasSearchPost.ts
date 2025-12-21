@@ -19,7 +19,7 @@ type WindowOrWorkerGlobalScope = any;
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -37,10 +37,8 @@ export interface AliasSearchPost {
 /**
  * Check if a given object implements the AliasSearchPost interface.
  */
-export function instanceOfAliasSearchPost(value: object): boolean {
-    let isInstance = true;
-
-    return isInstance;
+export function instanceOfAliasSearchPost(value: object): value is AliasSearchPost {
+    return true;
 }
 
 export function AliasSearchPostFromJSON(json: any): AliasSearchPost {
@@ -48,25 +46,27 @@ export function AliasSearchPostFromJSON(json: any): AliasSearchPost {
 }
 
 export function AliasSearchPostFromJSONTyped(json: any, ignoreDiscriminator: boolean): AliasSearchPost {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
         
-        'query': !exists(json, 'query') ? undefined : json['query'],
+        'query': json['query'] == null ? undefined : json['query'],
     };
 }
 
-export function AliasSearchPostToJSON(value?: AliasSearchPost | null): any {
-    if (value === undefined) {
-        return undefined;
+export function AliasSearchPostToJSON(json: any): AliasSearchPost {
+    return AliasSearchPostToJSONTyped(json, false);
+}
+
+export function AliasSearchPostToJSONTyped(value?: AliasSearchPost | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'query': value.query,
+        'query': value['query'],
     };
 }
 

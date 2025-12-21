@@ -19,7 +19,7 @@ type WindowOrWorkerGlobalScope = any;
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -55,13 +55,11 @@ export interface AliasOptionsSuffixesInner {
 /**
  * Check if a given object implements the AliasOptionsSuffixesInner interface.
  */
-export function instanceOfAliasOptionsSuffixesInner(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "suffix" in value;
-    isInstance = isInstance && "isCustom" in value;
-    isInstance = isInstance && "isPremium" in value;
-
-    return isInstance;
+export function instanceOfAliasOptionsSuffixesInner(value: object): value is AliasOptionsSuffixesInner {
+    if (!('suffix' in value) || value['suffix'] === undefined) return false;
+    if (!('isCustom' in value) || value['isCustom'] === undefined) return false;
+    if (!('isPremium' in value) || value['isPremium'] === undefined) return false;
+    return true;
 }
 
 export function AliasOptionsSuffixesInnerFromJSON(json: any): AliasOptionsSuffixesInner {
@@ -69,31 +67,33 @@ export function AliasOptionsSuffixesInnerFromJSON(json: any): AliasOptionsSuffix
 }
 
 export function AliasOptionsSuffixesInnerFromJSONTyped(json: any, ignoreDiscriminator: boolean): AliasOptionsSuffixesInner {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
         
         'suffix': json['suffix'],
-        'signedSuffix': !exists(json, 'signed_suffix') ? undefined : json['signed_suffix'],
+        'signedSuffix': json['signed_suffix'] == null ? undefined : json['signed_suffix'],
         'isCustom': json['is_custom'],
         'isPremium': json['is_premium'],
     };
 }
 
-export function AliasOptionsSuffixesInnerToJSON(value?: AliasOptionsSuffixesInner | null): any {
-    if (value === undefined) {
-        return undefined;
+export function AliasOptionsSuffixesInnerToJSON(json: any): AliasOptionsSuffixesInner {
+    return AliasOptionsSuffixesInnerToJSONTyped(json, false);
+}
+
+export function AliasOptionsSuffixesInnerToJSONTyped(value?: AliasOptionsSuffixesInner | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'suffix': value.suffix,
-        'signed_suffix': value.signedSuffix,
-        'is_custom': value.isCustom,
-        'is_premium': value.isPremium,
+        'suffix': value['suffix'],
+        'signed_suffix': value['signedSuffix'],
+        'is_custom': value['isCustom'],
+        'is_premium': value['isPremium'],
     };
 }
 

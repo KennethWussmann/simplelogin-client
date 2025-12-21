@@ -19,7 +19,7 @@ type WindowOrWorkerGlobalScope = any;
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -37,10 +37,8 @@ export interface AliasRandomNewPost {
 /**
  * Check if a given object implements the AliasRandomNewPost interface.
  */
-export function instanceOfAliasRandomNewPost(value: object): boolean {
-    let isInstance = true;
-
-    return isInstance;
+export function instanceOfAliasRandomNewPost(value: object): value is AliasRandomNewPost {
+    return true;
 }
 
 export function AliasRandomNewPostFromJSON(json: any): AliasRandomNewPost {
@@ -48,25 +46,27 @@ export function AliasRandomNewPostFromJSON(json: any): AliasRandomNewPost {
 }
 
 export function AliasRandomNewPostFromJSONTyped(json: any, ignoreDiscriminator: boolean): AliasRandomNewPost {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
         
-        'note': !exists(json, 'note') ? undefined : json['note'],
+        'note': json['note'] == null ? undefined : json['note'],
     };
 }
 
-export function AliasRandomNewPostToJSON(value?: AliasRandomNewPost | null): any {
-    if (value === undefined) {
-        return undefined;
+export function AliasRandomNewPostToJSON(json: any): AliasRandomNewPost {
+    return AliasRandomNewPostToJSONTyped(json, false);
+}
+
+export function AliasRandomNewPostToJSONTyped(value?: AliasRandomNewPost | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'note': value.note,
+        'note': value['note'],
     };
 }
 

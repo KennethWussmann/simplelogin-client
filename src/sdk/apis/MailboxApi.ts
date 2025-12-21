@@ -61,8 +61,11 @@ export class MailboxApi extends runtime.BaseAPI {
      * Create mailbox
      */
     async createMailboxRaw(requestParameters: CreateMailboxRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Mailbox>> {
-        if (requestParameters.mailboxPost === null || requestParameters.mailboxPost === undefined) {
-            throw new runtime.RequiredError('mailboxPost','Required parameter requestParameters.mailboxPost was null or undefined when calling createMailbox.');
+        if (requestParameters['mailboxPost'] == null) {
+            throw new runtime.RequiredError(
+                'mailboxPost',
+                'Required parameter "mailboxPost" was null or undefined when calling createMailbox().'
+            );
         }
 
         const queryParameters: any = {};
@@ -72,15 +75,18 @@ export class MailboxApi extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authentication"] = this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
+            headerParameters["Authentication"] = await this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/mailboxes`;
+
         const response = await this.request({
-            path: `/mailboxes`,
+            path: urlPath,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: MailboxPostToJSON(requestParameters.mailboxPost),
+            body: MailboxPostToJSON(requestParameters['mailboxPost']),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => MailboxFromJSON(jsonValue));
@@ -100,8 +106,11 @@ export class MailboxApi extends runtime.BaseAPI {
      * Delete mailbox
      */
     async deleteMailboxRaw(requestParameters: DeleteMailboxRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.mailboxId === null || requestParameters.mailboxId === undefined) {
-            throw new runtime.RequiredError('mailboxId','Required parameter requestParameters.mailboxId was null or undefined when calling deleteMailbox.');
+        if (requestParameters['mailboxId'] == null) {
+            throw new runtime.RequiredError(
+                'mailboxId',
+                'Required parameter "mailboxId" was null or undefined when calling deleteMailbox().'
+            );
         }
 
         const queryParameters: any = {};
@@ -109,11 +118,15 @@ export class MailboxApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authentication"] = this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
+            headerParameters["Authentication"] = await this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/mailboxes/{mailbox_id}`;
+        urlPath = urlPath.replace(`{${"mailbox_id"}}`, encodeURIComponent(String(requestParameters['mailboxId'])));
+
         const response = await this.request({
-            path: `/mailboxes/{mailbox_id}`.replace(`{${"mailbox_id"}}`, encodeURIComponent(String(requestParameters.mailboxId))),
+            path: urlPath,
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -140,11 +153,14 @@ export class MailboxApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authentication"] = this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
+            headerParameters["Authentication"] = await this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/v2/mailboxes`;
+
         const response = await this.request({
-            path: `/v2/mailboxes`,
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -167,12 +183,18 @@ export class MailboxApi extends runtime.BaseAPI {
      * Update mailbox
      */
     async updateMailboxRaw(requestParameters: UpdateMailboxRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.mailboxId === null || requestParameters.mailboxId === undefined) {
-            throw new runtime.RequiredError('mailboxId','Required parameter requestParameters.mailboxId was null or undefined when calling updateMailbox.');
+        if (requestParameters['mailboxId'] == null) {
+            throw new runtime.RequiredError(
+                'mailboxId',
+                'Required parameter "mailboxId" was null or undefined when calling updateMailbox().'
+            );
         }
 
-        if (requestParameters.mailboxMailboxIdPut === null || requestParameters.mailboxMailboxIdPut === undefined) {
-            throw new runtime.RequiredError('mailboxMailboxIdPut','Required parameter requestParameters.mailboxMailboxIdPut was null or undefined when calling updateMailbox.');
+        if (requestParameters['mailboxMailboxIdPut'] == null) {
+            throw new runtime.RequiredError(
+                'mailboxMailboxIdPut',
+                'Required parameter "mailboxMailboxIdPut" was null or undefined when calling updateMailbox().'
+            );
         }
 
         const queryParameters: any = {};
@@ -182,15 +204,19 @@ export class MailboxApi extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authentication"] = this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
+            headerParameters["Authentication"] = await this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/mailboxes/{mailbox_id}`;
+        urlPath = urlPath.replace(`{${"mailbox_id"}}`, encodeURIComponent(String(requestParameters['mailboxId'])));
+
         const response = await this.request({
-            path: `/mailboxes/{mailbox_id}`.replace(`{${"mailbox_id"}}`, encodeURIComponent(String(requestParameters.mailboxId))),
+            path: urlPath,
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: MailboxMailboxIdPutToJSON(requestParameters.mailboxMailboxIdPut),
+            body: MailboxMailboxIdPutToJSON(requestParameters['mailboxMailboxIdPut']),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);

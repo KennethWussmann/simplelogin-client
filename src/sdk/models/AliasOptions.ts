@@ -19,19 +19,21 @@ type WindowOrWorkerGlobalScope = any;
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
-import type { AliasOptionsRecommendation } from './AliasOptionsRecommendation';
-import {
-    AliasOptionsRecommendationFromJSON,
-    AliasOptionsRecommendationFromJSONTyped,
-    AliasOptionsRecommendationToJSON,
-} from './AliasOptionsRecommendation';
+import { mapValues } from '../runtime';
 import type { AliasOptionsSuffixesInner } from './AliasOptionsSuffixesInner';
 import {
     AliasOptionsSuffixesInnerFromJSON,
     AliasOptionsSuffixesInnerFromJSONTyped,
     AliasOptionsSuffixesInnerToJSON,
+    AliasOptionsSuffixesInnerToJSONTyped,
 } from './AliasOptionsSuffixesInner';
+import type { AliasOptionsRecommendation } from './AliasOptionsRecommendation';
+import {
+    AliasOptionsRecommendationFromJSON,
+    AliasOptionsRecommendationFromJSONTyped,
+    AliasOptionsRecommendationToJSON,
+    AliasOptionsRecommendationToJSONTyped,
+} from './AliasOptionsRecommendation';
 
 /**
  * 
@@ -68,13 +70,11 @@ export interface AliasOptions {
 /**
  * Check if a given object implements the AliasOptions interface.
  */
-export function instanceOfAliasOptions(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "canCreate" in value;
-    isInstance = isInstance && "prefixSuggestion" in value;
-    isInstance = isInstance && "suffixes" in value;
-
-    return isInstance;
+export function instanceOfAliasOptions(value: object): value is AliasOptions {
+    if (!('canCreate' in value) || value['canCreate'] === undefined) return false;
+    if (!('prefixSuggestion' in value) || value['prefixSuggestion'] === undefined) return false;
+    if (!('suffixes' in value) || value['suffixes'] === undefined) return false;
+    return true;
 }
 
 export function AliasOptionsFromJSON(json: any): AliasOptions {
@@ -82,7 +82,7 @@ export function AliasOptionsFromJSON(json: any): AliasOptions {
 }
 
 export function AliasOptionsFromJSONTyped(json: any, ignoreDiscriminator: boolean): AliasOptions {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -90,23 +90,25 @@ export function AliasOptionsFromJSONTyped(json: any, ignoreDiscriminator: boolea
         'canCreate': json['can_create'],
         'prefixSuggestion': json['prefix_suggestion'],
         'suffixes': ((json['suffixes'] as Array<any>).map(AliasOptionsSuffixesInnerFromJSON)),
-        'recommendation': !exists(json, 'recommendation') ? undefined : AliasOptionsRecommendationFromJSON(json['recommendation']),
+        'recommendation': json['recommendation'] == null ? undefined : AliasOptionsRecommendationFromJSON(json['recommendation']),
     };
 }
 
-export function AliasOptionsToJSON(value?: AliasOptions | null): any {
-    if (value === undefined) {
-        return undefined;
+export function AliasOptionsToJSON(json: any): AliasOptions {
+    return AliasOptionsToJSONTyped(json, false);
+}
+
+export function AliasOptionsToJSONTyped(value?: AliasOptions | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'can_create': value.canCreate,
-        'prefix_suggestion': value.prefixSuggestion,
-        'suffixes': ((value.suffixes as Array<any>).map(AliasOptionsSuffixesInnerToJSON)),
-        'recommendation': AliasOptionsRecommendationToJSON(value.recommendation),
+        'can_create': value['canCreate'],
+        'prefix_suggestion': value['prefixSuggestion'],
+        'suffixes': ((value['suffixes'] as Array<any>).map(AliasOptionsSuffixesInnerToJSON)),
+        'recommendation': AliasOptionsRecommendationToJSON(value['recommendation']),
     };
 }
 

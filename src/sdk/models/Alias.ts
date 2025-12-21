@@ -19,19 +19,21 @@ type WindowOrWorkerGlobalScope = any;
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
-import type { AliasLatestActivity } from './AliasLatestActivity';
-import {
-    AliasLatestActivityFromJSON,
-    AliasLatestActivityFromJSONTyped,
-    AliasLatestActivityToJSON,
-} from './AliasLatestActivity';
+import { mapValues } from '../runtime';
 import type { MailboxModelRef } from './MailboxModelRef';
 import {
     MailboxModelRefFromJSON,
     MailboxModelRefFromJSONTyped,
     MailboxModelRefToJSON,
+    MailboxModelRefToJSONTyped,
 } from './MailboxModelRef';
+import type { AliasLatestActivity } from './AliasLatestActivity';
+import {
+    AliasLatestActivityFromJSON,
+    AliasLatestActivityFromJSONTyped,
+    AliasLatestActivityToJSON,
+    AliasLatestActivityToJSONTyped,
+} from './AliasLatestActivity';
 
 /**
  * 
@@ -140,26 +142,24 @@ export interface Alias {
 /**
  * Check if a given object implements the Alias interface.
  */
-export function instanceOfAlias(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "creationDate" in value;
-    isInstance = isInstance && "creationTimestamp" in value;
-    isInstance = isInstance && "email" in value;
-    isInstance = isInstance && "name" in value;
-    isInstance = isInstance && "enabled" in value;
-    isInstance = isInstance && "id" in value;
-    isInstance = isInstance && "mailbox" in value;
-    isInstance = isInstance && "mailboxes" in value;
-    isInstance = isInstance && "latestActivity" in value;
-    isInstance = isInstance && "nbBlock" in value;
-    isInstance = isInstance && "nbForward" in value;
-    isInstance = isInstance && "nbReply" in value;
-    isInstance = isInstance && "note" in value;
-    isInstance = isInstance && "pinned" in value;
-    isInstance = isInstance && "disablePgp" in value;
-    isInstance = isInstance && "supportPgp" in value;
-
-    return isInstance;
+export function instanceOfAlias(value: object): value is Alias {
+    if (!('creationDate' in value) || value['creationDate'] === undefined) return false;
+    if (!('creationTimestamp' in value) || value['creationTimestamp'] === undefined) return false;
+    if (!('email' in value) || value['email'] === undefined) return false;
+    if (!('name' in value) || value['name'] === undefined) return false;
+    if (!('enabled' in value) || value['enabled'] === undefined) return false;
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('mailbox' in value) || value['mailbox'] === undefined) return false;
+    if (!('mailboxes' in value) || value['mailboxes'] === undefined) return false;
+    if (!('latestActivity' in value) || value['latestActivity'] === undefined) return false;
+    if (!('nbBlock' in value) || value['nbBlock'] === undefined) return false;
+    if (!('nbForward' in value) || value['nbForward'] === undefined) return false;
+    if (!('nbReply' in value) || value['nbReply'] === undefined) return false;
+    if (!('note' in value) || value['note'] === undefined) return false;
+    if (!('pinned' in value) || value['pinned'] === undefined) return false;
+    if (!('disablePgp' in value) || value['disablePgp'] === undefined) return false;
+    if (!('supportPgp' in value) || value['supportPgp'] === undefined) return false;
+    return true;
 }
 
 export function AliasFromJSON(json: any): Alias {
@@ -167,7 +167,7 @@ export function AliasFromJSON(json: any): Alias {
 }
 
 export function AliasFromJSONTyped(json: any, ignoreDiscriminator: boolean): Alias {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -191,31 +191,33 @@ export function AliasFromJSONTyped(json: any, ignoreDiscriminator: boolean): Ali
     };
 }
 
-export function AliasToJSON(value?: Alias | null): any {
-    if (value === undefined) {
-        return undefined;
+export function AliasToJSON(json: any): Alias {
+    return AliasToJSONTyped(json, false);
+}
+
+export function AliasToJSONTyped(value?: Alias | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'creation_date': (value.creationDate.toISOString()),
-        'creation_timestamp': value.creationTimestamp,
-        'email': value.email,
-        'name': value.name,
-        'enabled': value.enabled,
-        'id': value.id,
-        'mailbox': MailboxModelRefToJSON(value.mailbox),
-        'mailboxes': ((value.mailboxes as Array<any>).map(MailboxModelRefToJSON)),
-        'latest_activity': AliasLatestActivityToJSON(value.latestActivity),
-        'nb_block': value.nbBlock,
-        'nb_forward': value.nbForward,
-        'nb_reply': value.nbReply,
-        'note': value.note,
-        'pinned': value.pinned,
-        'disable_pgp': value.disablePgp,
-        'support_pgp': value.supportPgp,
+        'creation_date': value['creationDate'].toISOString(),
+        'creation_timestamp': value['creationTimestamp'],
+        'email': value['email'],
+        'name': value['name'],
+        'enabled': value['enabled'],
+        'id': value['id'],
+        'mailbox': MailboxModelRefToJSON(value['mailbox']),
+        'mailboxes': ((value['mailboxes'] as Array<any>).map(MailboxModelRefToJSON)),
+        'latest_activity': AliasLatestActivityToJSON(value['latestActivity']),
+        'nb_block': value['nbBlock'],
+        'nb_forward': value['nbForward'],
+        'nb_reply': value['nbReply'],
+        'note': value['note'],
+        'pinned': value['pinned'],
+        'disable_pgp': value['disablePgp'],
+        'support_pgp': value['supportPgp'],
     };
 }
 

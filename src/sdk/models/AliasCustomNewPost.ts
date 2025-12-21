@@ -19,7 +19,7 @@ type WindowOrWorkerGlobalScope = any;
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -61,13 +61,11 @@ export interface AliasCustomNewPost {
 /**
  * Check if a given object implements the AliasCustomNewPost interface.
  */
-export function instanceOfAliasCustomNewPost(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "aliasPrefix" in value;
-    isInstance = isInstance && "signedSuffix" in value;
-    isInstance = isInstance && "mailboxIds" in value;
-
-    return isInstance;
+export function instanceOfAliasCustomNewPost(value: object): value is AliasCustomNewPost {
+    if (!('aliasPrefix' in value) || value['aliasPrefix'] === undefined) return false;
+    if (!('signedSuffix' in value) || value['signedSuffix'] === undefined) return false;
+    if (!('mailboxIds' in value) || value['mailboxIds'] === undefined) return false;
+    return true;
 }
 
 export function AliasCustomNewPostFromJSON(json: any): AliasCustomNewPost {
@@ -75,7 +73,7 @@ export function AliasCustomNewPostFromJSON(json: any): AliasCustomNewPost {
 }
 
 export function AliasCustomNewPostFromJSONTyped(json: any, ignoreDiscriminator: boolean): AliasCustomNewPost {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -83,25 +81,27 @@ export function AliasCustomNewPostFromJSONTyped(json: any, ignoreDiscriminator: 
         'aliasPrefix': json['alias_prefix'],
         'signedSuffix': json['signed_suffix'],
         'mailboxIds': json['mailbox_ids'],
-        'note': !exists(json, 'note') ? undefined : json['note'],
-        'name': !exists(json, 'name') ? undefined : json['name'],
+        'note': json['note'] == null ? undefined : json['note'],
+        'name': json['name'] == null ? undefined : json['name'],
     };
 }
 
-export function AliasCustomNewPostToJSON(value?: AliasCustomNewPost | null): any {
-    if (value === undefined) {
-        return undefined;
+export function AliasCustomNewPostToJSON(json: any): AliasCustomNewPost {
+    return AliasCustomNewPostToJSONTyped(json, false);
+}
+
+export function AliasCustomNewPostToJSONTyped(value?: AliasCustomNewPost | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'alias_prefix': value.aliasPrefix,
-        'signed_suffix': value.signedSuffix,
-        'mailbox_ids': value.mailboxIds,
-        'note': value.note,
-        'name': value.name,
+        'alias_prefix': value['aliasPrefix'],
+        'signed_suffix': value['signedSuffix'],
+        'mailbox_ids': value['mailboxIds'],
+        'note': value['note'],
+        'name': value['name'],
     };
 }
 

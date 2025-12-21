@@ -19,7 +19,7 @@ type WindowOrWorkerGlobalScope = any;
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -37,11 +37,9 @@ export interface Success {
 /**
  * Check if a given object implements the Success interface.
  */
-export function instanceOfSuccess(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "ok" in value;
-
-    return isInstance;
+export function instanceOfSuccess(value: object): value is Success {
+    if (!('ok' in value) || value['ok'] === undefined) return false;
+    return true;
 }
 
 export function SuccessFromJSON(json: any): Success {
@@ -49,7 +47,7 @@ export function SuccessFromJSON(json: any): Success {
 }
 
 export function SuccessFromJSONTyped(json: any, ignoreDiscriminator: boolean): Success {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -58,16 +56,18 @@ export function SuccessFromJSONTyped(json: any, ignoreDiscriminator: boolean): S
     };
 }
 
-export function SuccessToJSON(value?: Success | null): any {
-    if (value === undefined) {
-        return undefined;
+export function SuccessToJSON(json: any): Success {
+    return SuccessToJSONTyped(json, false);
+}
+
+export function SuccessToJSONTyped(value?: Success | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'ok': value.ok,
+        'ok': value['ok'],
     };
 }
 

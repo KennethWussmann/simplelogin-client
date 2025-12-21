@@ -19,7 +19,7 @@ type WindowOrWorkerGlobalScope = any;
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -37,11 +37,9 @@ export interface UserCookieToken {
 /**
  * Check if a given object implements the UserCookieToken interface.
  */
-export function instanceOfUserCookieToken(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "token" in value;
-
-    return isInstance;
+export function instanceOfUserCookieToken(value: object): value is UserCookieToken {
+    if (!('token' in value) || value['token'] === undefined) return false;
+    return true;
 }
 
 export function UserCookieTokenFromJSON(json: any): UserCookieToken {
@@ -49,7 +47,7 @@ export function UserCookieTokenFromJSON(json: any): UserCookieToken {
 }
 
 export function UserCookieTokenFromJSONTyped(json: any, ignoreDiscriminator: boolean): UserCookieToken {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -58,16 +56,18 @@ export function UserCookieTokenFromJSONTyped(json: any, ignoreDiscriminator: boo
     };
 }
 
-export function UserCookieTokenToJSON(value?: UserCookieToken | null): any {
-    if (value === undefined) {
-        return undefined;
+export function UserCookieTokenToJSON(json: any): UserCookieToken {
+    return UserCookieTokenToJSONTyped(json, false);
+}
+
+export function UserCookieTokenToJSONTyped(value?: UserCookieToken | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'token': value.token,
+        'token': value['token'],
     };
 }
 

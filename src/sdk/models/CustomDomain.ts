@@ -19,12 +19,13 @@ type WindowOrWorkerGlobalScope = any;
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 import type { MailboxModelRef } from './MailboxModelRef';
 import {
     MailboxModelRefFromJSON,
     MailboxModelRefFromJSONTyped,
     MailboxModelRefToJSON,
+    MailboxModelRefToJSONTyped,
 } from './MailboxModelRef';
 
 /**
@@ -98,20 +99,18 @@ export interface CustomDomain {
 /**
  * Check if a given object implements the CustomDomain interface.
  */
-export function instanceOfCustomDomain(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "catchAll" in value;
-    isInstance = isInstance && "creationDate" in value;
-    isInstance = isInstance && "creationTimestamp" in value;
-    isInstance = isInstance && "domainName" in value;
-    isInstance = isInstance && "id" in value;
-    isInstance = isInstance && "isVerified" in value;
-    isInstance = isInstance && "mailboxes" in value;
-    isInstance = isInstance && "name" in value;
-    isInstance = isInstance && "nbAlias" in value;
-    isInstance = isInstance && "randomPrefixGeneration" in value;
-
-    return isInstance;
+export function instanceOfCustomDomain(value: object): value is CustomDomain {
+    if (!('catchAll' in value) || value['catchAll'] === undefined) return false;
+    if (!('creationDate' in value) || value['creationDate'] === undefined) return false;
+    if (!('creationTimestamp' in value) || value['creationTimestamp'] === undefined) return false;
+    if (!('domainName' in value) || value['domainName'] === undefined) return false;
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('isVerified' in value) || value['isVerified'] === undefined) return false;
+    if (!('mailboxes' in value) || value['mailboxes'] === undefined) return false;
+    if (!('name' in value) || value['name'] === undefined) return false;
+    if (!('nbAlias' in value) || value['nbAlias'] === undefined) return false;
+    if (!('randomPrefixGeneration' in value) || value['randomPrefixGeneration'] === undefined) return false;
+    return true;
 }
 
 export function CustomDomainFromJSON(json: any): CustomDomain {
@@ -119,7 +118,7 @@ export function CustomDomainFromJSON(json: any): CustomDomain {
 }
 
 export function CustomDomainFromJSONTyped(json: any, ignoreDiscriminator: boolean): CustomDomain {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -137,25 +136,27 @@ export function CustomDomainFromJSONTyped(json: any, ignoreDiscriminator: boolea
     };
 }
 
-export function CustomDomainToJSON(value?: CustomDomain | null): any {
-    if (value === undefined) {
-        return undefined;
+export function CustomDomainToJSON(json: any): CustomDomain {
+    return CustomDomainToJSONTyped(json, false);
+}
+
+export function CustomDomainToJSONTyped(value?: CustomDomain | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'catch_all': value.catchAll,
-        'creation_date': (value.creationDate.toISOString()),
-        'creation_timestamp': value.creationTimestamp,
-        'domain_name': value.domainName,
-        'id': value.id,
-        'is_verified': value.isVerified,
-        'mailboxes': ((value.mailboxes as Array<any>).map(MailboxModelRefToJSON)),
-        'name': value.name,
-        'nb_alias': value.nbAlias,
-        'random_prefix_generation': value.randomPrefixGeneration,
+        'catch_all': value['catchAll'],
+        'creation_date': value['creationDate'].toISOString(),
+        'creation_timestamp': value['creationTimestamp'],
+        'domain_name': value['domainName'],
+        'id': value['id'],
+        'is_verified': value['isVerified'],
+        'mailboxes': ((value['mailboxes'] as Array<any>).map(MailboxModelRefToJSON)),
+        'name': value['name'],
+        'nb_alias': value['nbAlias'],
+        'random_prefix_generation': value['randomPrefixGeneration'],
     };
 }
 

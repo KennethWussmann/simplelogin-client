@@ -19,7 +19,7 @@ type WindowOrWorkerGlobalScope = any;
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -49,13 +49,11 @@ export interface AuthLoginPost {
 /**
  * Check if a given object implements the AuthLoginPost interface.
  */
-export function instanceOfAuthLoginPost(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "email" in value;
-    isInstance = isInstance && "password" in value;
-    isInstance = isInstance && "device" in value;
-
-    return isInstance;
+export function instanceOfAuthLoginPost(value: object): value is AuthLoginPost {
+    if (!('email' in value) || value['email'] === undefined) return false;
+    if (!('password' in value) || value['password'] === undefined) return false;
+    if (!('device' in value) || value['device'] === undefined) return false;
+    return true;
 }
 
 export function AuthLoginPostFromJSON(json: any): AuthLoginPost {
@@ -63,7 +61,7 @@ export function AuthLoginPostFromJSON(json: any): AuthLoginPost {
 }
 
 export function AuthLoginPostFromJSONTyped(json: any, ignoreDiscriminator: boolean): AuthLoginPost {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -74,18 +72,20 @@ export function AuthLoginPostFromJSONTyped(json: any, ignoreDiscriminator: boole
     };
 }
 
-export function AuthLoginPostToJSON(value?: AuthLoginPost | null): any {
-    if (value === undefined) {
-        return undefined;
+export function AuthLoginPostToJSON(json: any): AuthLoginPost {
+    return AuthLoginPostToJSONTyped(json, false);
+}
+
+export function AuthLoginPostToJSONTyped(value?: AuthLoginPost | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'email': value.email,
-        'password': value.password,
-        'device': value.device,
+        'email': value['email'],
+        'password': value['password'],
+        'device': value['device'],
     };
 }
 

@@ -19,7 +19,7 @@ type WindowOrWorkerGlobalScope = any;
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -67,16 +67,14 @@ export interface Mailbox {
 /**
  * Check if a given object implements the Mailbox interface.
  */
-export function instanceOfMailbox(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "email" in value;
-    isInstance = isInstance && "id" in value;
-    isInstance = isInstance && "_default" in value;
-    isInstance = isInstance && "creationTimestamp" in value;
-    isInstance = isInstance && "nbAlias" in value;
-    isInstance = isInstance && "verified" in value;
-
-    return isInstance;
+export function instanceOfMailbox(value: object): value is Mailbox {
+    if (!('email' in value) || value['email'] === undefined) return false;
+    if (!('id' in value) || value['id'] === undefined) return false;
+    if (!('_default' in value) || value['_default'] === undefined) return false;
+    if (!('creationTimestamp' in value) || value['creationTimestamp'] === undefined) return false;
+    if (!('nbAlias' in value) || value['nbAlias'] === undefined) return false;
+    if (!('verified' in value) || value['verified'] === undefined) return false;
+    return true;
 }
 
 export function MailboxFromJSON(json: any): Mailbox {
@@ -84,7 +82,7 @@ export function MailboxFromJSON(json: any): Mailbox {
 }
 
 export function MailboxFromJSONTyped(json: any, ignoreDiscriminator: boolean): Mailbox {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -98,21 +96,23 @@ export function MailboxFromJSONTyped(json: any, ignoreDiscriminator: boolean): M
     };
 }
 
-export function MailboxToJSON(value?: Mailbox | null): any {
-    if (value === undefined) {
-        return undefined;
+export function MailboxToJSON(json: any): Mailbox {
+    return MailboxToJSONTyped(json, false);
+}
+
+export function MailboxToJSONTyped(value?: Mailbox | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'email': value.email,
-        'id': value.id,
-        'default': value._default,
-        'creation_timestamp': value.creationTimestamp,
-        'nb_alias': value.nbAlias,
-        'verified': value.verified,
+        'email': value['email'],
+        'id': value['id'],
+        'default': value['_default'],
+        'creation_timestamp': value['creationTimestamp'],
+        'nb_alias': value['nbAlias'],
+        'verified': value['verified'],
     };
 }
 

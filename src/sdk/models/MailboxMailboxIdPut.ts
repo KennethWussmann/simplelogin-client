@@ -19,7 +19,7 @@ type WindowOrWorkerGlobalScope = any;
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -49,10 +49,8 @@ export interface MailboxMailboxIdPut {
 /**
  * Check if a given object implements the MailboxMailboxIdPut interface.
  */
-export function instanceOfMailboxMailboxIdPut(value: object): boolean {
-    let isInstance = true;
-
-    return isInstance;
+export function instanceOfMailboxMailboxIdPut(value: object): value is MailboxMailboxIdPut {
+    return true;
 }
 
 export function MailboxMailboxIdPutFromJSON(json: any): MailboxMailboxIdPut {
@@ -60,29 +58,31 @@ export function MailboxMailboxIdPutFromJSON(json: any): MailboxMailboxIdPut {
 }
 
 export function MailboxMailboxIdPutFromJSONTyped(json: any, ignoreDiscriminator: boolean): MailboxMailboxIdPut {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
         
-        '_default': !exists(json, 'default') ? undefined : json['default'],
-        'email': !exists(json, 'email') ? undefined : json['email'],
-        'cancelEmailChange': !exists(json, 'cancel_email_change') ? undefined : json['cancel_email_change'],
+        '_default': json['default'] == null ? undefined : json['default'],
+        'email': json['email'] == null ? undefined : json['email'],
+        'cancelEmailChange': json['cancel_email_change'] == null ? undefined : json['cancel_email_change'],
     };
 }
 
-export function MailboxMailboxIdPutToJSON(value?: MailboxMailboxIdPut | null): any {
-    if (value === undefined) {
-        return undefined;
+export function MailboxMailboxIdPutToJSON(json: any): MailboxMailboxIdPut {
+    return MailboxMailboxIdPutToJSONTyped(json, false);
+}
+
+export function MailboxMailboxIdPutToJSONTyped(value?: MailboxMailboxIdPut | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'default': value._default,
-        'email': value.email,
-        'cancel_email_change': value.cancelEmailChange,
+        'default': value['_default'],
+        'email': value['email'],
+        'cancel_email_change': value['cancelEmailChange'],
     };
 }
 

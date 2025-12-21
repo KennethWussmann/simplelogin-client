@@ -19,7 +19,7 @@ type WindowOrWorkerGlobalScope = any;
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -37,10 +37,8 @@ export interface AliasAliasIdTogglePost {
 /**
  * Check if a given object implements the AliasAliasIdTogglePost interface.
  */
-export function instanceOfAliasAliasIdTogglePost(value: object): boolean {
-    let isInstance = true;
-
-    return isInstance;
+export function instanceOfAliasAliasIdTogglePost(value: object): value is AliasAliasIdTogglePost {
+    return true;
 }
 
 export function AliasAliasIdTogglePostFromJSON(json: any): AliasAliasIdTogglePost {
@@ -48,25 +46,27 @@ export function AliasAliasIdTogglePostFromJSON(json: any): AliasAliasIdTogglePos
 }
 
 export function AliasAliasIdTogglePostFromJSONTyped(json: any, ignoreDiscriminator: boolean): AliasAliasIdTogglePost {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
         
-        'enabled': !exists(json, 'enabled') ? undefined : json['enabled'],
+        'enabled': json['enabled'] == null ? undefined : json['enabled'],
     };
 }
 
-export function AliasAliasIdTogglePostToJSON(value?: AliasAliasIdTogglePost | null): any {
-    if (value === undefined) {
-        return undefined;
+export function AliasAliasIdTogglePostToJSON(json: any): AliasAliasIdTogglePost {
+    return AliasAliasIdTogglePostToJSONTyped(json, false);
+}
+
+export function AliasAliasIdTogglePostToJSONTyped(value?: AliasAliasIdTogglePost | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'enabled': value.enabled,
+        'enabled': value['enabled'],
     };
 }
 
