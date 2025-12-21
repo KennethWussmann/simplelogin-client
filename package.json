@@ -30,7 +30,7 @@
     "lint": "tsx scripts/index.ts lint",
     "format": "tsx scripts/index.ts format",
     "dependency-update": "tsx scripts/index.ts dependencyUpdate",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "files": [
     "README.md",
