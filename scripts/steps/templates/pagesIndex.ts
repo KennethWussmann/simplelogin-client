@@ -22,4 +22,4 @@ export const pagesIndexHtml = `
     </ul>
   </body>
 </html>
-`
+`;

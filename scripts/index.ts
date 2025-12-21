@@ -1,5 +1,5 @@
-import { run } from "./run";
-import { measureBuildTime } from "./utils";
+import { run } from './run';
+import { measureBuildTime } from './utils';
 
-process.env.FORCE_COLOR = "1";
+process.env.FORCE_COLOR = '1';
 measureBuildTime(run);

@@ -1,4 +1,4 @@
-import { Configuration, FetchAPI } from "./sdk";
+import { Configuration, type FetchAPI } from './sdk';
 
 export type SimpleLoginProps = {
   /**

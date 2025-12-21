@@ -1,6 +1,6 @@
-import { config } from "dotenv";
-import type { Response } from "node-fetch";
-import { AccountApi, AliasApi, CustomDomainApi, MailboxApi, SimpleLoginConfig } from "../src";
+import { config } from 'dotenv';
+import type { Response } from 'node-fetch';
+import { AccountApi, AliasApi, CustomDomainApi, MailboxApi, SimpleLoginConfig } from '../src';
 
 config();
 
@@ -12,8 +12,8 @@ const assertEnv = (env: string): string => {
   return envValue;
 };
 
-const serverUrl = assertEnv("SERVER_URL");
-const apiKey = assertEnv("API_KEY");
+const serverUrl = assertEnv('SERVER_URL');
+const apiKey = assertEnv('API_KEY');
 const apiConfig = new SimpleLoginConfig({ apiKey, basePath: serverUrl });
 export const accountApi = new AccountApi(apiConfig);
 export const aliasApi = new AliasApi(apiConfig);
@@ -34,11 +34,11 @@ export const printUnexpectedResponse = async (error: unknown) => {
 
   throw new Error(
     [
-      "Unexpected response:",
+      'Unexpected response:',
       `  URL: ${response.url}`,
       `  Status: ${response.status} ${response.statusText}`,
       //`  Headers: ${JSON.stringify(Object.fromEntries(Array.from(response.headers.entries())), null, 4)}`,
       `  Body: ${await response.text()}`,
-    ].join("\n"),
+    ].join('\n')
   );
 };

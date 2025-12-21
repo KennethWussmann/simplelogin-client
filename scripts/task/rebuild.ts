@@ -1,6 +1,6 @@
-import { run } from "../run";
+import { run } from '../run';
 
 export default async () => {
-  await run("clean");
-  await run("build");
+  await run('clean');
+  await run('build');
 };
