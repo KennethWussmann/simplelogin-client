@@ -1,0 +1,9 @@
+tags:
+  - settings
+summary: Get available domains for random aliases
+description: Retrieve available domains for random alias creation
+operationId: {{ opId() }}
+responses:
+  '200':
+    description: Successful
+    content: {{ mixin("@mixins/request/json.yml", "@schemas/setting/domain/modelArray.yml") }}

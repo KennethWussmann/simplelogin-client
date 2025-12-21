@@ -1,0 +1,12 @@
+tags:
+  - settings
+summary: Update user settings
+description: Modify user's configuration preferences
+operationId: {{ opId() }}
+requestBody:
+  required: true
+  content: {{ mixin("@mixins/request/json.yml", "@schemas/setting/patch.yml") }}
+responses:
+  '200':
+    description: Successful
+    content: {{ mixin("@mixins/request/json.yml", "@schemas/setting/model.yml") }}

@@ -1,0 +1,9 @@
+tags:
+  - settings
+summary: Get user settings
+description: Retrieve user's configuration preferences
+operationId: {{ opId() }}
+responses:
+  '200':
+    description: Successful
+    content: {{ mixin("@mixins/request/json.yml", "@schemas/setting/model.yml") }}
