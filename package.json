@@ -17,6 +17,9 @@
   "bugs": {
     "url": "https://github.com/KennethWussmann/simplelogin-client/issues"
   },
+  "repository": {
+    "url": "https://github.com/KennethWussmann/simplelogin-client"
+  },
   "license": "MIT",
   "scripts": {
     "dev": "npm-watch",
