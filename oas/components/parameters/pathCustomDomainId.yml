@@ -1,0 +1,7 @@
+in: path
+name: custom_domain_id
+required: true
+schema:
+  type: number
+  example: 1
+description: ID of a custom domain

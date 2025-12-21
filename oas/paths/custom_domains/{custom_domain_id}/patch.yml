@@ -1,0 +1,18 @@
+tags:
+  - custom-domain
+summary: Update custom domain
+description: Update settings for a custom domain.
+operationId: {{ opId() }}
+parameters:
+  - $ref: "@parameters/pathCustomDomainId.yml"
+requestBody:
+  description: Updated settings for the custom domain.
+  required: true
+  content: {{ mixin("@mixins/request/json.yml", "@schemas/custom_domain/{custom_domain_id}/patch.yml") }}
+responses:
+  "200":
+    description: Successful
+    content: {{ mixin("@mixins/request/json.yml", "@schemas/custom_domain/model.yml") }}
+  "404":
+    description: Not found
+    content: {{ mixin("@mixins/request/json.yml", "@schemas/error.yml") }}
