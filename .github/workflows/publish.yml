@@ -18,14 +18,14 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v6
-      - uses: ./.github/actions/npm-install
+      - uses: ./.github/actions/pnpm-install
       - name: Login to GitHub Packages Docker Registry
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - run: npm run ci
+      - run: pnpm ci
       - name: Set package version
         run: npm version --no-git-tag-version ${GITHUB_REF/refs\/tags\//}
       - name: Publish
@@ -45,8 +45,8 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v6
-      - uses: ./.github/actions/npm-install
-      - run: npm run build:docs
+      - uses: ./.github/actions/pnpm-install
+      - run: pnpm build:docs
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact

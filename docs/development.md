@@ -8,17 +8,17 @@ Everything in `./dist` & `./src/sdk` is generated and should not be modified man
 
 ## Setup
 
-> Requires Docker & NodeJS 18+
+> Requires Docker & NodeJS 24+
 
 ```shell
 # Install dependencies
-npm install
+pnpm install
 
 # Start build of ./dist & ./src/sdk
-npm run build
+pnpm build
 
 # During development the build can run when a source file was changed using
-npm run dev
+pnpm dev
 ```
 
 ## Build process
