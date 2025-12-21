@@ -37,10 +37,10 @@
 - [x] [Settings](https://kennethwussmann.github.io/simplelogin-client/typedoc/classes/SettingsApi.html)
   - [x] [Read](https://kennethwussmann.github.io/simplelogin-client/typedoc/classes/SettingsApi.html#getUserSettings) and [write settings](https://kennethwussmann.github.io/simplelogin-client/typedoc/classes/SettingsApi.html#updateUserSettings)
   - [x] [Read random alias domains](https://kennethwussmann.github.io/simplelogin-client/typedoc/classes/SettingsApi.html#getAvailableDomainsForRandomAliases)
-- [ ] [Custom Domain Management](https://github.com/KennethWussmann/simplelogin-client/issues/7)
+- [x] [Custom Domain Management](https://kennethwussmann.github.io/simplelogin-client/typedoc/classes/CustomDomainApi.html)
   - [x] [Get domains](https://kennethwussmann.github.io/simplelogin-client/typedoc/classes/CustomDomainApi.html#getCustomDomains)
-  - [ ] Update domain settings
-  - [ ] View trash (deleted aliases)
+  - [x] [Update domain settings](https://kennethwussmann.github.io/simplelogin-client/typedoc/classes/CustomDomainApi.html#updateCustomDomain)
+  - [x] [View trash (deleted aliases)](https://kennethwussmann.github.io/simplelogin-client/typedoc/classes/CustomDomainApi.html#getDeletedAliases)
 - [ ] [Notifications](https://github.com/KennethWussmann/simplelogin-client/issues/9)
   - [ ] Get notifications
   - [ ] Mark notification as read
