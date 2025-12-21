@@ -122,6 +122,7 @@ export const pagesIndexHtml = (version: string, commit: string) => `
       <ul>
         <li><a href="typedoc/index.html">Documentation</a></li>
         <li><a href="redoc/index.html">SimpleLogin API Specification</a></li>
+        <li><a href="https://github.com/KennethWussmann/simplelogin-cli">CLI Tool</a></li>
         <li><a href="https://github.com/KennethWussmann/simplelogin-client">GitHub</a></li>
       </ul>
     </div>

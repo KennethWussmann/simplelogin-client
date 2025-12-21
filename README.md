@@ -4,9 +4,12 @@
     <strong>Zero-dependency TypeScript client for the <a href="https://simplelogin.io">SimpleLogin.io</a> API. Compatible with NodeJS and browsers.</strong>
   </p>
   <p>
-    <a href="https://kennethwussmann.github.io/simplelogin-client/typedoc/index.html">Documentation</a> • <a href="https://kennethwussmann.github.io/simplelogin-client/redoc/index.html">API Spec</a> 
+    <a href="https://kennethwussmann.github.io/simplelogin-client/typedoc/index.html">Documentation</a> • <a href="https://kennethwussmann.github.io/simplelogin-client/redoc/index.html">API Spec</a> • <a href="https://github.com/KennethWussmann/simplelogin-cli">CLI Tool</a>
   </p>
 </div>
+
+> [!TIP]
+> No time to code? Check out the [CLI tool](https://github.com/KennethWussmann/simplelogin-cli) based on this client SDK to get started quickly!
 
 ## Features
 
