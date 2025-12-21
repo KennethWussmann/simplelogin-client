@@ -28,11 +28,13 @@
   - [x] Get, Create
   - [x] Delete
   - [x] Block & unblock
+- [x] Settings
+  - [x] Read and write settings
+  - [x] Read random alias domains
 - [ ] [Custom Domain Management](https://github.com/KennethWussmann/simplelogin-client/issues/7)
   - [x] Get
   - [ ] Update, Delete
 - [ ] [Notifications](https://github.com/KennethWussmann/simplelogin-client/issues/9)
-- [ ] [Settings](https://github.com/KennethWussmann/simplelogin-client/issues/10)
 - [ ] [Import & Export](https://github.com/KennethWussmann/simplelogin-client/issues/11)
 - [ ] [Phone & Misc](https://github.com/KennethWussmann/simplelogin-client/issues/12)
 
