@@ -1,0 +1,16 @@
+type: object
+properties:
+  catch_all:
+    type: boolean
+    description: Enable or disable catch-all for this domain
+  random_prefix_generation:
+    type: boolean
+    description: Enable or disable random prefix generation for this domain
+  name:
+    type: string
+    description: Display name for the custom domain
+  mailbox_ids:
+    type: array
+    description: Array of mailbox IDs to associate with this domain
+    items:
+      type: integer

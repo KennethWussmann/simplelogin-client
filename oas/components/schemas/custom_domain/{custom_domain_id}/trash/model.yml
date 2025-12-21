@@ -1,0 +1,19 @@
+type: object
+properties:
+  aliases:
+    type: array
+    description: List of deleted aliases for this custom domain
+    items:
+      type: object
+      properties:
+        alias:
+          type: string
+          description: The deleted email address
+          example: deleted@example.com
+        deletion_timestamp:
+          $ref: '@schemas/unixTimestamp.yml'
+      required:
+        - alias
+        - deletion_timestamp
+required:
+  - aliases

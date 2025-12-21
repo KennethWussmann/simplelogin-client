@@ -23,14 +23,29 @@ type WindowOrWorkerGlobalScope = any;
 import * as runtime from '../runtime';
 import type {
   CustomDomain,
+  CustomDomainCustomDomainIdPatch,
+  CustomDomainCustomDomainIdTrash,
 } from '../models/index';
 import {
     CustomDomainFromJSON,
     CustomDomainToJSON,
+    CustomDomainCustomDomainIdPatchFromJSON,
+    CustomDomainCustomDomainIdPatchToJSON,
+    CustomDomainCustomDomainIdTrashFromJSON,
+    CustomDomainCustomDomainIdTrashToJSON,
 } from '../models/index';
 
 export interface GetCustomDomainsRequest {
     aliasId: number;
+}
+
+export interface GetDeletedAliasesRequest {
+    customDomainId: number;
+}
+
+export interface UpdateCustomDomainRequest {
+    customDomainId: number;
+    customDomainCustomDomainIdPatch: CustomDomainCustomDomainIdPatch;
 }
 
 /**
@@ -78,6 +93,102 @@ export class CustomDomainApi extends runtime.BaseAPI {
      */
     async getCustomDomains(requestParameters: GetCustomDomainsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CustomDomain> {
         const response = await this.getCustomDomainsRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Get all deleted aliases for a custom domain (trash).
+     * Get deleted aliases
+     */
+    async getDeletedAliasesRaw(requestParameters: GetDeletedAliasesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CustomDomainCustomDomainIdTrash>> {
+        if (requestParameters['customDomainId'] == null) {
+            throw new runtime.RequiredError(
+                'customDomainId',
+                'Required parameter "customDomainId" was null or undefined when calling getDeletedAliases().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authentication"] = await this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
+        }
+
+
+        let urlPath = `/custom_domains/{custom_domain_id}/trash`;
+        urlPath = urlPath.replace(`{${"custom_domain_id"}}`, encodeURIComponent(String(requestParameters['customDomainId'])));
+
+        const response = await this.request({
+            path: urlPath,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => CustomDomainCustomDomainIdTrashFromJSON(jsonValue));
+    }
+
+    /**
+     * Get all deleted aliases for a custom domain (trash).
+     * Get deleted aliases
+     */
+    async getDeletedAliases(requestParameters: GetDeletedAliasesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CustomDomainCustomDomainIdTrash> {
+        const response = await this.getDeletedAliasesRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Update settings for a custom domain.
+     * Update custom domain
+     */
+    async updateCustomDomainRaw(requestParameters: UpdateCustomDomainRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CustomDomain>> {
+        if (requestParameters['customDomainId'] == null) {
+            throw new runtime.RequiredError(
+                'customDomainId',
+                'Required parameter "customDomainId" was null or undefined when calling updateCustomDomain().'
+            );
+        }
+
+        if (requestParameters['customDomainCustomDomainIdPatch'] == null) {
+            throw new runtime.RequiredError(
+                'customDomainCustomDomainIdPatch',
+                'Required parameter "customDomainCustomDomainIdPatch" was null or undefined when calling updateCustomDomain().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["Authentication"] = await this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
+        }
+
+
+        let urlPath = `/custom_domains/{custom_domain_id}`;
+        urlPath = urlPath.replace(`{${"custom_domain_id"}}`, encodeURIComponent(String(requestParameters['customDomainId'])));
+
+        const response = await this.request({
+            path: urlPath,
+            method: 'PATCH',
+            headers: headerParameters,
+            query: queryParameters,
+            body: CustomDomainCustomDomainIdPatchToJSON(requestParameters['customDomainCustomDomainIdPatch']),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => CustomDomainFromJSON(jsonValue));
+    }
+
+    /**
+     * Update settings for a custom domain.
+     * Update custom domain
+     */
+    async updateCustomDomain(requestParameters: UpdateCustomDomainRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CustomDomain> {
+        const response = await this.updateCustomDomainRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
