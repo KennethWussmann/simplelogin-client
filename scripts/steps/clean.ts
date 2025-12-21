@@ -6,8 +6,8 @@ import {
   distTypedocDir,
   sdkDestination,
   tscBuildDir,
-} from "../constants";
-import { createDirectoryIfNotExists, deleteIfExists, sectionHeader } from "../utils";
+} from '../constants';
+import { createDirectoryIfNotExists, deleteIfExists, sectionHeader } from '../utils';
 
 const logIfTrue = async (value: Promise<boolean>, message: string) => {
   if (await value) {
@@ -16,15 +16,24 @@ const logIfTrue = async (value: Promise<boolean>, message: string) => {
 };
 
 const deleteAndLog = async (path: string) => logIfTrue(deleteIfExists(path), `Deleted ${path}`);
-const mkdirAndLog = async (path: string) => logIfTrue(createDirectoryIfNotExists(path), `Created directory ${path}`);
+const mkdirAndLog = async (path: string) =>
+  logIfTrue(createDirectoryIfNotExists(path), `Created directory ${path}`);
 
 export const clean = async () => {
-  console.log(sectionHeader("🚮 Cleaning up"));
+  console.log(sectionHeader('🚮 Cleaning up'));
   await Promise.all([buildDir, tscBuildDir, sdkDestination, distDir].map(deleteAndLog));
   await createDirs();
 };
 
 export const createDirs = async () =>
   Promise.all(
-    [buildDir, tscBuildDir, sdkDestination, distDir, distRedocDir, distTypedocDir, distOpenApiDir].map(mkdirAndLog),
+    [
+      buildDir,
+      tscBuildDir,
+      sdkDestination,
+      distDir,
+      distRedocDir,
+      distTypedocDir,
+      distOpenApiDir,
+    ].map(mkdirAndLog)
   );

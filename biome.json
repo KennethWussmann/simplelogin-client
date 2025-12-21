@@ -1,20 +1,39 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.2.2/schema.json",
-  "organizeImports": {
-    "enabled": true
-  },
-  "formatter": {
-    "indentStyle": "space",
-    "indentWidth": 2,
-    "lineWidth": 120
-  },
+  "$schema": "https://biomejs.dev/schemas/2.3.10/schema.json",
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true
+      "recommended": true,
+      "correctness": {
+        "noUnusedVariables": "error"
+      },
+      "style": {
+        "noNonNullAssertion": "warn",
+        "useConst": "error",
+        "useConsistentArrayType": "error"
+      },
+      "suspicious": {
+        "noExplicitAny": "warn"
+      }
+    }
+  },
+  "formatter": {
+    "enabled": true,
+    "formatWithErrors": false,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 100,
+    "lineEnding": "lf"
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single",
+      "trailingCommas": "es5",
+      "semicolons": "always"
     }
   },
   "files": {
-    "ignore": ["./build", "./dist", "oas/", "!oas/helpers", "src/sdk", "tscBuild/", "./node_modules", ".github"]
+    "includes": ["{src,test,scripts}/**/*.{ts,js}", "!src/sdk"],
+    "ignoreUnknown": true
   }
 }
