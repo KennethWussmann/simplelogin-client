@@ -19,7 +19,7 @@ type WindowOrWorkerGlobalScope = any;
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -43,10 +43,8 @@ export interface UserInfoPatch {
 /**
  * Check if a given object implements the UserInfoPatch interface.
  */
-export function instanceOfUserInfoPatch(value: object): boolean {
-    let isInstance = true;
-
-    return isInstance;
+export function instanceOfUserInfoPatch(value: object): value is UserInfoPatch {
+    return true;
 }
 
 export function UserInfoPatchFromJSON(json: any): UserInfoPatch {
@@ -54,27 +52,29 @@ export function UserInfoPatchFromJSON(json: any): UserInfoPatch {
 }
 
 export function UserInfoPatchFromJSONTyped(json: any, ignoreDiscriminator: boolean): UserInfoPatch {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
         
-        'profilePicture': !exists(json, 'profile_picture') ? undefined : json['profile_picture'],
-        'name': !exists(json, 'name') ? undefined : json['name'],
+        'profilePicture': json['profile_picture'] == null ? undefined : json['profile_picture'],
+        'name': json['name'] == null ? undefined : json['name'],
     };
 }
 
-export function UserInfoPatchToJSON(value?: UserInfoPatch | null): any {
-    if (value === undefined) {
-        return undefined;
+export function UserInfoPatchToJSON(json: any): UserInfoPatch {
+    return UserInfoPatchToJSONTyped(json, false);
+}
+
+export function UserInfoPatchToJSONTyped(value?: UserInfoPatch | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'profile_picture': value.profilePicture,
-        'name': value.name,
+        'profile_picture': value['profilePicture'],
+        'name': value['name'],
     };
 }
 

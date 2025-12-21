@@ -19,7 +19,7 @@ type WindowOrWorkerGlobalScope = any;
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -43,12 +43,10 @@ export interface AuthActivatePost {
 /**
  * Check if a given object implements the AuthActivatePost interface.
  */
-export function instanceOfAuthActivatePost(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "email" in value;
-    isInstance = isInstance && "code" in value;
-
-    return isInstance;
+export function instanceOfAuthActivatePost(value: object): value is AuthActivatePost {
+    if (!('email' in value) || value['email'] === undefined) return false;
+    if (!('code' in value) || value['code'] === undefined) return false;
+    return true;
 }
 
 export function AuthActivatePostFromJSON(json: any): AuthActivatePost {
@@ -56,7 +54,7 @@ export function AuthActivatePostFromJSON(json: any): AuthActivatePost {
 }
 
 export function AuthActivatePostFromJSONTyped(json: any, ignoreDiscriminator: boolean): AuthActivatePost {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -66,17 +64,19 @@ export function AuthActivatePostFromJSONTyped(json: any, ignoreDiscriminator: bo
     };
 }
 
-export function AuthActivatePostToJSON(value?: AuthActivatePost | null): any {
-    if (value === undefined) {
-        return undefined;
+export function AuthActivatePostToJSON(json: any): AuthActivatePost {
+    return AuthActivatePostToJSONTyped(json, false);
+}
+
+export function AuthActivatePostToJSONTyped(value?: AuthActivatePost | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'email': value.email,
-        'code': value.code,
+        'email': value['email'],
+        'code': value['code'],
     };
 }
 

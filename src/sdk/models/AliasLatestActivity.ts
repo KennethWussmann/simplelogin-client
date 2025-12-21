@@ -19,12 +19,13 @@ type WindowOrWorkerGlobalScope = any;
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 import type { AliasLatestActivityContact } from './AliasLatestActivityContact';
 import {
     AliasLatestActivityContactFromJSON,
     AliasLatestActivityContactFromJSONTyped,
     AliasLatestActivityContactToJSON,
+    AliasLatestActivityContactToJSONTyped,
 } from './AliasLatestActivityContact';
 
 /**
@@ -56,13 +57,11 @@ export interface AliasLatestActivity {
 /**
  * Check if a given object implements the AliasLatestActivity interface.
  */
-export function instanceOfAliasLatestActivity(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "action" in value;
-    isInstance = isInstance && "contact" in value;
-    isInstance = isInstance && "timestamp" in value;
-
-    return isInstance;
+export function instanceOfAliasLatestActivity(value: object): value is AliasLatestActivity {
+    if (!('action' in value) || value['action'] === undefined) return false;
+    if (!('contact' in value) || value['contact'] === undefined) return false;
+    if (!('timestamp' in value) || value['timestamp'] === undefined) return false;
+    return true;
 }
 
 export function AliasLatestActivityFromJSON(json: any): AliasLatestActivity {
@@ -70,7 +69,7 @@ export function AliasLatestActivityFromJSON(json: any): AliasLatestActivity {
 }
 
 export function AliasLatestActivityFromJSONTyped(json: any, ignoreDiscriminator: boolean): AliasLatestActivity {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -81,18 +80,20 @@ export function AliasLatestActivityFromJSONTyped(json: any, ignoreDiscriminator:
     };
 }
 
-export function AliasLatestActivityToJSON(value?: AliasLatestActivity | null): any {
-    if (value === undefined) {
-        return undefined;
+export function AliasLatestActivityToJSON(json: any): AliasLatestActivity {
+    return AliasLatestActivityToJSONTyped(json, false);
+}
+
+export function AliasLatestActivityToJSONTyped(value?: AliasLatestActivity | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'action': value.action,
-        'contact': AliasLatestActivityContactToJSON(value.contact),
-        'timestamp': value.timestamp,
+        'action': value['action'],
+        'contact': AliasLatestActivityContactToJSON(value['contact']),
+        'timestamp': value['timestamp'],
     };
 }
 

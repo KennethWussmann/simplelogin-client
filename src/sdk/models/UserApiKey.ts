@@ -19,7 +19,7 @@ type WindowOrWorkerGlobalScope = any;
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -37,11 +37,9 @@ export interface UserApiKey {
 /**
  * Check if a given object implements the UserApiKey interface.
  */
-export function instanceOfUserApiKey(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "apiKey" in value;
-
-    return isInstance;
+export function instanceOfUserApiKey(value: object): value is UserApiKey {
+    if (!('apiKey' in value) || value['apiKey'] === undefined) return false;
+    return true;
 }
 
 export function UserApiKeyFromJSON(json: any): UserApiKey {
@@ -49,7 +47,7 @@ export function UserApiKeyFromJSON(json: any): UserApiKey {
 }
 
 export function UserApiKeyFromJSONTyped(json: any, ignoreDiscriminator: boolean): UserApiKey {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -58,16 +56,18 @@ export function UserApiKeyFromJSONTyped(json: any, ignoreDiscriminator: boolean)
     };
 }
 
-export function UserApiKeyToJSON(value?: UserApiKey | null): any {
-    if (value === undefined) {
-        return undefined;
+export function UserApiKeyToJSON(json: any): UserApiKey {
+    return UserApiKeyToJSONTyped(json, false);
+}
+
+export function UserApiKeyToJSONTyped(value?: UserApiKey | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'api_key': value.apiKey,
+        'api_key': value['apiKey'],
     };
 }
 

@@ -19,7 +19,7 @@ type WindowOrWorkerGlobalScope = any;
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -67,16 +67,14 @@ export interface UserInfo {
 /**
  * Check if a given object implements the UserInfo interface.
  */
-export function instanceOfUserInfo(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "name" in value;
-    isInstance = isInstance && "email" in value;
-    isInstance = isInstance && "isPremium" in value;
-    isInstance = isInstance && "inTrial" in value;
-    isInstance = isInstance && "profilePicture" in value;
-    isInstance = isInstance && "maxAliasFreePlan" in value;
-
-    return isInstance;
+export function instanceOfUserInfo(value: object): value is UserInfo {
+    if (!('name' in value) || value['name'] === undefined) return false;
+    if (!('email' in value) || value['email'] === undefined) return false;
+    if (!('isPremium' in value) || value['isPremium'] === undefined) return false;
+    if (!('inTrial' in value) || value['inTrial'] === undefined) return false;
+    if (!('profilePicture' in value) || value['profilePicture'] === undefined) return false;
+    if (!('maxAliasFreePlan' in value) || value['maxAliasFreePlan'] === undefined) return false;
+    return true;
 }
 
 export function UserInfoFromJSON(json: any): UserInfo {
@@ -84,7 +82,7 @@ export function UserInfoFromJSON(json: any): UserInfo {
 }
 
 export function UserInfoFromJSONTyped(json: any, ignoreDiscriminator: boolean): UserInfo {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -98,21 +96,23 @@ export function UserInfoFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
     };
 }
 
-export function UserInfoToJSON(value?: UserInfo | null): any {
-    if (value === undefined) {
-        return undefined;
+export function UserInfoToJSON(json: any): UserInfo {
+    return UserInfoToJSONTyped(json, false);
+}
+
+export function UserInfoToJSONTyped(value?: UserInfo | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'name': value.name,
-        'email': value.email,
-        'is_premium': value.isPremium,
-        'in_trial': value.inTrial,
-        'profile_picture': value.profilePicture,
-        'max_alias_free_plan': value.maxAliasFreePlan,
+        'name': value['name'],
+        'email': value['email'],
+        'is_premium': value['isPremium'],
+        'in_trial': value['inTrial'],
+        'profile_picture': value['profilePicture'],
+        'max_alias_free_plan': value['maxAliasFreePlan'],
     };
 }
 

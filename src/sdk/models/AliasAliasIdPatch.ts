@@ -19,7 +19,7 @@ type WindowOrWorkerGlobalScope = any;
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -67,10 +67,8 @@ export interface AliasAliasIdPatch {
 /**
  * Check if a given object implements the AliasAliasIdPatch interface.
  */
-export function instanceOfAliasAliasIdPatch(value: object): boolean {
-    let isInstance = true;
-
-    return isInstance;
+export function instanceOfAliasAliasIdPatch(value: object): value is AliasAliasIdPatch {
+    return true;
 }
 
 export function AliasAliasIdPatchFromJSON(json: any): AliasAliasIdPatch {
@@ -78,35 +76,37 @@ export function AliasAliasIdPatchFromJSON(json: any): AliasAliasIdPatch {
 }
 
 export function AliasAliasIdPatchFromJSONTyped(json: any, ignoreDiscriminator: boolean): AliasAliasIdPatch {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
         
-        'note': !exists(json, 'note') ? undefined : json['note'],
-        'mailboxId': !exists(json, 'mailbox_id') ? undefined : json['mailbox_id'],
-        'name': !exists(json, 'name') ? undefined : json['name'],
-        'mailboxIds': !exists(json, 'mailbox_ids') ? undefined : json['mailbox_ids'],
-        'disablePgp': !exists(json, 'disable_pgp') ? undefined : json['disable_pgp'],
-        'pinned': !exists(json, 'pinned') ? undefined : json['pinned'],
+        'note': json['note'] == null ? undefined : json['note'],
+        'mailboxId': json['mailbox_id'] == null ? undefined : json['mailbox_id'],
+        'name': json['name'] == null ? undefined : json['name'],
+        'mailboxIds': json['mailbox_ids'] == null ? undefined : json['mailbox_ids'],
+        'disablePgp': json['disable_pgp'] == null ? undefined : json['disable_pgp'],
+        'pinned': json['pinned'] == null ? undefined : json['pinned'],
     };
 }
 
-export function AliasAliasIdPatchToJSON(value?: AliasAliasIdPatch | null): any {
-    if (value === undefined) {
-        return undefined;
+export function AliasAliasIdPatchToJSON(json: any): AliasAliasIdPatch {
+    return AliasAliasIdPatchToJSONTyped(json, false);
+}
+
+export function AliasAliasIdPatchToJSONTyped(value?: AliasAliasIdPatch | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'note': value.note,
-        'mailbox_id': value.mailboxId,
-        'name': value.name,
-        'mailbox_ids': value.mailboxIds,
-        'disable_pgp': value.disablePgp,
-        'pinned': value.pinned,
+        'note': value['note'],
+        'mailbox_id': value['mailboxId'],
+        'name': value['name'],
+        'mailbox_ids': value['mailboxIds'],
+        'disable_pgp': value['disablePgp'],
+        'pinned': value['pinned'],
     };
 }
 

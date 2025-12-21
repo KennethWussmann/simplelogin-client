@@ -19,7 +19,7 @@ type WindowOrWorkerGlobalScope = any;
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -37,11 +37,9 @@ export interface AliasAliasIdContactsPost {
 /**
  * Check if a given object implements the AliasAliasIdContactsPost interface.
  */
-export function instanceOfAliasAliasIdContactsPost(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "contact" in value;
-
-    return isInstance;
+export function instanceOfAliasAliasIdContactsPost(value: object): value is AliasAliasIdContactsPost {
+    if (!('contact' in value) || value['contact'] === undefined) return false;
+    return true;
 }
 
 export function AliasAliasIdContactsPostFromJSON(json: any): AliasAliasIdContactsPost {
@@ -49,7 +47,7 @@ export function AliasAliasIdContactsPostFromJSON(json: any): AliasAliasIdContact
 }
 
 export function AliasAliasIdContactsPostFromJSONTyped(json: any, ignoreDiscriminator: boolean): AliasAliasIdContactsPost {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -58,16 +56,18 @@ export function AliasAliasIdContactsPostFromJSONTyped(json: any, ignoreDiscrimin
     };
 }
 
-export function AliasAliasIdContactsPostToJSON(value?: AliasAliasIdContactsPost | null): any {
-    if (value === undefined) {
-        return undefined;
+export function AliasAliasIdContactsPostToJSON(json: any): AliasAliasIdContactsPost {
+    return AliasAliasIdContactsPostToJSONTyped(json, false);
+}
+
+export function AliasAliasIdContactsPostToJSONTyped(value?: AliasAliasIdContactsPost | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'contact': value.contact,
+        'contact': value['contact'],
     };
 }
 

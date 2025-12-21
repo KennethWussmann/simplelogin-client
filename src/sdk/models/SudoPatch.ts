@@ -19,7 +19,7 @@ type WindowOrWorkerGlobalScope = any;
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -37,10 +37,8 @@ export interface SudoPatch {
 /**
  * Check if a given object implements the SudoPatch interface.
  */
-export function instanceOfSudoPatch(value: object): boolean {
-    let isInstance = true;
-
-    return isInstance;
+export function instanceOfSudoPatch(value: object): value is SudoPatch {
+    return true;
 }
 
 export function SudoPatchFromJSON(json: any): SudoPatch {
@@ -48,25 +46,27 @@ export function SudoPatchFromJSON(json: any): SudoPatch {
 }
 
 export function SudoPatchFromJSONTyped(json: any, ignoreDiscriminator: boolean): SudoPatch {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
         
-        'password': !exists(json, 'password') ? undefined : json['password'],
+        'password': json['password'] == null ? undefined : json['password'],
     };
 }
 
-export function SudoPatchToJSON(value?: SudoPatch | null): any {
-    if (value === undefined) {
-        return undefined;
+export function SudoPatchToJSON(json: any): SudoPatch {
+    return SudoPatchToJSONTyped(json, false);
+}
+
+export function SudoPatchToJSONTyped(value?: SudoPatch | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'password': value.password,
+        'password': value['password'],
     };
 }
 

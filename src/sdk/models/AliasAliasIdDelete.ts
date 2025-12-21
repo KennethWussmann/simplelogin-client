@@ -19,7 +19,7 @@ type WindowOrWorkerGlobalScope = any;
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -37,10 +37,8 @@ export interface AliasAliasIdDelete {
 /**
  * Check if a given object implements the AliasAliasIdDelete interface.
  */
-export function instanceOfAliasAliasIdDelete(value: object): boolean {
-    let isInstance = true;
-
-    return isInstance;
+export function instanceOfAliasAliasIdDelete(value: object): value is AliasAliasIdDelete {
+    return true;
 }
 
 export function AliasAliasIdDeleteFromJSON(json: any): AliasAliasIdDelete {
@@ -48,25 +46,27 @@ export function AliasAliasIdDeleteFromJSON(json: any): AliasAliasIdDelete {
 }
 
 export function AliasAliasIdDeleteFromJSONTyped(json: any, ignoreDiscriminator: boolean): AliasAliasIdDelete {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
         
-        'deleted': !exists(json, 'deleted') ? undefined : json['deleted'],
+        'deleted': json['deleted'] == null ? undefined : json['deleted'],
     };
 }
 
-export function AliasAliasIdDeleteToJSON(value?: AliasAliasIdDelete | null): any {
-    if (value === undefined) {
-        return undefined;
+export function AliasAliasIdDeleteToJSON(json: any): AliasAliasIdDelete {
+    return AliasAliasIdDeleteToJSONTyped(json, false);
+}
+
+export function AliasAliasIdDeleteToJSONTyped(value?: AliasAliasIdDelete | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'deleted': value.deleted,
+        'deleted': value['deleted'],
     };
 }
 

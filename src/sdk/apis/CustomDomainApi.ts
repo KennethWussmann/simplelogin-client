@@ -43,8 +43,11 @@ export class CustomDomainApi extends runtime.BaseAPI {
      * Get custom domains
      */
     async getCustomDomainsRaw(requestParameters: GetCustomDomainsRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CustomDomain>> {
-        if (requestParameters.aliasId === null || requestParameters.aliasId === undefined) {
-            throw new runtime.RequiredError('aliasId','Required parameter requestParameters.aliasId was null or undefined when calling getCustomDomains.');
+        if (requestParameters['aliasId'] == null) {
+            throw new runtime.RequiredError(
+                'aliasId',
+                'Required parameter "aliasId" was null or undefined when calling getCustomDomains().'
+            );
         }
 
         const queryParameters: any = {};
@@ -52,11 +55,15 @@ export class CustomDomainApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authentication"] = this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
+            headerParameters["Authentication"] = await this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/custom_domains`;
+        urlPath = urlPath.replace(`{${"alias_id"}}`, encodeURIComponent(String(requestParameters['aliasId'])));
+
         const response = await this.request({
-            path: `/custom_domains`.replace(`{${"alias_id"}}`, encodeURIComponent(String(requestParameters.aliasId))),
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,

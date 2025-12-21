@@ -19,7 +19,7 @@ type WindowOrWorkerGlobalScope = any;
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -55,10 +55,8 @@ export interface UserStats {
 /**
  * Check if a given object implements the UserStats interface.
  */
-export function instanceOfUserStats(value: object): boolean {
-    let isInstance = true;
-
-    return isInstance;
+export function instanceOfUserStats(value: object): value is UserStats {
+    return true;
 }
 
 export function UserStatsFromJSON(json: any): UserStats {
@@ -66,31 +64,33 @@ export function UserStatsFromJSON(json: any): UserStats {
 }
 
 export function UserStatsFromJSONTyped(json: any, ignoreDiscriminator: boolean): UserStats {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
         
-        'nbAlias': !exists(json, 'nb_alias') ? undefined : json['nb_alias'],
-        'nbBlock': !exists(json, 'nb_block') ? undefined : json['nb_block'],
-        'nbForward': !exists(json, 'nb_forward') ? undefined : json['nb_forward'],
-        'nbReply': !exists(json, 'nb_reply') ? undefined : json['nb_reply'],
+        'nbAlias': json['nb_alias'] == null ? undefined : json['nb_alias'],
+        'nbBlock': json['nb_block'] == null ? undefined : json['nb_block'],
+        'nbForward': json['nb_forward'] == null ? undefined : json['nb_forward'],
+        'nbReply': json['nb_reply'] == null ? undefined : json['nb_reply'],
     };
 }
 
-export function UserStatsToJSON(value?: UserStats | null): any {
-    if (value === undefined) {
-        return undefined;
+export function UserStatsToJSON(json: any): UserStats {
+    return UserStatsToJSONTyped(json, false);
+}
+
+export function UserStatsToJSONTyped(value?: UserStats | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'nb_alias': value.nbAlias,
-        'nb_block': value.nbBlock,
-        'nb_forward': value.nbForward,
-        'nb_reply': value.nbReply,
+        'nb_alias': value['nbAlias'],
+        'nb_block': value['nbBlock'],
+        'nb_forward': value['nbForward'],
+        'nb_reply': value['nbReply'],
     };
 }
 

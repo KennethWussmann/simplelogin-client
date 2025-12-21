@@ -19,7 +19,7 @@ type WindowOrWorkerGlobalScope = any;
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -43,12 +43,10 @@ export interface MailboxModelRef {
 /**
  * Check if a given object implements the MailboxModelRef interface.
  */
-export function instanceOfMailboxModelRef(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "email" in value;
-    isInstance = isInstance && "id" in value;
-
-    return isInstance;
+export function instanceOfMailboxModelRef(value: object): value is MailboxModelRef {
+    if (!('email' in value) || value['email'] === undefined) return false;
+    if (!('id' in value) || value['id'] === undefined) return false;
+    return true;
 }
 
 export function MailboxModelRefFromJSON(json: any): MailboxModelRef {
@@ -56,7 +54,7 @@ export function MailboxModelRefFromJSON(json: any): MailboxModelRef {
 }
 
 export function MailboxModelRefFromJSONTyped(json: any, ignoreDiscriminator: boolean): MailboxModelRef {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -66,17 +64,19 @@ export function MailboxModelRefFromJSONTyped(json: any, ignoreDiscriminator: boo
     };
 }
 
-export function MailboxModelRefToJSON(value?: MailboxModelRef | null): any {
-    if (value === undefined) {
-        return undefined;
+export function MailboxModelRefToJSON(json: any): MailboxModelRef {
+    return MailboxModelRefToJSONTyped(json, false);
+}
+
+export function MailboxModelRefToJSONTyped(value?: MailboxModelRef | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'email': value.email,
-        'id': value.id,
+        'email': value['email'],
+        'id': value['id'],
     };
 }
 

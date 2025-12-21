@@ -19,7 +19,7 @@ type WindowOrWorkerGlobalScope = any;
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -37,10 +37,8 @@ export interface MailboxPost {
 /**
  * Check if a given object implements the MailboxPost interface.
  */
-export function instanceOfMailboxPost(value: object): boolean {
-    let isInstance = true;
-
-    return isInstance;
+export function instanceOfMailboxPost(value: object): value is MailboxPost {
+    return true;
 }
 
 export function MailboxPostFromJSON(json: any): MailboxPost {
@@ -48,25 +46,27 @@ export function MailboxPostFromJSON(json: any): MailboxPost {
 }
 
 export function MailboxPostFromJSONTyped(json: any, ignoreDiscriminator: boolean): MailboxPost {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
         
-        'email': !exists(json, 'email') ? undefined : json['email'],
+        'email': json['email'] == null ? undefined : json['email'],
     };
 }
 
-export function MailboxPostToJSON(value?: MailboxPost | null): any {
-    if (value === undefined) {
-        return undefined;
+export function MailboxPostToJSON(json: any): MailboxPost {
+    return MailboxPostToJSONTyped(json, false);
+}
+
+export function MailboxPostToJSONTyped(value?: MailboxPost | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'email': value.email,
+        'email': value['email'],
     };
 }
 

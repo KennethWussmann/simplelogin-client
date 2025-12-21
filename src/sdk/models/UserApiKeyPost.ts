@@ -19,7 +19,7 @@ type WindowOrWorkerGlobalScope = any;
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -37,11 +37,9 @@ export interface UserApiKeyPost {
 /**
  * Check if a given object implements the UserApiKeyPost interface.
  */
-export function instanceOfUserApiKeyPost(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "device" in value;
-
-    return isInstance;
+export function instanceOfUserApiKeyPost(value: object): value is UserApiKeyPost {
+    if (!('device' in value) || value['device'] === undefined) return false;
+    return true;
 }
 
 export function UserApiKeyPostFromJSON(json: any): UserApiKeyPost {
@@ -49,7 +47,7 @@ export function UserApiKeyPostFromJSON(json: any): UserApiKeyPost {
 }
 
 export function UserApiKeyPostFromJSONTyped(json: any, ignoreDiscriminator: boolean): UserApiKeyPost {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -58,16 +56,18 @@ export function UserApiKeyPostFromJSONTyped(json: any, ignoreDiscriminator: bool
     };
 }
 
-export function UserApiKeyPostToJSON(value?: UserApiKeyPost | null): any {
-    if (value === undefined) {
-        return undefined;
+export function UserApiKeyPostToJSON(json: any): UserApiKeyPost {
+    return UserApiKeyPostToJSONTyped(json, false);
+}
+
+export function UserApiKeyPostToJSONTyped(value?: UserApiKeyPost | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'device': value.device,
+        'device': value['device'],
     };
 }
 

@@ -19,7 +19,7 @@ type WindowOrWorkerGlobalScope = any;
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -49,13 +49,11 @@ export interface AuthMfa {
 /**
  * Check if a given object implements the AuthMfa interface.
  */
-export function instanceOfAuthMfa(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "name" in value;
-    isInstance = isInstance && "apiKey" in value;
-    isInstance = isInstance && "email" in value;
-
-    return isInstance;
+export function instanceOfAuthMfa(value: object): value is AuthMfa {
+    if (!('name' in value) || value['name'] === undefined) return false;
+    if (!('apiKey' in value) || value['apiKey'] === undefined) return false;
+    if (!('email' in value) || value['email'] === undefined) return false;
+    return true;
 }
 
 export function AuthMfaFromJSON(json: any): AuthMfa {
@@ -63,7 +61,7 @@ export function AuthMfaFromJSON(json: any): AuthMfa {
 }
 
 export function AuthMfaFromJSONTyped(json: any, ignoreDiscriminator: boolean): AuthMfa {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -74,18 +72,20 @@ export function AuthMfaFromJSONTyped(json: any, ignoreDiscriminator: boolean): A
     };
 }
 
-export function AuthMfaToJSON(value?: AuthMfa | null): any {
-    if (value === undefined) {
-        return undefined;
+export function AuthMfaToJSON(json: any): AuthMfa {
+    return AuthMfaToJSONTyped(json, false);
+}
+
+export function AuthMfaToJSONTyped(value?: AuthMfa | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'name': value.name,
-        'api_key': value.apiKey,
-        'email': value.email,
+        'name': value['name'],
+        'api_key': value['apiKey'],
+        'email': value['email'],
     };
 }
 

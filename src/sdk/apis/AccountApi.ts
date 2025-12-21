@@ -120,8 +120,11 @@ export class AccountApi extends runtime.BaseAPI {
      * Activate account
      */
     async activateAccountRaw(requestParameters: ActivateAccountRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.authActivatePost === null || requestParameters.authActivatePost === undefined) {
-            throw new runtime.RequiredError('authActivatePost','Required parameter requestParameters.authActivatePost was null or undefined when calling activateAccount.');
+        if (requestParameters['authActivatePost'] == null) {
+            throw new runtime.RequiredError(
+                'authActivatePost',
+                'Required parameter "authActivatePost" was null or undefined when calling activateAccount().'
+            );
         }
 
         const queryParameters: any = {};
@@ -130,12 +133,15 @@ export class AccountApi extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
+
+        let urlPath = `/auth/activate`;
+
         const response = await this.request({
-            path: `/auth/activate`,
+            path: urlPath,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: AuthActivatePostToJSON(requestParameters.authActivatePost),
+            body: AuthActivatePostToJSON(requestParameters['authActivatePost']),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -154,8 +160,11 @@ export class AccountApi extends runtime.BaseAPI {
      * Create API key
      */
     async createApiKeyRaw(requestParameters: CreateApiKeyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UserApiKey>> {
-        if (requestParameters.userApiKeyPost === null || requestParameters.userApiKeyPost === undefined) {
-            throw new runtime.RequiredError('userApiKeyPost','Required parameter requestParameters.userApiKeyPost was null or undefined when calling createApiKey.');
+        if (requestParameters['userApiKeyPost'] == null) {
+            throw new runtime.RequiredError(
+                'userApiKeyPost',
+                'Required parameter "userApiKeyPost" was null or undefined when calling createApiKey().'
+            );
         }
 
         const queryParameters: any = {};
@@ -165,15 +174,18 @@ export class AccountApi extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authentication"] = this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
+            headerParameters["Authentication"] = await this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/user/api_key`;
+
         const response = await this.request({
-            path: `/user/api_key`,
+            path: urlPath,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: UserApiKeyPostToJSON(requestParameters.userApiKeyPost),
+            body: UserApiKeyPostToJSON(requestParameters['userApiKeyPost']),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => UserApiKeyFromJSON(jsonValue));
@@ -198,11 +210,14 @@ export class AccountApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authentication"] = this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
+            headerParameters["Authentication"] = await this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/user`;
+
         const response = await this.request({
-            path: `/user`,
+            path: urlPath,
             method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
@@ -225,8 +240,11 @@ export class AccountApi extends runtime.BaseAPI {
      * Enable sudo mode
      */
     async enableSudoModeRaw(requestParameters: EnableSudoModeRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Success>> {
-        if (requestParameters.sudoPatch === null || requestParameters.sudoPatch === undefined) {
-            throw new runtime.RequiredError('sudoPatch','Required parameter requestParameters.sudoPatch was null or undefined when calling enableSudoMode.');
+        if (requestParameters['sudoPatch'] == null) {
+            throw new runtime.RequiredError(
+                'sudoPatch',
+                'Required parameter "sudoPatch" was null or undefined when calling enableSudoMode().'
+            );
         }
 
         const queryParameters: any = {};
@@ -236,15 +254,18 @@ export class AccountApi extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authentication"] = this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
+            headerParameters["Authentication"] = await this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/sudo`;
+
         const response = await this.request({
-            path: `/sudo`,
+            path: urlPath,
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: SudoPatchToJSON(requestParameters.sudoPatch),
+            body: SudoPatchToJSON(requestParameters['sudoPatch']),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => SuccessFromJSON(jsonValue));
@@ -264,8 +285,11 @@ export class AccountApi extends runtime.BaseAPI {
      * Forgot password
      */
     async forgotPasswordRaw(requestParameters: ForgotPasswordRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.authForgotPasswordPost === null || requestParameters.authForgotPasswordPost === undefined) {
-            throw new runtime.RequiredError('authForgotPasswordPost','Required parameter requestParameters.authForgotPasswordPost was null or undefined when calling forgotPassword.');
+        if (requestParameters['authForgotPasswordPost'] == null) {
+            throw new runtime.RequiredError(
+                'authForgotPasswordPost',
+                'Required parameter "authForgotPasswordPost" was null or undefined when calling forgotPassword().'
+            );
         }
 
         const queryParameters: any = {};
@@ -274,12 +298,15 @@ export class AccountApi extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
+
+        let urlPath = `/auth/forgot_password`;
+
         const response = await this.request({
-            path: `/auth/forgot_password`,
+            path: urlPath,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: AuthForgotPasswordPostToJSON(requestParameters.authForgotPasswordPost),
+            body: AuthForgotPasswordPostToJSON(requestParameters['authForgotPasswordPost']),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -303,11 +330,14 @@ export class AccountApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authentication"] = this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
+            headerParameters["Authentication"] = await this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/user/cookie_token`;
+
         const response = await this.request({
-            path: `/user/cookie_token`,
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -335,11 +365,14 @@ export class AccountApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authentication"] = this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
+            headerParameters["Authentication"] = await this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/stats`;
+
         const response = await this.request({
-            path: `/stats`,
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -367,11 +400,14 @@ export class AccountApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authentication"] = this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
+            headerParameters["Authentication"] = await this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/user_info`;
+
         const response = await this.request({
-            path: `/user_info`,
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -394,8 +430,11 @@ export class AccountApi extends runtime.BaseAPI {
      * Login
      */
     async loginRaw(requestParameters: LoginRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AuthLogin>> {
-        if (requestParameters.authLoginPost === null || requestParameters.authLoginPost === undefined) {
-            throw new runtime.RequiredError('authLoginPost','Required parameter requestParameters.authLoginPost was null or undefined when calling login.');
+        if (requestParameters['authLoginPost'] == null) {
+            throw new runtime.RequiredError(
+                'authLoginPost',
+                'Required parameter "authLoginPost" was null or undefined when calling login().'
+            );
         }
 
         const queryParameters: any = {};
@@ -404,12 +443,15 @@ export class AccountApi extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
+
+        let urlPath = `/auth/login`;
+
         const response = await this.request({
-            path: `/auth/login`,
+            path: urlPath,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: AuthLoginPostToJSON(requestParameters.authLoginPost),
+            body: AuthLoginPostToJSON(requestParameters['authLoginPost']),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => AuthLoginFromJSON(jsonValue));
@@ -434,11 +476,14 @@ export class AccountApi extends runtime.BaseAPI {
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authentication"] = this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
+            headerParameters["Authentication"] = await this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/logout`;
+
         const response = await this.request({
-            path: `/logout`,
+            path: urlPath,
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -461,8 +506,11 @@ export class AccountApi extends runtime.BaseAPI {
      * MFA authentication
      */
     async mfaRaw(requestParameters: MfaRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AuthMfa>> {
-        if (requestParameters.authMfaPost === null || requestParameters.authMfaPost === undefined) {
-            throw new runtime.RequiredError('authMfaPost','Required parameter requestParameters.authMfaPost was null or undefined when calling mfa.');
+        if (requestParameters['authMfaPost'] == null) {
+            throw new runtime.RequiredError(
+                'authMfaPost',
+                'Required parameter "authMfaPost" was null or undefined when calling mfa().'
+            );
         }
 
         const queryParameters: any = {};
@@ -471,12 +519,15 @@ export class AccountApi extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
+
+        let urlPath = `/auth/mfa`;
+
         const response = await this.request({
-            path: `/auth/mfa`,
+            path: urlPath,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: AuthMfaPostToJSON(requestParameters.authMfaPost),
+            body: AuthMfaPostToJSON(requestParameters['authMfaPost']),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => AuthMfaFromJSON(jsonValue));
@@ -496,8 +547,11 @@ export class AccountApi extends runtime.BaseAPI {
      * Reactivate account
      */
     async reactivateAccountRaw(requestParameters: ReactivateAccountRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.authReactivatePost === null || requestParameters.authReactivatePost === undefined) {
-            throw new runtime.RequiredError('authReactivatePost','Required parameter requestParameters.authReactivatePost was null or undefined when calling reactivateAccount.');
+        if (requestParameters['authReactivatePost'] == null) {
+            throw new runtime.RequiredError(
+                'authReactivatePost',
+                'Required parameter "authReactivatePost" was null or undefined when calling reactivateAccount().'
+            );
         }
 
         const queryParameters: any = {};
@@ -506,12 +560,15 @@ export class AccountApi extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
+
+        let urlPath = `/auth/reactivate`;
+
         const response = await this.request({
-            path: `/auth/reactivate`,
+            path: urlPath,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: AuthReactivatePostToJSON(requestParameters.authReactivatePost),
+            body: AuthReactivatePostToJSON(requestParameters['authReactivatePost']),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -530,8 +587,11 @@ export class AccountApi extends runtime.BaseAPI {
      * Register account
      */
     async registerAccountRaw(requestParameters: RegisterAccountRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
-        if (requestParameters.authRegisterPost === null || requestParameters.authRegisterPost === undefined) {
-            throw new runtime.RequiredError('authRegisterPost','Required parameter requestParameters.authRegisterPost was null or undefined when calling registerAccount.');
+        if (requestParameters['authRegisterPost'] == null) {
+            throw new runtime.RequiredError(
+                'authRegisterPost',
+                'Required parameter "authRegisterPost" was null or undefined when calling registerAccount().'
+            );
         }
 
         const queryParameters: any = {};
@@ -540,12 +600,15 @@ export class AccountApi extends runtime.BaseAPI {
 
         headerParameters['Content-Type'] = 'application/json';
 
+
+        let urlPath = `/auth/register`;
+
         const response = await this.request({
-            path: `/auth/register`,
+            path: urlPath,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: AuthRegisterPostToJSON(requestParameters.authRegisterPost),
+            body: AuthRegisterPostToJSON(requestParameters['authRegisterPost']),
         }, initOverrides);
 
         return new runtime.VoidApiResponse(response);
@@ -564,8 +627,11 @@ export class AccountApi extends runtime.BaseAPI {
      * Update user info
      */
     async updateUserInfoRaw(requestParameters: UpdateUserInfoRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UserInfo>> {
-        if (requestParameters.userInfoPatch === null || requestParameters.userInfoPatch === undefined) {
-            throw new runtime.RequiredError('userInfoPatch','Required parameter requestParameters.userInfoPatch was null or undefined when calling updateUserInfo.');
+        if (requestParameters['userInfoPatch'] == null) {
+            throw new runtime.RequiredError(
+                'userInfoPatch',
+                'Required parameter "userInfoPatch" was null or undefined when calling updateUserInfo().'
+            );
         }
 
         const queryParameters: any = {};
@@ -575,15 +641,18 @@ export class AccountApi extends runtime.BaseAPI {
         headerParameters['Content-Type'] = 'application/json';
 
         if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authentication"] = this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
+            headerParameters["Authentication"] = await this.configuration.apiKey("Authentication"); // apiKeyAuth authentication
         }
 
+
+        let urlPath = `/user_info`;
+
         const response = await this.request({
-            path: `/user_info`,
+            path: urlPath,
             method: 'PATCH',
             headers: headerParameters,
             query: queryParameters,
-            body: UserInfoPatchToJSON(requestParameters.userInfoPatch),
+            body: UserInfoPatchToJSON(requestParameters['userInfoPatch']),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => UserInfoFromJSON(jsonValue));

@@ -19,7 +19,7 @@ type WindowOrWorkerGlobalScope = any;
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -49,13 +49,11 @@ export interface AuthMfaPost {
 /**
  * Check if a given object implements the AuthMfaPost interface.
  */
-export function instanceOfAuthMfaPost(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "mfaToken" in value;
-    isInstance = isInstance && "mfaKey" in value;
-    isInstance = isInstance && "device" in value;
-
-    return isInstance;
+export function instanceOfAuthMfaPost(value: object): value is AuthMfaPost {
+    if (!('mfaToken' in value) || value['mfaToken'] === undefined) return false;
+    if (!('mfaKey' in value) || value['mfaKey'] === undefined) return false;
+    if (!('device' in value) || value['device'] === undefined) return false;
+    return true;
 }
 
 export function AuthMfaPostFromJSON(json: any): AuthMfaPost {
@@ -63,7 +61,7 @@ export function AuthMfaPostFromJSON(json: any): AuthMfaPost {
 }
 
 export function AuthMfaPostFromJSONTyped(json: any, ignoreDiscriminator: boolean): AuthMfaPost {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -74,18 +72,20 @@ export function AuthMfaPostFromJSONTyped(json: any, ignoreDiscriminator: boolean
     };
 }
 
-export function AuthMfaPostToJSON(value?: AuthMfaPost | null): any {
-    if (value === undefined) {
-        return undefined;
+export function AuthMfaPostToJSON(json: any): AuthMfaPost {
+    return AuthMfaPostToJSONTyped(json, false);
+}
+
+export function AuthMfaPostToJSONTyped(value?: AuthMfaPost | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'mfa_token': value.mfaToken,
-        'mfa_key': value.mfaKey,
-        'device': value.device,
+        'mfa_token': value['mfaToken'],
+        'mfa_key': value['mfaKey'],
+        'device': value['device'],
     };
 }
 

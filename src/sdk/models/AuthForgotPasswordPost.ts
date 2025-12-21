@@ -19,7 +19,7 @@ type WindowOrWorkerGlobalScope = any;
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -37,11 +37,9 @@ export interface AuthForgotPasswordPost {
 /**
  * Check if a given object implements the AuthForgotPasswordPost interface.
  */
-export function instanceOfAuthForgotPasswordPost(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "email" in value;
-
-    return isInstance;
+export function instanceOfAuthForgotPasswordPost(value: object): value is AuthForgotPasswordPost {
+    if (!('email' in value) || value['email'] === undefined) return false;
+    return true;
 }
 
 export function AuthForgotPasswordPostFromJSON(json: any): AuthForgotPasswordPost {
@@ -49,7 +47,7 @@ export function AuthForgotPasswordPostFromJSON(json: any): AuthForgotPasswordPos
 }
 
 export function AuthForgotPasswordPostFromJSONTyped(json: any, ignoreDiscriminator: boolean): AuthForgotPasswordPost {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -58,16 +56,18 @@ export function AuthForgotPasswordPostFromJSONTyped(json: any, ignoreDiscriminat
     };
 }
 
-export function AuthForgotPasswordPostToJSON(value?: AuthForgotPasswordPost | null): any {
-    if (value === undefined) {
-        return undefined;
+export function AuthForgotPasswordPostToJSON(json: any): AuthForgotPasswordPost {
+    return AuthForgotPasswordPostToJSONTyped(json, false);
+}
+
+export function AuthForgotPasswordPostToJSONTyped(value?: AuthForgotPasswordPost | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'email': value.email,
+        'email': value['email'],
     };
 }
 

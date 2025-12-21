@@ -19,7 +19,7 @@ type WindowOrWorkerGlobalScope = any;
  * Do not edit the class manually.
  */
 
-import { exists, mapValues } from '../runtime';
+import { mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -43,12 +43,10 @@ export interface AliasOptionsRecommendation {
 /**
  * Check if a given object implements the AliasOptionsRecommendation interface.
  */
-export function instanceOfAliasOptionsRecommendation(value: object): boolean {
-    let isInstance = true;
-    isInstance = isInstance && "alias" in value;
-    isInstance = isInstance && "hostname" in value;
-
-    return isInstance;
+export function instanceOfAliasOptionsRecommendation(value: object): value is AliasOptionsRecommendation {
+    if (!('alias' in value) || value['alias'] === undefined) return false;
+    if (!('hostname' in value) || value['hostname'] === undefined) return false;
+    return true;
 }
 
 export function AliasOptionsRecommendationFromJSON(json: any): AliasOptionsRecommendation {
@@ -56,7 +54,7 @@ export function AliasOptionsRecommendationFromJSON(json: any): AliasOptionsRecom
 }
 
 export function AliasOptionsRecommendationFromJSONTyped(json: any, ignoreDiscriminator: boolean): AliasOptionsRecommendation {
-    if ((json === undefined) || (json === null)) {
+    if (json == null) {
         return json;
     }
     return {
@@ -66,17 +64,19 @@ export function AliasOptionsRecommendationFromJSONTyped(json: any, ignoreDiscrim
     };
 }
 
-export function AliasOptionsRecommendationToJSON(value?: AliasOptionsRecommendation | null): any {
-    if (value === undefined) {
-        return undefined;
+export function AliasOptionsRecommendationToJSON(json: any): AliasOptionsRecommendation {
+    return AliasOptionsRecommendationToJSONTyped(json, false);
+}
+
+export function AliasOptionsRecommendationToJSONTyped(value?: AliasOptionsRecommendation | null, ignoreDiscriminator: boolean = false): any {
+    if (value == null) {
+        return value;
     }
-    if (value === null) {
-        return null;
-    }
+
     return {
         
-        'alias': value.alias,
-        'hostname': value.hostname,
+        'alias': value['alias'],
+        'hostname': value['hostname'],
     };
 }
 
