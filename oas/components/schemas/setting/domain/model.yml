@@ -1,0 +1,11 @@
+type: object
+properties:
+  domain:
+    type: string
+    description: The domain name available for random alias creation
+  is_custom:
+    type: boolean
+    description: Whether the domain belongs to the user (true) or the platform (false)
+required:
+  - domain
+  - is_custom

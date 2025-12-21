@@ -1,0 +1,20 @@
+type: object
+properties:
+  alias_generator:
+    type: string
+    enum: [word, uuid]
+    description: Random alias generation style
+  notification:
+    type: boolean
+    description: Enable or disable notifications
+  random_alias_default_domain:
+    type: string
+    description: Domain selection for random aliases
+  sender_format:
+    type: string
+    enum: [AT, A, NAME_ONLY, AT_ONLY, NO_NAME]
+    description: Display format for sender information
+  random_alias_suffix:
+    type: string
+    enum: [word, random_string]
+    description: Suffix generation method for random aliases
