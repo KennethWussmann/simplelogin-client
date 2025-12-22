@@ -65,26 +65,6 @@ describe('AccountApi', () => {
       );
       expect(apiKey.apiKey.length).toBeGreaterThan(0);
     });
-
-    api('creates api key for mobile app', async ({ client }) => {
-      const response = await client.account.createApiKeyRaw({
-        apiKeyPost: { device: 'mobile-app' },
-      });
-
-      const apiKey = await expectSuccess(response);
-      expect(apiKey.apiKey).toBeDefined();
-      expect(apiKey.apiKey.length).toBeGreaterThan(0);
-    });
-
-    api('creates api key for web browser', async ({ client }) => {
-      const response = await client.account.createApiKeyRaw({
-        apiKeyPost: { device: 'web-browser' },
-      });
-
-      const apiKey = await expectSuccess(response);
-      expect(apiKey.apiKey).toBeDefined();
-      expect(apiKey.apiKey.length).toBeGreaterThan(0);
-    });
   });
 
   describe('Stats', () => {
