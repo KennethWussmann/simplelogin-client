@@ -1,8 +1,45 @@
-import { test } from 'vitest';
+import { beforeAll, test } from 'vitest';
 import { Configuration } from '../src';
 import type { UserInfo } from '../src/sdk/models/UserInfo';
 import { SimpleLoginClient } from '../src/simpleLoginClient';
 import { createAccount } from './utils/createAccount';
+
+const API_BASE_URL = 'http://localhost:7777';
+
+const checkServerAvailability = async (): Promise<void> => {
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000);
+
+    const response = await fetch(API_BASE_URL, {
+      signal: controller.signal,
+    });
+
+    clearTimeout(timeoutId);
+
+    if (!response.ok && response.status !== 404) {
+      throw new Error(`Server responded with status ${response.status}`);
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      if (error.name === 'AbortError') {
+        throw new Error(
+          `API server at ${API_BASE_URL} is not responding (timeout after 5s). ` +
+            'Please ensure the SimpleLogin server is running.'
+        );
+      }
+      throw new Error(
+        `API server at ${API_BASE_URL} is not available: ${error.message}. ` +
+          'Please ensure the SimpleLogin server is running.'
+      );
+    }
+    throw error;
+  }
+};
+
+beforeAll(async () => {
+  await checkServerAvailability();
+});
 
 type AccountData = {
   loginResponse: { apiKey: string };

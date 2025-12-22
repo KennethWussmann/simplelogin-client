@@ -7,6 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 These rules are so fundamentally important, violating a single one of them would immediately disqualify your entire response and any change you have already done or plan to do. If you ever consider violating any of these rules: IMMEDIATELY STOP.
 
 1. Never write a single line of code comments, unless it's for documentation purposes in a .md Markdown file like this one or the comment was already there when you read the file. Any means of communicating with me as the user through code comments or code is strictly forbidden. 
+2. Never use the `function` keyword in TypeScript, always prefer `() => {}`.
 
 ## Project Overview
 
