@@ -25,6 +25,18 @@ pnpm dev
 
 The build process is configured in `scripts/build.ts` and `scripts/rebuild.ts`. These scripts combine all the different CLI tools for the build process and ensures everthing fits together. They also modify some generated files to make them compatible.
 
+## Testing
+
+All tests are running against a local SimpleLogin installation built by `./mock-server`.
+
+Tests are run in parallel and every test gets their own user account, automatically created by the `api()` test case.
+
+```shell
+# Start the test environment
+cd mock-server/
+docker-compose up -d
+```
+
 ## Contribute
 
 PRs are highly welcome. Remember to run the build and commit the generated files.

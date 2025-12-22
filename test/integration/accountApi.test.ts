@@ -39,16 +39,15 @@ describe('AccountApi', () => {
       );
     });
 
-    api('updates user notification preferences', async ({ client }) => {
+    api('updates user name', async ({ client }) => {
       const response = await client.account.updateUserInfoRaw({
         userInfoPatch: {
-          notification: false,
+          name: 'Test User',
         },
       });
 
       const updatedInfo = await expectSuccess(response);
-      // Note: The API response doesn't always return the notification field
-      expect(updatedInfo).toBeDefined();
+      expect(updatedInfo.name).toBe('Test User');
     });
   });
 
