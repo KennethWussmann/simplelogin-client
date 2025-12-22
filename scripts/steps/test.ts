@@ -1,3 +1,3 @@
 import { $ } from 'zx/core';
 
-export const test = async () => $`npm run test`;
+export const test = async () => $`pnpm vitest`;

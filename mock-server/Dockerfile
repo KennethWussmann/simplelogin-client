@@ -13,8 +13,10 @@ RUN apt-get update && \
 # Copy our custom scripts
 COPY scripts/bootstrap.sh /scripts/bootstrap.sh
 COPY scripts/entrypoint.sh /scripts/entrypoint.sh
+COPY scripts/create-account.py /scripts/create-account.py
+COPY scripts/test-api.py /scripts/test-api.py
 
-RUN chmod +x /scripts/bootstrap.sh /scripts/entrypoint.sh
+RUN chmod +x /scripts/bootstrap.sh /scripts/entrypoint.sh /scripts/create-account.py /scripts/test-api.py
 
 # Run bootstrap once during image build
 RUN /scripts/bootstrap.sh

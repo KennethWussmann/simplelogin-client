@@ -5,7 +5,15 @@ export type SimpleLoginProps = {
    * Most API endpoints require an API key to be passed in the header.
    * @default undefined
    */
-  apiKey: string;
+  apiKey?: string;
+  /**
+   * Password
+   */
+  email?: string;
+  /**
+   * Password for E-Mail & Password authentication
+   */
+  password?: string;
   /**
    * Override the default base path. This is useful for testing, or for selfhosted instances.
    * @default https://app.simplelogin.io/api
@@ -25,7 +33,7 @@ export class SimpleLoginConfig extends Configuration {
   }
 
   get apiKey() {
-    return () => this.props.apiKey;
+    return () => this.props.apiKey!;
   }
 
   get basePath() {

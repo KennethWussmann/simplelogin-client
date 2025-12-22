@@ -127,13 +127,6 @@ Configuration wrapper (`src/config.ts`):
 
 Only `src/config.ts` and `src/index.ts` should be manually edited. Everything in `src/sdk/` is regenerated on every build.
 
-### Testing
-
-Tests live in `test/` directory. Jest configuration:
-- Uses `ts-jest` preset
-- Excludes integration tests (`*.it.test.ts`) by default
-- Setup file: `test/setupEnv.ts`
-
 ## Code Style
 
 - **Formatter**: Biome (configured in `biome.json`)
