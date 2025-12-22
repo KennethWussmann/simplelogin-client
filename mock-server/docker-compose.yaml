@@ -71,6 +71,9 @@ services:
 
       # Reset settings
       RESET_DB: 'false'
+
+      # Disable rate limiting for testing
+      DISABLE_RATE_LIMIT: 'true'
     ports:
       - '7777:7777'
     restart: unless-stopped

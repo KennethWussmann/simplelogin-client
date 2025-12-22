@@ -183,8 +183,9 @@ import { describe, expect } from 'vitest';
 import { expectSuccess } from '../utils/matchers';
 
 describe('AccountApi', () => {
-  api('creates api key', async ({ client }) => {
+  api('creates api key', async ({ client, user }) => {
     // The 'client' is a SimpleLoginClient with authentication already configured
+    // The 'user' is the current UserInfo object with email, name, etc.
     const response = await client.account.createApiKeyRaw({
       apiKeyPost: { device: 'test-device' },
     });
@@ -198,7 +199,23 @@ describe('AccountApi', () => {
 The `api` fixture is globally available and defined in `test/setup.ts`. It:
 1. Creates a new test account using `createAccount()`
 2. Provides an authenticated `SimpleLoginClient` instance
-3. Automatically cleans up the test account after the test completes
+3. Provides the current `UserInfo` object via `getUserInfo()` for accessing user email, name, and other profile data
+4. Automatically cleans up the test account after the test completes
+
+**Using the `user` fixture:**
+
+```typescript
+api('matches alias email format', async ({ client, user }) => {
+  const response = await client.alias.createAliasRaw({
+    aliasPost: { note: 'Test alias' }
+  });
+
+  const alias = await expectSuccess(response);
+
+  // Use user.email to verify the alias belongs to the current user
+  expect(alias.email).toMatch(new RegExp(`@.*${user.email.split('@')[1]}`));
+});
+```
 
 #### SDK Method Variants
 
@@ -341,15 +358,19 @@ import { createAccount } from '../utils/createAccount';
 
 #### Snapshot Testing
 
-Snapshot testing is **highly recommended** for API response validation. It captures the entire response structure and detects unexpected changes.
+Snapshot testing can be useful for API response validation, but should be used selectively based on the nature of the response data.
 
 **When to use snapshots:**
-- Verifying complete API response structures
-- Ensuring response shape consistency across changes
-- Detecting unintended changes to API responses
-- Testing complex nested objects
+- Responses contain only static data (no timestamps, auto-generated IDs, random values)
+- The entire response structure can be asserted at once
+- You need to capture exact values for comparison
 
-**Always combine snapshots with custom matchers:**
+**When NOT to use snapshots (use `expect.objectContaining()` instead):**
+- Responses contain dynamic data (timestamps, IDs, tokens, UUIDs)
+- Only certain fields need validation while others change
+- Testing partial response structure
+
+**Use object containing matches for dynamic data:**
 
 ```typescript
 api('creates api key', async ({ client }) => {
@@ -360,15 +381,30 @@ api('creates api key', async ({ client }) => {
   // 1. Use custom matcher to verify status code
   const apiKey = await expectSuccess(response);
 
-  // 2. Verify critical fields
-  expect(apiKey.apiKey).toBeDefined();
+  // 2. Verify critical fields with object containing
+  expect(apiKey).toEqual(expect.objectContaining({
+    device: 'test-device',
+    apiKey: expect.any(String),
+  }));
 
-  // 3. Snapshot the complete response structure
-  expect(apiKey).toMatchSnapshot();
+  // 3. Verify specific fields
+  expect(apiKey.apiKey).toBeDefined();
+  expect(apiKey.apiKey.length).toBeGreaterThan(0);
 });
 ```
 
-**Updating snapshots:**
+**Example with static data (appropriate for snapshots):**
+
+```typescript
+api('gets account stats', async ({ client }) => {
+  const stats = await client.account.getStats();
+
+  // Only snapshot if stats are deterministic for test account
+  expect(stats).toMatchSnapshot();
+});
+```
+
+**Updating snapshots (when needed):**
 ```bash
 # Update all snapshots
 pnpm test -- -u
@@ -377,7 +413,7 @@ pnpm test -- -u
 pnpm test -- test/integration/accountApi.test.ts -u
 ```
 
-**Important:** Review snapshot changes carefully before committing. Ensure changes are intentional.
+**Important:** Review snapshot changes carefully before committing. Ensure changes are intentional and that dynamic data hasn't leaked into snapshots.
 
 #### Parameterized Tests
 
@@ -428,9 +464,12 @@ describe('AliasApi - Creation', () => {
     });
 
     const alias = await expectSuccess(response);
-    expect(alias.note).toBe(params.note);
-    expect(alias.enabled).toBe(params.enabled);
-    expect(alias).toMatchSnapshot();
+    expect(alias).toEqual(expect.objectContaining({
+      note: params.note,
+      enabled: params.enabled,
+      email: expect.any(String),
+      id: expect.any(Number),
+    }));
   });
 });
 ```
@@ -476,9 +515,12 @@ describe('AliasApi - Combinations', () => {
           });
 
           const alias = await expectSuccess(response);
-          expect(alias.note).toBe(note);
-          expect(alias.enabled).toBe(enabled);
-          expect(alias).toMatchSnapshot();
+          expect(alias).toEqual(expect.objectContaining({
+            note,
+            enabled,
+            email: expect.any(String),
+            id: expect.any(Number),
+          }));
         }
       );
     }
@@ -490,12 +532,12 @@ describe('AliasApi - Combinations', () => {
 
 1. **Use the `api` fixture** - Always use the provided `api` fixture for authenticated tests instead of manually creating accounts
 2. **Use Raw methods with matchers** - When testing status codes or HTTP details, use `*Raw()` methods with `expectSuccess()`
-3. **Always snapshot API responses** - Use `toMatchSnapshot()` after custom matcher validation to capture complete response structure
+3. **Prefer object containing over snapshots** - Use `expect.objectContaining()` for responses with dynamic data; only use snapshots for completely static responses
 4. **Use parameterized tests** - Use `test.each()` or `api.each()` to test multiple scenarios with the same logic
 5. **Test error cases** - Use `expectError()`, `expectClientError()`, or `expectServerError()` to verify error handling
 6. **Clean test data** - The `api` fixture handles cleanup, but for manual account creation, ensure cleanup in the test
 7. **Descriptive test names** - Use clear, descriptive test names that explain what is being tested
-8. **Review snapshot changes** - Always review snapshot diffs carefully before updating with `-u`
+8. **Review snapshot changes** - If using snapshots, always review snapshot diffs carefully before updating with `-u`
 9. **Keep tests focused** - Each test should verify one specific behavior or scenario
 
 #### Example: Complete Test Suite

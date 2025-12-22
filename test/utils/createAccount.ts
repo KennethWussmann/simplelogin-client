@@ -24,7 +24,6 @@ export const createAccount = async () => {
         password,
       },
     });
-    console.log(`Account ${email} created`);
 
     const code = await waitForSimpleLoginRegistrationCode(email);
 
@@ -34,7 +33,6 @@ export const createAccount = async () => {
         code,
       },
     });
-    console.log(`Account ${email} activated`);
 
     // Login to get API key for authentication
     const loginResponse = await api.login({
@@ -44,7 +42,6 @@ export const createAccount = async () => {
         device,
       },
     });
-    console.log(`Account ${email} logged in`);
     return { loginResponse, password, email };
   } catch (e: unknown) {
     if (e instanceof ResponseError) {
