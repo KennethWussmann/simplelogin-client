@@ -34,13 +34,13 @@ import {
     ExportDataAppInfoToJSON,
     ExportDataAppInfoToJSONTyped,
 } from './ExportDataAppInfo';
-import type { Alias } from './Alias';
+import type { AliasExport } from './AliasExport';
 import {
-    AliasFromJSON,
-    AliasFromJSONTyped,
-    AliasToJSON,
-    AliasToJSONTyped,
-} from './Alias';
+    AliasExportFromJSON,
+    AliasExportFromJSONTyped,
+    AliasExportToJSON,
+    AliasExportToJSONTyped,
+} from './AliasExport';
 
 /**
  * 
@@ -49,11 +49,11 @@ import {
  */
 export interface ExportData {
     /**
-     * List of all user aliases
-     * @type {Array<Alias>}
+     * List of all user aliases (simplified format for export)
+     * @type {Array<AliasExport>}
      * @memberof ExportData
      */
-    aliases: Array<Alias>;
+    aliases: Array<AliasExport>;
     /**
      * List of all user custom domains
      * @type {Array<CustomDomain>}
@@ -88,7 +88,7 @@ export function ExportDataFromJSONTyped(json: any, ignoreDiscriminator: boolean)
     }
     return {
         
-        'aliases': ((json['aliases'] as Array<any>).map(AliasFromJSON)),
+        'aliases': ((json['aliases'] as Array<any>).map(AliasExportFromJSON)),
         'customDomains': ((json['custom_domains'] as Array<any>).map(CustomDomainFromJSON)),
         'appInfo': ExportDataAppInfoFromJSON(json['app_info']),
     };
@@ -105,7 +105,7 @@ export function ExportDataToJSONTyped(value?: ExportData | null, ignoreDiscrimin
 
     return {
         
-        'aliases': ((value['aliases'] as Array<any>).map(AliasToJSON)),
+        'aliases': ((value['aliases'] as Array<any>).map(AliasExportToJSON)),
         'custom_domains': ((value['customDomains'] as Array<any>).map(CustomDomainToJSON)),
         'app_info': ExportDataAppInfoToJSON(value['appInfo']),
     };

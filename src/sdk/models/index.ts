@@ -10,6 +10,7 @@ export * from './AliasAliasIdDelete';
 export * from './AliasAliasIdPatch';
 export * from './AliasAliasIdTogglePost';
 export * from './AliasCustomNewPost';
+export * from './AliasExport';
 export * from './AliasLatestActivity';
 export * from './AliasLatestActivityContact';
 export * from './AliasModelArray';

@@ -2,9 +2,9 @@ type: object
 properties:
   aliases:
     type: array
-    description: List of all user aliases
+    description: List of all user aliases (simplified format for export)
     items:
-      $ref: '@schemas/alias/model.yml'
+      $ref: '@schemas/alias/exportModel.yml'
   custom_domains:
     type: array
     description: List of all user custom domains

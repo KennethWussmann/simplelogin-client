@@ -2,6 +2,12 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## MUST FOLLOW RULES
+
+These rules are so fundamentally important, violating a single one of them would immediately disqualify your entire response and any change you have already done or plan to do. If you ever consider violating any of these rules: IMMEDIATELY STOP.
+
+1. Never write a single line of code comments, unless it's for documentation purposes in a .md Markdown file like this one or the comment was already there when you read the file. Any means of communicating with me as the user through code comments or code is strictly forbidden. 
+
 ## Project Overview
 
 This is a **code-generated TypeScript SDK** for the SimpleLogin API. The client code in `src/sdk/` and documentation in `dist/` are **entirely generated** and must never be edited directly. All changes happen through OpenAPI spec modifications in `oas/`.
@@ -173,6 +179,13 @@ pnpm test -- --coverage
 ```
 
 ### Writing Tests
+
+100% accuracy in tests is ABSOLUTELY a MUST requirement. The simplelogin-client is supposed to be a client exactly for the application we are running our tests against. All tests are tests against a real running SimpleLogin instance.
+
+If a test fails because the actual response does not match what is defined by our OpenAPI spec, then this is an high indicator for inaccuracy of our client! The server is always correct and we rather have to adjust our client than the test case, because the OpenAPI spec defines what responses are expected. 
+
+Most API calls are secured. We can use the `api` test fixture to use authenticated access or we build the clients locally in the test with the normal `test` vitest fixture. The API calls often inherit error codes from the authentication, unless we specifically want to test authentication and authorization; we can take it as given that the existing `accountApi.test.ts` takes care of that. We don't need to test for missing API keys all the time.
+
 
 #### Test Fixtures
 

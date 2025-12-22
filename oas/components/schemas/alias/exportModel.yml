@@ -1,0 +1,10 @@
+type: object
+description: Simplified alias model returned by the export endpoint
+properties:
+  email:
+    $ref: '@schemas/email.yml'
+  enabled:
+    type: boolean
+required:
+  - email
+  - enabled
