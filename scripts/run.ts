@@ -1,5 +1,8 @@
+import { $ } from 'zx';
 import * as steps from './steps';
 import * as tasks from './task';
+
+$.verbose = true;
 
 export const run = async (task: string | undefined = process.argv[2], ...params: unknown[]) => {
   if (!task) {

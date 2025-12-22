@@ -48,6 +48,7 @@ export const api = test.extend<{ client: SimpleLoginClient }>({
 
 // Make it available globally
 declare global {
+  // biome-ignore lint/suspicious/noRedeclare: global declaration for test fixture
   const api: typeof test;
 }
 

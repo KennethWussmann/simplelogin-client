@@ -1,5 +1,11 @@
-import type { SimpleLoginConfig } from './config';
-import { AccountApi, AliasApi, CustomDomainApi, MailboxApi, SettingsApi } from './sdk';
+import {
+  AccountApi,
+  AliasApi,
+  type Configuration,
+  CustomDomainApi,
+  MailboxApi,
+  SettingsApi,
+} from './sdk';
 
 export class SimpleLoginClient {
   public account: AccountApi;
@@ -8,7 +14,7 @@ export class SimpleLoginClient {
   public mailbox: MailboxApi;
   public settings: SettingsApi;
 
-  constructor(config: SimpleLoginConfig) {
+  constructor(config: Configuration) {
     this.account = new AccountApi(config);
     this.alias = new AliasApi(config);
     this.customDomain = new CustomDomainApi(config);
