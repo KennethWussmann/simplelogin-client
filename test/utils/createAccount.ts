@@ -3,13 +3,15 @@ import { AccountApi, Configuration, ResponseError } from '../../src';
 import { waitForSimpleLoginRegistrationCode } from './mailHog';
 
 export const createAccount = async () => {
-  const email = randEmail();
+  const email = randEmail({
+    nameSeparator: '.',
+    provider: 'home',
+    suffix: 'name',
+  });
   const password = randPassword({ size: 8 });
 
   const api = new AccountApi(
     new Configuration({
-      username: email,
-      password,
       basePath: 'http://localhost:7777/api',
     })
   );
@@ -33,13 +35,13 @@ export const createAccount = async () => {
     });
     console.log(`Account ${email} activated`);
 
-    const apiKey = await api.createApiKey({
-      userApiKeyPost: {
+    const { apiKey } = await api.createApiKey({
+      apiKeyPost: {
         device: 'automated-api-tests',
       },
     });
 
-    console.log('API key created', apiKey);
+    console.log(`API key for account ${email} created`, apiKey);
   } catch (e: unknown) {
     if (e instanceof ResponseError) {
       console.log(`Failed to create account ${email}`, e.response, await e.response.text());

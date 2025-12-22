@@ -2,6 +2,7 @@ type: object
 properties:
   api_key:
     type: string
+    description: The generated API key for authentication
 
 required:
   - api_key

@@ -1,0 +1,8 @@
+type: object
+properties:
+  device:
+    type: string
+    description: The device's name, used to identify the API key for management purposes
+
+required:
+  - device

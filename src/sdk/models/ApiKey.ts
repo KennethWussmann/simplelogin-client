@@ -23,51 +23,51 @@ import { mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface UserApiKeyPost
+ * @interface ApiKey
  */
-export interface UserApiKeyPost {
+export interface ApiKey {
     /**
-     * Device name
+     * The generated API key for authentication
      * @type {string}
-     * @memberof UserApiKeyPost
+     * @memberof ApiKey
      */
-    device: string;
+    apiKey: string;
 }
 
 /**
- * Check if a given object implements the UserApiKeyPost interface.
+ * Check if a given object implements the ApiKey interface.
  */
-export function instanceOfUserApiKeyPost(value: object): value is UserApiKeyPost {
-    if (!('device' in value) || value['device'] === undefined) return false;
+export function instanceOfApiKey(value: object): value is ApiKey {
+    if (!('apiKey' in value) || value['apiKey'] === undefined) return false;
     return true;
 }
 
-export function UserApiKeyPostFromJSON(json: any): UserApiKeyPost {
-    return UserApiKeyPostFromJSONTyped(json, false);
+export function ApiKeyFromJSON(json: any): ApiKey {
+    return ApiKeyFromJSONTyped(json, false);
 }
 
-export function UserApiKeyPostFromJSONTyped(json: any, ignoreDiscriminator: boolean): UserApiKeyPost {
+export function ApiKeyFromJSONTyped(json: any, ignoreDiscriminator: boolean): ApiKey {
     if (json == null) {
         return json;
     }
     return {
         
-        'device': json['device'],
+        'apiKey': json['api_key'],
     };
 }
 
-export function UserApiKeyPostToJSON(json: any): UserApiKeyPost {
-    return UserApiKeyPostToJSONTyped(json, false);
+export function ApiKeyToJSON(json: any): ApiKey {
+    return ApiKeyToJSONTyped(json, false);
 }
 
-export function UserApiKeyPostToJSONTyped(value?: UserApiKeyPost | null, ignoreDiscriminator: boolean = false): any {
+export function ApiKeyToJSONTyped(value?: ApiKey | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
 
     return {
         
-        'device': value['device'],
+        'api_key': value['apiKey'],
     };
 }
 
