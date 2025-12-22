@@ -1,0 +1,9 @@
+tags:
+  - export
+summary: Export user data
+description: Export comprehensive user data including aliases, custom domains, and app information
+operationId: {{ opId() }}
+responses:
+  '200':
+    description: Successful export of user data
+    content: {{ mixin("@mixins/request/json.yml", "@schemas/export/data.yml") }}

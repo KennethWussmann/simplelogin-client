@@ -1,0 +1,14 @@
+tags:
+  - export
+summary: Export aliases as CSV
+description: Export user aliases in an importable CSV format that can be used in the settings screen
+operationId: {{ opId() }}
+responses:
+  '200':
+    description: Successful export of aliases as CSV file
+    content:
+      text/csv:
+        schema:
+          type: string
+          format: binary
+          description: CSV file with alias information

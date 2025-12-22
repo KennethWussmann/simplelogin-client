@@ -31,6 +31,8 @@ export * from './AuthRegisterPost';
 export * from './ContactsContactIdDelete';
 export * from './ContactsContactIdToggle';
 export * from './CustomDomain';
+export * from './ExportData';
+export * from './ExportDataAppInfo';
 export * from './Mailbox';
 export * from './MailboxMailboxIdPut';
 export * from './MailboxModelArray';

@@ -1,0 +1,43 @@
+type: object
+properties:
+  aliases:
+    type: array
+    description: List of all user aliases
+    items:
+      $ref: '@schemas/alias/model.yml'
+  custom_domains:
+    type: array
+    description: List of all user custom domains
+    items:
+      $ref: '@schemas/custom_domain/model.yml'
+  app_info:
+    type: object
+    description: Application-related user information
+    properties:
+      name:
+        type: string
+        description: User's full name
+      email:
+        $ref: '@schemas/email.yml'
+      is_premium:
+        type: boolean
+        description: Whether the user is a premium user
+      in_trial:
+        type: boolean
+        description: Whether the user is in trial period
+      profile_picture:
+        type: string
+        format: url
+        description: URL of the user's profile picture
+      max_alias_free_plan:
+        type: number
+        description: Maximum number of aliases for free plan users
+    required:
+      - name
+      - email
+      - is_premium
+      - in_trial
+required:
+  - aliases
+  - custom_domains
+  - app_info
