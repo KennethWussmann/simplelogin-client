@@ -1,4 +1,5 @@
 export * from './buildDocs';
+export * from './buildMockServer';
 export * from './buildOAS';
 export * from './buildPagesIndex';
 export * from './buildSdk';

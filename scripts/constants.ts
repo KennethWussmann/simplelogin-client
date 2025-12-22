@@ -10,3 +10,4 @@ export const distRedocDir = join(distDir, 'redoc');
 export const distTypedocDir = join(distDir, 'typedoc');
 
 export const image = 'openapitools/openapi-generator-cli:v7.17.0';
+export const simpleLoginVersion = 'v4.74.6';

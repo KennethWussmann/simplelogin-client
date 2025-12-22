@@ -1,0 +1,159 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: simplelogin
+      POSTGRES_USER: simplelogin
+      POSTGRES_PASSWORD: simplelogin
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - '15432:5432'
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U simplelogin']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - '16379:6379'
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    ports:
+      - '1025:1025'  # SMTP server
+      - '8025:8025'  # Web UI
+    healthcheck:
+      test: ['CMD', 'wget', '--no-verbose', '--tries=1', '--spider', 'http://localhost:8025']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app:
+    image: simplelogin-mock:latest
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      mailhog:
+        condition: service_healthy
+    environment:
+      # Database
+      DB_URI: postgresql://simplelogin:simplelogin@postgres:5432/simplelogin
+      POSTGRES_DB: simplelogin
+      POSTGRES_USER: simplelogin
+      POSTGRES_PASSWORD: simplelogin
+
+      # Redis
+      REDIS_URL: redis://redis:6379
+
+      # App config
+      URL: http://localhost:7777
+      EMAIL_DOMAIN: example.com
+      SUPPORT_EMAIL: support@example.com
+      ADMIN_EMAIL: admin@example.com
+
+      # Flask
+      FLASK_SECRET: development-secret-key-change-in-production
+
+      # Email configuration - use MailHog for testing
+      EMAIL_SERVERS_WITH_PRIORITY: '[("mailhog", 1025)]'
+      POSTFIX_SERVER: mailhog
+      POSTFIX_PORT: 1025
+
+      # Email sending is enabled (NOT_SEND_EMAIL is not set)
+
+      # Reset settings
+      RESET_DB: 'false'
+    ports:
+      - '7777:7777'
+    restart: unless-stopped
+
+  job-runner:
+    image: simplelogin-mock:latest
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      mailhog:
+        condition: service_healthy
+    environment:
+      # Database
+      DB_URI: postgresql://simplelogin:simplelogin@postgres:5432/simplelogin
+      POSTGRES_DB: simplelogin
+      POSTGRES_USER: simplelogin
+      POSTGRES_PASSWORD: simplelogin
+
+      # Redis
+      REDIS_URL: redis://redis:6379
+
+      # App config
+      URL: http://localhost:7777
+      EMAIL_DOMAIN: example.com
+      SUPPORT_EMAIL: support@example.com
+      ADMIN_EMAIL: admin@example.com
+
+      # Flask
+      FLASK_SECRET: development-secret-key-change-in-production
+
+      # Email configuration - use MailHog for testing
+      EMAIL_SERVERS_WITH_PRIORITY: '[("mailhog", 1025)]'
+      POSTFIX_SERVER: mailhog
+      POSTFIX_PORT: 1025
+
+      # Email sending is enabled (NOT_SEND_EMAIL is not set)
+    command: ['python', 'job_runner.py']
+    restart: unless-stopped
+
+  email-handler:
+    image: simplelogin-mock:latest
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      mailhog:
+        condition: service_healthy
+    environment:
+      # Database
+      DB_URI: postgresql://simplelogin:simplelogin@postgres:5432/simplelogin
+      POSTGRES_DB: simplelogin
+      POSTGRES_USER: simplelogin
+      POSTGRES_PASSWORD: simplelogin
+
+      # Redis
+      REDIS_URL: redis://redis:6379
+
+      # App config
+      URL: http://localhost:7777
+      EMAIL_DOMAIN: example.com
+      SUPPORT_EMAIL: support@example.com
+      ADMIN_EMAIL: admin@example.com
+
+      # Flask
+      FLASK_SECRET: development-secret-key-change-in-production
+
+      # Email configuration - use MailHog for testing
+      EMAIL_SERVERS_WITH_PRIORITY: '[("mailhog", 1025)]'
+      POSTFIX_SERVER: mailhog
+      POSTFIX_PORT: 1025
+
+      # Email sending is enabled (NOT_SEND_EMAIL is not set)
+    ports:
+      - '20381:20381'  # SMTP server for incoming emails
+    command: ['python', 'email_handler.py']
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
