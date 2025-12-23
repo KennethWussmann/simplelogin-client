@@ -14,4 +14,4 @@ export const mockServerDockerComposeDir = join(mockServerDir, 'docker-compose.ya
 
 export const image = 'openapitools/openapi-generator-cli:v7.17.0';
 // The version of SimpleLogin we run our API tests against
-export const mockServerSimpleLoginVersion = 'v4.74.6';
+export const mockServerSimpleLoginVersion = 'v4.74.7';

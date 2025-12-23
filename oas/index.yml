@@ -1,6 +1,6 @@
 openapi: "3.0.0"
 info:
-  version: 4.74.6
+  version: 4.74.7
   title: "SimpleLogin (unofficial)"
   description: The unofficial SimpleLogin API docs as OpenAPI 3.0.0 spec. This is based on the official markdown based docs, but written in OpenAPI to allow for easier integration with other tools and generation of client SDKs. Please do not contact the SimpleLogin team for support or issues with this API documentation.
   contact:
