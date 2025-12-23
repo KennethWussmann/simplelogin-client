@@ -1,0 +1,15 @@
+tags:
+  - misc
+summary: Health
+description: Check if the API server is healthy and responding. This endpoint does not require authentication.
+operationId: {{ opId() }}
+servers:
+  - url: https://app.simplelogin.io
+    description: SimpleLogin root (health endpoint is at root level, not under /api)
+responses:
+  '200':
+    description: Server is healthy
+    content:
+      text/html:
+        schema:
+          $ref: '@schemas/health/response.yml'

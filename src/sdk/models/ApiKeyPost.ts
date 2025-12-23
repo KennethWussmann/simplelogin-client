@@ -23,51 +23,51 @@ import { mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface UserApiKey
+ * @interface ApiKeyPost
  */
-export interface UserApiKey {
+export interface ApiKeyPost {
     /**
-     * 
+     * The device's name, used to identify the API key for management purposes
      * @type {string}
-     * @memberof UserApiKey
+     * @memberof ApiKeyPost
      */
-    apiKey: string;
+    device: string;
 }
 
 /**
- * Check if a given object implements the UserApiKey interface.
+ * Check if a given object implements the ApiKeyPost interface.
  */
-export function instanceOfUserApiKey(value: object): value is UserApiKey {
-    if (!('apiKey' in value) || value['apiKey'] === undefined) return false;
+export function instanceOfApiKeyPost(value: object): value is ApiKeyPost {
+    if (!('device' in value) || value['device'] === undefined) return false;
     return true;
 }
 
-export function UserApiKeyFromJSON(json: any): UserApiKey {
-    return UserApiKeyFromJSONTyped(json, false);
+export function ApiKeyPostFromJSON(json: any): ApiKeyPost {
+    return ApiKeyPostFromJSONTyped(json, false);
 }
 
-export function UserApiKeyFromJSONTyped(json: any, ignoreDiscriminator: boolean): UserApiKey {
+export function ApiKeyPostFromJSONTyped(json: any, ignoreDiscriminator: boolean): ApiKeyPost {
     if (json == null) {
         return json;
     }
     return {
         
-        'apiKey': json['api_key'],
+        'device': json['device'],
     };
 }
 
-export function UserApiKeyToJSON(json: any): UserApiKey {
-    return UserApiKeyToJSONTyped(json, false);
+export function ApiKeyPostToJSON(json: any): ApiKeyPost {
+    return ApiKeyPostToJSONTyped(json, false);
 }
 
-export function UserApiKeyToJSONTyped(value?: UserApiKey | null, ignoreDiscriminator: boolean = false): any {
+export function ApiKeyPostToJSONTyped(value?: ApiKeyPost | null, ignoreDiscriminator: boolean = false): any {
     if (value == null) {
         return value;
     }
 
     return {
         
-        'api_key': value['apiKey'],
+        'device': value['device'],
     };
 }
 

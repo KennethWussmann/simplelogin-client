@@ -1,9 +1,11 @@
 import { Configuration, type FetchAPI } from './sdk';
 
+/**
+ * @deprecated Use {@link SimpleLoginClient} instead.
+ */
 export type SimpleLoginProps = {
   /**
-   * Most API endpoints require an API key to be passed in the header.
-   * @default undefined
+   * API key to be passed in the header
    */
   apiKey: string;
   /**
@@ -19,6 +21,9 @@ export type SimpleLoginProps = {
   fetchApi?: FetchAPI;
 };
 
+/**
+ * @deprecated Use {@link SimpleLoginClient} instead.
+ */
 export class SimpleLoginConfig extends Configuration {
   constructor(private props: SimpleLoginProps) {
     super();

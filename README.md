@@ -15,6 +15,9 @@
 
 > Interested in the state of the project? [Check the faq!](./docs/faq.md#whats-the-current-project-state)
 
+- [x] [Export](https://kennethwussmann.github.io/simplelogin-client/typedoc/classes/ImportExportApi.html)
+  - [x] [Export complete user data](https://kennethwussmann.github.io/simplelogin-client/typedoc/classes/ImportExportApi.html#exportUserData)
+  - [x] [Export aliases as CSV](https://kennethwussmann.github.io/simplelogin-client/typedoc/classes/ImportExportApi.html#exportAliasesAsCsv)
 - [x] [Account Management](https://kennethwussmann.github.io/simplelogin-client/typedoc/classes/AccountApi.html)
   - [x] [Login](https://kennethwussmann.github.io/simplelogin-client/typedoc/classes/AccountApi.html#login) ([+MFA](https://kennethwussmann.github.io/simplelogin-client/typedoc/classes/AccountApi.html#mfa)), [Register](https://kennethwussmann.github.io/simplelogin-client/typedoc/classes/AccountApi.html#registerAccount), [Activate](https://kennethwussmann.github.io/simplelogin-client/typedoc/classes/AccountApi.html#activateAccount), [Reactivate](https://kennethwussmann.github.io/simplelogin-client/typedoc/classes/AccountApi.html#reactivateAccount)
   - [x] [Password reset](https://kennethwussmann.github.io/simplelogin-client/typedoc/classes/AccountApi.html#forgotPassword)
@@ -44,9 +47,6 @@
 - [ ] [Notifications](https://github.com/KennethWussmann/simplelogin-client/issues/9)
   - [ ] Get notifications
   - [ ] Mark notification as read
-- [ ] [Import & Export](https://github.com/KennethWussmann/simplelogin-client/issues/11)
-  - [ ] Export complete user data
-  - [ ] Export aliases as CSV
 - [ ] [Phone & Misc](https://github.com/KennethWussmann/simplelogin-client/issues/12)
   - [ ] Phone reservation message retrieval
   - [ ] Apple payment processing
@@ -63,13 +63,11 @@ npm install --save simplelogin-client
 ```
 
 ```typescript
-import { AliasApi, SimpleLoginConfig } from 'simplelogin-client';
+import { SimpleLoginClient } from 'simplelogin-client';
 
-const alias = new AliasApi(
-  new SimpleLoginConfig({
-    apiKey: process.env.API_KEY,
-  }),
-);
+const { alias } = new SimpleLoginClient({
+  apiKey: process.env.API_KEY,
+})
 
 const createdAlias = await alias.createRandomAlias({
   note: 'This alias was created with simplelogin-client!',

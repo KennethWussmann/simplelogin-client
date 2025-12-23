@@ -2,10 +2,10 @@ import { join, parse } from 'node:path';
 import { glob } from 'zx';
 import { $ } from 'zx/core';
 import { distOpenApiDir } from '../constants';
-import { copy, sectionHeader } from '../utils';
+import { copy, stepHeader } from '../utils';
 
 export const buildOAS = async () => {
-  console.log(sectionHeader('📄 Building OpenAPI Spec'));
+  console.log(stepHeader('📄 Building OpenAPI Spec'));
 
   await Promise.all([
     $`boats --noVersionCheck -i ./oas/index.yml -o ${join('build', 'openapi', 'simplelogin.json')} -f ${join(

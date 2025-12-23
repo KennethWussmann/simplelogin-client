@@ -2,7 +2,7 @@ import { join, parse } from 'node:path';
 import { glob } from 'zx';
 import { $ } from 'zx/core';
 import { image, sdkDestination } from '../constants';
-import { createDirectoryIfNotExists, read, save, sectionHeader } from '../utils';
+import { createDirectoryIfNotExists, read, save, stepHeader } from '../utils';
 
 const getDestinationPath = (path: string) => {
   const filename = parse(path).base;
@@ -40,7 +40,7 @@ const moveSdkFiles = async () => {
 };
 
 export const buildSdk = async (oasPath: string) => {
-  console.log(sectionHeader('🔧 Building SDK'));
+  console.log(stepHeader('🔧 Building SDK'));
   await $`docker run --rm -v ${process.cwd()}:/local ${image} generate -i ${join(
     '/local',
     'dist',

@@ -22,6 +22,8 @@ type WindowOrWorkerGlobalScope = any;
 
 import * as runtime from '../runtime';
 import type {
+  ApiKey,
+  ApiKeyPost,
   AuthActivatePost,
   AuthForgotPasswordPost,
   AuthLogin,
@@ -32,14 +34,16 @@ import type {
   AuthRegisterPost,
   Success,
   SudoPatch,
-  UserApiKey,
-  UserApiKeyPost,
   UserCookieToken,
   UserInfo,
   UserInfoPatch,
   UserStats,
 } from '../models/index';
 import {
+    ApiKeyFromJSON,
+    ApiKeyToJSON,
+    ApiKeyPostFromJSON,
+    ApiKeyPostToJSON,
     AuthActivatePostFromJSON,
     AuthActivatePostToJSON,
     AuthForgotPasswordPostFromJSON,
@@ -60,10 +64,6 @@ import {
     SuccessToJSON,
     SudoPatchFromJSON,
     SudoPatchToJSON,
-    UserApiKeyFromJSON,
-    UserApiKeyToJSON,
-    UserApiKeyPostFromJSON,
-    UserApiKeyPostToJSON,
     UserCookieTokenFromJSON,
     UserCookieTokenToJSON,
     UserInfoFromJSON,
@@ -79,7 +79,7 @@ export interface ActivateAccountRequest {
 }
 
 export interface CreateApiKeyRequest {
-    userApiKeyPost: UserApiKeyPost;
+    apiKeyPost: ApiKeyPost;
 }
 
 export interface EnableSudoModeRequest {
@@ -156,14 +156,14 @@ export class AccountApi extends runtime.BaseAPI {
     }
 
     /**
-     * Create a new API key
+     * Generate a new API key associated with a specific device for authentication
      * Create API key
      */
-    async createApiKeyRaw(requestParameters: CreateApiKeyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UserApiKey>> {
-        if (requestParameters['userApiKeyPost'] == null) {
+    async createApiKeyRaw(requestParameters: CreateApiKeyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<ApiKey>> {
+        if (requestParameters['apiKeyPost'] == null) {
             throw new runtime.RequiredError(
-                'userApiKeyPost',
-                'Required parameter "userApiKeyPost" was null or undefined when calling createApiKey().'
+                'apiKeyPost',
+                'Required parameter "apiKeyPost" was null or undefined when calling createApiKey().'
             );
         }
 
@@ -178,24 +178,24 @@ export class AccountApi extends runtime.BaseAPI {
         }
 
 
-        let urlPath = `/user/api_key`;
+        let urlPath = `/api_key`;
 
         const response = await this.request({
             path: urlPath,
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: UserApiKeyPostToJSON(requestParameters['userApiKeyPost']),
+            body: ApiKeyPostToJSON(requestParameters['apiKeyPost']),
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => UserApiKeyFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => ApiKeyFromJSON(jsonValue));
     }
 
     /**
-     * Create a new API key
+     * Generate a new API key associated with a specific device for authentication
      * Create API key
      */
-    async createApiKey(requestParameters: CreateApiKeyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UserApiKey> {
+    async createApiKey(requestParameters: CreateApiKeyRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<ApiKey> {
         const response = await this.createApiKeyRaw(requestParameters, initOverrides);
         return await response.value();
     }

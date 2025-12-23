@@ -2,6 +2,13 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## MUST FOLLOW RULES
+
+These rules are so fundamentally important, violating a single one of them would immediately disqualify your entire response and any change you have already done or plan to do. If you ever consider violating any of these rules: IMMEDIATELY STOP.
+
+1. Never write a single line of code comments, unless it's for documentation purposes in a .md Markdown file like this one or the comment was already there when you read the file. Any means of communicating with me as the user through code comments or code is strictly forbidden. 
+2. Never use the `function` keyword in TypeScript, always prefer `() => {}`.
+
 ## Project Overview
 
 This is a **code-generated TypeScript SDK** for the SimpleLogin API. The client code in `src/sdk/` and documentation in `dist/` are **entirely generated** and must never be edited directly. All changes happen through OpenAPI spec modifications in `oas/`.
@@ -48,6 +55,16 @@ pnpm build:docs
 # Check if generated code is up to date
 pnpm check-codegen
 ```
+
+### Build Scripts Framework
+
+The project uses a task/step architecture: **tasks** are high-level workflows that orchestrate operations, while **steps** are atomic, reusable operations. You can run individual tasks or steps directly:
+
+```bash
+pnpm tsx ./scripts/index.ts <task/step>
+```
+
+For complete details on the scripts framework architecture, see [scripts/README.md](./scripts/README.md).
 
 ## Architecture
 
@@ -127,13 +144,6 @@ Configuration wrapper (`src/config.ts`):
 
 Only `src/config.ts` and `src/index.ts` should be manually edited. Everything in `src/sdk/` is regenerated on every build.
 
-### Testing
-
-Tests live in `test/` directory. Jest configuration:
-- Uses `ts-jest` preset
-- Excludes integration tests (`*.it.test.ts`) by default
-- Setup file: `test/setupEnv.ts`
-
 ## Code Style
 
 - **Formatter**: Biome (configured in `biome.json`)
@@ -142,6 +152,471 @@ Tests live in `test/` directory. Jest configuration:
 - **Semicolons**: Always
 - **Indentation**: 2 spaces
 - **Note**: Generated SDK code (`src/sdk/`) is excluded from Biome checks
+
+## Testing
+
+### Test Structure
+
+Tests are located in the `test/` directory with the following structure:
+
+```
+test/
+├── global.d.ts           # TypeScript type declarations for global test helpers
+├── setup.ts              # Test setup and custom fixtures
+├── vitest.config.ts      # Vitest configuration
+├── integration/          # Integration tests for API endpoints
+│   └── accountApi.test.ts
+└── utils/                # Test utilities and helpers
+    ├── index.ts          # Exports all test utilities
+    ├── matchers.ts       # Custom test matchers for responses and errors
+    ├── createAccount.ts  # Helper to create test accounts
+    └── mailHog.ts        # MailHog email testing utilities
+```
+
+### Running Tests
+
+```bash
+# Run all tests
+pnpm test
+
+# Run a specific test file
+pnpm test -- test/integration/accountApi.test.ts
+
+# Run tests in watch mode
+pnpm test -- --watch
+
+# Run tests with coverage
+pnpm test -- --coverage
+```
+
+### Writing Tests
+
+100% accuracy in tests is ABSOLUTELY a MUST requirement. The simplelogin-client is supposed to be a client exactly for the application we are running our tests against. All tests are tests against a real running SimpleLogin instance.
+
+If a test fails because the actual response does not match what is defined by our OpenAPI spec, then this is an high indicator for inaccuracy of our client! The server is always correct and we rather have to adjust our client than the test case, because the OpenAPI spec defines what responses are expected. 
+
+Most API calls are secured. We can use the `api` test fixture to use authenticated access or we build the clients locally in the test with the normal `test` vitest fixture. The API calls often inherit error codes from the authentication, unless we specifically want to test authentication and authorization; we can take it as given that the existing `accountApi.test.ts` takes care of that. We don't need to test for missing API keys all the time.
+
+
+#### Test Fixtures
+
+The test suite provides a custom `api` test fixture that automatically creates a fresh test account with authentication for each test and cleans up afterwards:
+
+```typescript
+import { describe, expect } from 'vitest';
+import { expectSuccess } from '../utils/matchers';
+
+describe('AccountApi', () => {
+  api('creates api key', async ({ client, user }) => {
+    // The 'client' is a SimpleLoginClient with authentication already configured
+    // The 'user' is the current UserInfo object with email, name, etc.
+    const response = await client.account.createApiKeyRaw({
+      apiKeyPost: { device: 'test-device' },
+    });
+
+    const apiKey = await expectSuccess(response);
+    expect(apiKey.apiKey).toBeDefined();
+  });
+});
+```
+
+The `api` fixture is globally available and defined in `test/setup.ts`. It:
+1. Creates a new test account using `createAccount()`
+2. Provides an authenticated `SimpleLoginClient` instance
+3. Provides the current `UserInfo` object via `getUserInfo()` for accessing user email, name, and other profile data
+4. Automatically cleans up the test account after the test completes
+
+**Using the `user` fixture:**
+
+```typescript
+api('matches alias email format', async ({ client, user }) => {
+  const response = await client.alias.createAliasRaw({
+    aliasPost: { note: 'Test alias' }
+  });
+
+  const alias = await expectSuccess(response);
+
+  // Use user.email to verify the alias belongs to the current user
+  expect(alias.email).toMatch(new RegExp(`@.*${user.email.split('@')[1]}`));
+});
+```
+
+#### SDK Method Variants
+
+The generated SDK provides two versions of each API method:
+
+1. **Regular methods** (e.g., `createApiKey()`) - Return `Promise<T>` directly (unwrapped value)
+2. **Raw methods** (e.g., `createApiKeyRaw()`) - Return `Promise<ApiResponse<T>>` with:
+   - `raw`: The raw fetch Response object with status code, headers, etc.
+   - `value()`: Method to get the typed response data
+
+**When to use each:**
+- Use **Raw methods** when you need to inspect the HTTP response (status codes, headers)
+- Use **Regular methods** when you only care about the response data
+
+#### Custom Test Matchers
+
+The project provides custom matchers in `test/utils/matchers.ts` to simplify testing HTTP responses and errors:
+
+##### `expectSuccess<T>(response)`
+
+Verifies a response has a successful status code (200-299) and returns the unwrapped value.
+
+**Important:** Use with `*Raw()` methods only.
+
+```typescript
+import { expectSuccess } from '../utils/matchers';
+
+api('creates an alias', async ({ client }) => {
+  const response = await client.alias.createAliasRaw({
+    aliasPost: { note: 'test alias' }
+  });
+
+  // Verifies status is 200-299 and returns the typed value
+  const alias = await expectSuccess(response);
+  expect(alias.email).toBeDefined();
+  expect(alias.note).toBe('test alias');
+});
+
+// You can also check specific status codes
+api('returns 201 on creation', async ({ client }) => {
+  const response = await client.alias.createAliasRaw({
+    aliasPost: { note: 'test' }
+  });
+
+  expect(response.raw.status).toBe(201); // Specific status check
+  const alias = await expectSuccess(response);
+});
+```
+
+##### `expectError(error, statusCode)`
+
+Verifies an error is a ResponseError with the expected HTTP status code.
+
+Works with both `*Raw()` and regular methods since both throw ResponseError on failure.
+
+```typescript
+import { expectError } from '../utils/matchers';
+
+api('returns 401 for invalid auth', async () => {
+  const client = new SimpleLoginClient(new Configuration({
+    basePath: 'http://localhost:7777/api',
+    apiKey: 'invalid-key'
+  }));
+
+  try {
+    await client.account.getUserInfo();
+    throw new Error('Should have thrown');
+  } catch (error) {
+    expectError(error, 401); // Verifies ResponseError with status 401
+  }
+});
+
+api('returns 404 for non-existent resource', async ({ client }) => {
+  try {
+    await client.alias.getAlias({ aliasId: 99999 });
+    throw new Error('Should have thrown');
+  } catch (error) {
+    expectError(error, 404);
+  }
+});
+
+api('returns 400 for invalid input', async ({ client }) => {
+  try {
+    await client.account.login({
+      authLoginPost: { email: 'invalid', password: 'invalid' }
+    });
+    throw new Error('Should have thrown');
+  } catch (error) {
+    expectError(error, 400);
+  }
+});
+```
+
+##### `expectClientError(error)`
+
+Verifies an error is a ResponseError with a status code in the client error range (400-499). Useful when you don't care about the specific error code, just that it's a client error.
+
+```typescript
+import { expectClientError } from '../utils/matchers';
+
+api('rejects invalid requests', async ({ client }) => {
+  try {
+    await client.alias.getAlias({ aliasId: -1 });
+    throw new Error('Should have thrown');
+  } catch (error) {
+    expectClientError(error); // Accepts any 4xx status code
+  }
+});
+```
+
+##### `expectServerError(error)`
+
+Verifies an error is a ResponseError with a status code in the server error range (500-599).
+
+```typescript
+import { expectServerError } from '../utils/matchers';
+
+api('handles server errors', async ({ client }) => {
+  try {
+    await client.account.getSomeFailingEndpoint();
+    throw new Error('Should have thrown');
+  } catch (error) {
+    expectServerError(error); // Accepts any 5xx status code
+  }
+});
+```
+
+#### Test Utilities
+
+Import test utilities from `test/utils/`:
+
+```typescript
+// Import everything
+import { expectSuccess, expectError, createAccount } from '../utils';
+
+// Or import specific utilities
+import { expectSuccess } from '../utils/matchers';
+import { createAccount } from '../utils/createAccount';
+```
+
+#### Snapshot Testing
+
+Snapshot testing can be useful for API response validation, but should be used selectively based on the nature of the response data.
+
+**When to use snapshots:**
+- Responses contain only static data (no timestamps, auto-generated IDs, random values)
+- The entire response structure can be asserted at once
+- You need to capture exact values for comparison
+
+**When NOT to use snapshots (use `expect.objectContaining()` instead):**
+- Responses contain dynamic data (timestamps, IDs, tokens, UUIDs)
+- Only certain fields need validation while others change
+- Testing partial response structure
+
+**Use object containing matches for dynamic data:**
+
+```typescript
+api('creates api key', async ({ client }) => {
+  const response = await client.account.createApiKeyRaw({
+    apiKeyPost: { device: 'test-device' }
+  });
+
+  // 1. Use custom matcher to verify status code
+  const apiKey = await expectSuccess(response);
+
+  // 2. Verify critical fields with object containing
+  expect(apiKey).toEqual(expect.objectContaining({
+    device: 'test-device',
+    apiKey: expect.any(String),
+  }));
+
+  // 3. Verify specific fields
+  expect(apiKey.apiKey).toBeDefined();
+  expect(apiKey.apiKey.length).toBeGreaterThan(0);
+});
+```
+
+**Example with static data (appropriate for snapshots):**
+
+```typescript
+api('gets account stats', async ({ client }) => {
+  const stats = await client.account.getStats();
+
+  // Only snapshot if stats are deterministic for test account
+  expect(stats).toMatchSnapshot();
+});
+```
+
+**Updating snapshots (when needed):**
+```bash
+# Update all snapshots
+pnpm test -- -u
+
+# Update snapshots for a specific file
+pnpm test -- test/integration/accountApi.test.ts -u
+```
+
+**Important:** Review snapshot changes carefully before committing. Ensure changes are intentional and that dynamic data hasn't leaked into snapshots.
+
+#### Parameterized Tests
+
+Use parameterized tests (also called data-driven tests) to test the same behavior with multiple inputs. This reduces code duplication and improves test coverage.
+
+**Basic parameterized test with `test.each()`:**
+
+```typescript
+import { describe, expect, test } from 'vitest';
+import { expectError } from '../utils/matchers';
+
+describe('AccountApi - Input Validation', () => {
+  // Test multiple invalid email formats
+  test.each([
+    { email: '', password: 'valid123', description: 'empty email' },
+    { email: 'invalid', password: 'valid123', description: 'malformed email' },
+    { email: 'no@domain', password: 'valid123', description: 'missing TLD' },
+    { email: 'spaces @test.com', password: 'valid123', description: 'spaces in email' },
+  ])('rejects login with $description', async ({ email, password }) => {
+    const client = new SimpleLoginClient(new Configuration({
+      basePath: 'http://localhost:7777/api'
+    }));
+
+    try {
+      await client.account.login({
+        authLoginPost: { email, password }
+      });
+      throw new Error('Should have thrown');
+    } catch (error) {
+      expectError(error, 400);
+    }
+  });
+});
+```
+
+**Parameterized test with the `api` fixture:**
+
+```typescript
+describe('AliasApi - Creation', () => {
+  // Test different alias configurations
+  api.each([
+    { note: 'Personal alias', enabled: true },
+    { note: 'Work alias', enabled: false },
+    { note: 'Temporary alias', enabled: true },
+  ])('creates alias with note "$note"', async ({ client }, params) => {
+    const response = await client.alias.createAliasRaw({
+      aliasPost: params
+    });
+
+    const alias = await expectSuccess(response);
+    expect(alias).toEqual(expect.objectContaining({
+      note: params.note,
+      enabled: params.enabled,
+      email: expect.any(String),
+      id: expect.any(Number),
+    }));
+  });
+});
+```
+
+**Testing error status codes with parameterized tests:**
+
+```typescript
+describe('AliasApi - Error Handling', () => {
+  test.each([
+    { id: -1, expectedStatus: 400, description: 'negative id' },
+    { id: 0, expectedStatus: 400, description: 'zero id' },
+    { id: 99999, expectedStatus: 404, description: 'non-existent id' },
+  ])('returns $expectedStatus for $description', async ({ id, expectedStatus }) => {
+    const client = new SimpleLoginClient(new Configuration({
+      basePath: 'http://localhost:7777/api',
+      apiKey: 'test-key'
+    }));
+
+    try {
+      await client.alias.getAlias({ aliasId: id });
+      throw new Error('Should have thrown');
+    } catch (error) {
+      expectError(error, expectedStatus);
+    }
+  });
+});
+```
+
+**Matrix testing (multiple dimensions):**
+
+```typescript
+describe('AliasApi - Combinations', () => {
+  const noteValues = ['short', 'a very long note with many words'];
+  const enabledValues = [true, false];
+
+  // Test all combinations of note length and enabled status
+  for (const note of noteValues) {
+    for (const enabled of enabledValues) {
+      api(`creates alias with ${note.length > 10 ? 'long' : 'short'} note, enabled=${enabled}`,
+        async ({ client }) => {
+          const response = await client.alias.createAliasRaw({
+            aliasPost: { note, enabled }
+          });
+
+          const alias = await expectSuccess(response);
+          expect(alias).toEqual(expect.objectContaining({
+            note,
+            enabled,
+            email: expect.any(String),
+            id: expect.any(Number),
+          }));
+        }
+      );
+    }
+  }
+});
+```
+
+#### Best Practices
+
+1. **Use the `api` fixture** - Always use the provided `api` fixture for authenticated tests instead of manually creating accounts
+2. **Use Raw methods with matchers** - When testing status codes or HTTP details, use `*Raw()` methods with `expectSuccess()`
+3. **Prefer object containing over snapshots** - Use `expect.objectContaining()` for responses with dynamic data; only use snapshots for completely static responses
+4. **Use parameterized tests** - Use `test.each()` or `api.each()` to test multiple scenarios with the same logic
+5. **Test error cases** - Use `expectError()`, `expectClientError()`, or `expectServerError()` to verify error handling
+6. **Clean test data** - The `api` fixture handles cleanup, but for manual account creation, ensure cleanup in the test
+7. **Descriptive test names** - Use clear, descriptive test names that explain what is being tested
+8. **Review snapshot changes** - If using snapshots, always review snapshot diffs carefully before updating with `-u`
+9. **Keep tests focused** - Each test should verify one specific behavior or scenario
+
+#### Example: Complete Test Suite
+
+```typescript
+import { describe, expect } from 'vitest';
+import { expectSuccess, expectError, expectClientError } from '../utils';
+
+describe('AliasApi', () => {
+  api('creates a new alias', async ({ client }) => {
+    const response = await client.alias.createAliasRaw({
+      aliasPost: { note: 'Test alias' }
+    });
+
+    const alias = await expectSuccess(response);
+    expect(alias.email).toMatch(/@.+\..+/); // Valid email format
+    expect(alias.enabled).toBe(true);
+  });
+
+  api('retrieves alias by id', async ({ client }) => {
+    // Create an alias first
+    const createResponse = await client.alias.createAliasRaw({
+      aliasPost: { note: 'Test' }
+    });
+    const created = await expectSuccess(createResponse);
+
+    // Retrieve it
+    const getResponse = await client.alias.getAliasRaw({
+      aliasId: created.id
+    });
+    const alias = await expectSuccess(getResponse);
+    expect(alias.id).toBe(created.id);
+  });
+
+  api('returns 404 for non-existent alias', async ({ client }) => {
+    try {
+      await client.alias.getAlias({ aliasId: 99999 });
+      throw new Error('Should have thrown');
+    } catch (error) {
+      expectError(error, 404);
+    }
+  });
+
+  api('rejects invalid alias creation', async ({ client }) => {
+    try {
+      await client.alias.createAlias({
+        aliasPost: { note: '' } // Invalid data
+      });
+      throw new Error('Should have thrown');
+    } catch (error) {
+      expectClientError(error); // Any 4xx error
+    }
+  });
+});
+```
 
 ## Requirements
 
@@ -154,4 +629,3 @@ Tests live in `test/` directory. Jest configuration:
 - **Never edit generated files**: `src/sdk/`, `dist/`, `tscBuild/`, `build/`
 - **Always commit generated code**: The SDK output is version-controlled
 - **OpenAPI spec is the source of truth**: All API changes happen in `oas/`
-- **Pre-commit hooks**: Husky runs format+lint via lint-staged on commit

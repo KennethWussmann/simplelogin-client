@@ -1,0 +1,12 @@
+tags:
+  - account
+summary: Create API key
+description: Generate a new API key associated with a specific device for authentication
+operationId: {{ opId() }}
+requestBody:
+  required: true
+  content: {{ mixin("@mixins/request/json.yml", "@schemas/api_key/post.yml") }}
+responses:
+  '201':
+    description: Created
+    content: {{ mixin("@mixins/response/json.yml", "@schemas/api_key/model.yml") }}

@@ -1,8 +1,8 @@
 import { $ } from 'zx/core';
-import { sectionHeader } from '../utils';
+import { stepHeader } from '../utils';
 
 export const lint = async () => {
-  console.log(sectionHeader('🔍 Linting'));
+  console.log(stepHeader('🔍 Linting'));
   await $`biome format .`;
   await $`biome check .`;
 };

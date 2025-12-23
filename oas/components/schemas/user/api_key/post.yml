@@ -1,8 +1,0 @@
-type: object
-properties:
-  device:
-    type: string
-    description: Device name
-
-required:
-  - device

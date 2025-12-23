@@ -23,7 +23,7 @@ tags:
   - name: contact
   - name: notification
   - name: settings
-  - name: import-export
+  - name: export
   - name: phone
   - name: misc
 
@@ -45,7 +45,7 @@ components:
   inject([
     {
       toAllOperations: {
-        excludePaths: ['/auth/*'],
+        excludePaths: ['/auth/*', '/health'],
         content: {
           security: [{
             apiKeyAuth: []

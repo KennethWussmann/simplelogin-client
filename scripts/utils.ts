@@ -42,6 +42,8 @@ export const copy = async (
 export const sectionHeader = (text: string) =>
   ['\n', '-'.repeat(text.length), chalk.greenBright(text), '-'.repeat(text.length)].join('\n');
 
+export const stepHeader = (text: string) => `\n${chalk.cyan('→')} ${text}`;
+
 export const measureBuildTime = async (fn: () => Promise<void>) => {
   const start = Date.now();
   await fn();

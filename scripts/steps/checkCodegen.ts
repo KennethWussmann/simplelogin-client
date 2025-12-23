@@ -1,8 +1,8 @@
 import { $ } from 'zx/core';
-import { sectionHeader } from '../utils';
+import { stepHeader } from '../utils';
 
 export const checkCodegen = async () => {
-  console.log(sectionHeader('🔍 Checking codegen'));
+  console.log(stepHeader('🔍 Checking codegen'));
   const { stdout } = await $`git status --porcelain`;
   if (stdout.length !== 0) {
     await $`git diff > changes.patch`;

@@ -11,7 +11,7 @@
     "moduleResolution": "NodeNext",
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
-    "types": ["node", "jest"],
+    "types": ["node", "vitest"],
     "lib": ["ES2022"],
     "outDir": "./tscBuild",
     "esModuleInterop": true,
