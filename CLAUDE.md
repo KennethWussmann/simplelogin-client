@@ -619,4 +619,3 @@ describe('AliasApi', () => {
 - **Never edit generated files**: `src/sdk/`, `dist/`, `tscBuild/`, `build/`
 - **Always commit generated code**: The SDK output is version-controlled
 - **OpenAPI spec is the source of truth**: All API changes happen in `oas/`
-- **Pre-commit hooks**: Husky runs format+lint via lint-staged on commit

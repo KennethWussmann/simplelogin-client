@@ -33,7 +33,7 @@
     "lint": "tsx scripts/index.ts lint",
     "format": "tsx scripts/index.ts format",
     "dependency-update": "tsx scripts/index.ts dependencyUpdate",
-    "prepare": "husky"
+    "prepare": "lefthook install"
   },
   "files": [
     "README.md",
@@ -47,9 +47,6 @@
       "extensions": "yml,yaml"
     }
   },
-  "lint-staged": {
-    "*.{ts,json,yml,yaml,html,md}": "tsx scripts/index.ts format lint"
-  },
   "engines": {
     "node": "24"
   },
@@ -60,12 +57,9 @@
     "@types/node": "24.*",
     "@types/node-fetch": "^2.6.13",
     "boats": "4.10.2",
-    "dotenv": "^17.2.3",
-    "husky": "^9.1.7",
-    "lint-staged": "^16",
+    "lefthook": "^2.0.12",
     "npm-check-updates": "^19.2.0",
     "npm-watch": "^0.13.0",
-    "prettier": "^3.7.4",
     "ts-node": "^10.9.2",
     "tsx": "^4.21.0",
     "typedoc": "^0.28.15",
