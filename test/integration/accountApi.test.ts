@@ -1,7 +1,8 @@
 import { randEmail, randPassword } from '@ngneat/falso';
-import { describe, expect, test } from 'vitest';
-import { Configuration } from '../../src';
+import { beforeAll, describe, expect, test } from 'vitest';
+import { Configuration, SimpleLoginClient } from '../../src';
 import { AccountApi } from '../../src/sdk/apis/AccountApi';
+import { createAccount } from '../utils';
 import { waitForSimpleLoginRegistrationCode } from '../utils/mailHog';
 import { expectClientError, expectError, expectSuccess } from '../utils/matchers';
 
@@ -137,11 +138,34 @@ describe('AccountApi', () => {
   });
 
   describe('Account Deletion', () => {
-    api('deletes user account in sudo mode', async ({ client, password }) => {
-      // Enable sudo mode first
+    let account: Awaited<ReturnType<typeof createAccount>>;
+    let client: SimpleLoginClient;
+
+    beforeAll(async () => {
+      account = await createAccount();
+      if (!account) {
+        throw new Error('Failed to create account');
+      }
+
+      client = new SimpleLoginClient({
+        apiKey: account.loginResponse.apiKey,
+        url: 'http://localhost:7777',
+      });
+    });
+
+    test('rejects account deletion without sudo mode', async () => {
+      try {
+        await client.account.deleteUser();
+        throw new Error('Should have thrown');
+      } catch (error) {
+        expectClientError(error);
+      }
+    });
+
+    test('deletes user account in sudo mode', async () => {
       await client.account.enableSudoMode({
         sudoPatch: {
-          password,
+          password: account.password,
         },
       });
 
@@ -149,16 +173,6 @@ describe('AccountApi', () => {
 
       const result = await expectSuccess(response);
       expect(result).toBeDefined();
-    });
-
-    api('rejects account deletion without sudo mode', async ({ client }) => {
-      // Don't enable sudo mode - should fail
-      try {
-        await client.account.deleteUser();
-        throw new Error('Should have thrown');
-      } catch (error) {
-        expectClientError(error);
-      }
     });
   });
 

@@ -1,7 +1,7 @@
 import { beforeAll, test } from 'vitest';
 import type { UserInfo } from '../src/sdk/models/UserInfo';
 import { SimpleLoginClient, type SimpleLoginClientOptions } from '../src/simpleLoginClient';
-import { createAccount } from './utils/createAccount';
+import { getAuthenticatedClient } from './utils/apiClient';
 
 export const DEFAULT_API_CLIENT_CONFIG: SimpleLoginClientOptions = {
   url: 'http://localhost:7777',
@@ -82,7 +82,7 @@ export const api = test.extend<{
     // biome-ignore lint/correctness/noEmptyPattern: vitest fixture pattern
     async ({}, use) => {
       // Setup: Create account and get API key
-      const account = await createAccount();
+      const { account } = await getAuthenticatedClient();
 
       if (!account) {
         throw new Error('Failed to create test account');
