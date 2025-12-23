@@ -63,13 +63,11 @@ npm install --save simplelogin-client
 ```
 
 ```typescript
-import { AliasApi, SimpleLoginConfig } from 'simplelogin-client';
+import { SimpleLoginClient } from 'simplelogin-client';
 
-const alias = new AliasApi(
-  new SimpleLoginConfig({
-    apiKey: process.env.API_KEY,
-  }),
-);
+const { alias } = new SimpleLoginClient({
+  apiKey: process.env.API_KEY,
+})
 
 const createdAlias = await alias.createRandomAlias({
   note: 'This alias was created with simplelogin-client!',
