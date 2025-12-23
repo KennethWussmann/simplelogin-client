@@ -135,3 +135,6 @@ export const api = test.extend<{
     await use(userInfo);
   },
 });
+
+// Make api globally available for tests
+globalThis.api = api;
