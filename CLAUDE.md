@@ -56,11 +56,15 @@ pnpm build:docs
 pnpm check-codegen
 ```
 
-Beyond the pnpm scripts you can also call separate tasks and steps individually via the build scripts at ./scripts/README.md
+### Build Scripts Framework
 
-```typescript
+The project uses a task/step architecture: **tasks** are high-level workflows that orchestrate operations, while **steps** are atomic, reusable operations. You can run individual tasks or steps directly:
+
+```bash
 pnpm tsx ./scripts/index.ts <task/step>
 ```
+
+For complete details on the scripts framework architecture, see [scripts/README.md](./scripts/README.md).
 
 ## Architecture
 
