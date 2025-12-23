@@ -9,38 +9,51 @@ export const DEFAULT_API_CLIENT_CONFIG: SimpleLoginClientOptions = {
 const client = new SimpleLoginClient(DEFAULT_API_CLIENT_CONFIG);
 
 const checkServerAvailability = async (): Promise<void> => {
-  try {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 5000);
+  const maxRetryDuration = 30000;
+  const retryInterval = 1000;
+  const startTime = Date.now();
 
-    const response = await client.misc.healthRaw({
-      signal: controller.signal,
-    });
+  while (Date.now() - startTime < maxRetryDuration) {
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000);
 
-    clearTimeout(timeoutId);
+      const response = await client.misc.healthRaw({
+        signal: controller.signal,
+      });
 
-    if (!response.raw.ok) {
-      throw new Error(`Health check failed with status ${response.raw.status}`);
-    }
+      clearTimeout(timeoutId);
 
-    const healthStatus = await response.value();
-    if (healthStatus !== 'success') {
-      throw new Error(`Health check returned unexpected status: ${healthStatus}`);
-    }
-  } catch (error) {
-    if (error instanceof Error) {
-      if (error.name === 'AbortError') {
-        throw new Error(
-          `API server at ${client.config.basePath} is not responding (timeout after 5s). ` +
-            'Please ensure the SimpleLogin server is running.'
-        );
+      if (!response.raw.ok) {
+        throw new Error(`Health check failed with status ${response.raw.status}`);
       }
-      throw new Error(
-        `API server at ${client.config.basePath} is not available: ${error.message}. ` +
-          'Please ensure the SimpleLogin server is running.'
-      );
+
+      const healthStatus = await response.value();
+      if (healthStatus !== 'success') {
+        throw new Error(`Health check returned unexpected status: ${healthStatus}`);
+      }
+
+      return;
+    } catch (error) {
+      const elapsed = Date.now() - startTime;
+      if (elapsed >= maxRetryDuration) {
+        if (error instanceof Error) {
+          if (error.name === 'AbortError') {
+            throw new Error(
+              `API server at ${client.config.basePath} is not responding (timeout after 30s). ` +
+                'Please ensure the SimpleLogin server is running.'
+            );
+          }
+          throw new Error(
+            `API server at ${client.config.basePath} is not available: ${error.message}. ` +
+              'Please ensure the SimpleLogin server is running.'
+          );
+        }
+        throw error;
+      }
+
+      await new Promise((resolve) => setTimeout(resolve, retryInterval));
     }
-    throw error;
   }
 };
 
