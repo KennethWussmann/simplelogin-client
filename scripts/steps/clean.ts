@@ -19,9 +19,9 @@ const deleteAndLog = async (path: string) => logIfTrue(deleteIfExists(path), `De
 const mkdirAndLog = async (path: string) =>
   logIfTrue(createDirectoryIfNotExists(path), `Created directory ${path}`);
 
-export const clean = async () => {
+export const clean = async (dirs = [buildDir, tscBuildDir, sdkDestination, distDir]) => {
   console.log(sectionHeader('🚮 Cleaning up'));
-  await Promise.all([buildDir, tscBuildDir, sdkDestination, distDir].map(deleteAndLog));
+  await Promise.all(dirs.map(deleteAndLog));
   await createDirs();
 };
 

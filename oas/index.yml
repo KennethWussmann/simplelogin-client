@@ -45,7 +45,7 @@ components:
   inject([
     {
       toAllOperations: {
-        excludePaths: ['/auth/*'],
+        excludePaths: ['/auth/*', '/health'],
         content: {
           security: [{
             apiKeyAuth: []

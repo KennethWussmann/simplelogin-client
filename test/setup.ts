@@ -1,35 +1,42 @@
 import { beforeAll, test } from 'vitest';
-import { Configuration } from '../src';
 import type { UserInfo } from '../src/sdk/models/UserInfo';
-import { SimpleLoginClient } from '../src/simpleLoginClient';
+import { SimpleLoginClient, type SimpleLoginClientOptions } from '../src/simpleLoginClient';
 import { createAccount } from './utils/createAccount';
 
-const API_BASE_URL = 'http://localhost:7777';
+export const DEFAULT_API_CLIENT_CONFIG: SimpleLoginClientOptions = {
+  url: 'http://localhost:7777',
+};
+const client = new SimpleLoginClient(DEFAULT_API_CLIENT_CONFIG);
 
 const checkServerAvailability = async (): Promise<void> => {
   try {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 5000);
 
-    const response = await fetch(API_BASE_URL, {
+    const response = await client.misc.healthRaw({
       signal: controller.signal,
     });
 
     clearTimeout(timeoutId);
 
-    if (!response.ok && response.status !== 404) {
-      throw new Error(`Server responded with status ${response.status}`);
+    if (!response.raw.ok) {
+      throw new Error(`Health check failed with status ${response.raw.status}`);
+    }
+
+    const healthStatus = await response.value();
+    if (healthStatus !== 'success') {
+      throw new Error(`Health check returned unexpected status: ${healthStatus}`);
     }
   } catch (error) {
     if (error instanceof Error) {
       if (error.name === 'AbortError') {
         throw new Error(
-          `API server at ${API_BASE_URL} is not responding (timeout after 5s). ` +
+          `API server at ${client.config.basePath} is not responding (timeout after 5s). ` +
             'Please ensure the SimpleLogin server is running.'
         );
       }
       throw new Error(
-        `API server at ${API_BASE_URL} is not available: ${error.message}. ` +
+        `API server at ${client.config.basePath} is not available: ${error.message}. ` +
           'Please ensure the SimpleLogin server is running.'
       );
     }
@@ -50,15 +57,13 @@ type AccountData = {
 /**
  * Test helper that creates a fresh account for each test and cleans up afterwards
  */
-export const api = test.extend<
-  {
-    client: SimpleLoginClient;
-    user: UserInfo;
-    password: string;
-    email: string;
-  },
-  { accountData: AccountData }
->({
+export const api = test.extend<{
+  client: SimpleLoginClient;
+  user: UserInfo;
+  password: string;
+  email: string;
+  accountData: AccountData;
+}>({
   // Worker fixture: creates account once per test
   accountData: [
     // biome-ignore lint/correctness/noEmptyPattern: vitest fixture pattern
@@ -78,12 +83,10 @@ export const api = test.extend<
 
       // Teardown: Delete the account
       try {
-        const client = new SimpleLoginClient(
-          new Configuration({
-            basePath: 'http://localhost:7777/api',
-            apiKey: loginResponse.apiKey,
-          })
-        );
+        const client = new SimpleLoginClient({
+          ...DEFAULT_API_CLIENT_CONFIG,
+          apiKey: loginResponse.apiKey,
+        });
 
         // Enable sudo mode first (required for account deletion)
         await client.account.enableSudoMode({
@@ -107,12 +110,10 @@ export const api = test.extend<
     await use(accountData.email);
   },
   client: async ({ accountData }, use) => {
-    const client = new SimpleLoginClient(
-      new Configuration({
-        basePath: 'http://localhost:7777/api',
-        apiKey: accountData.loginResponse.apiKey,
-      })
-    );
+    const client = new SimpleLoginClient({
+      ...DEFAULT_API_CLIENT_CONFIG,
+      apiKey: accountData.loginResponse.apiKey,
+    });
     await use(client);
   },
   user: async ({ client }, use) => {
