@@ -136,5 +136,5 @@ export const api = test.extend<{
   },
 });
 
-// Make api globally available for tests
-globalThis.api = api;
+// biome-ignore lint/suspicious/noExplicitAny: Required for global test fixture
+(globalThis as any).api = api;
