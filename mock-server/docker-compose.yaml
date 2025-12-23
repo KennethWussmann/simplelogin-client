@@ -45,6 +45,12 @@ services:
         condition: service_healthy
       mailhog:
         condition: service_healthy
+    healthcheck:
+      test: ['CMD', '/scripts/healthcheck.sh']
+      interval: 5s
+      timeout: 5s
+      start_period: 30s
+      retries: 5
     environment:
       # Database
       DB_URI: postgresql://simplelogin:simplelogin@postgres:5432/simplelogin
@@ -81,6 +87,8 @@ services:
   job-runner:
     image: simplelogin-mock:latest
     depends_on:
+      app:
+        condition: service_healthy
       postgres:
         condition: service_healthy
       redis:
@@ -116,6 +124,8 @@ services:
   email-handler:
     image: simplelogin-mock:latest
     depends_on:
+      app:
+        condition: service_healthy
       postgres:
         condition: service_healthy
       redis:

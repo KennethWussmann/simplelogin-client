@@ -9,4 +9,5 @@ export * from './clean';
 export * from './format';
 export * from './lint';
 export * from './startMockServer';
+export * from './stopMockServer';
 export * from './test';

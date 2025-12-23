@@ -56,6 +56,12 @@ pnpm build:docs
 pnpm check-codegen
 ```
 
+Beyond the pnpm scripts you can also call separate tasks and steps individually via the build scripts at ./scripts/README.md
+
+```typescript
+pnpm tsx ./scripts/index.ts <task/step>
+```
+
 ## Architecture
 
 ### Code Generation Pipeline
