@@ -1,7 +1,7 @@
 import { $ } from 'zx/core';
-import { sectionHeader } from '../utils';
+import { stepHeader } from '../utils';
 
 export const format = async () => {
-  console.log(sectionHeader('🧹 Formatting'));
+  console.log(stepHeader('🧹 Formatting'));
   await $`biome check . --write --unsafe`;
 };

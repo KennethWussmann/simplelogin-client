@@ -1,23 +1,23 @@
 import { join } from 'node:path';
 import { $ } from 'zx/core';
-import { simpleLoginVersion } from '../constants';
-import { createDirectoryIfNotExists, deleteIfExists, sectionHeader } from '../utils';
+import { mockServerSimpleLoginVersion } from '../constants';
+import { createDirectoryIfNotExists, deleteIfExists, stepHeader } from '../utils';
 
 const mockServerDir = join(process.cwd(), 'mock-server');
 const buildDir = join(mockServerDir, 'build');
-const downloadUrl = `https://github.com/simple-login/app/archive/refs/tags/${simpleLoginVersion}.zip`;
+const downloadUrl = `https://github.com/simple-login/app/archive/refs/tags/${mockServerSimpleLoginVersion}.zip`;
 
 export const buildMockServer = async () => {
-  console.log(sectionHeader('🐳 Building SimpleLogin Docker Image'));
+  console.log(stepHeader('🐳 Building SimpleLogin Docker Image'));
 
   // Create build directory
   await createDirectoryIfNotExists(buildDir);
 
-  const zipFile = join(buildDir, `${simpleLoginVersion}.zip`);
-  const extractedDir = join(buildDir, `app-${simpleLoginVersion.replace('v', '')}`);
+  const zipFile = join(buildDir, `${mockServerSimpleLoginVersion}.zip`);
+  const extractedDir = join(buildDir, `app-${mockServerSimpleLoginVersion.replace('v', '')}`);
 
   // Download SimpleLogin app if not already downloaded
-  console.log(`Downloading SimpleLogin ${simpleLoginVersion}...`);
+  console.log(`Downloading SimpleLogin ${mockServerSimpleLoginVersion}...`);
   await $`curl -L ${downloadUrl} -o ${zipFile}`;
 
   // Clean up any existing extracted directory
@@ -29,15 +29,15 @@ export const buildMockServer = async () => {
 
   // Build the Docker image
   console.log('Building SimpleLogin image...');
-  await $`docker build --tag simplelogin-app:${simpleLoginVersion} ${extractedDir}`;
+  await $`docker build --tag simplelogin-app:${mockServerSimpleLoginVersion} ${extractedDir}`;
 
   console.log('Built SimpleLogin successfully');
 
-  console.log(sectionHeader('🐳 Building Mock Server'));
+  console.log(stepHeader('🐳 Building Mock Server'));
 
   // Build the mock server wrapper image
   console.log('Building mock server image...');
-  await $`docker build --build-arg SIMPLELOGIN_VERSION=${simpleLoginVersion} --tag simplelogin-mock:latest ${mockServerDir}`;
+  await $`docker build --build-arg SIMPLELOGIN_VERSION=${mockServerSimpleLoginVersion} --tag simplelogin-mock:latest ${mockServerDir}`;
 
   console.log('Built Mock Server successfully');
 };

@@ -1,7 +1,7 @@
 import { $ } from 'zx/core';
-import { sectionHeader } from '../utils';
+import { stepHeader } from '../utils';
 
 export const buildSrc = async () => {
-  console.log(sectionHeader('⚙️ Building source'));
+  console.log(stepHeader('⚙️ Building source'));
   await $`tsc --project tsconfig.build.json`;
 };
