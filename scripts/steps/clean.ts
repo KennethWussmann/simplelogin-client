@@ -20,7 +20,9 @@ const deleteAndLog = async (path: string) => logIfTrue(deleteIfExists(path), `De
 const mkdirAndLog = async (path: string) =>
   logIfTrue(createDirectoryIfNotExists(path), `Created directory ${path}`);
 
-export const clean = async (dirs = [buildDir, tscBuildDir, sdkDestination, distDir]) => {
+export const clean = async (
+  dirs = [buildDir, tscBuildDir, sdkDestination, distDir, mockServerBuildDir]
+) => {
   console.log(stepHeader('🚮 Cleaning up'));
   await Promise.all(dirs.map(deleteAndLog));
   await createDirs();

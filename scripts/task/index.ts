@@ -4,3 +4,4 @@ export * as ci from './ci';
 export * as dependencyUpdate from './dependencyUpdate';
 export * as preCommit from './preCommit';
 export * as rebuild from './rebuild';
+export * as test from './test';

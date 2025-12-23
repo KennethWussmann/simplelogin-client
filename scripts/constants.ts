@@ -10,6 +10,7 @@ export const distOpenApiDir = join(distDir, 'openapi');
 export const distRedocDir = join(distDir, 'redoc');
 export const distTypedocDir = join(distDir, 'typedoc');
 export const mockServerBuildDir = join(mockServerDir, 'build');
+export const mockServerDockerComposeDir = join(mockServerDir, 'docker-compose.yaml');
 
 export const image = 'openapitools/openapi-generator-cli:v7.17.0';
 // The version of SimpleLogin we run our API tests against
