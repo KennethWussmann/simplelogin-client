@@ -136,10 +136,5 @@ export const api = test.extend<{
   },
 });
 
-// Make it available globally
-declare global {
-  // biome-ignore lint/suspicious/noRedeclare: global declaration for test fixture
-  const api: typeof test;
-}
-
-globalThis.api = api;
+// biome-ignore lint/suspicious/noExplicitAny: Required for global test fixture
+(globalThis as any).api = api;

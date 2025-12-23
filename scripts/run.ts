@@ -11,14 +11,24 @@ export const run = async (task: string | undefined = process.argv[2], ...params:
 
   const taskNames = Object.keys(tasks);
   if (taskNames.map((taskName) => taskName.toLowerCase()).includes(task.toLowerCase())) {
-    await tasks[task].default(...params);
-    return;
+    const taskKey = taskNames.find((name) => name.toLowerCase() === task.toLowerCase());
+    if (taskKey && taskKey in tasks) {
+      await (
+        tasks[taskKey as keyof typeof tasks].default as (...args: unknown[]) => Promise<unknown>
+      )(...params);
+      return;
+    }
   }
 
   const stepNames = Object.keys(steps);
   if (stepNames.map((stepName) => stepName.toLowerCase()).includes(task.toLowerCase())) {
-    await steps[task](...params);
-    return;
+    const stepKey = stepNames.find((name) => name.toLowerCase() === task.toLowerCase());
+    if (stepKey && stepKey in steps) {
+      await (steps[stepKey as keyof typeof steps] as (...args: unknown[]) => Promise<unknown>)(
+        ...params
+      );
+      return;
+    }
   }
 
   throw new Error(

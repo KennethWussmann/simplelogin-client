@@ -145,7 +145,7 @@ cd ..
 pnpm task:build-mock-server
 
 # Or rebuild manually
-docker build --build-arg SIMPLELOGIN_VERSION=v4.74.6 --tag simplelogin-mock:latest ./mock-server
+docker build --build-arg SIMPLELOGIN_VERSION=v4.74.7 --tag simplelogin-mock:latest ./mock-server
 ```
 
 ### Database Management
@@ -233,15 +233,3 @@ docker compose logs -f app | grep -i email
          │ (SMTP Out)  │
          └─────────────┘
 ```
-
-## SimpleLogin Version
-
-Current version: **v4.74.6**
-
-To use a different version, edit `scripts/constants.ts`:
-
-```typescript
-export const simpleLoginVersion = 'v4.74.6';
-```
-
-Then rebuild the mock server.
