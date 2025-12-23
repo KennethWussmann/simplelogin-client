@@ -27,6 +27,7 @@
     "ci": "tsx scripts/index.ts ci",
     "build": "tsx scripts/index.ts build",
     "build:docs": "tsx scripts/index.ts buildDocs",
+    "build:src": "tsx scripts/index.ts buildSrc",
     "rebuild": "tsx scripts/index.ts rebuild",
     "clean": "tsx scripts/index.ts clean",
     "check-codegen": "tsx scripts/index.ts checkCodegen",

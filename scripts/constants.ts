@@ -12,6 +12,9 @@ export const distTypedocDir = join(distDir, 'typedoc');
 export const mockServerBuildDir = join(mockServerDir, 'build');
 export const mockServerDockerComposeDir = join(mockServerDir, 'docker-compose.yaml');
 
-export const image = 'openapitools/openapi-generator-cli:v7.17.0';
+const openapiGeneratorImageName = 'openapitools/openapi-generator-cli';
+const openapiGeneratorImageVersion = process.env.OPENAPI_GENERATOR_IMAGE_VERSION ?? 'v7.17.0';
+export const openapiGeneratorImage = `${openapiGeneratorImageName}:${openapiGeneratorImageVersion}`;
+
 // The version of SimpleLogin we run our API tests against
-export const mockServerSimpleLoginVersion = 'v4.74.7';
+export const mockServerSimpleLoginVersion = process.env.SIMPLELOGIN_VERSION ?? 'v4.74.7';
