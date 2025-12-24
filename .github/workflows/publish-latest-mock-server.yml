@@ -2,14 +2,6 @@ name: publish-latest-mock-server
 on:
   schedule:
     - cron: '0 * * * *'
-  push:
-    branches:
-      - main
-    paths:
-      - 'mock-server/**'
-      - 'scripts/steps/buildMockServer.ts'
-      - 'scripts/constants.ts'
-      - '.github/workflows/publish-latest-mock-server.yml'
   workflow_dispatch:
     inputs:
       simplelogin_version:
