@@ -74,14 +74,7 @@ jobs:
   build:
     needs: check-version
     if: needs.check-version.outputs.should_build == 'true'
-    runs-on: ${{ matrix.runner }}
-    strategy:
-      matrix:
-        include:
-          - runner: ubuntu-24.04-arm
-            arch: arm64
-          - runner: ubuntu-latest
-            arch: amd64
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
@@ -104,56 +97,16 @@ jobs:
 
       - name: Tag and push Docker image
         run: |
-          docker tag simplelogin-mock:latest ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ matrix.arch }}-${{ needs.check-version.outputs.simplelogin_version }}
-          docker tag simplelogin-mock:latest ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ matrix.arch }}-${{ needs.check-version.outputs.commit_sha }}
-          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ matrix.arch }}-${{ needs.check-version.outputs.simplelogin_version }}
-          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ matrix.arch }}-${{ needs.check-version.outputs.commit_sha }}
-
-  create-and-push-manifest:
-    needs: [check-version, build]
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-    steps:
-      - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v3
-        with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Create and push Docker manifests
-        run: |
-          # Create and push manifest for SimpleLogin version tag
-          docker manifest create ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.check-version.outputs.simplelogin_version }} \
-            --amend ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:amd64-${{ needs.check-version.outputs.simplelogin_version }} \
-            --amend ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:arm64-${{ needs.check-version.outputs.simplelogin_version }}
-          docker manifest push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.check-version.outputs.simplelogin_version }}
-
-          # Create and push manifest for commit SHA tag
-          docker manifest create ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.check-version.outputs.commit_sha }} \
-            --amend ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:amd64-${{ needs.check-version.outputs.commit_sha }} \
-            --amend ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:arm64-${{ needs.check-version.outputs.commit_sha }}
-          docker manifest push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.check-version.outputs.commit_sha }}
-
-          # Create and push manifest for latest tag
-          docker manifest create ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest \
-            --amend ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:amd64-${{ needs.check-version.outputs.simplelogin_version }} \
-            --amend ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:arm64-${{ needs.check-version.outputs.simplelogin_version }}
-          docker manifest push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+          docker tag simplelogin-mock:latest ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.check-version.outputs.simplelogin_version }}
+          docker tag simplelogin-mock:latest ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.check-version.outputs.commit_sha }}
+          docker tag simplelogin-mock:latest ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.check-version.outputs.simplelogin_version }}
+          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.check-version.outputs.commit_sha }}
+          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
 
       - name: Output image tags
         run: |
-          echo "Published multi-arch Docker images:"
+          echo "Published Docker images (AMD64):"
           echo "  - ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest"
           echo "  - ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.check-version.outputs.simplelogin_version }}"
           echo "  - ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.check-version.outputs.commit_sha }}"
-          echo ""
-          echo "Architecture-specific tags:"
-          echo "  AMD64:"
-          echo "    - ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:amd64-${{ needs.check-version.outputs.simplelogin_version }}"
-          echo "    - ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:amd64-${{ needs.check-version.outputs.commit_sha }}"
-          echo "  ARM64:"
-          echo "    - ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:arm64-${{ needs.check-version.outputs.simplelogin_version }}"
-          echo "    - ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:arm64-${{ needs.check-version.outputs.commit_sha }}"
