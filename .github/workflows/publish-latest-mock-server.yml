@@ -1,0 +1,159 @@
+name: publish-latest-mock-server
+on:
+  schedule:
+    - cron: '0 * * * *'
+  push:
+    branches:
+      - main
+    paths:
+      - 'mock-server/**'
+      - 'scripts/steps/buildMockServer.ts'
+      - 'scripts/constants.ts'
+      - '.github/workflows/publish-latest-mock-server.yml'
+  workflow_dispatch:
+    inputs:
+      simplelogin_version:
+        description: 'SimpleLogin version to build (e.g., v4.74.7). Leave empty to use latest release.'
+        required: false
+        type: string
+
+env:
+  FORCE_COLOR: 1
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository_owner }}/simplelogin-client-mock-server
+
+concurrency:
+  group: "mock-server"
+  cancel-in-progress: true
+
+jobs:
+  check-version:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: read
+      contents: read
+    outputs:
+      simplelogin_version: ${{ steps.version.outputs.simplelogin_version }}
+      should_build: ${{ steps.check.outputs.should_build }}
+      commit_sha: ${{ steps.vars.outputs.commit_sha }}
+    steps:
+      - name: Determine SimpleLogin version
+        id: version
+        run: |
+          if [ -n "${{ inputs.simplelogin_version }}" ]; then
+            VERSION="${{ inputs.simplelogin_version }}"
+            echo "Using manually specified version: ${VERSION}"
+          else
+            VERSION=$(curl -s https://api.github.com/repos/simple-login/app/releases/latest | jq -r .tag_name)
+            echo "Using latest release version: ${VERSION}"
+          fi
+          echo "simplelogin_version=${VERSION}" >> $GITHUB_OUTPUT
+
+      - name: Set commit SHA
+        id: vars
+        run: echo "commit_sha=${{ github.sha }}" >> $GITHUB_OUTPUT
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check if image exists
+        id: check
+        run: |
+          if docker manifest inspect ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.version.outputs.simplelogin_version }} > /dev/null 2>&1; then
+            echo "✓ Image for version ${{ steps.version.outputs.simplelogin_version }} already exists, skipping build"
+            echo "should_build=false" >> $GITHUB_OUTPUT
+          else
+            echo "✗ Image for version ${{ steps.version.outputs.simplelogin_version }} does not exist, proceeding with build"
+            echo "should_build=true" >> $GITHUB_OUTPUT
+          fi
+
+  build:
+    needs: check-version
+    if: needs.check-version.outputs.should_build == 'true'
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      matrix:
+        include:
+          - runner: ubuntu-24.04-arm
+            arch: arm64
+          - runner: ubuntu-latest
+            arch: amd64
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: ./.github/actions/pnpm-install
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build mock server
+        env:
+          SIMPLELOGIN_VERSION: ${{ needs.check-version.outputs.simplelogin_version }}
+        run: pnpm tsx ./scripts/index.ts buildMockServer
+
+      - name: Tag and push Docker image
+        run: |
+          docker tag simplelogin-mock:latest ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ matrix.arch }}-${{ needs.check-version.outputs.simplelogin_version }}
+          docker tag simplelogin-mock:latest ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ matrix.arch }}-${{ needs.check-version.outputs.commit_sha }}
+          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ matrix.arch }}-${{ needs.check-version.outputs.simplelogin_version }}
+          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ matrix.arch }}-${{ needs.check-version.outputs.commit_sha }}
+
+  create-and-push-manifest:
+    needs: [check-version, build]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create and push Docker manifests
+        run: |
+          # Create and push manifest for SimpleLogin version tag
+          docker manifest create ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.check-version.outputs.simplelogin_version }} \
+            --amend ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:amd64-${{ needs.check-version.outputs.simplelogin_version }} \
+            --amend ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:arm64-${{ needs.check-version.outputs.simplelogin_version }}
+          docker manifest push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.check-version.outputs.simplelogin_version }}
+
+          # Create and push manifest for commit SHA tag
+          docker manifest create ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.check-version.outputs.commit_sha }} \
+            --amend ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:amd64-${{ needs.check-version.outputs.commit_sha }} \
+            --amend ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:arm64-${{ needs.check-version.outputs.commit_sha }}
+          docker manifest push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.check-version.outputs.commit_sha }}
+
+          # Create and push manifest for latest tag
+          docker manifest create ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest \
+            --amend ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:amd64-${{ needs.check-version.outputs.simplelogin_version }} \
+            --amend ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:arm64-${{ needs.check-version.outputs.simplelogin_version }}
+          docker manifest push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+
+      - name: Output image tags
+        run: |
+          echo "Published multi-arch Docker images:"
+          echo "  - ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest"
+          echo "  - ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.check-version.outputs.simplelogin_version }}"
+          echo "  - ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.check-version.outputs.commit_sha }}"
+          echo ""
+          echo "Architecture-specific tags:"
+          echo "  AMD64:"
+          echo "    - ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:amd64-${{ needs.check-version.outputs.simplelogin_version }}"
+          echo "    - ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:amd64-${{ needs.check-version.outputs.commit_sha }}"
+          echo "  ARM64:"
+          echo "    - ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:arm64-${{ needs.check-version.outputs.simplelogin_version }}"
+          echo "    - ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:arm64-${{ needs.check-version.outputs.commit_sha }}"

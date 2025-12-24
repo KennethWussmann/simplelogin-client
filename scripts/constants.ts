@@ -17,4 +17,4 @@ const openapiGeneratorImageVersion = process.env.OPENAPI_GENERATOR_IMAGE_VERSION
 export const openapiGeneratorImage = `${openapiGeneratorImageName}:${openapiGeneratorImageVersion}`;
 
 // The version of SimpleLogin we run our API tests against
-export const mockServerSimpleLoginVersion = process.env.SIMPLELOGIN_VERSION ?? 'v4.74.7';
+export const mockServerSimpleLoginVersion = process.env.SIMPLELOGIN_VERSION ?? 'v4.74.8';
