@@ -20,7 +20,7 @@ on:
 env:
   FORCE_COLOR: 1
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository_owner }}/simplelogin-client-mock-server
+  IMAGE_NAME: kennethwussmann/simplelogin-client-mock-server
 
 concurrency:
   group: "mock-server"
