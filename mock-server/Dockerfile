@@ -10,9 +10,8 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-COPY scripts/entrypoint.sh /scripts/entrypoint.sh
-COPY scripts/healthcheck.sh /scripts/healthcheck.sh
-RUN chmod +x /scripts/entrypoint.sh /scripts/healthcheck.sh
+COPY scripts/ /scripts/
+RUN chmod +x /scripts/*.sh
 
 HEALTHCHECK --interval=5s --timeout=5s --start-period=30s --retries=5 \
     CMD ["/scripts/healthcheck.sh"]
