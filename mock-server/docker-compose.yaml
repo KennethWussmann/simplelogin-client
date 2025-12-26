@@ -38,6 +38,7 @@ services:
 
   app:
     image: ghcr.io/kennethwussmann/simplelogin-client-mock-server:v4.74.8
+    #image: simplelogin-mock:latest
     depends_on:
       postgres:
         condition: service_healthy
