@@ -198,3 +198,4 @@ build/
 
 tscBuild/
 dist/
+.husky/
