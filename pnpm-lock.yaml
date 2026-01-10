@@ -29,9 +29,6 @@ importers:
       lefthook:
         specifier: ^2.0.13
         version: 2.0.13
-      npm-check-updates:
-        specifier: ^19.2.0
-        version: 19.2.0
       npm-watch:
         specifier: ^0.13.0
         version: 0.13.0
@@ -1758,11 +1755,6 @@ packages:
   normalize-path@3.0.0:
     resolution: {integrity: sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==}
     engines: {node: '>=0.10.0'}
-
-  npm-check-updates@19.2.0:
-    resolution: {integrity: sha512-XSIuL0FNgzXPDZa4lje7+OwHjiyEt84qQm6QMsQRbixNY5EHEM9nhgOjxjlK9jIbN+ysvSqOV8DKNS0zydwbdg==}
-    engines: {node: '>=20.0.0', npm: '>=8.12.1'}
-    hasBin: true
 
   npm-tool-version-check@1.2.0:
     resolution: {integrity: sha512-ppM17yOZbh0z3xzk2YR1y2VtJvXGftG60+t5BZEH41v6WWyaeztM/DC4kBZw8UGtXNl4sTB+UcPPzoEMcfbYyA==}
@@ -4296,8 +4288,6 @@ snapshots:
       undefsafe: 2.0.5
 
   normalize-path@3.0.0: {}
-
-  npm-check-updates@19.2.0: {}
 
   npm-tool-version-check@1.2.0:
     dependencies:
