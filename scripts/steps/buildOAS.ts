@@ -11,12 +11,12 @@ export const buildOAS = async () => {
     $`boats --noVersionCheck -i ./oas/index.yml -o ${join('build', 'openapi', 'simplelogin.json')} -f ${join(
       'oas',
       'helpers',
-      'opId.ts'
+      'opId.js'
     )}`,
     $`boats --noVersionCheck -i ./oas/index.yml -o ${join('build', 'openapi', 'simplelogin.yml')} -f ${join(
       'oas',
       'helpers',
-      'opId.ts'
+      'opId.js'
     )}`,
   ]);
 

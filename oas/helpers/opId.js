@@ -1,4 +1,4 @@
-import { readFileSync } from 'fs';
+const { readFileSync } = require('node:fs');
 
 /*
 const methodToAction: Record<string, string> = {
@@ -29,7 +29,7 @@ const getTags = (path: string) => {
   return tags;
 };
 */
-const getSummary = (path: string) => {
+const getSummary = (path) => {
   const lines = readFileSync(path, 'utf-8').split('\n');
   for (const line of lines) {
     const trimmedLine = line.trim();
@@ -41,13 +41,13 @@ const getSummary = (path: string) => {
   throw new Error(`Could not find summary for ${path}`);
 };
 
-const toLowerCamelCase = (strings: string[]) =>
+const toLowerCamelCase = (strings) =>
   strings
     .map((str) => str.replace(/-(\w)/g, (_, letter) => letter.toUpperCase()))
     .map((str, index) => (index === 0 ? str : str[0].toUpperCase() + str.slice(1)))
     .join('');
 
-export default function (this: any) { //, action: string | null | undefined
+module.exports = function () { //, action: string | null | undefined
   const currentFilePointer = this?.env?.globals?.currentFilePointer;
   if (!currentFilePointer) {
     return undefined;

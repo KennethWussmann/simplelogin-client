@@ -6,6 +6,12 @@ The `simplelogin-client` is much more a fancy build pipeline and OpenAPI spec ra
 
 What steps have to happen is quite complex on the high-level, but the tasks and steps are readable and easily understandable.
 
+## Compiler Dependencies
+
+The SDK is compiled with TypeScript 7. TypeDoc 0.28.20 still needs the TypeScript 6 compiler API, so `.pnpmfile.cjs` gives that version of TypeDoc its own TypeScript 6.0.3 dependency. Remove the hook once TypeDoc supports TypeScript 7.
+
+The BOATS operation ID helper is JavaScript because BOATS loads TypeScript helpers through `ts-node`, which also needs the old compiler API. This avoids keeping `ts-node` just to load one helper.
+
 ## Framework Overview
 
 The scripts framework follows a **task/step architecture** where:
