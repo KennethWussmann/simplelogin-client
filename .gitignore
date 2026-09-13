@@ -192,6 +192,7 @@ out
 
 build/
 *.js
+!/oas/helpers/*.js
 *.map
 .env
 .turbo
