@@ -1,14 +1,22 @@
+import { randomUUID } from 'node:crypto';
 import { randEmail, randPassword } from '@ngneat/falso';
 import { AccountApi, Configuration, ResponseError } from '../../src';
 import { waitForSimpleLoginRegistrationCode } from './mailHog';
 
-export const createAccount = async () => {
-  const device = 'automated-api-tests';
+const maxAttempts = 5;
+
+const createRandomEmail = () => {
   const email = randEmail({
     nameSeparator: '.',
     provider: 'home',
     suffix: 'name',
   });
+  const [local, domain] = email.split('@');
+  return `${local}.${randomUUID().slice(0, 8)}@${domain}`;
+};
+
+export const createAccount = async () => {
+  const device = 'automated-api-tests';
   const password = randPassword({ size: 8 });
 
   const api = new AccountApi(
@@ -17,38 +25,43 @@ export const createAccount = async () => {
     })
   );
 
-  try {
-    await api.registerAccount({
-      authRegisterPost: {
-        email,
-        password,
-      },
-    });
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    const email = createRandomEmail();
 
-    const code = await waitForSimpleLoginRegistrationCode(email);
+    try {
+      await api.registerAccount({
+        authRegisterPost: {
+          email,
+          password,
+        },
+      });
 
-    await api.activateAccount({
-      authActivatePost: {
-        email,
-        code,
-      },
-    });
+      const code = await waitForSimpleLoginRegistrationCode(email);
 
-    // Login to get API key for authentication
-    const loginResponse = await api.login({
-      authLoginPost: {
-        email,
-        password,
-        device,
-      },
-    });
-    return { loginResponse, password, email };
-  } catch (e: unknown) {
-    if (e instanceof ResponseError) {
-      console.log(`Failed to create account ${email}`, e.response, await e.response.text());
-    } else {
+      await api.activateAccount({
+        authActivatePost: {
+          email,
+          code,
+        },
+      });
+
+      // Login to get API key for authentication
+      const loginResponse = await api.login({
+        authLoginPost: {
+          email,
+          password,
+          device,
+        },
+      });
+      return { loginResponse, password, email };
+    } catch (e: unknown) {
+      if (e instanceof ResponseError) {
+        console.log(`Failed to create account ${email}`, e.response, await e.response.text());
+        continue;
+      }
       throw e;
     }
   }
+
   throw new Error('Failed to register account');
 };
